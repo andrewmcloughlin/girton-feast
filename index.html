@@ -1,781 +1,229 @@
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Girton Feast</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-        <link rel="stylesheet" href="styles.css">
+
+        <!-- Bootstrap CSS from CDN -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Google Fonts: Sigmar One and Roboto -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Chicle&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    </head>
-    <style>
-        h1 {
-            font-family: "Chicle", serif;
-            font-weight: 400;
-            font-style: normal;
-        }
-        .hero-section {
-            background-image: url('https://placehold.co/1920x600/6c757d/dee2e6&text=Girton+Feast+Hero'); 
-            background-size: cover;
-            background-position: center center;
-            padding: 8rem 1rem;
-            color: white;
-        }
-        .marquee-container {
-            overflow: hidden;
-            position: relative;
-            width: 100%;
-        }
-        .marquee-content {
-            display: flex;
-            width: fit-content;
-            animation: marquee-scroll 120s linear infinite;
-        }
-        .sponsor-item {
-            flex-shrink: 0;
-            padding: 0 1rem;
-            text-align: center;
-        }
-        @keyframes marquee-scroll {
-            0%   { transform: translateX(0%); }
-            100% { transform: translateX(-50%); }
-        }
+        <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+        <!-- Font Awesome CDN -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+        <style>
+            body {
+                font-family: 'Roboto', sans-serif;
+                color: #353535;
+            }
+            .o-container {
+                position: relative;
+            }
+            .mascot-image {
+                position: absolute;
+                width: 5.6em;
+                height: auto;
+                top: -2em;
+                left: -3.5em;
+                clip-path: inset(0 0);
+                z-index: 1;
+            }
+            .content-container {
+                overflow: hidden;
+                z-index: 1;
+            }
+            .carousel-caption {
+                background-color: rgba(0, 0, 0, 0.5);
+                border-radius: .5rem;
+                padding: 1rem;
+            }
+            @keyframes marquee {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+            .animate-marquee {
+                width: max-content;
+                animation: marquee 30s linear infinite;
+            }
+
+
         </style>
-    <body data-bs-spy="scroll" data-bs-target="#mainNavbar" data-bs-offset="70">
-        <!-- Hero Section -->
-        <div id="home-section" class="hero-section text-center">
-            <div class="container">
-                <h1 class="display-1">Girton Feast</h1>
-                <p class="lead fs-4">July 11th-12th 2025</p>
-            </div>
+    </head>
+    <body class="px-0 mx-0 w-100 bg-light">
+       <section class="container bg-white rounded content-container pt-5">
+    <div class="text-center my-5 pt-5">
+        <h1 class="display-1 fw-bold" style="font-family: 'Sigmar One', cursive; color: #41850B; line-height: 0.8; letter-spacing: -5px; font-size: clamp(6rem, 10vw, 12rem);">
+            <span style="white-space: nowrap;">Girt<span class="o-container">o<img src="images/mascot.png" alt="Mascot peeking out of the letter O" class="mascot-image"></span>n</span><br>
+            <span style="color: #A8D012;">Feast</span>
+        </h1>
+    </div>
+    <div class="pb-4">
+        <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-3">
+            <span class="badge rounded-pill bg-light text-dark p-3 fs-5">
+                <i class="fas fa-calendar-alt"></i> 14 - 16 June 2025
+            </span>
+            <span class="badge rounded-pill bg-light text-dark p-3 fs-5">
+                <i class="fas fa-map-marker-alt"></i> Girton Rec
+            </span>
         </div>
-        <!-- End Hero Section -->
-        <nav id="mainNavbar" class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                    <a class="nav-link" href="#home-section">Home</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#features-section">Food & Drinks</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#activities-section">Activities</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#headliner-event">Entertainment</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#map-section">Where to Find us</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#event-layout-map-section">Event Map</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#volunteering-section">Get Involved</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#sponsors-section">Advertising & Sponsorships</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="#contact-section">Contact Us</a>
-                    </li>
-                </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Flex container for the cards -->
-        <div id="features-section" class="container pt-5">
-            <div class="row g-4">
-                <!-- Card 1: About the Feast -->
-                <div class="col-12 col-md-6"> 
-                    <div class="card h-100">
-                        <img src="https://placehold.co/600x400/FABCDE/AAAAAA&text=About+Us" class="card-img-top" alt="Placeholder image for About the Feast">
-                        <div class="card-body">
-                            <h5 class="card-title">About the Feast</h5>
-                            <p class="card-text">The Girton Feast is a <mark><b>free</b></mark> annual event that brings together the community for a weekend of food, fun, and festivities. Join us for a celebration of local culture and cuisine!</p>
-                            <a href="#" class="btn btn-primary">Learn More</a>
-                        </div>
-                    </div>
-                </div>
+    </div>
+    <div class="text-center pt-4">
+        <p id="event-description" class="lead">
+            Join us for a <b>free</b> weekend of food, fun, and festivities.
+        </p>
+    </div>
+    <img src="images/hero.png" alt="Girton Feast Map" class="img-fluid mx-auto d-block" style="max-width: 100%; height: auto;">
+</section>
 
-
-            </div>
+<!-- Events and Entertainment -->
+<section class="container bg-white rounded my-5 py-5">
+    <h2 class="text-center mb-4" style="font-family: 'Sigmar One', cursive; color: #41850B;">Events and Other Entertainment</h2>
+    <div id="entertainmentCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-
-        
-        <!-- Headliner Event Section -->
-        <div id="headliner-event" class="container pt-5"> 
-            <div class="row align-items-center">
-                <div class="col-md-7">
-                    <img src="https://placehold.co/800x500/EEDDEE/AAAAAA&text=Headliner+Event+Photo" class="img-fluid rounded mb-3 mb-md-0" alt="Headliner Entertainment Event">
+        <div class="carousel-inner rounded">
+            <div class="carousel-item active">
+                <img src="https://placehold.co/800x400/A8D012/41850B?text=This+Is+Queen" class="d-block w-100" alt="Live Music Stage">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Live Music Stage</h5>
+                    <p>Enjoy performances from local bands and artists all weekend long.</p>
                 </div>
-                <div class="col-md-5">
-                    <h2 class="mb-3">Don't Miss Our Headliner Event!</h2>
-                    <p class="lead">Experience an unforgettable evening with our special headliner performance. Get ready for amazing music, dazzling lights, and an atmosphere you won't forget!</p>
-                    <p>Join us on Saturday night for the main event that everyone will be talking about. Limited tickets available, so book yours now!</p>
-                    <p>Friday 11th July 2025, 7pm, The Marquee, Girton Recreation Ground</p>
-                    
-Tickets: Adults £12; Children £3
-                    <a href="#" class="btn btn-lg btn-success">Buy Tickets Now</a>
+            </div>
+            <div class="carousel-item">
+                <img src="https://placehold.co/800x400/41850B/A8D012?text=Food+Stalls" class="d-block w-100" alt="Artisan Food Stalls">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Artisan Food Stalls</h5>
+                    <p>Taste a variety of delicious foods from around the world.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://placehold.co/800x400/A8D012/41850B?text=Funfair" class="d-block w-100" alt="Family Funfair">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Family Funfair</h5>
+                    <p>Classic rides and games for all ages to enjoy.</p>
                 </div>
             </div>
         </div>
-        <!-- End Headliner Event Section -->
-         <!-- Other Entertainment Carousel Section -->
-        <div id="other-entertainment-section" class="container pt-5 pb-5">
-            <h2 class="text-center mb-4">More Fun & Entertainment</h2>
-            <div id="otherEntertainmentCarousel" class="carousel slide carousel-dark" data-bs-interval="5000">
-                <div class="carousel-inner">
-                    <!-- First Slide of Entertainment Cards -->
-                    <div class="carousel-item active">
-                        <div class="row g-4 justify-content-center">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/ABCDEF/FFFFFF&text=Rock+Choir" class="card-img-top" alt="Rock Choir" loading="lazy" width="600" height="400">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Rock Choir</h5>
-                                        <p class="card-text">Get ready for uplifting harmonies and popular hits from the fantastic Rock Choir!</p>
-                                        <a href="#" class="btn btn-outline-primary btn-sm">See Schedule</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/CDEABC/FFFFFF&text=Girton+Glebe+Choir" class="card-img-top" alt="Girton Glebe Choir" loading="lazy" width="600" height="400">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Girton Glebe Choir</h5>
-                                        <p class="card-text">Enjoy beautiful melodies performed by the talented voices of the Girton Glebe Choir.</p>
-                                        <a href="#" class="btn btn-outline-primary btn-sm">More Info</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/EFABCD/FFFFFF&text=Louise+Pom+Pom" class="card-img-top" alt="Louise Pom Pom and the Magic Fox" loading="lazy" width="600" height="400">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Louise Pom Pom and the Magic Fox</h5>
-                                        <p class="card-text">A magical and engaging performance perfect for all the family!</p>
-                                        <a href="#" class="btn btn-outline-primary btn-sm">View Crafters</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Second Slide of Entertainment Cards -->
-                    <div class="carousel-item">
-                        <div class="row g-4 justify-content-center">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/BCDEFA/FFFFFF&text=Asian+Dancers" class="card-img-top" alt="Asian Dancers" loading="lazy" width="600" height="400">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Asian Dancers</h5>
-                                        <p class="card-text">Experience the vibrant colours and graceful movements of traditional Asian dance.</p>
-                                        <a href="#" class="btn btn-outline-primary btn-sm">Enter Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/FABDEC/FFFFFF&text=The+Munroes" class="card-img-top" alt="The Munroes" loading="lazy" width="600" height="400">
-                                    <div class="card-body">
-                                        <h5 class="card-title">The Munroes</h5>
-                                        <p class="card-text">Get ready to tap your feet to the lively sounds of The Munroes!</p>
-                                        <a href="#" class="btn btn-outline-primary btn-sm">Learn More</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#entertainmentCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#entertainmentCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
 
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#otherEntertainmentCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#otherEntertainmentCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
+<!-- Facilities -->
+<section class="container bg-white rounded my-5 py-5">
+    <div class="text-center my-5 pt-5">
+        <h2 class="display-4" style="font-family: 'Sigmar One', cursive; color: #41850B;">Facilities</h2>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <ul class="list-inline text-center fs-5">
+                <li class="list-inline-item m-2">Toilets</li>
+                <li class="list-inline-item m-2">Accessible parking</li>
+                <li class="list-inline-item m-2">First aid</li>
+                <li class="list-inline-item m-2">Lost and found</li>
+                <li class="list-inline-item m-2">Water refill stations</li>
+                <li class="list-inline-item m-2">Charging stations</li>
+                <li class="list-inline-item m-2">Picnic areas</li>
+                <li class="list-inline-item m-2">Family-friendly zones</li>
+                <li class="list-inline-item m-2">Pet-friendly areas</li>
+                <li class="list-inline-item m-2">Security services</li>
+                <li class="list-inline-item m-2">Waste disposal and recycling</li>
+                <li class="list-inline-item m-2">Information booths</li>
+                <li class="list-inline-item m-2">Food and drink vendors</li>
+                <li class="list-inline-item m-2">Entertainment zones</li>
+                <li class="list-inline-item m-2">Seating areas</li>
+                <li class="list-inline-item m-2">Rest areas</li>
+                <li class="list-inline-item m-2">Shade and shelter</li>
+                <li class="list-inline-item m-2">Signage and maps</li>
+                <li class="list-inline-item m-2">Emergency services</li>
+                <li class="list-inline-item m-2">Accessibility services</li>
+                <li class="list-inline-item m-2">Event merchandise</li>
+                <li class="list-inline-item m-2">Volunteer support</li>
+                <li class="list-inline-item m-2">Feedback and suggestions</li>
+                <li class="list-inline-item m-2">Community engagement</li>
+                <li class="list-inline-item m-2">Local business support</li>
+                <li class="list-inline-item m-2">Sustainability initiatives</li>
+                <li class="list-inline-item m-2">Cultural activities</li>
+                <li class="list-inline-item m-2">Art installations</li>
+                <li class="list-inline-item m-2">Workshops and demonstrations</li>
+                <li class="list-inline-item m-2">Live performances</li>
+                <li class="list-inline-item m-2">Interactive exhibits</li>
+                <li class="list-inline-item m-2">Games and activities</li>
+                <li class="list-inline-item m-2">Photo opportunities</li>
+            </ul>
         </div>
-        <!-- End Other Entertainment Carousel Section -->
+    </div>
+</section>
 
-         <!-- Food & Drink Carousel Section -->
-        <div id="food-drink-section" class="container pt-5 pb-5 bg-light">
-            <h2 class="text-center mb-4">Delicious Food & Drinks</h2>
-            <div id="foodDrinkCarousel" class="carousel slide carousel-dark" data-bs-interval="6000">
-                <div class="carousel-inner">
-                    <!-- First Slide of Food & Drink Cards -->
-                    <div class="carousel-item active">
-                        <div class="row g-4 justify-content-center">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/FFD700/000000&text=Beer+Tent" class="card-img-top" alt="Beer Tent">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Beer Tent</h5>
-                                        <p class="card-text">Real ales, wine and soft drinks.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/FFC0CB/000000&text=PROSECCO!" class="card-img-top" alt="PROSECCO!">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Prosecco!</h5>
-                                        <p class="card-text">Enjoy a glass of bubbly!</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/87CEEB/000000&text=Pimp+My+Fish" class="card-img-top" alt="PIMP MY FISH">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Pimp My Fish</h5>
-                                        <p class="card-text">Deliciously customized fish dishes.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Second Slide of Food & Drink Cards -->
-                    <div class="carousel-item">
-                        <div class="row g-4 justify-content-center">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/FF6347/FFFFFF&text=Pizza+Passione" class="card-img-top" alt="PIZZA PASSIONE">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Pizza Passione</h5>
-                                        <p class="card-text">Authentic, wood-fired pizzas.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/D2B48C/000000&text=Lexi's+Cakes" class="card-img-top" alt="LEXI'S CAKES">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Lexi's Cakes</h5>
-                                        <p class="card-text">Sweet treats and delightful cakes.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/ADD8E6/000000&text=Toni's+Ices" class="card-img-top" alt="TONI'S ICES">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Toni's Ices</h5>
-                                        <p class="card-text">Cool down with refreshing ice cream.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Third Slide of Food & Drink Cards -->
-                    <div class="carousel-item">
-                        <div class="row g-4 justify-content-center">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/A52A2A/FFFFFF&text=Smokehouse" class="card-img-top" alt="Smokehouse burgers">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Smokehouse burgers</h5>
-                                        <p class="card-text">Juicy, flame-grilled burgers.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/32CD32/FFFFFF&text=Thai+Food" class="card-img-top" alt="Thai food">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Thai food</h5>
-                                        <p class="card-text">Authentic and aromatic Thai cuisine.</p>
-                                    </div>
-                                </div>
-                            </div>
-                             <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/FF69B4/FFFFFF&text=Pimm's" class="card-img-top" alt="Pimm's stall">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Pimm's stall</h5>
-                                        <p class="card-text">The quintessential summer drink!</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                     <!-- Fourth Slide of Food & Drink Cards -->
-                    <div class="carousel-item">
-                        <div class="row g-4 justify-content-center">
-                            <div class="col-md-4">
-                                <div class="card h-100">
-                                    <img src="https://placehold.co/600x400/FF4500/FFFFFF&text=Strawberries" class="card-img-top" alt="Strawberries and cream">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Strawberries and cream</h5>
-                                        <p class="card-text">A classic summer delight.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#foodDrinkCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#foodDrinkCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+<!-- Get involved! -->
+<section class="my-5 py-5">
+    <div class="container">
+        <div class="row align-items-center bg-primary bg-gradient rounded-4 text-white position-relative overflow-hidden my-5 p-5">
+            <div class="col-md-6">
+                <h2 class="fw-bold mb-3" style="font-family: 'Sigmar One', cursive; font-size: 2.5rem; letter-spacing: 1px;">
+                    Get involved!
+                </h2>
+                <p class="mt-4 mb-5">
+                    There are lots of ways to get involved and make a difference in your community. Whether you want to volunteer your time, donate resources, or simply spread the word, we welcome your support!
+                </p>
+                <a class="btn btn-light" href="#">
+                    Contact us
+                </a>
             </div>
-        </div>
-        <!-- End Food & Drink Carousel Section -->
-
-        <!-- Activities Section -->
-        <div id="activities-section" class="container pt-5 pb-5">
-            <h2 class="text-center mb-4">Fun Activities for All Ages</h2>
-            <div class="row g-4"> <!-- Row for the first 3 visible activities -->
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <img src="https://placehold.co/600x400/FFEB3B/000000&text=Fun+Run" class="card-img-top" alt="Fun Run">
-                        <div class="card-body">
-                            <h5 class="card-title">Fun Run</h5>
-                            <p class="card-text">Join our friendly 1-mile run around the rec, suitable for all abilities and ages!</p>
-                            <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <img src="https://placehold.co/600x400/4CAF50/FFFFFF&text=Tennis" class="card-img-top" alt="Have-a-go-Tennis">
-                        <div class="card-body">
-                            <h5 class="card-title">Have-a-go-Tennis</h5>
-                            <p class="card-text">Grab a racket and try your hand at tennis with our friendly coaches on hand.</p>
-                            <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="card h-100">
-                        <img src="https://placehold.co/600x400/E91E63/FFFFFF&text=Table+Tennis" class="card-img-top" alt="Table Tennis Tournament">
-                        <div class="card-body">
-                            <h5 class="card-title">Table Tennis Tournament</h5>
-                            <p class="card-text">Show off your ping pong skills and compete for glory in our exciting tournament.</p>
-                            <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-4">
-                <details id="moreActivitiesDetails">
-                    <summary class="btn btn-outline-primary">View all activities</summary>
-                    <div class="row g-4 mt-3">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card h-100">
-                                <img src="https://placehold.co/600x400/9C27B0/FFFFFF&text=Target+Bowls" class="card-img-top" alt="Target Bowls">
-                                <div class="card-body">
-                                    <h5 class="card-title">Target Bowls</h5>
-                                    <p class="card-text">Test your aim and precision with this classic lawn game, fun for everyone.</p>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card h-100">
-                                <img src="https://placehold.co/600x400/8BC34A/000000&text=Model+Aircraft" class="card-img-top" alt="Model Aircraft Display">
-                                <div class="card-body">
-                                    <h5 class="card-title">Model Aircraft Display</h5>
-                                    <p class="card-text">Marvel at intricate model aircraft and spectacular flying demonstrations.</p>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card h-100">
-                                <img src="https://placehold.co/600x400/3F51B5/FFFFFF&text=Shoot+Goalie" class="card-img-top" alt="Shoot the Goalie">
-                                <div class="card-body">
-                                    <h5 class="card-title">Shoot the Goalie</h5>
-                                    <p class="card-text">Can you score past our keeper? Step up and take your best shot!</p>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card h-100">
-                                <img src="https://placehold.co/600x400/00BCD4/000000&text=Tug+of+War" class="card-img-top" alt="Tug of War">
-                                <div class="card-body">
-                                    <h5 class="card-title">Tug of War</h5>
-                                    <p class="card-text">Gather your team and pull for victory in this ultimate test of strength!</p>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card h-100">
-                                <img src="https://placehold.co/600x400/FF9800/000000&text=Helter+Skelter" class="card-img-top" alt="Helter Skelter">
-                                <div class="card-body">
-                                    <h5 class="card-title">Helter Skelter</h5>
-                                    <p class="card-text">Experience the thrill of sliding down our classic Helter Skelter!</p>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card h-100">
-                                <img src="https://placehold.co/600x400/795548/FFFFFF&text=Bungee+Trampoline" class="card-img-top" alt="Bungee Trampoline">
-                                <div class="card-body">
-                                    <h5 class="card-title">Bungee Trampoline</h5>
-                                    <p class="card-text">Soar high and perform amazing flips on our exciting bungee trampolines.</p>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card h-100">
-                                <img src="https://placehold.co/600x400/607D8B/FFFFFF&text=Bouncy+Castles" class="card-img-top" alt="Bouncy Castles">
-                                <div class="card-body">
-                                    <h5 class="card-title">Bouncy Castles</h5>
-                                    <p class="card-text">Endless jumping fun for the kids on our selection of bouncy castles.</p>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card h-100">
-                                <img src="https://placehold.co/600x400/03A9F4/000000&text=Land+Train" class="card-img-top" alt="Land Train">
-                                <div class="card-body">
-                                    <h5 class="card-title">Land Train</h5>
-                                    <p class="card-text">All aboard for a delightful ride around the feast grounds on our charming land train.</p>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card h-100">
-                                <img src="https://placehold.co/600x400/8BC34A/000000&text=Garden+Show" class="card-img-top" alt="Girton Garden Society Minishow">
-                                <div class="card-body">
-                                    <h5 class="card-title">Girton Garden Society Minishow</h5>
-                                    <p class="card-text">Admire local gardening talent and beautiful displays at the annual minishow.</p>
-                                    <a href="#" class="btn btn-outline-secondary btn-sm">Details</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="card h-100 bg-secondary text-white">
-                                <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                    <h5 class="card-title text-center">And Much More!</h5>
-                                    <p class="card-text text-center">Including a variety of stalls and exciting side shows throughout the day.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </summary>
-                </details>
-            </div>
-        </div>
-        <!-- End Activities Section -->
-
-        <div id="map-section" class="container pt-5 pb-5">
-            <h2 class="text-center mb-4">Where to Find Us</h2>
-             <div class="row g-4">
-                <!-- Google Map Embed Card -->
-                <div class="col-lg-8 col-md-10 mx-auto">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Find Us - Girton Recreation Ground</h5>
-                            <p class="card-text">Use the interactive map below to get directions to the event.</p>
-                        </div>
-                        <!-- Responsive Google Map Embed -->
-                        <div class="ratio ratio-16x9">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2444.274039199586!2d0.07806231579687556!3d52.23990097976209!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d870e0d5f1f0c7%3A0x8f9a8e7d8f1f0c7!2sGirton%20Recreation%20Ground!5e0!3m2!1sen!2suk!4v1620000000000!5m2!1sen!2suk" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" title="Google Map of Girton Recreation Ground"></iframe>
-                        </div>
-                    </div>
+            <div class="col-md-6 text-center mt-4 mt-md-0 position-relative">
+                <div class="d-inline-flex align-items-center justify-content-center">
+                    <img src="images/volunteer-hero.png" alt="Volunteer icon" class="img-fluid position-absolute top-50 start-50 translate-middle" style="width: 300px; height: auto; z-index: 0;">
                 </div>
             </div>
         </div>
-        <!-- End Where to Find Us Section -->
+    </div>
+</section>
 
-        <!-- Event Map Section (Layout Image) -->
-        <div id="event-layout-map-section" class="container pt-5 pb-5 bg-light">
-            <h2 class="text-center mb-4">Event Layout Map</h2>
-            <div class="row g-4 justify-content-center">
-                <!-- Event Map Image Card -->
-                <div class="col-lg-6">
-                    <div class="card h-100">
-                        <img src="https://placehold.co/600x400/e9ecef/6c757d&text=Event+Layout+Map" class="card-img-top" alt="Event Layout Map Placeholder">
-                        <div class="card-body">
-                            <h5 class="card-title">Feast Layout Map</h5>
-                            <p class="card-text"><em>Detailed event layout map coming soon! This will show you where to find stalls, entertainment, and facilities.</em></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Sponsors -->
+<section class="container bg-white rounded my-5 py-5">
+    <div class="text-center">
+        <h2 class="mb-4" style="font-family: 'Sigmar One', cursive; color: #4d0ea0;">Thank you to our Sponsors</h2>
+        <p class="lead">We are grateful for the support of our sponsors who make this event possible.</p>
+        <p>Interested in sponsoring Girton Feast? <a href="">Contact us</a></p>
+    </div>
+    <div class="overflow-hidden py-2">
+        <div class="d-flex align-items-center gap-4 animate-marquee">
+            <img src="images/sponsors/Frame 85-1.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 1" height="100">
+            <img src="images/sponsors/Frame 85.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 2" height="100">
+            <img src="images/sponsors/Frame 86.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 3" height="100">
+            <img src="images/sponsors/Frame 89.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 6" height="100">
+            <img src="images/sponsors/Frame 90.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 7" height="100">
+            <img src="images/sponsors/Frame 92.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 9" height="100">
+            <img src="images/sponsors/Frame 93.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 10" height="100">
+            <img src="images/sponsors/Frame 94.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 11" height="100">
+            <img src="images/sponsors/Frame 95.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 12" height="100">
+            <!-- Repeat images for seamless loop -->
+            <img src="images/sponsors/Frame 85-1.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 1" height="100">
+            <img src="images/sponsors/Frame 85.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 2" height="100">
+            <img src="images/sponsors/Frame 86.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 3" height="100">
+            <img src="images/sponsors/Frame 89.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 6" height="100">
+            <img src="images/sponsors/Frame 90.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 7" height="100">
+            <img src="images/sponsors/Frame 92.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 9" height="100">
+            <img src="images/sponsors/Frame 93.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 10" height="100">
+            <img src="images/sponsors/Frame 94.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 11" height="100">
+            <img src="images/sponsors/Frame 95.png" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Sponsor 12" height="100">
         </div>
-        <!-- End Map Section -->
+    </div>
+</section>
 
-        <div id="volunteering-section" class="container pt-5 pb-5 bg-light">
-            <h2 class="text-center mb-4">Get Involved - Volunteer!</h2>
-            <p class="text-center">The Girton Feast wouldn't be possible without our amazing volunteers. Join our team and be a part of the fun!</p>
-            <p class="text-center"><a href="#" class="btn btn-info">Sign Up to Volunteer</a></p>
-        </div>
-        <!-- Sponsors Carousel Section -->
-        <div id="sponsors-section" class="container pt-5 pb-5">
-            <h2 class="text-center mb-4">Our Sponsors</h2>
-            <div id="sponsorsMarquee" class="marquee-container">
-                <div class="marquee-content">
-                    <!-- Original Set of Sponsors -->
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EFEFEF/AAAAAA&text=Arlington+Manor" class="img-fluid" alt="Arlington Manor">
-                        <p class="small mt-1 mb-0">Arlington Manor</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DDEEFF/999999&text=C%26C+Blinds" class="img-fluid" alt="C&C Blinds">
-                        <p class="small mt-1 mb-0">C&C Blinds</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FFEECC/888888&text=Cambridge+Border+Design" class="img-fluid" alt="Cambridge Border Design">
-                        <p class="small mt-1 mb-0">Cambridge Border Design</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EEDDEE/777777&text=Cambridge+Self-Service+Storage" class="img-fluid" alt="Cambridge Self-Service Storage">
-                        <p class="small mt-1 mb-0">Cambridge Self-Service Storage</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DEFABC/666666&text=Cote+Brasserie" class="img-fluid" alt="Cote Brasserie">
-                        <p class="small mt-1 mb-0">Cote Brasserie</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FABCDE/555555&text=Crossways+Garage" class="img-fluid" alt="Crossways Garage">
-                        <p class="small mt-1 mb-0">Crossways Garage</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/ABCDEF/444444&text=George+Inn" class="img-fluid" alt="George Inn">
-                        <p class="small mt-1 mb-0">George Inn</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/CDEFAB/333333&text=Girton+College" class="img-fluid" alt="Girton College">
-                        <p class="small mt-1 mb-0">Girton College</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EFABCD/222222&text=Girton+Parish+Council" class="img-fluid" alt="Girton Parish Council">
-                        <p class="small mt-1 mb-0">Girton Parish Council</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/BCDEFA/111111&text=Girton+Social+Club" class="img-fluid" alt="Girton Social Club">
-                        <p class="small mt-1 mb-0">Girton Social Club</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FABDEC/000000&text=Gretton+School" class="img-fluid" alt="Gretton School">
-                        <p class="small mt-1 mb-0">Gretton School</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EFEFEF/AAAAAA&text=GV+Harrison" class="img-fluid" alt="GV Harrison: Velux experts">
-                        <p class="small mt-1 mb-0">GV Harrison: Velux experts</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DDEEFF/999999&text=Jeab's+Thai" class="img-fluid" alt="Jeab's Thai">
-                        <p class="small mt-1 mb-0">Jeab's Thai</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FFEECC/888888&text=LM+Groundworks" class="img-fluid" alt="LM Groundworks & Landscaping">
-                        <p class="small mt-1 mb-0">LM Groundworks & Landscaping</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EEDDEE/777777&text=M%26M+Heating" class="img-fluid" alt="M&M heating">
-                        <p class="small mt-1 mb-0">M&M heating</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DEFABC/666666&text=MM+Wealth" class="img-fluid" alt="MM Wealth">
-                        <p class="small mt-1 mb-0">MM Wealth</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FABCDE/555555&text=Oakington+Garden+Centre" class="img-fluid" alt="Oakington Garden Centre">
-                        <p class="small mt-1 mb-0">Oakington Garden Centre</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/ABCDEF/444444&text=P+Loveridge+Carpentry" class="img-fluid" alt="P Loveridge Carpentry">
-                        <p class="small mt-1 mb-0">P Loveridge Carpentry</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/CDEFAB/333333&text=Pimp+my+Fish" class="img-fluid" alt="Pimp my Fish">
-                        <p class="small mt-1 mb-0">Pimp my Fish</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EFABCD/222222&text=Pizza+Passione" class="img-fluid" alt="Pizza Passione">
-                        <p class="small mt-1 mb-0">Pizza Passione</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/BCDEFA/111111&text=Polarglaze" class="img-fluid" alt="Polarglaze">
-                        <p class="small mt-1 mb-0">Polarglaze</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FABDEC/000000&text=Prime+Plumbing" class="img-fluid" alt="Prime Plumbing">
-                        <p class="small mt-1 mb-0">Prime Plumbing</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EFEFEF/AAAAAA&text=Pull+Me+Chéri" class="img-fluid" alt="Pull Me Chéri">
-                        <p class="small mt-1 mb-0">Pull Me Chéri</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DDEEFF/999999&text=Redmayne+Arnold+%26+Harris" class="img-fluid" alt="Redmayne, Arnold & Harris">
-                        <p class="small mt-1 mb-0">Redmayne, Arnold & Harris</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FFEECC/888888&text=Wheelie+Fresh+Bins" class="img-fluid" alt="Wheelie Fresh Bins">
-                        <p class="small mt-1 mb-0">Wheelie Fresh Bins</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EEDDEE/777777&text=White+Horse+Oakington" class="img-fluid" alt="White Horse Oakington">
-                        <p class="small mt-1 mb-0">White Horse Oakington</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DEFABC/666666&text=WJ+Guttering" class="img-fluid" alt="WJ Guttering & Drainage">
-                        <p class="small mt-1 mb-0">WJ Guttering & Drainage</p>
-                    </div>
-
-                    <!-- Duplicated Set of Sponsors for Seamless Scroll -->
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EFEFEF/AAAAAA&text=Arlington+Manor" class="img-fluid" alt="Arlington Manor">
-                        <p class="small mt-1 mb-0">Arlington Manor</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DDEEFF/999999&text=C%26C+Blinds" class="img-fluid" alt="C&C Blinds">
-                        <p class="small mt-1 mb-0">C&C Blinds</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FFEECC/888888&text=Cambridge+Border+Design" class="img-fluid" alt="Cambridge Border Design">
-                        <p class="small mt-1 mb-0">Cambridge Border Design</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EEDDEE/777777&text=Cambridge+Self-Service+Storage" class="img-fluid" alt="Cambridge Self-Service Storage">
-                        <p class="small mt-1 mb-0">Cambridge Self-Service Storage</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DEFABC/666666&text=Cote+Brasserie" class="img-fluid" alt="Cote Brasserie">
-                        <p class="small mt-1 mb-0">Cote Brasserie</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FABCDE/555555&text=Crossways+Garage" class="img-fluid" alt="Crossways Garage">
-                        <p class="small mt-1 mb-0">Crossways Garage</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/ABCDEF/444444&text=George+Inn" class="img-fluid" alt="George Inn">
-                        <p class="small mt-1 mb-0">George Inn</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/CDEFAB/333333&text=Girton+College" class="img-fluid" alt="Girton College">
-                        <p class="small mt-1 mb-0">Girton College</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EFABCD/222222&text=Girton+Parish+Council" class="img-fluid" alt="Girton Parish Council">
-                        <p class="small mt-1 mb-0">Girton Parish Council</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/BCDEFA/111111&text=Girton+Social+Club" class="img-fluid" alt="Girton Social Club">
-                        <p class="small mt-1 mb-0">Girton Social Club</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FABDEC/000000&text=Gretton+School" class="img-fluid" alt="Gretton School">
-                        <p class="small mt-1 mb-0">Gretton School</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EFEFEF/AAAAAA&text=GV+Harrison" class="img-fluid" alt="GV Harrison: Velux experts">
-                        <p class="small mt-1 mb-0">GV Harrison: Velux experts</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DDEEFF/999999&text=Jeab's+Thai" class="img-fluid" alt="Jeab's Thai">
-                        <p class="small mt-1 mb-0">Jeab's Thai</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FFEECC/888888&text=LM+Groundworks" class="img-fluid" alt="LM Groundworks & Landscaping">
-                        <p class="small mt-1 mb-0">LM Groundworks & Landscaping</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EEDDEE/777777&text=M%26M+Heating" class="img-fluid" alt="M&M heating">
-                        <p class="small mt-1 mb-0">M&M heating</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DEFABC/666666&text=MM+Wealth" class="img-fluid" alt="MM Wealth">
-                        <p class="small mt-1 mb-0">MM Wealth</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FABCDE/555555&text=Oakington+Garden+Centre" class="img-fluid" alt="Oakington Garden Centre">
-                        <p class="small mt-1 mb-0">Oakington Garden Centre</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/ABCDEF/444444&text=P+Loveridge+Carpentry" class="img-fluid" alt="P Loveridge Carpentry">
-                        <p class="small mt-1 mb-0">P Loveridge Carpentry</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/CDEFAB/333333&text=Pimp+my+Fish" class="img-fluid" alt="Pimp my Fish">
-                        <p class="small mt-1 mb-0">Pimp my Fish</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EFABCD/222222&text=Pizza+Passione" class="img-fluid" alt="Pizza Passione">
-                        <p class="small mt-1 mb-0">Pizza Passione</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/BCDEFA/111111&text=Polarglaze" class="img-fluid" alt="Polarglaze">
-                        <p class="small mt-1 mb-0">Polarglaze</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FABDEC/000000&text=Prime+Plumbing" class="img-fluid" alt="Prime Plumbing">
-                        <p class="small mt-1 mb-0">Prime Plumbing</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EFEFEF/AAAAAA&text=Pull+Me+Chéri" class="img-fluid" alt="Pull Me Chéri">
-                        <p class="small mt-1 mb-0">Pull Me Chéri</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DDEEFF/999999&text=Redmayne+Arnold+%26+Harris" class="img-fluid" alt="Redmayne, Arnold & Harris">
-                        <p class="small mt-1 mb-0">Redmayne, Arnold & Harris</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/FFEECC/888888&text=Wheelie+Fresh+Bins" class="img-fluid" alt="Wheelie Fresh Bins">
-                        <p class="small mt-1 mb-0">Wheelie Fresh Bins</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/EEDDEE/777777&text=White+Horse+Oakington" class="img-fluid" alt="White Horse Oakington">
-                        <p class="small mt-1 mb-0">White Horse Oakington</p>
-                    </div>
-                    <div class="sponsor-item">
-                        <img src="https://placehold.co/200x100/DEFABC/666666&text=WJ+Guttering" class="img-fluid" alt="WJ Guttering & Drainage">
-                        <p class="small mt-1 mb-0">WJ Guttering & Drainage</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Sponsors Carousel Section -->
-         <footer id="contact-section" class="bg-dark text-white pt-5 pb-4 mt-5">
-            <div class="container text-center">
-                <h3 class="mb-3">Contact Us</h3>
-                <p>Have questions or want to get in touch? Reach out to the Girton Feast Committee.</p>
-                <p>Email: <a href="mailto:info@girtonfeast.example.com" class="text-white">info@girtonfeast.example.com</a></p>
-                <hr class="my-4" style="border-top: 1px solid rgba(255,255,255,.1);">
-                <ul class="list-inline mb-3">
-                    <li class="list-inline-item">
-                        <a class="nav-link text-white-50" href="#home-section">Home</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="nav-link text-white-50" href="#map-section">Map</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="nav-link text-white-50" href="#features-section">Food & Drinks</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="nav-link text-white-50" href="#headliner-event">Entertainment</a>
-                    </li>
-                    <li class="list-inline-item">
-                        <a class="nav-link" href="#">Contact Us</a>
-                    </li>
-                </ul>
-                <p class="text-muted mb-0">© 2025 Girton Feast. All rights reserved.</p>
-         </footer>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <!-- Bootstrap JS Bundle from CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     </body>
-</html>
