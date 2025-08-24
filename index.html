@@ -22,10 +22,11 @@
         <style>
             /* Define a consistent color palette using CSS variables for easier theming */
             :root {
-                --brand-purple: #6A0DAD;
-                --brand-teal: #78B5B5;
-                --brand-coral: #FF6B6B;
-                --brand-pink: #FBC7E2;
+                --brand-saffron: #e9c253;
+                --brand-marian-blue: #3d3b8e;
+                --brand-glaucous: #6883ba;
+                --brand-thulian-pink: #e072a4;
+                --brand-giants-orange: #ff521b;
             }
 
             body {
@@ -85,7 +86,7 @@
                 z-index: 1000;
                 border: none;
                 outline: none;
-                background-color: var(--brand-coral);
+                background-color: var(--brand-giants-orange);
                 color: white;
                 cursor: pointer;
                 width: 50px;
@@ -99,12 +100,21 @@
             }
 
             #scrollToTopBtn:hover {
-                background-color: var(--brand-pink);
+                background-color: var(--brand-thulian-pink);
             }
 
             /* Custom class for a new green background */
-            .bg-brand-purple {
-                background-color: var(--brand-purple) !important;
+            .bg-brand-marian-blue {
+                background-color: var(--brand-marian-blue) !important;
+            }
+            .bg-brand-glaucous {
+                background-color: var(--brand-glaucous) !important;
+            }
+            .bg-brand-thulian-pink {
+                background-color: var(--brand-thulian-pink) !important;
+            }
+            .bg-brand-saffron {
+                background-color: var(--brand-saffron) !important;
             }
             /* Styling for the accordion items */
             .accordion-item {
@@ -115,11 +125,11 @@
             }
             .accordion-button {
                 font-family: 'Sigmar One', cursive;
-                color: var(--brand-purple);
+                color: var(--brand-marian-blue);
                 font-size: 1.25rem;
             }
             .navbar-nav .nav-link.active {
-                color: var(--brand-purple) !important;
+                color: var(--brand-thulian-pink) !important;
                 font-weight: bold;
             }
         </style>
@@ -128,10 +138,10 @@
     <!-- The data-bs-target links the scrollspy to our new navbar's ID -->
     <!-- The data-bs-smooth-scroll enables smooth scrolling to sections -->
     <body data-bs-spy="scroll" data-bs-target="#main-navbar" data-bs-smooth-scroll="true" tabindex="0" class="px-0 mx-0 w-100 bg-light">
-        
+
         <!-- Sticky top navigation bar -->
         <!-- The navbar-expand-md class makes the menu collapse on screens smaller than 'medium' -->
-        <nav id="main-navbar" class="navbar navbar-expand-md navbar-light bg-white sticky-top py-3">
+        <nav id="main-navbar" class="navbar navbar-expand-md navbar-dark bg-brand-marian-blue sticky-top py-3">
             <div class="container-fluid">
                 <!-- The hamburger menu button -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -170,21 +180,21 @@
             </div>
         </nav>
 
-       <section id="hero-section" class="container bg-white rounded content-container pt-5 p-lg-5">
+       <section id="hero-section" class="container bg-light rounded content-container pt-5 p-lg-5">
     <div class="text-center mt-5 mb-4">
-        <h1 class="display-1 fw-bold" style="font-family: 'Sigmar One', cursive; color: var(--brand-purple); line-height: 0.8; letter-spacing: -5px; font-size: clamp(6rem, 10vw, 12rem);">
+        <h1 class="display-1 fw-bold" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue); line-height: 0.8; letter-spacing: -5px; font-size: clamp(6rem, 10vw, 12rem);">
             <span style="white-space: nowrap;">Girt<span class="o-container">o<img src="images/mascot.png" alt="A mascot of a crowned caterpillar peeking out from behind the letter O." class="mascot-image"></span>n</span><br>
-            <span style="color: var(--brand-teal);">Feast</span>
+            <span style="color: var(--brand-glaucous);">Feast</span>
         </h1>
     </div>
-    <div class="pb-4">
-        <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-3">
+    <div class="p-4">
+        <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2">
             <!-- Updated date badge to be a link that adds to a calendar -->
-            <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast&dates=20250614T100000Z/20250616T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK" target="_blank" class="badge rounded-pill bg-light text-dark p-3 fs-5 text-decoration-none">
+            <a target="_blank" class="badge rounded-pill bg-light p-2 fs-5 text-decoration-none" style="color: var(--brand-thulian-pink);" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast&dates=20250614T100000Z/20250616T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
                 <i class="fas fa-calendar-alt"></i> 14 - 16 June 2025
             </a>
             <!-- Updated location badge to use the new Google Maps URL -->
-            <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" class="badge rounded-pill bg-light text-dark p-3 fs-5 text-decoration-none">
+            <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" class="badge rounded-pill bg-light p-2 fs-5 text-decoration-none" style="color: var(--brand-thulian-pink);">
                 <i class="fas fa-map-marker-alt"></i> Girton Rec
             </a>
         </div>
@@ -199,7 +209,8 @@
 
 <!-- Events and Entertainment section with ID for scrollspy -->
 <section id="events" class="container bg-white rounded my-5 p-5">
-    <h2 class="text-center mb-4 display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-purple);">Events and Other Entertainment</h2>
+    <h2 class="text-center display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Events</h2>
+    <h6 class="text-center mb-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-glaucous);">& Other Entertainment</h6>
     <div id="entertainmentCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -209,7 +220,7 @@
         <div class="carousel-inner rounded">
             <div class="carousel-item active">
                 <!-- Updated placeholder image colors -->
-                <img src="https://placehold.co/800x400/FBC7E2/6A0DAD?text=Band+Name" class="d-block w-100" alt="A stage with a band performing under a spotlight.">
+                <img src="https://placehold.co/800x400/e072a4/3d3b8e?text=Band+Name" class="d-block w-100" alt="A stage with a band performing under a spotlight.">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Live Music Stage</h5>
                     <p>Enjoy performances from local bands and artists all weekend long.</p>
@@ -217,7 +228,7 @@
             </div>
             <div class="carousel-item">
                 <!-- Updated placeholder image colors -->
-                <img src="https://placehold.co/800x400/6A0DAD/FBC7E2?text=Food+Stalls" class="d-block w-100" alt="A row of vibrant food stalls serving a variety of cuisines.">
+                <img src="https://placehold.co/800x400/3d3b8e/e072a4?text=Food+Stalls" class="d-block w-100" alt="A row of vibrant food stalls serving a variety of cuisines.">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Food Stalls</h5>
                     <p>Taste a variety of delicious foods from around the world.</p>
@@ -225,7 +236,7 @@
             </div>
             <div class="carousel-item">
                 <!-- Updated placeholder image colors -->
-                <img src="https://placehold.co/800x400/FF6B6B/FFFFFF?text=Funfair" class="d-block w-100" alt="People laughing and enjoying a classic funfair ride.">
+                <img src="https://placehold.co/800x400/ff521b/FFFFFF?text=Funfair" class="d-block w-100" alt="People laughing and enjoying a classic funfair ride.">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Family Funfair</h5>
                     <p>Classic rides and games for all ages to enjoy.</p>
@@ -246,7 +257,7 @@
 <!-- Food & Drink section with ID for scrollspy -->
 <section id="food" class="container bg-white rounded my-5 p-5">
     <div class="text-center mt-5 mb-4">
-        <h2 class="display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-purple);">Food + Drink</h2>
+        <h2 class="display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Food + Drink</h2>
     </div>
     <!-- Replaced the list with a Bootstrap accordion -->
     <div class="accordion" id="foodAccordion">
@@ -295,13 +306,13 @@
 <!-- Agenda section with ID for scrollspy -->
 <section id="agenda" class="container bg-white rounded my-5 p-5">
     <div class="text-center mt-5 mb-4">
-        <h2 class="display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-purple);">Agenda</h2>
+        <h2 class="display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Agenda</h2>
     </div>
     <div class="row">
         <!-- Saturday Agenda -->
         <div class="col-md-6 mb-4">
             <div class="bg-light p-4 rounded h-100">
-                <h3 class="fw-bold" style="color: var(--brand-teal);">Saturday</h3>
+                <h3 class="fw-bold" style="color: var(--brand-glaucous);">Saturday</h3>
                 <ul class="list-group list-group-flush mt-3">
                     <li class="list-group-item bg-transparent">
                         <small class="text-muted">10:00 AM</small><br>
@@ -329,7 +340,7 @@
         <!-- Sunday Agenda -->
         <div class="col-md-6 mb-4">
             <div class="bg-light p-4 rounded h-100">
-                <h3 class="fw-bold" style="color: var(--brand-teal);">Sunday</h3>
+                <h3 class="fw-bold" style="color: var(--brand-glaucous);">Sunday</h3>
                 <ul class="list-group list-group-flush mt-3">
                     <li class="list-group-item bg-transparent">
                         <small class="text-muted">10:00 AM</small><br>
@@ -356,33 +367,29 @@
 <!-- Facilities section with ID for scrollspy -->
 <section id="facilities" class="container bg-white rounded my-5 p-5">
     <div class="text-center mt-5 mb-4">
-        <h2 class="display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-purple);">Facilities</h2>
+        <h2 class="display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Facilities</h2>
     </div>
     <!-- Replaced the list with a flexbox and icons -->
     <div class="d-flex flex-wrap justify-content-center text-center py-4">
         <!-- Toilets -->
         <div class="d-flex flex-column align-items-center mb-4 mx-3" style="width: 150px;">
-            <i class="fas fa-toilet fa-3x mb-2" style="color: var(--brand-purple);"></i>
-            <h5 class="fw-bold">Toilets</h5>
-            <p class="text-muted">Located at various points around the grounds.</p>
+            <i class="fas fa-toilet fa-3x mb-2" style="color: var(--brand-marian-blue);"></i>
+            <h6 class="fw-bold">Toilets</h6>
         </div>
         <!-- Accessible parking -->
         <div class="d-flex flex-column align-items-center mb-4 mx-3" style="width: 150px;">
-            <i class="fas fa-wheelchair fa-3x mb-2" style="color: var(--brand-purple);"></i>
-            <h5 class="fw-bold">Accessible Parking</h5>
-            <p class="text-muted">Designated spaces are available near the main entrance.</p>
+            <i class="fas fa-wheelchair fa-3x mb-2" style="color: var(--brand-thulian-pink);"></i>
+            <h6 class="fw-bold">Accessible Parking</h6>
         </div>
         <!-- First aid -->
         <div class="d-flex flex-column align-items-center mb-4 mx-3" style="width: 150px;">
-            <i class="fas fa-first-aid fa-3x mb-2" style="color: var(--brand-purple);"></i>
-            <h5 class="fw-bold">First Aid</h5>
-            <p class="text-muted">A first aid station is located next to the information tent.</p>
+            <i class="fas fa-first-aid fa-3x mb-2" style="color: var(--brand-giants-orange);"></i>
+            <h6 class="fw-bold">First Aid</h6>
         </div>
         <!-- Lost and found -->
         <div class="d-flex flex-column align-items-center mb-4 mx-3" style="width: 150px;">
-            <i class="fas fa-box fa-3x mb-2" style="color: var(--brand-purple);"></i>
-            <h5 class="fw-bold">Lost and Found</h5>
-            <p class="text-muted">Report any lost or found items at the information tent.</p>
+            <i class="fas fa-box fa-3x mb-2" style="color: var(--brand-glaucous);"></i>
+            <h6 class="fw-bold">Lost and Found</h6>
         </div>
     </div>
 </section>
@@ -390,7 +397,7 @@
 <!-- Map section with ID for scrollspy -->
  <section id="map-section">
     <div class="container py-5">
-        <h1 class="mb-4 display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-purple);">Interactive Map</h1>
+        <h1 class="mb-4 display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Interactive Map</h1>
         <div id="map"></div>
     </div>
  </section>
@@ -399,7 +406,7 @@
 <section id="involved" class="my-5 py-5">
     <div class="container">
         <!-- Updated to use the new brand-purple class -->
-        <div class="row align-items-center bg-brand-purple rounded-4 text-white position-relative overflow-hidden my-5 p-5">
+        <div class="row align-items-center bg-brand-marian-blue rounded-4 text-white position-relative overflow-hidden my-5 p-5">
             <!-- Image column: Appears first on mobile (default order), but second on medium screens and up -->
             <div class="col-md-6 text-center mt-4 mt-md-0 order-md-2">
                 <div class="d-flex align-items-center justify-content-center">
@@ -425,10 +432,10 @@
 
 
 <!-- Sponsors section with ID for scrollspy -->
-<section id="sponsors" class="container bg-white rounded my-5 p-5">
+<section id="sponsors" class="container bg-white rounded my-5 py-5">
     <div class="text-center">
         <!-- Updated the h2 color to be consistent with the other headers -->
-        <h2 class="mb-4 display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-purple);">Thank you to our Sponsors</h2>
+        <h2 class="mb-4 display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Thank you to our Sponsors</h2>
         <p class="lead mb-4 fs-5">We are grateful for the support of our sponsors who make this event possible.</p>
         <!-- Updated the 'Contact us' link to be a styled button with a mailto link -->
         <a class="btn btn-light" href="mailto:rowena@girtonfeast.org.uk">
@@ -482,7 +489,7 @@
         var bounds = [[0,0], [mapHeight, mapWidth]];
 
         // Changed from SVG to a PNG image overlay for performance
-        L.imageOverlay('https://placehold.co/1190x842/78B5B5/6A0DAD?text=Girton+Feast+Map+PNG', bounds).addTo(map);
+        L.imageOverlay('images/map.png', bounds).addTo(map);
 
         // Fit the map to the image bounds
         var zoom = map.getBoundsZoom(bounds, true);
