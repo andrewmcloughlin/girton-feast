@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expandable Containers</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2U6c+Jv1Dk3E8nC5f93s+g/55z9k5oGz4BfWw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <style>
+        /* Base styles for body and the main wrapper to ensure a full-screen layout */
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            overflow: hidden; /* Prevents body scrolling */
+        }
+        #wrapper {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Base styles for the containers */
+        .container {
+            width: 100%;
+            height: 50vh; /* Default half-height */
+            display: flex;
+            flex-direction: column; /* Allows content and controls to stack */
+            align-items: flex-start;
+            justify-content: flex-start;
+            color: black;
+            font-size: 1rem;
+            text-align: left;
+            transition: height 0.3s ease-in-out, padding 0.3s ease-in-out; /* Smooth transitions for both height and padding */
+            position: relative; /* For positioning controls */
+            padding: 1rem;
+            box-sizing: border-box;
+            overflow-y: auto; /* Added for vertical scrolling */
+        }
+        /* Styles for the controls inside each container, now using sticky positioning */
+        .container-controls {
+            position: sticky;
+            top: 0;
+            /* Use margin-left: auto to push the div to the right within the flex container */
+            margin-left: auto;
+            padding: 0.5rem;
+            z-index: 20; /* High z-index to ensure it stays on top of sticky h3 headings */
+            /* Removed background color here to make it transparent */
+        }
+        .container-controls button {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 9999px; /* Tailwind's rounded-full */
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .container-controls button i {
+            font-size: 1rem;
+            color: white;
+        }
+        /* Custom styles for colors */
+        #container1 {
+            background-color: #3498db; /* Blue */
+            color: white;
+        }
+        #container2 {
+            background-color: #2ecc71; /* Green */
+            color: white;
+        }
+        /* Additional styling for the schedule content to account for the fixed bar */
+        .schedule-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
+            width: 100%;
+        }
+        .schedule-section h3 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            position: sticky;
+            top: 0; /* Resetting top position to compete for the top of the container */
+            background-color: #3498db;
+            padding: 0.5rem 0;
+            z-index: 10;
+        }
+        .schedule-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0.75rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        /* New highlight class for the top-most visible event */
+        .schedule-item.highlight {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: bold;
+        }
+        .schedule-item .time {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        /* New styles for the map container */
+        #map {
+            height: 100%;
+            width: 100%;
+            z-index: 1; /* Ensure map is below controls */
+        }
+    </style>
+</head>
+<body>
+    <!-- Main wrapper for the two containers -->
+    <div id="wrapper">
+        <!-- First container with its controls and event schedule -->
+        <div id="container1" class="container">
+            <div class="container-controls">
+                <button class="toggle-btn" onclick="toggleContainerHeight('container1', this)">
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+            </div>
+            <div class="schedule-title">Event Schedule</div>
+            <p>Welcome to the conference! Here is a list of our key events.</p>
+
+            <div class="schedule-section">
+                <h3>Day 1: Saturday, October 26</h3>
+                <div class="schedule-item">
+                    <span class="time">9:00 AM</span>
+                    <span>Registration & Welcome Coffee</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">10:00 AM</span>
+                    <span>Opening Keynote: The Future of AI</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">11:30 AM</span>
+                    <span>Panel Discussion: Ethical AI Development</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">1:00 PM</span>
+                    <span>Lunch Break</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">2:30 PM</span>
+                    <span>Workshop: Machine Learning with Python</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">4:00 PM</span>
+                    <span>Networking Session</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">5:00 PM</span>
+                    <span>Day 1 Concludes</span>
+                </div>
+            </div>
+
+            <div class="schedule-section">
+                <h3>Day 2: Sunday, October 27</h3>
+                <div class="schedule-item">
+                    <span class="time">9:30 AM</span>
+                    <span>Guided Tour of the Tech Lab</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">11:00 AM</span>
+                    <span>Fireside Chat: Innovation in the Cloud</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">12:30 PM</span>
+                    <span>Lunch & Learn Session</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">2:00 PM</span>
+                    <span>Closing Keynote: AI and Society</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">3:30 PM</span>
+                    <span>Closing Ceremony & Raffle</span>
+                </div>
+                <div class="schedule-item">
+                    <span class="time">4:30 PM</span>
+                    <span>Event Ends</span>
+                </div>
+            </div>
+        </div>
+        <!-- Second container -->
+        <div id="container2" class="container">
+            <div class="container-controls">
+                <button class="toggle-btn" onclick="toggleContainerHeight('container2', this)">
+                    <i class="fa-solid fa-expand"></i>
+                </button>
+            </div>
+            <!-- Map container added here -->
+            <div id="map"></div>
+        </div>
+    </div>
+    <!-- Leaflet JavaScript library -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""></script>
+    <script>
+        // Function to toggle a container between full and half height
+        function toggleContainerHeight(containerId, button) {
+            const container1 = document.getElementById('container1');
+            const container2 = document.getElementById('container2');
+            const icon = button.querySelector('i');
+
+            // Check the current height of the clicked container
+            if (document.getElementById(containerId).style.height === '100vh') {
+                // If it's already full height, collapse both back to half height
+                container1.style.height = '50vh';
+                container2.style.height = '50vh';
+                container1.style.padding = '1rem';
+                container2.style.padding = '1rem';
+                icon.className = 'fa-solid fa-expand';
+            } else {
+                // If it's not full height, expand the clicked container and collapse the other
+                if (containerId === 'container1') {
+                    container1.style.height = '100vh';
+                    container2.style.height = '0';
+                    container1.style.padding = '1rem';
+                    container2.style.padding = '0';
+                } else {
+                    container1.style.height = '0';
+                    container2.style.height = '100vh';
+                    container1.style.padding = '0';
+                    container2.style.padding = '1rem';
+                }
+                icon.className = 'fa-solid fa-compress';
+            }
+        }
+        
+        // Find the top-most visible event as the user scrolls
+        const scheduleContainer = document.getElementById('container1');
+        const scheduleItems = document.querySelectorAll('.schedule-item');
+        let lastHighlightedElement = null;
+        
+        // The stickyOffset is now increased to ensure the highlight appears below the sticky elements.
+        const stickyOffset = 90; 
+
+        // Function to highlight the top-most visible event
+        function highlightTopEvent() {
+            // Check if the user is manually interacting with the scroll
+            let topMostEvent = null;
+            let minDistance = Infinity;
+            
+            // Loop through each event item to find the one closest to the top of the container
+            scheduleItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                const containerRect = scheduleContainer.getBoundingClientRect();
+
+                // Check if the event item is within the container's viewport, and below the sticky offset
+                if (rect.top >= containerRect.top + stickyOffset && rect.top < minDistance) {
+                    minDistance = rect.top;
+                    topMostEvent = item;
+                }
+            });
+
+            // If a new top-most event is found and it's not the same as the last one
+            if (topMostEvent && topMostEvent !== lastHighlightedElement) {
+                // Remove the highlight from the previous element
+                if (lastHighlightedElement) {
+                    lastHighlightedElement.classList.remove('highlight');
+                }
+                // Add the highlight to the new top-most element
+                topMostEvent.classList.add('highlight');
+                // Update the reference to the last highlighted element
+                lastHighlightedElement = topMostEvent;
+            }
+        }
+        
+        // Add a scroll event listener to the schedule container to trigger the highlight function
+        scheduleContainer.addEventListener('scroll', highlightTopEvent);
+
+        // Add a click event listener to each schedule item to allow manual highlighting
+        scheduleItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove the highlight from the last highlighted element
+                if (lastHighlightedElement) {
+                    lastHighlightedElement.classList.remove('highlight');
+                }
+                // Add the highlight to the clicked item
+                item.classList.add('highlight');
+                // Update the last highlighted element to the clicked item
+                lastHighlightedElement = item;
+            });
+        });
+
+        // Run the highlight function once on page load to highlight the first event
+        window.addEventListener('load', highlightTopEvent);
+
+        // --- Start of Leaflet map code ---
+        function initMap() {
+            // Initialize the map on the #map div
+            const map = L.map('map', { zoomControl: false }).setView([51.505, -0.09], 13);
+
+            // Add a tile layer from OpenStreetMap
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '© OpenStreetMap'
+            }).addTo(map);
+
+            // Add a marker to the map
+            L.marker([51.505, -0.09]).addTo(map)
+                .bindPopup('A sample location!')
+                .openPopup();
+            
+            return map;
+        }
+
+        const map = initMap();
+        
+        // Use a MutationObserver to watch for changes in the container's height
+        // This is a more reliable way to update the map's size on transition end
+        const mapContainer = document.getElementById('container2');
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.attributeName === 'style' && mapContainer.style.height !== '0px') {
+                    map.invalidateSize();
+                }
+            });
+        });
+
+        // Start observing the map container for attribute changes
+        observer.observe(mapContainer, { attributes: true });
+        // --- End of Leaflet map code ---
+    </script>
+</body>
+</html>
