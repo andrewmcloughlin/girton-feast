@@ -21,14 +21,14 @@
     <!-- Favicon Placeholder (replace with your actual favicon) -->
     <link rel="icon" href="images/mascot.png" type="image/png">
 </head>
-<body>
+<body class="bg-brand-saffron">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
 
     <main class="container my-5">
         <div class="text-center mt-5 mb-5">
-            <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Photo Gallery</h1>
+            <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Relive the memories</h1>
             <p class="lead text-muted">A look back at previous years of the Girton Feast.</p>
         </div>
 
@@ -77,24 +77,24 @@
             // Sort years in descending order
             photoConfig.sort((a, b) => b.year - a.year);
 
-            galleryContainer.id = 'galleryAccordion';
-            galleryContainer.className = 'accordion';
+            // 1. Start building the HTML string with the accordion container
+            let allYearsHtml = '<div id="galleryAccordion" class="accordion">';
 
             photoConfig.forEach(config => {
                 const isFirst = photoConfig.indexOf(config) === 0;
                 const collapseId = `collapse-${config.year}`;
 
-                let yearHtml = `
-                    <div class="accordion-item">
+                allYearsHtml += `
+                    <div class="accordion-item bg-brand-saffron mb-4"> 
                         <h2 class="accordion-header" id="heading-${config.year}">
-                            <button class="accordion-button ${isFirst ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" aria-controls="${collapseId}">
+                            <button class="bg-brand-marian-blue text-white accordion-button ${isFirst ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" aria-controls="${collapseId}">
                                 ${config.year}
                             </button>
                         </h2>
                         <div id="${collapseId}" class="accordion-collapse collapse ${isFirst ? 'show' : ''}" aria-labelledby="heading-${config.year}" data-bs-parent="#galleryAccordion">
                             <div class="accordion-body">
                                 <div class="d-flex justify-content-end mb-4">
-                                    <button class="btn btn-outline-primary download-btn" onclick="downloadYearAsZip(${config.year}, this)">
+                                    <button class="btn btn-primary download-btn" onclick="downloadYearAsZip(${config.year}, this)">
                                         <i class="fas fa-download me-2"></i>Download All Photos
                                     </button>
                                 </div>
@@ -102,17 +102,21 @@
 
                 for (let i = 1; i <= config.imageCount; i++) {
                     const imagePath = `images/previous/${config.year}/${i}.jpg`;
-                    yearHtml += `
+                    allYearsHtml += `
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                             <div class="gallery-img-container" onclick="openLightbox(${config.year}, ${i})">
-                                <img src="${imagePath}" class="gallery-img" alt="Girton Feast ${config.year} - Photo ${i}" loading="lazy">
+                                <img src="${imagePath}" style="height: auto; width: 100%; border-radius: 15px;" class="gallery-img" alt="Girton Feast ${config.year} - Photo ${i}" loading="lazy">
                             </div>
                         </div>`;
                 }
 
-                yearHtml += `</div></div></div></div>`;
-                galleryContainer.innerHTML += yearHtml;
+                allYearsHtml += `</div></div></div></div>`;
             });
+
+            allYearsHtml += '</div>'; // Close the accordion container
+
+            // 2. Set the innerHTML of the container only once with the complete HTML string
+            galleryContainer.innerHTML = allYearsHtml; 
         }
 
         // --- Lightbox State ---
