@@ -1,0 +1,116 @@
+/* 
+========================================
+Global Styles & Variables
+========================================
+*/ /* Define a consistent color palette using CSS variables for easier theming */
+:root {
+    --brand-saffron: #e9c253;
+    --brand-marian-blue: #3d3b8e;
+    --brand-glaucous: #6883ba;
+    --brand-thulian-pink: #e072a4;
+    --brand-giants-orange: #ff521b;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #353535;
+    padding-top: 0;
+}
+.o-container {
+    position: relative;
+}
+.mascot-image {
+    position: absolute;
+    width: 5.6em;
+    height: auto;
+    top: -1.98em;
+    left: -3.48em;
+    clip-path: inset(0 0);
+    z-index: 1;
+}
+.content-container {
+    overflow: hidden;
+    z-index: 1;
+}
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: .5rem;
+    padding: 1rem;
+}
+/* Marquee animation for the sponsor section */
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+    width: max-content;
+    animation: marquee 30s linear infinite;
+}
+
+#map {
+    height: 80vh;
+    width: 100%;
+    border-radius: 1rem;
+    margin: 2rem 0;
+}
+
+/* Custom styles for the navbar */
+.navbar {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Scroll to top button styles */
+#scrollToTopBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 20px;
+    display: none; /* Hidden by default */
+    z-index: 1000;
+    border: none;
+    outline: none;
+    background-color: var(--brand-giants-orange);
+    color: white;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: opacity 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#scrollToTopBtn:hover {
+    background-color: var(--brand-thulian-pink);
+}
+
+/* Custom class for a new green background */
+.bg-brand-marian-blue {
+    background-color: var(--brand-marian-blue) !important;
+}
+.bg-brand-glaucous {
+    background-color: var(--brand-glaucous) !important;
+}
+.bg-brand-thulian-pink {
+    background-color: var(--brand-thulian-pink) !important;
+}
+.bg-brand-saffron {
+    background-color: var(--brand-saffron) !important;
+}
+/* Styling for the accordion items */
+.accordion-item {
+    border-radius: .5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+.accordion-button {
+    font-family: 'Sigmar One', cursive;
+    color: var(--brand-marian-blue);
+    font-size: 1.25rem;
+}
+.navbar-nav .nav-link.active {
+    color: var(--brand-thulian-pink) !important;
+    font-weight: bold;
+}

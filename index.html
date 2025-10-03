@@ -19,120 +19,10 @@
         <!-- Leaflet -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-        <style>
-            /* Define a consistent color palette using CSS variables for easier theming */
-            :root {
-                --brand-saffron: #e9c253;
-                --brand-marian-blue: #3d3b8e;
-                --brand-glaucous: #6883ba;
-                --brand-thulian-pink: #e072a4;
-                --brand-giants-orange: #ff521b;
-            }
-
-            body {
-                font-family: 'Poppins', sans-serif;
-                color: #353535;
-                padding-top: 0;
-            }
-            .o-container {
-                position: relative;
-            }
-            .mascot-image {
-                position: absolute;
-                width: 5.6em;
-                height: auto;
-                top: -1.98em;
-                left: -3.48em;
-                clip-path: inset(0 0);
-                z-index: 1;
-            }
-            .content-container {
-                overflow: hidden;
-                z-index: 1;
-            }
-            .carousel-caption {
-                background-color: rgba(0, 0, 0, 0.5);
-                border-radius: .5rem;
-                padding: 1rem;
-            }
-            /* Marquee animation for the sponsor section */
-            @keyframes marquee {
-                0% { transform: translateX(0); }
-                100% { transform: translateX(-50%); }
-            }
-            .animate-marquee {
-                width: max-content;
-                animation: marquee 30s linear infinite;
-            }
-
-            #map {
-                height: 80vh;
-                width: 100%;
-                border-radius: 1rem;
-                margin: 2rem 0;
-            }
-            
-            /* Custom styles for the navbar */
-            .navbar {
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            }
-            
-            /* Scroll to top button styles */
-            #scrollToTopBtn {
-                position: fixed;
-                bottom: 30px;
-                right: 20px;
-                display: none; /* Hidden by default */
-                z-index: 1000;
-                border: none;
-                outline: none;
-                background-color: var(--brand-giants-orange);
-                color: white;
-                cursor: pointer;
-                width: 50px;
-                height: 50px;
-                border-radius: 50%;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                transition: opacity 0.3s ease-in-out;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            #scrollToTopBtn:hover {
-                background-color: var(--brand-thulian-pink);
-            }
-
-            /* Custom class for a new green background */
-            .bg-brand-marian-blue {
-                background-color: var(--brand-marian-blue) !important;
-            }
-            .bg-brand-glaucous {
-                background-color: var(--brand-glaucous) !important;
-            }
-            .bg-brand-thulian-pink {
-                background-color: var(--brand-thulian-pink) !important;
-            }
-            .bg-brand-saffron {
-                background-color: var(--brand-saffron) !important;
-            }
-            /* Styling for the accordion items */
-            .accordion-item {
-                border-radius: .5rem;
-                margin-bottom: 1rem;
-                border: 1px solid #ddd;
-                overflow: hidden;
-            }
-            .accordion-button {
-                font-family: 'Sigmar One', cursive;
-                color: var(--brand-marian-blue);
-                font-size: 1.25rem;
-            }
-            .navbar-nav .nav-link.active {
-                color: var(--brand-thulian-pink) !important;
-                font-weight: bold;
-            }
-        </style>
+        <!-- Custom Stylesheet -->
+        <link rel="stylesheet" href="style.css">
+        <!-- Favicon Placeholder (replace with your actual favicon) -->
+        <link rel="icon" href="images/mascot.png" type="image/png">
     </head>
     <!-- The data-bs-spy attribute activates the scrollspy behavior on the body -->
     <!-- The data-bs-target links the scrollspy to our new navbar's ID -->
@@ -184,7 +74,7 @@
         <div class="carousel-inner rounded">
             <div class="carousel-item active">
                 <!-- Updated placeholder image colors -->
-                <img src="https://placehold.co/800x400/e072a4/3d3b8e?text=Band+Name" class="d-block w-100" alt="A stage with a band performing under a spotlight.">
+                <img src="images/main_event/1.jpg" class="d-block w-100" alt="A stage with a band performing under a spotlight.">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Live Music Stage</h5>
                     <p>Enjoy performances from local bands and artists all weekend long.</p>
@@ -192,7 +82,7 @@
             </div>
             <div class="carousel-item">
                 <!-- Updated placeholder image colors -->
-                <img src="https://placehold.co/800x400/3d3b8e/e072a4?text=Food+Stalls" class="d-block w-100" alt="A row of vibrant food stalls serving a variety of cuisines.">
+                <img src="images/main_event/2.jpg" class="d-block w-100" alt="A row of vibrant food stalls serving a variety of cuisines.">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Food Stalls</h5>
                     <p>Taste a variety of delicious foods from around the world.</p>
@@ -200,7 +90,7 @@
             </div>
             <div class="carousel-item">
                 <!-- Updated placeholder image colors -->
-                <img src="https://placehold.co/800x400/ff521b/FFFFFF?text=Funfair" class="d-block w-100" alt="People laughing and enjoying a classic funfair ride.">
+                <img src="images/main_event/3.jpg" class="d-block w-100" alt="People laughing and enjoying a classic funfair ride.">
                 <div class="carousel-caption d-none d-md-block">
                     <h5>Family Funfair</h5>
                     <p>Classic rides and games for all ages to enjoy.</p>
@@ -229,12 +119,12 @@
         <div class="accordion-item">
             <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Pimp my Fish
+                    Pizza Passione
                 </button>
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#foodAccordion">
                 <div class="accordion-body">
-                    <p>Serving up delicious, crispy fish and chips with a variety of unique sauces and toppings. A local favourite!</p>
+                    <p>Serving up delicious, crispy pizza with a variety of unique sauces and toppings. A local favourite!</p>
                 </div>
             </div>
         </div>
@@ -512,19 +402,44 @@
          * - On other pages, links like "#events" become "index.html#events".
          */
         function loadComponent(selector, url) {
-            const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
-            fetch(url)
+            const currentPagePath = window.location.pathname; // e.g., "/gallery.html" or "/index.html" or "/"
+            const currentFileName = currentPagePath.substring(currentPagePath.lastIndexOf('/') + 1); // e.g., "gallery.html" or "index.html" or ""
+            const currentHash = window.location.hash; // e.g., "#hero-section"
+            const isIndexPage = (currentFileName === 'index.html' || currentFileName === ''); // True if on index or root
+
+            return fetch(url)
                 .then(response => response.text())
                 .then(data => {
                     const tempDiv = document.createElement('div');
                     tempDiv.innerHTML = data;
-                    const links = tempDiv.querySelectorAll('a');
+                    const links = tempDiv.querySelectorAll('.navbar-nav .nav-link'); // Select only nav links
 
                     links.forEach(link => {
                         const href = link.getAttribute('href');
-                        if (href && href.startsWith('#')) {
-                            if (!isIndexPage) {
-                                link.setAttribute('href', `index.html${href}`);
+                        if (!href) return;
+
+                        // 1. Adjust hash links for non-index pages (e.g., on gallery.html, #events becomes index.html#events)
+                        if (href.startsWith('#') && !isIndexPage) {
+                            link.setAttribute('href', `index.html${href}`);
+                        }
+
+                        // 2. Determine active state
+                        link.classList.remove('active'); // Remove any existing active class first
+
+                        if (isIndexPage) {
+                            // On the index page (or root):
+                            // Highlight if the link is 'index.html' OR if it's a hash link matching the current hash,
+                            // OR if it's the #hero-section and there's no hash (i.e., at the very top of the page).
+                            if (href === 'index.html' || (href.startsWith('#') && (currentHash === href || (currentHash === '' && href === '#hero-section')))) {
+                                link.classList.add('active');
+                            }
+                        }
+                        else {
+                            // On other pages (e.g., gallery.html):
+                            // Highlight if the link's filename matches the current page's filename.
+                            const linkFileName = href.substring(href.lastIndexOf('/') + 1);
+                            if (currentFileName === linkFileName) {
+                                link.classList.add('active');
                             }
                         }
                     });
@@ -532,7 +447,39 @@
                 });
         };
         // Load the navbar
-        loadComponent('#navbar-placeholder', '_navbar.html');
+        loadComponent('#navbar-placeholder', '_navbar.html').then(() => {
+            // Once the navbar is loaded, start the countdown
+            initializeCountdown();
+        });
+
+        // --- Countdown Timer Logic ---
+        function initializeCountdown() {
+            const countdownElement = document.getElementById('countdown-timer');
+            if (!countdownElement) return;
+
+            // Set the date for the event (June 14, 2026, 10:00 AM)
+            const eventDate = new Date("June 14, 2026 10:00:00").getTime();
+
+            const interval = setInterval(function() {
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+
+                // Time calculations for days, hours, minutes and seconds
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Display the result in the element with id="countdown-timer"
+                countdownElement.innerHTML = `🎉 ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                // If the countdown is finished, write some text
+                if (distance < 0) {
+                    clearInterval(interval);
+                    countdownElement.innerHTML = "The Feast is on!";
+                }
+            }, 1000);
+        }
     </script>
     </body>
 </html>
