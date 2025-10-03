@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - Girton Feast</title>
+
+    <!-- Bootstrap CSS from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Google Fonts: Sigmar One and Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        /* Define a consistent color palette using CSS variables for easier theming */
+        :root {
+            --brand-saffron: #e9c253;
+            --brand-marian-blue: #3d3b8e;
+            --brand-glaucous: #6883ba;
+            --brand-thulian-pink: #e072a4;
+            --brand-giants-orange: #ff521b;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #353535;
+            background-color: #f8f9fa; /* bg-light */
+        }
+
+        /* Custom styles for the navbar */
+        .navbar {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .bg-brand-marian-blue {
+            background-color: var(--brand-marian-blue) !important;
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--brand-thulian-pink) !important;
+            font-weight: bold;
+        }
+
+        .gallery-img-container {
+            overflow: hidden;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-img-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        /* Lightbox styles */
+        #lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1050; /* Higher than navbar */
+        }
+
+        #lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+
+        #lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 0.5rem;
+        }
+
+        .lightbox-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            font-size: 2rem;
+            padding: 0 1rem;
+            cursor: pointer;
+            height: 100%;
+            border-radius: 0;
+        }
+        .lightbox-btn.close { top: 1rem; right: 1rem; height: auto; font-size: 2.5rem; background: transparent; }
+        .lightbox-btn.prev { left: 0; }
+        .lightbox-btn.next { right: 0; }
+        .lightbox-btn:hover { background: rgba(255, 255, 255, 0.4); }
+        
+        /* Accordion custom styles */
+        .accordion-button {
+            font-family: 'Sigmar One', cursive;
+            font-size: 1.25rem;
+            color: var(--brand-marian-blue);
+        }
+        .accordion-button:not(.collapsed) {
+            background-color: #f0f3f9;
+            color: var(--brand-marian-blue);
+        }
+        .accordion-item {
+            margin-bottom: 1rem;
+            border-radius: .5rem !important;
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Placeholder for the navigation bar -->
+    <div id="navbar-placeholder"></div>
+
+    <main class="container my-5">
+        <div class="text-center mt-5 mb-5">
+            <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Photo Gallery</h1>
+            <p class="lead text-muted">A look back at previous years of the Girton Feast.</p>
+        </div>
+
+        <!-- The gallery will be dynamically generated here -->
+        <div id="gallery-container"></div>
+    </main>
+    
+    <!-- Lightbox Structure -->
+    <div id="lightbox-overlay">
+        <div id="lightbox-content">
+            <img id="lightbox-img" src="" alt="Enlarged gallery view">
+            <button class="lightbox-btn prev" onclick="showPrevImage()">&lt;</button>
+            <button class="lightbox-btn next" onclick="showNextImage()">&gt;</button>
+            <button class="lightbox-btn close" onclick="closeLightbox()">&times;</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JSZip library for creating zip files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <script>
+        // --- START: Gallery Configuration ---
+        // To add photos, simply update this configuration.
+        // The script will automatically find images named 1.jpg, 2.jpg, etc.
+        // inside the folder for each year.
+        const photoConfig = [
+            { year: 2024, imageCount: 60 },
+            { year: 2018, imageCount: 36 },
+            { year: 2017, imageCount: 40 },
+            { year: 2016, imageCount: 45 },
+            { year: 2015, imageCount: 15 },
+            { year: 2014, imageCount: 14 },
+            { year: 2013, imageCount: 41 },
+            { year: 2012, imageCount: 50 },
+            // Example: { year: 2021, imageCount: 8 },
+        ];
+        // --- END: Gallery Configuration ---
+
+        /**
+         * Loads a component and adjusts its links based on the current page.
+         * - On index.html, links like "index.html#events" become "#events".
+         * - On other pages, links like "#events" become "index.html#events".
+         */
+        function loadComponent(selector, url) {
+            const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname === '/';
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = data;
+                    const links = tempDiv.querySelectorAll('a');
+
+                    links.forEach(link => {
+                        const href = link.getAttribute('href');
+                        if (href && href.startsWith('#')) {
+                            if (!isIndexPage) {
+                                link.setAttribute('href', `index.html${href}`);
+                            }
+                        }
+                    });
+                    document.querySelector(selector).innerHTML = tempDiv.innerHTML;
+                });
+        };
+
+        // --- Lightbox State ---
+        let currentImageIndex = 0;
+        let currentYearConfig = null;
+
+        // Function to build the gallery from the configuration
+        function buildGallery() {
+            const galleryContainer = document.getElementById('gallery-container');
+            if (!galleryContainer) return;
+
+            // Sort years in descending order
+            photoConfig.sort((a, b) => b.year - a.year);
+
+            galleryContainer.id = 'galleryAccordion';
+            galleryContainer.className = 'accordion';
+
+            photoConfig.forEach(config => {
+                const isFirst = photoConfig.indexOf(config) === 0;
+                const collapseId = `collapse-${config.year}`;
+
+                let yearHtml = `
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading-${config.year}">
+                            <button class="accordion-button ${isFirst ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" aria-controls="${collapseId}">
+                                ${config.year}
+                            </button>
+                        </h2>
+                        <div id="${collapseId}" class="accordion-collapse collapse ${isFirst ? 'show' : ''}" aria-labelledby="heading-${config.year}" data-bs-parent="#galleryAccordion">
+                            <div class="accordion-body">
+                                <div class="d-flex justify-content-end mb-4">
+                                    <button class="btn btn-outline-primary download-btn" onclick="downloadYearAsZip(${config.year}, this)">
+                                        <i class="fas fa-download me-2"></i>Download All Photos
+                                    </button>
+                                </div>
+                                <div class="row g-4">`;
+
+                for (let i = 1; i <= config.imageCount; i++) {
+                    const imagePath = `images/previous/${config.year}/${i}.jpg`;
+                    yearHtml += `
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="gallery-img-container" onclick="openLightbox(${config.year}, ${i})">
+                                <img src="${imagePath}" class="gallery-img" alt="Girton Feast ${config.year} - Photo ${i}" loading="lazy">
+                            </div>
+                        </div>`;
+                }
+
+                yearHtml += `</div></div></div></div>`;
+                galleryContainer.innerHTML += yearHtml;
+            });
+        }
+
+        // --- Lightbox Functions ---
+        function openLightbox(year, index) {
+            currentYearConfig = photoConfig.find(c => c.year === year);
+            currentImageIndex = index;
+            updateLightboxImage();
+            document.getElementById('lightbox-overlay').style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-overlay').style.display = 'none';
+        }
+
+        function showNextImage() {
+            currentImageIndex++;
+            if (currentImageIndex > currentYearConfig.imageCount) {
+                currentImageIndex = 1; // Loop back to the first image
+            }
+            updateLightboxImage();
+        }
+
+        function showPrevImage() {
+            currentImageIndex--;
+            if (currentImageIndex < 1) {
+                currentImageIndex = currentYearConfig.imageCount; // Loop back to the last image
+            }
+            updateLightboxImage();
+        }
+
+        function updateLightboxImage() {
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = `images/previous/${currentYearConfig.year}/${currentImageIndex}.jpg`;
+        }
+
+        // --- Download All Function ---
+        async function downloadYearAsZip(year, button) {
+            const config = photoConfig.find(c => c.year === year);
+            if (!config) return;
+
+            // Provide user feedback
+            const originalText = button.innerHTML;
+            button.disabled = true;
+            button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Zipping...';
+
+            const zip = new JSZip();
+            const imagePromises = [];
+
+            for (let i = 1; i <= config.imageCount; i++) {
+                const imageUrl = `images/previous/${year}/${i}.jpg`;
+                const promise = fetch(imageUrl)
+                    .then(response => {
+                        if (!response.ok) throw new Error(`Image ${i}.jpg not found`);
+                        return response.blob();
+                    })
+                    .then(blob => {
+                        zip.file(`${i}.jpg`, blob);
+                    })
+                    .catch(error => console.error(`Failed to fetch ${imageUrl}:`, error));
+                imagePromises.push(promise);
+            }
+
+            await Promise.all(imagePromises);
+
+            zip.generateAsync({ type: "blob" })
+                .then(function(content) {
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(content);
+                    link.download = `girton-feast-${year}-photos.zip`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // Restore button state
+                    button.disabled = false;
+                    button.innerHTML = originalText;
+                });
+        }
+
+        // Load the navbar and then build the gallery
+        document.addEventListener('DOMContentLoaded', () => {
+            loadComponent('#navbar-placeholder', '_navbar.html');
+            buildGallery();
+        });
+
+        // Add keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox-overlay').style.display === 'flex') {
+                if (e.key === 'ArrowRight') showNextImage();
+                if (e.key === 'ArrowLeft') showPrevImage();
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+    </script>
+</body>
+</html>
