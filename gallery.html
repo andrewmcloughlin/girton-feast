@@ -69,62 +69,6 @@
         ];
         // --- END: Gallery Configuration ---
 
-        /**
-         * Loads a component and adjusts its links based on the current page.
-         * - On index.html, links like "index.html#events" become "#events".
-         * - On other pages, links like "#events" become "index.html#events".
-         */
-        function loadComponent(selector, url) {
-            const currentPagePath = window.location.pathname; // e.g., "/gallery.html" or "/index.html" or "/"
-            const currentFileName = currentPagePath.substring(currentPagePath.lastIndexOf('/') + 1); // e.g., "gallery.html" or "index.html" or ""
-            const currentHash = window.location.hash; // e.g., "#hero-section"
-            const isIndexPage = (currentFileName === 'index.html' || currentFileName === ''); // True if on index or root
-
-            return fetch(url)
-                .then(response => response.text())
-                .then(data => {
-                    const tempDiv = document.createElement('div');
-                    tempDiv.innerHTML = data;
-                    const links = tempDiv.querySelectorAll('.navbar-nav .nav-link'); // Select only nav links
-
-                    links.forEach(link => {
-                        const href = link.getAttribute('href');
-                        if (!href) return;
-
-                        // Make sure the 'Home' link works from other pages
-                        if (href === '#hero-section') {
-                            link.setAttribute('href', 'index.html#hero-section');
-                        }
-
-                        // 1. Adjust hash links for non-index pages (e.g., on gallery.html, #events becomes index.html#events)
-                        if (href.startsWith('#') && !isIndexPage) {
-                            link.setAttribute('href', `index.html${href}`);
-                        }
-
-                        // 2. Determine active state
-                        link.classList.remove('active'); // Remove any existing active class first
-
-                        if (isIndexPage) {
-                            // On the index page (or root):
-                            // Highlight if the link is 'index.html' OR if it's a hash link matching the current hash,
-                            // OR if it's the #hero-section and there's no hash (i.e., at the very top of the page).
-                            if (href.startsWith('index.html#') || (href.startsWith('#') && (currentHash === href || (currentHash === '' && href === '#hero-section')))) {
-                                link.classList.add('active');
-                            }
-                        }
-                        else {
-                            // On other pages (e.g., gallery.html):
-                            // Highlight if the link's filename matches the current page's filename.
-                            const linkFileName = href.substring(href.lastIndexOf('/') + 1);
-                            if (currentFileName === linkFileName) {
-                                link.classList.add('active');
-                            }
-                        }
-                    });
-                    document.querySelector(selector).innerHTML = tempDiv.innerHTML;
-                });
-        };
-
         // --- Lightbox State ---
         function openLightbox(year, index) {
             currentYearConfig = photoConfig.find(c => c.year === year);
@@ -204,7 +148,7 @@
 
         // Load the navbar and then build the gallery
         document.addEventListener('DOMContentLoaded', () => {
-            loadComponent('#navbar-placeholder', '_navbar.html');
+            loadComponent('#navbar-placeholder', 'navbar.html');
             // The initializeCountdown function is now in script.js, but only called from index.html
             buildGallery();
         });
