@@ -69,6 +69,52 @@
         ];
         // --- END: Gallery Configuration ---
 
+        // Function to build the gallery from the configuration
+        function buildGallery() {
+            const galleryContainer = document.getElementById('gallery-container');
+            if (!galleryContainer) return;
+
+            // Sort years in descending order
+            photoConfig.sort((a, b) => b.year - a.year);
+
+            galleryContainer.id = 'galleryAccordion';
+            galleryContainer.className = 'accordion';
+
+            photoConfig.forEach(config => {
+                const isFirst = photoConfig.indexOf(config) === 0;
+                const collapseId = `collapse-${config.year}`;
+
+                let yearHtml = `
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading-${config.year}">
+                            <button class="accordion-button ${isFirst ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" aria-controls="${collapseId}">
+                                ${config.year}
+                            </button>
+                        </h2>
+                        <div id="${collapseId}" class="accordion-collapse collapse ${isFirst ? 'show' : ''}" aria-labelledby="heading-${config.year}" data-bs-parent="#galleryAccordion">
+                            <div class="accordion-body">
+                                <div class="d-flex justify-content-end mb-4">
+                                    <button class="btn btn-outline-primary download-btn" onclick="downloadYearAsZip(${config.year}, this)">
+                                        <i class="fas fa-download me-2"></i>Download All Photos
+                                    </button>
+                                </div>
+                                <div class="row g-4">`;
+
+                for (let i = 1; i <= config.imageCount; i++) {
+                    const imagePath = `images/previous/${config.year}/${i}.jpg`;
+                    yearHtml += `
+                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <div class="gallery-img-container" onclick="openLightbox(${config.year}, ${i})">
+                                <img src="${imagePath}" class="gallery-img" alt="Girton Feast ${config.year} - Photo ${i}" loading="lazy">
+                            </div>
+                        </div>`;
+                }
+
+                yearHtml += `</div></div></div></div>`;
+                galleryContainer.innerHTML += yearHtml;
+            });
+        }
+
         // --- Lightbox State ---
         function openLightbox(year, index) {
             currentYearConfig = photoConfig.find(c => c.year === year);
