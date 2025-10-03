@@ -50,7 +50,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JSZip library for creating zip files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-
+    <script src="script.js"></script> <!-- Link to the new external script file -->
     <script>
         // --- START: Gallery Configuration ---
         // To add photos, simply update this configuration.
@@ -91,6 +91,11 @@
                         const href = link.getAttribute('href');
                         if (!href) return;
 
+                        // Make sure the 'Home' link works from other pages
+                        if (href === '#hero-section') {
+                            link.setAttribute('href', 'index.html#hero-section');
+                        }
+
                         // 1. Adjust hash links for non-index pages (e.g., on gallery.html, #events becomes index.html#events)
                         if (href.startsWith('#') && !isIndexPage) {
                             link.setAttribute('href', `index.html${href}`);
@@ -103,7 +108,7 @@
                             // On the index page (or root):
                             // Highlight if the link is 'index.html' OR if it's a hash link matching the current hash,
                             // OR if it's the #hero-section and there's no hash (i.e., at the very top of the page).
-                            if (href === 'index.html' || (href.startsWith('#') && (currentHash === href || (currentHash === '' && href === '#hero-section')))) {
+                            if (href.startsWith('index.html#') || (href.startsWith('#') && (currentHash === href || (currentHash === '' && href === '#hero-section')))) {
                                 link.classList.add('active');
                             }
                         }
@@ -121,56 +126,6 @@
         };
 
         // --- Lightbox State ---
-        let currentImageIndex = 0;
-        let currentYearConfig = null;
-
-        // Function to build the gallery from the configuration
-        function buildGallery() {
-            const galleryContainer = document.getElementById('gallery-container');
-            if (!galleryContainer) return;
-
-            // Sort years in descending order
-            photoConfig.sort((a, b) => b.year - a.year);
-
-            galleryContainer.id = 'galleryAccordion';
-            galleryContainer.className = 'accordion';
-
-            photoConfig.forEach(config => {
-                const isFirst = photoConfig.indexOf(config) === 0;
-                const collapseId = `collapse-${config.year}`;
-
-                let yearHtml = `
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading-${config.year}">
-                            <button class="accordion-button ${isFirst ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#${collapseId}" aria-expanded="${isFirst}" aria-controls="${collapseId}">
-                                ${config.year}
-                            </button>
-                        </h2>
-                        <div id="${collapseId}" class="accordion-collapse collapse ${isFirst ? 'show' : ''}" aria-labelledby="heading-${config.year}" data-bs-parent="#galleryAccordion">
-                            <div class="accordion-body">
-                                <div class="d-flex justify-content-end mb-4">
-                                    <button class="btn btn-outline-primary download-btn" onclick="downloadYearAsZip(${config.year}, this)">
-                                        <i class="fas fa-download me-2"></i>Download All Photos
-                                    </button>
-                                </div>
-                                <div class="row g-4">`;
-
-                for (let i = 1; i <= config.imageCount; i++) {
-                    const imagePath = `images/previous/${config.year}/${i}.jpg`;
-                    yearHtml += `
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                            <div class="gallery-img-container" onclick="openLightbox(${config.year}, ${i})">
-                                <img src="${imagePath}" class="gallery-img" alt="Girton Feast ${config.year} - Photo ${i}" loading="lazy">
-                            </div>
-                        </div>`;
-                }
-
-                yearHtml += `</div></div></div></div>`;
-                galleryContainer.innerHTML += yearHtml;
-            });
-        }
-
-        // --- Lightbox Functions ---
         function openLightbox(year, index) {
             currentYearConfig = photoConfig.find(c => c.year === year);
             currentImageIndex = index;
@@ -250,6 +205,7 @@
         // Load the navbar and then build the gallery
         document.addEventListener('DOMContentLoaded', () => {
             loadComponent('#navbar-placeholder', '_navbar.html');
+            // The initializeCountdown function is now in script.js, but only called from index.html
             buildGallery();
         });
 
