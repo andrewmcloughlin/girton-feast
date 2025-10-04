@@ -37,7 +37,7 @@
 
         <div class="row">
             <!-- Scrollspy Navigation Column -->
-            <div class="col-lg-3">
+            <div class="col-lg-3 d-none d-lg-block">
                 <nav id="gallery-nav" class="sticky-top p-3 rounded bg-brand-marian-blue">
                     <ul id="gallery-nav-ul" class="nav nav-pills flex-column">
                         <!-- Year links will be dynamically inserted here -->
@@ -46,7 +46,20 @@
             </div>
 
             <!-- Gallery Content Column -->
-            <div id="gallery-container" class="col-lg-9"></div>
+            <div id="gallery-container-wrapper" class="col-lg-9">
+                <!-- Mobile Dropdown Navigation -->
+                <div class="d-lg-none mb-4 sticky-top" style="top: 80px; z-index: 100;">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="galleryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Select a Year
+                        </button>
+                        <ul id="gallery-dropdown-ul" class="dropdown-menu w-100" aria-labelledby="galleryDropdown">
+                            <!-- Mobile year links will be inserted here -->
+                        </ul>
+                    </div>
+                </div>
+                <div id="gallery-container"></div>
+            </div>
         </div>
     </main>
 
@@ -79,7 +92,8 @@
         function buildGallery() {
             const galleryContainer = document.getElementById('gallery-container');
             const galleryNavUl = document.getElementById('gallery-nav-ul');
-            if (!galleryContainer || !galleryNavUl) return;
+            const galleryDropdownUl = document.getElementById('gallery-dropdown-ul');
+            if (!galleryContainer || !galleryNavUl || !galleryDropdownUl) return;
 
             // Sort years in descending order
             photoConfig.sort((a, b) => b.year - a.year);
@@ -87,6 +101,7 @@
             let allYearsHtml = '';
             let navLinksHtml = '';
 
+            let dropdownLinksHtml = '';
             photoConfig.forEach(config => {
                 const yearId = `year-${config.year}`;
 
@@ -95,6 +110,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#${yearId}">${config.year}</a>
                     </li>
+                `;
+
+                // Create the dropdown link
+                dropdownLinksHtml += `
+                    <li><a class="dropdown-item" href="#${yearId}">${config.year}</a></li>
                 `;
 
                 // Create the gallery section for the year
@@ -131,6 +151,7 @@
             // 2. Set the innerHTML of the container only once with the complete HTML string
             galleryContainer.innerHTML = allYearsHtml;
             galleryNavUl.innerHTML = navLinksHtml;
+            galleryDropdownUl.innerHTML = dropdownLinksHtml;
 
             // 3. Initialize Fancybox on the newly added elements
             Fancybox.bind("[data-fancybox]", {});

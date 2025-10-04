@@ -51,10 +51,12 @@ body {
 }
 
 #map {
-    height: 80vh;
-    width: 100%;
-    border-radius: 1rem;
-    margin: 2rem 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh; /* Full viewport height */
+    width: 100vw;  /* Full viewport width */
+    z-index: 0;    /* Position it behind the navbar */
 }
 
 /* Custom styles for the navbar */
@@ -101,6 +103,9 @@ body {
 .bg-brand-saffron {
     background-color: var(--brand-saffron) !important;
 }
+.bg-brand-giants-orange {
+    background-color: var(--brand-giants-orange) !important;
+}
 .bg-brand-light-blue {
     background-color: var(--brand-light-blue) !important;
 }
@@ -114,6 +119,101 @@ body {
 .navbar-nav .nav-link.active {
     color: var(--brand-thulian-pink) !important;
     font-weight: bold;
+}
+
+/* ========================================
+   Bento Grid Styles
+   ======================================== */
+.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns for mobile by default */
+    gap: 0.75rem; /* Reduced gap for smaller screens */
+    grid-auto-rows: minmax(160px, auto); /* Reduced min-height for smaller screens */
+}
+
+.bento-item {
+    border-radius: 1rem;
+    padding: 1rem; /* Reduced padding for smaller screens */
+    color: white;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+}
+
+.bento-item:hover {
+    transform: translateY(-5px); /* Subtle lift effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10); /* Add shadow */
+    /* Zoom the background image if one exists */
+    background-size: 110%;
+}
+
+.bento-item h4 {
+    font-family: 'Sigmar One', cursive;
+    font-size: 1.5rem; /* Reduced font size for smaller screens */
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+}
+
+.bento-item-large {
+    /* On mobile, it spans both columns to be full-width */
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.bento-item-tall {
+    /* This item will span two rows */
+    grid-column: span 1; /* On mobile, it's a full-width item */
+    grid-row: span 1;
+    min-height: 350px;
+}
+
+.bento-item-wide {
+    /* This item will span two columns */
+    grid-column: span 2; /* On mobile, it's a full-width item */
+    grid-row: span 1;
+}
+
+/* Add padding back to the bento container on larger screens */
+.bento-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Medium screens (tablets) */
+@media (min-width: 768px) {
+    .bento-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .bento-grid {
+        gap: 1rem; /* Restore gap for larger screens */
+        grid-auto-rows: minmax(200px, auto); /* Restore min-height */
+    }
+    .bento-item {
+        padding: 1.5rem; /* Restore padding */
+    }
+    .bento-item h4 {
+        font-size: 1.75rem; /* Restore font size */
+    }
+}
+
+/* Large screens (desktops) */
+@media (min-width: 992px) {
+    .bento-grid {
+        grid-template-columns: repeat(4, 1fr); /* Four columns for desktops */
+        grid-auto-rows: minmax(180px, auto);
+    }
+    .bento-item-large {
+        grid-column: span 2; /* The large item spans 2 columns and 2 rows */
+        grid-row: span 2;
+    }
+    .bento-item-tall {
+        grid-column: span 1; /* Tall item is 1 column wide */
+        grid-row: span 2;    /* and 2 rows tall */
+        min-height: auto;
+    }
 }
 
 /* ========================================
