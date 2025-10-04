@@ -9,6 +9,9 @@ Global Styles & Variables
     --brand-glaucous: #6883ba;
     --brand-thulian-pink: #e072a4;
     --brand-giants-orange: #ff521b;
+    --brand-light-blue: #e9eff9;
+    --brand-light-pink: #f7e9ed;
+    --brand-light-yellow: #fff8e1;
 }
 
 body {
@@ -98,18 +101,16 @@ body {
 .bg-brand-saffron {
     background-color: var(--brand-saffron) !important;
 }
-/* Styling for the accordion items */
-.accordion-item {
-    border-radius: .5rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    overflow: hidden;
+.bg-brand-light-blue {
+    background-color: var(--brand-light-blue) !important;
 }
-.accordion-button {
-    font-family: 'Sigmar One', cursive;
-    color: var(--brand-marian-blue);
-    font-size: 1.25rem;
+.bg-brand-light-pink {
+    background-color: var(--brand-light-pink) !important;
 }
+.bg-brand-light-yellow {
+    background-color: var(--brand-light-yellow) !important;
+}
+
 .navbar-nav .nav-link.active {
     color: var(--brand-thulian-pink) !important;
     font-weight: bold;
@@ -119,8 +120,32 @@ body {
    Gallery Specific Styles
    ======================================== */
 
+/* Keyframes for the fade-in-up animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Keyframes for the placeholder shimmer animation */
+@keyframes shimmer {
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
+}
+
+
 /* Thumbnail Container */
 .gallery-img-container {
+    display: block; /* Make the anchor tag a block-level element */
     width: 100%; /* Take full width of its column */
     padding-bottom: 75%; /* Maintain a 4:3 aspect ratio (height is 75% of width) */
     position: relative;
@@ -129,6 +154,19 @@ body {
     border-radius: 0.5rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
+    /* Apply the animation */
+    opacity: 0; /* Start hidden */
+    animation: fadeInUp 0.5s ease-out forwards;
+    animation-fill-mode: forwards; /* Keep the 'to' state after animation */
+    /* Add the shimmer effect as a background */
+    background-color: #e0e0e0;
+    background-image: linear-gradient(to right, #e0e0e0 0%, #f0f0f0 20%, #e0e0e0 40%, #e0e0e0 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 104px;
+    animation-name: fadeInUp, shimmer;
+    animation-duration: 0.5s, 1.5s;
+    animation-timing-function: ease-out, linear;
+    animation-iteration-count: 1, infinite;
 }
 
 .gallery-img-container:hover {
@@ -144,69 +182,43 @@ body {
     height: 100%;
     object-fit: cover; /* Crop to cover the container while maintaining aspect ratio */
     border-radius: 0.5rem;
+    /* Fade the image in when it loads */
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
-/* Lightbox Overlay */
-#lightbox-overlay {
-    display: none; /* Hidden by default, shown with JS */
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
-    z-index: 1050; /* Ensure it's above other content, including Bootstrap modals */
-    justify-content: center; /* Center content horizontally */
-    align-items: center; /* Center content vertically */
-    overflow: hidden; /* Prevent scrolling of the background content */
+.gallery-img.loaded {
+    opacity: 1;
 }
 
-/* Lightbox Content (holds the image and buttons) */
-#lightbox-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Styles for the new Gallery Scrollspy Nav */
+#gallery-nav {
+    top: 100px; /* Offset from the sticky top navbar */
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
-/* Lightbox Image */
-#lightbox-img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain; /* Ensure the image fits within the content area without cropping */
+#gallery-nav .nav-link {
+    color: var(--brand-thulian-pink);
+    font-weight: 500;
 }
 
-/* Lightbox Navigation and Close Buttons */
-.lightbox-btn {
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 2rem;
-    line-height: 1; /* For consistent button height */
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+#gallery-nav .nav-link.active,
+#gallery-nav .nav-link:hover {
+    color: #fff;
+    background-color: var(--brand-thulian-pink);
 }
 
-.lightbox-btn:hover {
-    background-color: rgba(0, 0, 0, 0.8);
+/* Style for the gallery download button */
+.download-btn {
+    background-color: var(--brand-glaucous);
+    color: #fff;
+    border: 1px solid var(--brand-glaucous);
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
 }
 
-.lightbox-btn.prev {
-    left: 10px;
-}
-
-.lightbox-btn.next {
-    right: 10px;
-}
-
-.lightbox-btn.close {
-    top: 10px;
-    right: 10px;
-    font-size: 2.5rem;
-    padding: 5px 15px;
+.download-btn:hover {
+    background-color: var(--brand-marian-blue);
+    border-color: var(--brand-marian-blue);
+    color: #fff;
 }

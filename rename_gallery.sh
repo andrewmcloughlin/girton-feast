@@ -2,7 +2,7 @@
 
 # --- Configuration ---
 # The year folder you want to process
-YEAR=2018
+YEAR=2024
 # --- End Configuration ---
 
 DIR="images/previous/$YEAR"
