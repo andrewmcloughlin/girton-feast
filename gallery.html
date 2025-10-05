@@ -63,6 +63,9 @@
         </div>
     </main>
 
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
     <!-- Bootstrap JS Bundle from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- JSZip library for creating zip files -->
@@ -205,6 +208,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadComponent('#navbar-placeholder', 'navbar.html');
             // The initializeCountdown function is now in script.js, but only called from index.html
+            loadComponent('#footer-placeholder', 'footer.html').then(() => setCopyrightYear());
             buildGallery();
         });
     </script>

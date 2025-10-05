@@ -88,3 +88,11 @@ function initializeCountdown() {
         }
     }, 1000);
 }
+
+/**
+ * Sets the copyright year in the footer to the current year.
+ */
+function setCopyrightYear() {
+    const yearElement = document.getElementById('copyright-year');
+    if (yearElement) yearElement.textContent = new Date().getFullYear();
+}

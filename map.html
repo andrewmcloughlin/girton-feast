@@ -21,12 +21,15 @@
     <!-- Favicon Placeholder (replace with your actual favicon) -->
     <link rel="icon" href="images/mascot.png" type="image/png">
 </head>
-<body class="bg-light">
+<body class="bg-light map-fullscreen-page">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
 
     <div id="map"></div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
 
     <!-- Bootstrap JS Bundle from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -35,6 +38,8 @@
     <script>
         // Load the navbar
         loadComponent('#navbar-placeholder', 'navbar.html');
+        loadComponent('#footer-placeholder', 'footer.html')
+            .then(() => setCopyrightYear());
 
         // Initialize Leaflet Map
         var mapWidth = 1190;
@@ -63,51 +68,6 @@
                 .addTo(map)
                 .bindPopup("<b>" + point.name + "</b><br>" + point.info);
         });
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Map - Girton Feast</title>
-
-    <!-- Bootstrap CSS from CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Google Fonts: Sigmar One and Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
-
-    <!-- Leaflet -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-    <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Favicon Placeholder (replace with your actual favicon) -->
-    <link rel="icon" href="images/mascot.png" type="image/png">
-</head>
-<body class="bg-light">
-    <!-- Placeholder for the navigation bar -->
-    <div id="navbar-placeholder"></div>
-    <!-- Bootstrap JS Bundle from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="script.js"></script>
-    <script>
-        // Load the navbar
-        loadComponent('#navbar-placeholder', 'navbar.html');
-
-        // Initialize Leaflet Map
-        var mapWidth = 1190;
-        var mapHeight = 842;
-        var map = L.map('map', { crs: L.CRS.Simple, minZoom: -2 });
-        var bounds = [[0,0], [mapHeight, mapWidth]];
-        L.imageOverlay('images/map.png', bounds).addTo(map);
-        var zoom = map.getBoundsZoom(bounds, true);
-        map.setView([mapHeight / 2, mapWidth / 2], zoom);
     </script>
 </body>
 </html>

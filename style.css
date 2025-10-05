@@ -50,14 +50,8 @@ body {
     animation: marquee 30s linear infinite;
 }
 
-#map {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh; /* Full viewport height */
-    width: 100vw;  /* Full viewport width */
-    z-index: 0;    /* Position it behind the navbar */
-}
+.map-fullscreen-page #map { position: absolute; top: 0; left: 0; height: 100vh; width: 100vw; z-index: 0; }
+
 
 /* Custom styles for the navbar */
 .navbar {
@@ -165,7 +159,7 @@ body {
 .bento-item-tall {
     /* This item will span two rows */
     grid-column: span 1; /* On mobile, it's a full-width item */
-    grid-row: span 1;
+    grid-row: span 2;
     min-height: 350px;
 }
 
