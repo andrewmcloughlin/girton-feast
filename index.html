@@ -8,6 +8,9 @@
         <!-- Bootstrap CSS from CDN -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+        <!-- Preload the LCP image for high priority fetching -->
+        <link rel="preload" fetchpriority="high" as="image" href="images/hero.png" type="image/png">
+
         <!-- Google Fonts: Sigmar One and Poppins -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +35,10 @@
         <!-- Placeholder for the navigation bar -->
         <div id="navbar-placeholder"></div>
 
-       <section id="hero-section" class="container bg-brand-glaucous rounded content-container pt-5 p-lg-5">
+       <!-- The hero image is now part of the initial HTML to be discovered immediately -->
+       <img src="images/hero.png" alt="A wide, aerial view of the Girton Feast event grounds, showing tents, stalls, and a large grassy field." class="img-fluid mx-auto d-block" style="max-width: 100%; height: auto; display: none;" onload="this.style.display='block'">
+
+       <section id="hero-section" class="container bg-brand-glaucous rounded content-container pt-5 p-lg-5" style="display: none;">
     <div class="text-center mt-5 mb-4">
         <br>
         <br>
@@ -44,8 +50,8 @@
     <div class="p-4">
         <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2">
             <!-- Updated date badge to be a link that adds to a calendar -->
-            <a target="_blank" class="badge rounded-pill bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none" style="color: var(--brand-thulian-pink);" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast&dates=20250614T100000Z/20250616T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
-                14 - 16 June 2025
+            <a target="_blank" class="badge rounded-pill bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none" style="color: var(--brand-thulian-pink);" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast&dates=20260710T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
+                Fri 10 - Sat 11 July 2026
             </a>
             <!-- Updated location badge to use the new Google Maps URL -->
             <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" class="badge rounded-pill bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none" style="color: var(--brand-thulian-pink);">
@@ -58,7 +64,6 @@
             Join us for a <b class="fw-bold" style="color: var(--brand-saffron);">free</b> weekend of food, fun, and festivities.
         </p>
     </div>
-    <img src="images/hero.png" alt="A wide, aerial view of the Girton Feast event grounds, showing tents, stalls, and a large grassy field." class="img-fluid mx-auto d-block" style="max-width: 100%; height: auto;">
 </section>
 
 <!-- What's On Bento Grid Section -->
@@ -128,24 +133,8 @@
                 <h3 class="fw-bold" style="color: var(--brand-glaucous);">Saturday</h3>
                 <ul class="list-group list-group-flush mt-3">
                     <li class="list-group-item bg-transparent">
-                        <small class="text-muted">10:00 AM</small><br>
-                        <strong>Opening Ceremony</strong>
-                    </li>
-                    <li class="list-group-item bg-transparent">
-                        <small class="text-muted">11:00 AM</small><br>
-                        <strong>Children's Funfair Opens</strong>
-                    </li>
-                    <li class="list-group-item bg-transparent">
-                        <small class="text-muted">1:00 PM</small><br>
-                        <strong>Live Music: Band A</strong>
-                    </li>
-                    <li class="list-group-item bg-transparent">
-                        <small class="text-muted">4:00 PM</small><br>
-                        <strong>Community Raffle</strong>
-                    </li>
-                    <li class="list-group-item bg-transparent">
                         <small class="text-muted">7:00 PM</small><br>
-                        <strong>Live Music: Band B</strong>
+                        <strong>Rule the World Performance</strong>
                     </li>
                 </ul>
             </div>
@@ -169,7 +158,7 @@
                     </li>
                     <li class="list-group-item bg-transparent">
                         <small class="text-muted">5:00 PM</small><br>
-                        <strong>Closing Remarks</strong>
+                        <strong>Fun Run</strong>
                     </li>
                 </ul>
             </div>
@@ -327,6 +316,13 @@
         });
         loadComponent('#footer-placeholder', 'footer.html')
             .then(() => setCopyrightYear());
+    </script>
+    <script>
+        // This script will un-hide the hero section once the component is loaded by script.js
+        document.addEventListener('DOMContentLoaded', function() {
+            const heroSection = document.getElementById('hero-section');
+            if (heroSection) heroSection.style.display = 'block';
+        });
     </script>
     </body>
 </html>
