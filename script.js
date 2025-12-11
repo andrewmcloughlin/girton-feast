@@ -15,7 +15,8 @@ function loadComponent(selector, url) {
         .then(data => {
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = data;
-            const links = tempDiv.querySelectorAll('.navbar-nav .nav-link');
+            // Select both nav-links (top level) and dropdown-items (nested)
+            const links = tempDiv.querySelectorAll('.navbar-nav .nav-link, .dropdown-item');
 
             links.forEach(link => {
                 const href = link.getAttribute('href');
@@ -57,6 +58,21 @@ function loadComponent(selector, url) {
                 }
             });
             document.querySelector(selector).innerHTML = tempDiv.innerHTML;
+
+            // Re-attach listeners because innerHTML replacement removes them. 
+            const insertedLinks = document.querySelector(selector).querySelectorAll('.nav-link, .dropdown-item');
+            insertedLinks.forEach(link => {
+                // Do not attach the close logic to dropdown toggles
+                if (link.classList.contains('dropdown-toggle')) return;
+
+                link.addEventListener('click', () => {
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    const toggler = document.querySelector('.navbar-toggler');
+                    if (navbarCollapse && navbarCollapse.classList.contains('show') && toggler && getComputedStyle(toggler).display !== 'none') {
+                        toggler.click();
+                    }
+                });
+            });
         });
 }
 
@@ -68,7 +84,7 @@ function initializeCountdown() {
     // Set the date for the event (June 14, 2026, 10:00 AM)
     const eventDate = new Date("June 14, 2026 10:00:00").getTime();
 
-    const interval = setInterval(function() {
+    const interval = setInterval(function () {
         const now = new Date().getTime();
         const distance = eventDate - now;
 
@@ -87,6 +103,31 @@ function initializeCountdown() {
             countdownElement.innerHTML = "The Feast is on!";
         }
     }, 1000);
+
+
+
+}
+
+// --- Dynamic Sponsors Logic ---
+function loadSponsors() {
+    const marqueeInner = document.querySelector('.animate-marquee');
+    if (!marqueeInner) return;
+
+    fetch('sponsors.json')
+        .then(response => response.json())
+        .then(images => {
+            let html = '';
+            // We duplicate the list to ensure there's enough content to scroll smoothly
+            // effectively creating an infinite loop visual
+            const fullList = [...images, ...images];
+
+            fullList.forEach(image => {
+                html += `<img src="images/sponsors/${image}" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Logo of an official event sponsor." height="100">`;
+            });
+
+            marqueeInner.innerHTML = html;
+        })
+        .catch(err => console.error('Failed to load sponsors:', err));
 }
 
 /**
@@ -96,3 +137,9 @@ function setCopyrightYear() {
     const yearElement = document.getElementById('copyright-year');
     if (yearElement) yearElement.textContent = new Date().getFullYear();
 }
+
+// Initialize everything when the DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    initializeCountdown();
+    loadSponsors();
+});
