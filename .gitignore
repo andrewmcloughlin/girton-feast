@@ -1,0 +1,10 @@
+# Secrets
+.env
+git_token.txt
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
