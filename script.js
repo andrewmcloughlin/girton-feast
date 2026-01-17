@@ -114,18 +114,68 @@ function loadSponsors() {
     if (!marqueeInner) return;
 
     fetch('sponsors.json')
-        .then(response => response.json())
-        .then(images => {
-            let html = '';
-            // We duplicate the list to ensure there's enough content to scroll smoothly
-            // effectively creating an infinite loop visual
-            const fullList = [...images, ...images];
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.text();
+        })
+        .then(text => {
+            try {
+                const sponsors = JSON.parse(text);
+                let html = '';
 
-            fullList.forEach(image => {
-                html += `<img src="images/sponsors/${image}" class="mx-2 rounded border border-2 bg-white shadow-sm" alt="Logo of an official event sponsor." height="100">`;
-            });
+                // Helper function to render a single sponsor
+                const renderSponsor = (sponsor) => {
+                    // Support both old string format and new object format
+                    const imageName = typeof sponsor === 'string' ? sponsor : sponsor.image;
+                    const url = typeof sponsor === 'object' ? sponsor.url : null;
 
-            marqueeInner.innerHTML = html;
+                    const imgTag = `<img src="images/sponsors/${imageName}" class="mx-2 rounded border border-2 bg-white shadow-sm sponsor-logo" alt="Logo of an official event sponsor." height="100">`;
+
+                    // If there's a URL, wrap the image in a link
+                    if (url) {
+                        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="sponsor-link">${imgTag}</a>`;
+                    }
+                    return imgTag;
+                };
+
+                // If we have fewer than 4 sponsors, display them statically and centered
+                if (sponsors.length < 4) {
+                    marqueeInner.classList.remove('animate-marquee');
+                    marqueeInner.classList.add('static-sponsors');
+
+                    sponsors.forEach(sponsor => {
+                        html += renderSponsor(sponsor);
+                    });
+                } else {
+                    // Otherwise, scroll them smoothly
+                    marqueeInner.classList.add('animate-marquee');
+                    marqueeInner.classList.remove('static-sponsors');
+
+                    // We duplicate the list to ensure there's enough content to scroll smoothly
+                    const fullList = [...sponsors, ...sponsors];
+                    fullList.forEach(sponsor => {
+                        html += renderSponsor(sponsor);
+                    });
+
+                    // Add hover Pause logic
+                    const marqueeContainer = marqueeInner.parentElement;
+                    if (marqueeContainer) {
+                        marqueeContainer.addEventListener('mouseenter', () => {
+                            marqueeInner.style.animationPlayState = 'paused';
+                        });
+                        marqueeContainer.addEventListener('mouseleave', () => {
+                            marqueeInner.style.animationPlayState = 'running';
+                        });
+                    }
+                }
+
+                marqueeInner.innerHTML = html;
+            } catch (err) {
+                console.error('Failed to parse sponsors JSON:', err);
+                console.log('Raw response text:', text);
+            }
         })
         .catch(err => console.error('Failed to load sponsors:', err));
 }

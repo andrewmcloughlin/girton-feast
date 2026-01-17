@@ -2,7 +2,8 @@
 ========================================
 Global Styles & Variables
 ========================================
-*/ /* Define a consistent color palette using CSS variables for easier theming */
+*/
+/* Define a consistent color palette using CSS variables for easier theming */
 :root {
     --brand-saffron: #e9c253;
     --brand-marian-blue: #3d3b8e;
@@ -19,9 +20,11 @@ body {
     color: #353535;
     padding-top: 0;
 }
+
 .o-container {
     position: relative;
 }
+
 .mascot-image {
     position: absolute;
     width: 5.6em;
@@ -31,26 +34,67 @@ body {
     clip-path: inset(0 0);
     z-index: 1;
 }
+
 .content-container {
     overflow: hidden;
     z-index: 1;
 }
+
 .carousel-caption {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: .5rem;
     padding: 1rem;
 }
+
 /* Marquee animation for the sponsor section */
 @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
 }
+
 .animate-marquee {
     width: max-content;
     animation: marquee 30s linear infinite;
 }
 
-.map-fullscreen-page #map { position: absolute; top: 0; left: 0; height: 100vh; width: 100vw; z-index: 0; }
+.static-sponsors {
+    width: 100%;
+    justify-content: center;
+    animation: none;
+}
+
+/* Sponsor link and logo styles */
+.sponsor-link {
+    display: inline-block;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out;
+}
+
+.sponsor-link:hover {
+    transform: scale(1.05);
+}
+
+.sponsor-logo {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.sponsor-link:hover .sponsor-logo {
+    opacity: 0.85;
+}
+
+.map-fullscreen-page #map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 0;
+}
 
 
 /* Custom styles for the navbar */
@@ -63,7 +107,8 @@ body {
     position: fixed;
     bottom: 30px;
     right: 20px;
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
     z-index: 1000;
     border: none;
     outline: none;
@@ -88,24 +133,31 @@ body {
 .bg-brand-marian-blue {
     background-color: var(--brand-marian-blue) !important;
 }
+
 .bg-brand-glaucous {
     background-color: var(--brand-glaucous) !important;
 }
+
 .bg-brand-thulian-pink {
     background-color: var(--brand-thulian-pink) !important;
 }
+
 .bg-brand-saffron {
     background-color: var(--brand-saffron) !important;
 }
+
 .bg-brand-giants-orange {
     background-color: var(--brand-giants-orange) !important;
 }
+
 .bg-brand-light-blue {
     background-color: var(--brand-light-blue) !important;
 }
+
 .bg-brand-light-pink {
     background-color: var(--brand-light-pink) !important;
 }
+
 .bg-brand-light-yellow {
     background-color: var(--brand-light-yellow) !important;
 }
@@ -129,9 +181,34 @@ body {
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.dropdown-item:hover, .dropdown-item:focus {
+.dropdown-item:hover,
+.dropdown-item:focus {
     background-color: var(--brand-thulian-pink);
     color: white;
+}
+
+/* Navbar Centering and Countdown Fixes */
+@media (min-width: 768px) {
+    .navbar-collapse {
+        position: relative;
+    }
+
+    .navbar-nav {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        width: max-content;
+        /* Ensure it doesn't wrap unnecessarily */
+    }
+
+    #countdown-timer {
+        min-width: 280px;
+        /* Reserve space to prevent resizing */
+        text-align: right;
+        display: inline-block;
+        font-variant-numeric: tabular-nums;
+        /* Monospaced numbers to reduce jitter */
+    }
 }
 
 
@@ -140,34 +217,42 @@ body {
    ======================================== */
 .bento-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns for mobile by default */
-    gap: 0.75rem; /* Reduced gap for smaller screens */
-    grid-auto-rows: minmax(160px, auto); /* Reduced min-height for smaller screens */
+    grid-template-columns: repeat(2, 1fr);
+    /* Two columns for mobile by default */
+    gap: 0.75rem;
+    /* Reduced gap for smaller screens */
+    grid-auto-rows: minmax(160px, auto);
+    /* Reduced min-height for smaller screens */
 }
 
 .bento-item {
     border-radius: 1rem;
-    padding: 1rem; /* Reduced padding for smaller screens */
+    padding: 1rem;
+    /* Reduced padding for smaller screens */
     color: white;
     background-size: cover;
     background-position: center;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+    transition: all 0.3s ease-in-out;
+    /* Smooth transition for hover effects */
 }
 
 .bento-item:hover {
-    transform: translateY(-5px); /* Subtle lift effect */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10); /* Add shadow */
+    transform: translateY(-5px);
+    /* Subtle lift effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15), 0 3px 6px rgba(0, 0, 0, 0.10);
+    /* Add shadow */
     /* Zoom the background image if one exists */
     background-size: 110%;
 }
 
 .bento-item h4 {
     font-family: 'Sigmar One', cursive;
-    font-size: 1.5rem; /* Reduced font size for smaller screens */
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+    font-size: 1.5rem;
+    /* Reduced font size for smaller screens */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .bento-item-large {
@@ -178,14 +263,16 @@ body {
 
 .bento-item-tall {
     /* This item will span two rows */
-    grid-column: span 1; /* On mobile, it's a full-width item */
+    grid-column: span 1;
+    /* On mobile, it's a full-width item */
     grid-row: span 2;
     min-height: 350px;
 }
 
 .bento-item-wide {
     /* This item will span two columns */
-    grid-column: span 2; /* On mobile, it's a full-width item */
+    grid-column: span 2;
+    /* On mobile, it's a full-width item */
     grid-row: span 1;
 }
 
@@ -201,31 +288,44 @@ body {
         padding-left: 2rem;
         padding-right: 2rem;
     }
+
     .bento-grid {
-        gap: 1rem; /* Restore gap for larger screens */
-        grid-auto-rows: minmax(200px, auto); /* Restore min-height */
+        gap: 1rem;
+        /* Restore gap for larger screens */
+        grid-auto-rows: minmax(200px, auto);
+        /* Restore min-height */
     }
+
     .bento-item {
-        padding: 1.5rem; /* Restore padding */
+        padding: 1.5rem;
+        /* Restore padding */
     }
+
     .bento-item h4 {
-        font-size: 1.75rem; /* Restore font size */
+        font-size: 1.75rem;
+        /* Restore font size */
     }
 }
 
 /* Large screens (desktops) */
 @media (min-width: 992px) {
     .bento-grid {
-        grid-template-columns: repeat(4, 1fr); /* Four columns for desktops */
+        grid-template-columns: repeat(4, 1fr);
+        /* Four columns for desktops */
         grid-auto-rows: minmax(180px, auto);
     }
+
     .bento-item-large {
-        grid-column: span 2; /* The large item spans 2 columns and 2 rows */
+        grid-column: span 2;
+        /* The large item spans 2 columns and 2 rows */
         grid-row: span 2;
     }
+
     .bento-item-tall {
-        grid-column: span 1; /* Tall item is 1 column wide */
-        grid-row: span 2;    /* and 2 rows tall */
+        grid-column: span 1;
+        /* Tall item is 1 column wide */
+        grid-row: span 2;
+        /* and 2 rows tall */
         min-height: auto;
     }
 }
@@ -240,6 +340,7 @@ body {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -251,6 +352,7 @@ body {
     0% {
         background-position: -468px 0;
     }
+
     100% {
         background-position: 468px 0;
     }
@@ -259,9 +361,12 @@ body {
 
 /* Thumbnail Container */
 .gallery-img-container {
-    display: block; /* Make the anchor tag a block-level element */
-    width: 100%; /* Take full width of its column */
-    padding-bottom: 75%; /* Maintain a 4:3 aspect ratio (height is 75% of width) */
+    display: block;
+    /* Make the anchor tag a block-level element */
+    width: 100%;
+    /* Take full width of its column */
+    padding-bottom: 75%;
+    /* Maintain a 4:3 aspect ratio (height is 75% of width) */
     position: relative;
     overflow: hidden;
     cursor: pointer;
@@ -269,9 +374,11 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
     /* Apply the animation */
-    opacity: 0; /* Start hidden */
+    opacity: 0;
+    /* Start hidden */
     animation: fadeInUp 0.5s ease-out forwards;
-    animation-fill-mode: forwards; /* Keep the 'to' state after animation */
+    animation-fill-mode: forwards;
+    /* Keep the 'to' state after animation */
     /* Add the shimmer effect as a background */
     background-color: #e0e0e0;
     background-image: linear-gradient(to right, #e0e0e0 0%, #f0f0f0 20%, #e0e0e0 40%, #e0e0e0 100%);
@@ -294,7 +401,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Crop to cover the container while maintaining aspect ratio */
+    object-fit: cover;
+    /* Crop to cover the container while maintaining aspect ratio */
     border-radius: 0.5rem;
     /* Fade the image in when it loads */
     opacity: 0;
@@ -307,9 +415,10 @@ body {
 
 /* Styles for the new Gallery Scrollspy Nav */
 #gallery-nav {
-    top: 100px; /* Offset from the sticky top navbar */
+    top: 100px;
+    /* Offset from the sticky top navbar */
     background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 #gallery-nav .nav-link {
