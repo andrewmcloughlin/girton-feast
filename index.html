@@ -85,7 +85,8 @@
                 <!-- Text content on the left, with right padding to make room for the image -->
                 <div class="me-auto text-white" style="padding-right: 180px;">
                     <h3 class="fw-bold mb-2" style="font-family: 'Poller One', cursive;">Day 1: Concert</h3>
-                    <p class="mb-0" style="font-family: 'Poppins', sans-serif;">The world’s greatest Take That tribute band are coming to Girton.</p>
+                    <i>Friday 10<sup>th</sup> July</i>
+                    <p class="mb-0" style="font-family: 'Poppins', sans-serif;">The world’s greatest Take That tribute band <strong>Rule&nbsp;The&nbsp;World</strong> are coming to Girton.</p>
                     <a href="pages/main-event.html" class="btn btn-light btn-sm mt-3 stretched-link">Book Now</a> 
                 </div>
             </div>
@@ -99,8 +100,9 @@
                     <img src="images/silly_goose.svg" alt="A Girton Goose" style="height: 140px; width: auto; object-fit: contain;">
                 </div>
                 <!-- Text content on the left, with right padding to make room for the image -->
-                <div class="ms-auto text-white" style="padding-right: 180px;">
+                <div class="ms-auto text-dark" style="padding-right: 180px;">
                     <h3 class="fw-bold mb-2" style="font-family: 'Poller One', cursive;">Day 2: Village Fete</h3>
+                    <i>Saturday 11<sup>th</sup> July</i>
                     <p class="mb-0" style="font-family: 'Poppins', sans-serif;">Rides, games, sports and stalls for all the family.</p>
                     <a href="#whatson" class="btn btn-light btn-sm mt-3 stretched-link">Learn More</a> 
                 </div>
@@ -162,16 +164,58 @@
 </section>
 
 <section class="container my-5">
-    <div class="card bg-brand-light-blue border-0 shadow-sm rounded-1 text-center p-5">
-        <div class="card-body">
-            <h2 class="display-5 mb-4" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Want to Run a Stall?</h2>
-            <p class="fs-5 mb-4">
-                We welcome local businesses, crafters, charities, and community groups.<br>
-                Last year over £4000 was raised for the village!
-            </p>
-            <a href="info/stall-holders.html" class="btn btn-dark text-light btn-lg fw-bold" style="color: var(--brand-marian-blue);">
-                <i class="fas fa-info-circle me-2"></i> Stall Holder Info & Booking
-            </a>
+    <div class="text-center mb-5">
+        <h2 class="display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Vendor Information</h2>
+        <p class="lead text-muted">Join us! Information for all our vendor partners.</p>
+    </div>
+    
+    <div class="row g-4 justify-content-center">
+        <!-- Stall Holders -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4" style="background-color: var(--brand-light-blue);">
+                <div class="card-body">
+                    <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 80px; height: 80px;">
+                        <i class="fas fa-store fa-2x" style="color: var(--brand-marian-blue);"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3" style="color: var(--brand-marian-blue);">Stall Holders</h3>
+                    <p class="mb-4">Standard pitches for local businesses, crafters, charities, and community groups.</p>
+                    <a href="info/stall-holders.html" class="btn btn-outline-primary fw-bold stretched-link" style="border-width: 2px;">
+                        Find Out More
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Food & Drink -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4" style="background-color: var(--brand-light-pink);">
+                <div class="card-body">
+                    <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 80px; height: 80px;">
+                        <i class="fas fa-utensils fa-2x" style="color: var(--brand-thulian-pink);"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3" style="color: var(--brand-thulian-pink);">Food Vendors</h3>
+                    <p class="mb-4">Information for caterers, ice cream vans, and other food & drink providers.</p>
+                    <a href="info/caterers-info.html" class="btn btn-outline-danger fw-bold stretched-link" style="border-width: 2px; color: var(--brand-thulian-pink); border-color: var(--brand-thulian-pink);">
+                        Find Out More
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rides & Games -->
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4" style="background-color: var(--brand-light-yellow);">
+                <div class="card-body">
+                    <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 80px; height: 80px;">
+                        <i class="fas fa-ticket-alt fa-2x" style="color: var(--brand-saffron);"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3" style="color: var(--brand-marian-blue);">Rides & Games</h3>
+                    <p class="mb-4">Details for fairground rides, inflatables, and authorized game operators.</p>
+                    <a href="info/ride-vendors-info.html" class="btn btn-outline-warning fw-bold stretched-link" style="border-width: 2px; background-color: transparent; border-color: var(--brand-saffron); color: var(--brand-marian-blue);">
+                        Find Out More
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -216,51 +260,52 @@
 </section> -->
 
 <!-- Facilities section with ID for scrollspy -->
-<section id="facilities" class="container bg-white rounded my-5 p-5">
-    <div class="text-center mt-5 mb-4">
-        <h2 class="display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Facilities</h2>
-    </div>
-    <!-- Replaced the list with a flexbox and icons -->
-    <!-- Facilities Grid -->
-    <div class="row row-cols-2 row-cols-md-3 g-4 justify-content-center py-4 text-secondary">
-        <!-- Toilets -->
-        <div class="col d-flex align-items-center justify-content-center">
-            <!-- <i class="fas fa-toilet fa-2x me-3 opacity-75"></i> -->
-            <h6 class="fw-bold mb-0">Toilets</h6>
-        </div>
-        <!-- Accessible parking -->
-        <div class="col d-flex align-items-center justify-content-center">
-            <!-- <i class="fas fa-wheelchair fa-2x me-3 opacity-75"></i> -->
-            <h6 class="fw-bold mb-0">Accessible Parking</h6>
-        </div>
-        <!-- First aid -->
-        <div class="col d-flex align-items-center justify-content-center">
-            <!-- <i class="fas fa-first-aid fa-2x me-3 opacity-75"></i> -->
-            <h6 class="fw-bold mb-0">First Aid</h6>
-        </div>
-        <!-- Lost and found -->
-        <div class="col d-flex align-items-center justify-content-center">
-            <!-- <i class="fas fa-box fa-2x me-3 opacity-75"></i> -->
-            <h6 class="fw-bold mb-0">Lost and Found</h6>
-        </div>
-        <!-- No Dogs -->
-        <div class="col d-flex align-items-center justify-content-center">
-            <!-- <span class="fa-stack me-3" style="font-size: 1.25em;">
-                <i class="fas fa-dog fa-stack-1x opacity-75"></i>
-                <i class="fas fa-ban fa-stack-2x opacity-50"></i>
-            </span> -->
-            <div class="text-center">
-                <h6 class="fw-bold mb-0">No Dogs</h6>
-                <small class="d-block" style="font-size: 0.7em; line-height: 1;">(Guide dogs welcome)</small>
+<section id="facilities" class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-12">
+            <div class="bg-white rounded-4 shadow-sm py-3 px-4 d-flex flex-wrap justify-content-center align-items-center gap-4 text-secondary">
+                <h3 class="h5 fw-bold mb-0 me-md-3 text-uppercase" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Facilities:</h3>
+                
+                <div class="d-flex align-items-center gap-2" title="Restrooms available">
+                    <i class="fas fa-restroom text-black-50"></i>
+                    <span class="small fw-bold">Toilets</span>
+                </div>
+                
+                <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+                
+                <div class="d-flex align-items-center gap-2" title="Accessible parking available">
+                    <i class="fas fa-wheelchair text-black-50"></i>
+                    <span class="small fw-bold">Accessible Parking</span>
+                </div>
+
+                <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+
+                <div class="d-flex align-items-center gap-2" title="First aid station on site">
+                    <i class="fas fa-first-aid text-black-50"></i>
+                    <span class="small fw-bold">First Aid</span>
+                </div>
+
+                <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+
+                <div class="d-flex align-items-center gap-2" title="Lost property point">
+                    <i class="fas fa-box-open text-black-50"></i>
+                    <span class="small fw-bold">Lost & Found</span>
+                </div>
+
+                <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+
+                <div class="d-flex align-items-center gap-2" title="Only guide dogs allowed">
+                    <i class="fas fa-dog text-black-50"></i>
+                    <span class="small fw-bold">No Dogs <span class="text-muted fw-normal" style="font-size: 0.9em;">(except guide dogs)</span></span>
+                </div>
+
+                <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+
+                <div class="d-flex align-items-center gap-2" title="Smoke-free event">
+                    <i class="fas fa-smoking-ban text-black-50"></i>
+                    <span class="small fw-bold">No Smoking</span>
+                </div>
             </div>
-        </div>
-        <!-- No Smoking -->
-        <div class="col d-flex align-items-center justify-content-center">
-            <!-- <span class="fa-stack me-3" style="font-size: 1.25em;">
-                <i class="fas fa-smoking fa-stack-1x opacity-75"></i>
-                <i class="fas fa-ban fa-stack-2x opacity-50"></i>
-            </span> -->
-            <h6 class="fw-bold mb-0">No Smoking</h6>
         </div>
     </div>
 </section>
