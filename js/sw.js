@@ -1,15 +1,15 @@
 // Service Worker for Girton Feast PWA
 const CACHE_NAME = 'girton-feast-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/css/style.css',
-    '/js/script.js',
-    '/components/navbar.html',
-    '/components/footer.html',
-    '/images/mascot.png',
-    '/images/hero.png',
-    '/images/helping-goose.svg',
+    '/girton-feast/',
+    '/girton-feast/index.html',
+    '/girton-feast/css/style.css',
+    '/girton-feast/js/script.js',
+    '/girton-feast/components/navbar.html',
+    '/girton-feast/components/footer.html',
+    '/girton-feast/images/mascot.png',
+    '/girton-feast/images/hero.png',
+    '/girton-feast/images/helping-goose.svg',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
     'https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poller+One&family=Poppins:wght@400;700&display=swap'
