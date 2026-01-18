@@ -47,7 +47,7 @@
         // Initialize the map without minZoom first, we will set it dynamically
         var map = L.map('map', { crs: L.CRS.Simple });
         var bounds = [[0,0], [mapHeight, mapWidth]];
-        L.imageOverlay('images/map.png', bounds).addTo(map);
+        L.imageOverlay('../images/map.png', bounds).addTo(map);
 
         // Calculate the zoom level that fits the image bounds perfectly
         var zoom = map.getBoundsZoom(bounds, true);
