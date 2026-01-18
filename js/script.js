@@ -14,6 +14,18 @@ function loadComponent(selector, url) {
         .then(response => response.text())
         .then(data => {
             const tempDiv = document.createElement('div');
+
+            // If we are on the index page/root, we need to adjust relative paths
+            // Components (navbar/footer) are written with "../" prefix for subpages (e.g. pages/about.html)
+            // But for index.html (root), "../" is incorrect. We remove it.
+            if (isIndexPage) {
+                // Replace "../" with "" in href and src attributes
+                // This converts "../images/logo.png" -> "images/logo.png"
+                // and "../pages/about.html" -> "pages/about.html"
+                data = data.replace(/src="\.\.\//g, 'src="')
+                    .replace(/href="\.\.\//g, 'href="');
+            }
+
             tempDiv.innerHTML = data;
             // Select both nav-links (top level) and dropdown-items (nested)
             const links = tempDiv.querySelectorAll('.navbar-nav .nav-link, .dropdown-item');
