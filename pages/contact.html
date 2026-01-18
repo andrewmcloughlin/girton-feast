@@ -42,7 +42,7 @@
                             <div class="bg-brand-glaucous rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
                                 <i class="fas fa-store fa-2x text-white"></i>
                             </div>
-                            <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Carol Noble</h3>
+                            <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Carol</h3>
                             <p class="text-muted mb-0">Stalls & Sponsorship</p>
                         </div>
                         
@@ -76,7 +76,7 @@
                 </div>
             </div>
 
-            <!-- Rowena Harding - General Inquiries -->
+            <!-- Rowena Barnes - General Inquiries -->
             <div class="col-lg-5 col-md-6">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body p-4">
@@ -84,7 +84,7 @@
                             <div class="bg-brand-thulian-pink rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
                                 <i class="fas fa-hands-helping fa-2x text-white"></i>
                             </div>
-                            <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Rowena Harding</h3>
+                            <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Rowena</h3>
                             <p class="text-muted mb-0">General Inquiries</p>
                         </div>
                         
@@ -106,6 +106,46 @@
                                 <span data-email-user="rowena" data-email-domain="girtonfeast.org.uk" class="fw-bold"></span>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Website Feedback Section -->
+        <div class="row mt-5 justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <div class="bg-brand-saffron rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                                <i class="fas fa-bug fa-2x text-white"></i>
+                            </div>
+                            <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Website Issues</h3>
+                            <p class="text-muted">Spot a bug or have a suggestion for the website? Let us know!</p>
+                        </div>
+                        
+                        <form id="website-feedback-form" onsubmit="event.preventDefault(); sendFeedbackEmail();">
+                            <div class="mb-3">
+                                <label for="issueType" class="form-label fw-bold" style="color: var(--brand-marian-blue);">Issue Type</label>
+                                <select class="form-select" id="issueType" required>
+                                    <option value="" selected disabled>Select an issue type...</option>
+                                    <option value="Broken Link">Broken Link</option>
+                                    <option value="Typo/Content Error">Typo or Content Error</option>
+                                    <option value="Display Issue">Display Issue (Layout/Images)</option>
+                                    <option value="Suggestion">Feature Suggestion</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="mb-4">
+                                <label for="issueDescription" class="form-label fw-bold" style="color: var(--brand-marian-blue);">Description</label>
+                                <textarea class="form-control" id="issueDescription" rows="4" placeholder="Please describe the issue or suggestion..." required></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg px-5 fw-bold" style="background-color: var(--brand-marian-blue); border: none;">
+                                    <i class="fas fa-paper-plane me-2"></i>Send Feedback
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -150,6 +190,21 @@
         loadComponent("#navbar-placeholder", "../components/navbar.html");
         loadComponent("#footer-placeholder", "../components/footer.html")
             .then(() => setCopyrightYear());
+
+        function sendFeedbackEmail() {
+            // Obfuscated email parts
+            const user = 'andrew.michael.mcloughlin+girtonfeast';
+            const domain = 'gmail.com';
+            const email = user + '@' + domain;
+            
+            const issueType = document.getElementById('issueType').value;
+            const description = document.getElementById('issueDescription').value;
+            
+            const subject = encodeURIComponent(`Website Feedback: ${issueType}`);
+            const body = encodeURIComponent(`Issue Type: ${issueType}\n\nDescription:\n${description}\n\nSent from: ${window.location.href}`);
+            
+            window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+        }
     </script>
 </body>
 </html>
