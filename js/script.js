@@ -95,7 +95,7 @@ function initializeCountdown() {
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
         // Display the result in the element with id="countdown-timer"
-        countdownElement.innerHTML = `🎉 ${days}d ${hours}h ${minutes}m ${seconds}s`;
+        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
         // If the countdown is finished, write some text
         if (distance < 0) {

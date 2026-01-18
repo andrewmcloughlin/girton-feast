@@ -20,9 +20,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 
     <!-- Custom Stylesheet -->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <!-- Favicon Placeholder (replace with your actual favicon) -->
-    <link rel="icon" href="images/mascot.png" type="image/png">
+    <link rel="icon" href="../images/mascot.png" type="image/png">
 </head>
 <body class="bg-brand-light-yellow" data-bs-spy="scroll" data-bs-target="#gallery-nav" data-bs-smooth-scroll="true" tabindex="0">
 
@@ -72,7 +72,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <!-- 2. Add Fancybox JS -->
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-    <script src="script.js"></script> <!-- Link to the new external script file -->
+    <script src="../js/script.js"></script> <!-- Link to the new external script file -->
     <script>
         // --- START: Gallery Configuration ---
         // To add photos, simply update this configuration.
@@ -206,9 +206,9 @@
 
         // Load the navbar and then build the gallery
         document.addEventListener('DOMContentLoaded', () => {
-            loadComponent('#navbar-placeholder', 'navbar.html');
+            loadComponent("#navbar-placeholder", "../components/navbar.html");
             // The initializeCountdown function is now in script.js, but only called from index.html
-            loadComponent('#footer-placeholder', 'footer.html').then(() => setCopyrightYear());
+            loadComponent("#footer-placeholder", "../components/footer.html").then(() => setCopyrightYear());
             buildGallery();
         });
     </script>
