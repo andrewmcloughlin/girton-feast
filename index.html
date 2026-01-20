@@ -1,237 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Girton Feast</title>
 
-        <!-- Bootstrap CSS from CDN -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Girton Feast</title>
 
-        <!-- Preload the LCP image for high priority fetching -->
-        <link rel="preload" fetchpriority="high" as="image" href="images/hero.png" type="image/png">
+    <!-- Bootstrap CSS from CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        <!-- Google Fonts: Sigmar One and Poppins -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poller+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Preload the LCP image for high priority fetching -->
+    <link rel="preload" fetchpriority="high" as="image" href="images/hero.png" type="image/png">
 
-        <!-- Font Awesome CDN -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Google Fonts: Sigmar One and Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poller+One&family=Poppins:wght@400;700&display=swap"
+        rel="stylesheet">
 
-        <!-- Leaflet -->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
-        <!-- Custom Stylesheet -->
-        <link rel="stylesheet" href="css/style.css">
-        
-        <!-- Favicons -->
-        <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
-        <link rel="manifest" href="images/favicons/site.webmanifest">
-        <link rel="shortcut icon" href="images/favicons/favicon.ico">
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2D103WGWN"></script>
-        <script>
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="images/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="images/favicons/favicon.ico">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2D103WGWN"></script>
+    <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'G-P2D103WGWN');
-        </script>
+    </script>
 </head>
-    <!-- The data-bs-spy attribute activates the scrollspy behavior on the body -->
-    <!-- The data-bs-target links the scrollspy to our new navbar's ID -->
-    <!-- The data-bs-smooth-scroll enables smooth scrolling to sections -->
-    <body data-bs-spy="scroll" data-bs-target="#main-navbar" data-bs-smooth-scroll="true" tabindex="0" class="px-0 mx-0 w-100 bg-light">
+<!-- The data-bs-spy attribute activates the scrollspy behavior on the body -->
+<!-- The data-bs-target links the scrollspy to our new navbar's ID -->
+<!-- The data-bs-smooth-scroll enables smooth scrolling to sections -->
 
-        <!-- Placeholder for the navigation bar -->
-        <div id="navbar-placeholder"></div>
+<body data-bs-spy="scroll" data-bs-target="#main-navbar" data-bs-smooth-scroll="true" tabindex="0"
+    class="px-0 mx-0 w-100 bg-light">
 
-        
-        <section id="hero-section" class="container-fluid bg-brand-glaucous content-container pt-5 pb-0 px-0" style="display: none;">
-            <div class="text-center mt-5 mb-4">
-                <br>
-                <br>
-                <h1 class="display-1 fw-bold" style="font-family: 'Sigmar One', cursive; color: var(--brand-saffron); line-height: 0.8; letter-spacing: -5px; font-size: clamp(6rem, 10vw, 12rem);">
-                    <span style="white-space: nowrap;">Girt<span class="o-container">o<img src="images/mascot.png" alt="A mascot of a crowned caterpillar peeking out from behind the letter O." class="mascot-image"></span>n</span><br>
-                    <span style="color: var(--brand-saffron);">Feast</span>
-                </h1>
-                <h2 class="display-4 fw-bold" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue); position: relative; z-index: 10; margin-top: -0.7em; transform: translateX(12%);">2026</h2>
-            </div>
-            <div class="p-4">
-                <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2">
-                    <a target="_blank" class="badge rounded-pill bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none" style="color: var(--brand-thulian-pink);" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Concert&dates=20260710T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
-                        Fri 10 - Concert
-                    </a>
-                    <a target="_blank" class="badge rounded-pill bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none" style="color: var(--brand-thulian-pink);" href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Village+Fete&dates=20260711T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
-                        Sat 11 - Village Fete
-                    </a>
-                    <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" class="badge rounded-pill bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none" style="color: var(--brand-thulian-pink);">
-                        Girton Rec
-                    </a>
-                </div>
-            </div>
-            <div class="text-center pt-4 text-white">
-                <p id="event-description" class="lead fs-4">
-                    Join us for a weekend of <strong class="text-brand-thulian-pink">live music</strong>, <strong class="text-brand-glaucous">food</strong>, <strong class="text-brand-giants-orange">fun</strong>, and <strong class="text-brand-marian-blue">festivities</strong>.
-                </p>
-            </div>
-            <!-- The hero image is now part of the initial HTML to be discovered immediately -->
-            <img src="images/hero.png" alt="A wide, aerial view of the Girton Feast event grounds, showing tents, stalls, and a large grassy field." class="img-fluid mx-auto d-block mb-0" style="max-width: 100%; height: auto; display: none;" onload="this.style.display='block'">
-</section>
-<section>
-<div class="container">
-    <div class="row">
-    <div class="col-12 col-lg-6" style="overflow: visible;">
-        <div class="card border-0 shadow-sm position-relative hover-scale" style="border-radius: 1.5rem; background: linear-gradient(to right, var(--brand-marian-blue), var(--brand-thulian-pink)); min-height: 200px; overflow: visible; margin-top: 3rem;">
-            <div class="card-body d-flex align-items-center p-4">
-                <!-- Image on the right, bottom-aligned with card, sticking out of the top -->
-                <div class="position-absolute" style="right: 2rem; bottom: 0;">
-                    <img src="images/rule-the-world-jump.png" alt="Rule the World band member jumping into the air" style="height: 240px; width: auto; object-fit: contain;">
-                </div>
-                <!-- Text content on the left, with right padding to make room for the image -->
-                <div class="me-auto text-white" style="padding-right: 180px;">
-                    <h3 class="fw-bold mb-2" style="font-family: 'Poller One', cursive;">Day 1: Concert</h3>
-                    <i>Friday 10<sup>th</sup> July</i>
-                    <p class="mb-0" style="font-family: 'Poppins', sans-serif;">The world’s greatest Take That tribute band <strong>Rule&nbsp;The&nbsp;World</strong> are coming to Girton.</p>
-                    <a href="pages/main-event.html" class="btn btn-light btn-sm mt-3 stretched-link">Book Now</a> 
-                </div>
+    <!-- Placeholder for the navigation bar -->
+    <div id="navbar-placeholder"></div>
+
+
+    <section id="hero-section" class="container-fluid bg-brand-glaucous content-container pt-5 pb-0 px-0"
+        style="display: none;">
+        <div class="text-center mt-5 mb-4">
+            <br>
+            <br>
+            <h1 class="display-1 fw-bold"
+                style="font-family: 'Sigmar One', cursive; color: var(--brand-saffron); line-height: 0.8; letter-spacing: -5px; font-size: clamp(6rem, 10vw, 12rem);">
+                <span style="white-space: nowrap;">Girt<span class="o-container">o<img src="images/mascot.png"
+                            alt="A mascot of a cheeky goose peeking out from behind the letter O."
+                            class="mascot-image"></span>n</span><br>
+                <span style="color: var(--brand-saffron);">Feast</span>
+            </h1>
+            <h2 class="display-4 fw-bold"
+                style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue); position: relative; z-index: 10; margin-top: -0.7em; transform: translateX(12%);">
+                2026</h2>
+        </div>
+        <div class="p-4">
+            <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2">
+                <a target="_blank"
+                    class="badge rounded-pill bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale"
+                    style="color: var(--brand-thulian-pink);"
+                    href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Concert&dates=20260710T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
+                    Fri 10 July - Concert
+                </a>
+                <a target="_blank"
+                    class="badge rounded-pill bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale"
+                    style="color: var(--brand-thulian-pink);"
+                    href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Village+Fete&dates=20260711T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
+                    Sat 11 July - Village Fete
+                </a>
+                <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank"
+                    class="badge rounded-pill bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale"
+                    style="color: var(--brand-thulian-pink);">
+                    Girton Rec
+                </a>
             </div>
         </div>
-    </div>
-    <div class="col-12 col-lg-6" style="overflow: visible;">
-        <div class="card border-0 shadow-sm position-relative hover-scale" style="border-radius: 1.5rem; background: linear-gradient(to right, var(--brand-saffron), var(--brand-saffron)); min-height: 200px; overflow: visible; margin-top: 3rem;">
-            <div class="card-body d-flex align-items-center p-4">
-                <!-- Image on the right, bottom-aligned with card, sticking out of the top -->
-                <div class="position-absolute" style="right: 2rem; bottom: 0;">
-                    <img src="images/silly_goose.svg" alt="A Girton Goose" style="height: 140px; width: auto; object-fit: contain;">
-                </div>
-                <!-- Text content on the left, with right padding to make room for the image -->
-                <div class="ms-auto text-dark" style="padding-right: 180px;">
-                    <h3 class="fw-bold mb-2" style="font-family: 'Poller One', cursive;">Day 2: Village Fete</h3>
-                    <i>Saturday 11<sup>th</sup> July</i>
-                    <p class="mb-0" style="font-family: 'Poppins', sans-serif;">Rides, games, sports and stalls for all the family.</p>
-                    <a href="#whatson" class="btn btn-light btn-sm mt-3 stretched-link">Learn More</a> 
-                </div>
-            </div>
+        <div class="text-center pt-4 text-white">
+            <p id="event-description" class="lead fs-4">
+                Join us for a weekend of <strong class="text-brand-thulian-pink">live music</strong>, <strong
+                    class="text-brand-glaucous">food</strong>, <strong class="text-brand-giants-orange">fun</strong>,
+                and <strong class="text-brand-marian-blue">festivities</strong>.
+            </p>
         </div>
-    </div>
-</div>
-</section>
-
-<!-- What's On Bento Grid Section -->
-<section id="whatson" class="bento-container container-fluid my-5 py-5 bg-brand-light-blue">
-    <h2 class="text-center display-5 mb-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">What's On?</h2>
-    <div class="bento-grid">
-        <!-- Large Image Box -->
-        <a href="pages/main-event.html" class="bento-item bento-item-large text-decoration-none" style="background-image: url('images/rule-the-world.png'); background-size: cover; background-position: top;">
-            <h4 style="font-family: 'Poller One', cursive;">Headliner: Rule The World</h4>
-        </a>
-        <!-- Small Color Box -->
-        <a href="pages/food.html" class="bento-item bg-brand-thulian-pink text-decoration-none">
-            <h4 style="font-family: 'Poller One', cursive;">Food & Drink</h4>
-        </a>
-        <!-- Small Color Box -->
-        <a href="pages/entertainment.html#funfair-rides" class="bento-item bento-item-tall bg-brand-giants-orange text-decoration-none" style="background-image: url('images/helter_skelter.png'); background-size: cover; background-position: right;">
-            <h4 style="font-family: 'Poller One', cursive;">Fun Fair Rides</h4>
-        </a>
-        <!-- Small Color Box -->
-        <a href="pages/entertainment.html#competitions-games" class="bento-item bg-brand-glaucous text-decoration-none" style="background-image: url('images/sports.png'); background-size: cover; background-position: top;">
-            <h4 style="font-family: 'Poller One', cursive;">Competitions & Games</h4>
-        </a>
-        <!-- Small Image Box -->
-        <a href="pages/entertainment.html#displays-shows" class="bento-item bento-item-tall bg-brand-marian-blue text-decoration-none" style="background-image: url('images/model-aircraft.png'); background-size: cover; background-position: center;">
-            <h4 style="font-family: 'Poller One', cursive;">Displays & Shows</h4>
-        </a>
-        <!-- Large Image Box -->
-        <a href="pages/map.html" class="bento-item bento-item-large text-decoration-none" style="background-image: url('images/map-thumbnail.png'); background-size: cover; background-position: center;">
-            <h4 style="font-family: 'Poller One', cursive;">Event Map</h4>
-        </a>
-        <!-- Small Color Box -->
-        <a href="pages/stalls.html" class="bento-item bg-brand-glaucous text-decoration-none">
-            <h4 style="font-family: 'Poller One', cursive;">Stalls</h4>
-        </a>
-        <!-- Small Color Box -->
-        <a href="#facilities" class="bento-item bg-brand-giants-orange text-decoration-none">
-            <h4 style="font-family: 'Poller One', cursive;">Facilities</h4>
-        </a>
-        <!-- Small Color Box -->
-        <a href="pages/gallery.html" class="bento-item bento-item-wide text-decoration-none" style="background-image: url('images/picnic.jpg'); background-size: cover; background-position: center;">
-            <h4 style="font-family: 'Poller One', cursive;">Gallery</h4>
-        </a>
-        <!-- Small Color Box -->
-        <a href="#sponsors" class="bento-item bg-brand-saffron text-decoration-none">
-            <h4 style="font-family: 'Poller One', cursive;">Our Sponsors</h4>
-        </a>
-        <!-- Small Color Box -->
-        <a href="pages/getting-here.html" class="bento-item bg-brand-marian-blue text-decoration-none" style="background-image: url('images/map-icon.png'); background-size: cover; background-position: top;">
-            <h4 style="font-family: 'Poller One', cursive;">Getting Here</h4>
-        </a>
-    </div>
-</section>
-
-<section class="container my-5">
-    <div class="text-center mb-5">
-        <h2 class="display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Vendor Information</h2>
-        <p class="lead text-muted">Join us! Information for all our vendor partners.</p>
-    </div>
-    
-    <div class="row g-4 justify-content-center">
-        <!-- Stall Holders -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4" style="background-color: var(--brand-light-blue);">
-                <div class="card-body">
-                    <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 80px; height: 80px;">
-                        <i class="fas fa-store fa-2x" style="color: var(--brand-marian-blue);"></i>
+        <img src="images/hero.png"
+            alt="A wide, aerial view of the Girton Feast event grounds, showing tents, stalls, and a large grassy field."
+            class="img-fluid mx-auto d-block mb-0" style="max-width: 100%; height: auto; display: none;"
+            onload="this.style.display='block'">
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <!-- section title -->
+                <div class="col-12 text-center">
+                    <h2 class="text-center display-5 mb-2 mt-5"
+                        style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
+                        Girton Feast Events
+                    </h2>
+                </div>
+                <div class="col-12 col-lg-6" style="overflow: visible;">
+                    <div class="card border-0 shadow-sm position-relative hover-scale"
+                        style="border-radius: 1.5rem; background: linear-gradient(to right, var(--brand-marian-blue), var(--brand-thulian-pink)); min-height: 200px; overflow: visible; margin-top: 3rem;">
+                        <div class="card-body d-flex align-items-center p-4">
+                            <!-- Image on the right, bottom-aligned with card, sticking out of the top -->
+                            <div class="position-absolute" style="right: 2rem; bottom: 0;">
+                                <img src="images/rule-the-world-jump.png"
+                                    alt="Rule the World band member jumping into the air"
+                                    style="height: 240px; width: auto; object-fit: contain;">
+                            </div>
+                            <!-- Text content on the left, with right padding to make room for the image -->
+                            <div class="me-auto text-white" style="padding-right: 180px;">
+                                <h3 class="fw-bold mb-2" style="font-family: 'Poller One', cursive;">
+                                    Day 1: Evening Concert
+                                </h3>
+                                <i>Friday 10<sup>th</sup> July</i>
+                                <p class="mb-0" style="font-family: 'Poppins', sans-serif;">The world’s greatest Take
+                                    That tribute band <strong>Rule&nbsp;The&nbsp;World</strong> are coming to Girton.
+                                </p>
+                                <a href="pages/main-event.html" class="btn btn-light btn-sm mt-3 stretched-link">Book
+                                    Now</a>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="h4 fw-bold mb-3" style="color: var(--brand-marian-blue);">Stall Holders</h3>
-                    <p class="mb-4">Standard pitches for local businesses, crafters, charities, and community groups.</p>
-                    <a href="info/stall-holders.html" class="btn btn-outline-primary fw-bold stretched-link" style="border-width: 2px;">
-                        Find Out More
-                    </a>
                 </div>
-            </div>
-        </div>
-
-        <!-- Food & Drink -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4" style="background-color: var(--brand-light-pink);">
-                <div class="card-body">
-                    <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 80px; height: 80px;">
-                        <i class="fas fa-utensils fa-2x" style="color: var(--brand-thulian-pink);"></i>
+                <div class="col-12 col-lg-6" style="overflow: visible;">
+                    <div class="card border-0 shadow-sm position-relative hover-scale text-dark"
+                        style="border-radius: 1.5rem; background: linear-gradient(to right, var(--brand-saffron), var(--brand-saffron)); min-height: 200px; overflow: visible; margin-top: 3rem;">
+                        <div class="card-body d-flex align-items-center p-4">
+                            <!-- Image on the right, bottom-aligned with card, sticking out of the top -->
+                            <div class="position-absolute text-dark" style="right: 2rem; bottom: 0;">
+                                <img src="images/silly_goose.svg" alt="A Girton Goose"
+                                    style="height: 140px; width: auto; object-fit: contain;">
+                            </div>
+                            <div class="me-auto text-dark" style="padding-right: 180px;">
+                                <h3 class="fw-bold mb-2" style="font-family: 'Poller One', cursive;">
+                                    Day 2: Village Fête
+                                </h3>
+                                <i>Saturday 11<sup>th</sup> July</i>
+                                <p class="mb-0" style="font-family: 'Poppins', sans-serif;">
+                                    Join us for a day of food, fun, and games.
+                                </p>
+                                <a href="#" class="btn btn-light btn-sm mt-3 stretched-link">Book Now</a>
+                            </div>
+                        </div>
                     </div>
-                    <h3 class="h4 fw-bold mb-3" style="color: var(--brand-thulian-pink);">Food Vendors</h3>
-                    <p class="mb-4">Information for caterers, ice cream vans, and other food & drink providers.</p>
-                    <a href="info/caterers-info.html" class="btn btn-outline-danger fw-bold stretched-link" style="border-width: 2px; color: var(--brand-thulian-pink); border-color: var(--brand-thulian-pink);">
-                        Find Out More
-                    </a>
                 </div>
             </div>
-        </div>
+    </section>
 
-        <!-- Rides & Games -->
-        <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4" style="background-color: var(--brand-light-yellow);">
-                <div class="card-body">
-                    <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm" style="width: 80px; height: 80px;">
-                        <i class="fas fa-ticket-alt fa-2x" style="color: var(--brand-saffron);"></i>
+    <section id="headliners" class="container-fluid my-5 py-5 bg-brand-light-blue">
+        <h2 class="text-center display-5 mb-5"
+            style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Headliners: Rule The World</h2>
+        <div class="row">
+            <!-- Image Carousel -->
+            <div id="entertainmentCarousel" class="carousel slide shadow-lg rounded" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner rounded">
+                    <div class="carousel-item active">
+                        <img src="../images/main_event/1.jpg" class="d-block w-100"
+                            alt="A stage with a band performing under a spotlight.">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Live Music Stage</h5>
+                            <p>Enjoy performances from local bands and artists all weekend long.</p>
+                        </div>
                     </div>
-                    <h3 class="h4 fw-bold mb-3" style="color: var(--brand-marian-blue);">Rides & Games</h3>
-                    <p class="mb-4">Details for fairground rides, inflatables, and authorized game operators.</p>
-                    <a href="info/ride-vendors-info.html" class="btn btn-outline-warning fw-bold stretched-link" style="border-width: 2px; background-color: transparent; border-color: var(--brand-saffron); color: var(--brand-marian-blue);">
-                        Find Out More
-                    </a>
+                    <div class="carousel-item">
+                        <img src="../images/main_event/2.jpg" class="d-block w-100"
+                            alt="A row of vibrant food stalls serving a variety of cuisines.">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Incredible Atmosphere</h5>
+                            <p>Join the crowd for an unforgettable night.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../images/main_event/3.jpg" class="d-block w-100"
+                            alt="People laughing and enjoying a classic funfair ride.">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>A Night to Remember</h5>
+                            <p>Sing along to all your favourite hits.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#entertainmentCarousel"
+                    data-bs-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span
+                        class="visually-hidden">Previous</span></button>
+                <button class="carousel-control-next" type="button" data-bs-target="#entertainmentCarousel"
+                    data-bs-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span
+                        class="visually-hidden">Next</span></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's On Bento Grid Section -->
+    <section id="whatson" class="bento-container container-fluid my-5 py-5 bg-brand-light-blue">
+        <h2 class="text-center display-5 mb-5"
+            style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">What's On at the Village Fete?
+        </h2>
+        <div class="bento-grid">
+            <!-- Large Image Box -->
+            <!-- <a href="pages/main-event.html" class="bento-item bento-item-large text-decoration-none"
+                style="background-image: url('images/rule-the-world.png'); background-size: cover; background-position: top;">
+                <h4 style="font-family: 'Poller One', cursive;">Headliner: Rule The World</h4>
+            </a> -->
+            <!-- Small Color Box -->
+            <a href="pages/entertainment.html#funfair-rides"
+                class="bento-item bento-item-tall bg-brand-giants-orange text-decoration-none"
+                style="background-image: url('images/helter_skelter.png'); background-size: cover; background-position: right;">
+                <h4 style="font-family: 'Poller One', cursive;">Fun Fair Rides</h4>
+            </a>
+            <!-- Small Color Box -->
+            <a href="pages/food.html" class="bento-item bg-brand-thulian-pink text-decoration-none">
+                <h4 style="font-family: 'Poller One', cursive;">Food & Drink</h4>
+            </a>
+            <!-- Small Color Box -->
+            <a href="pages/entertainment.html#displays-shows" class="bento-item bg-brand-glaucous text-decoration-none"
+                style="background-image: url('images/model-aircraft.png'); background-size: cover; background-position: top;">
+                <h4 style="font-family: 'Poller One', cursive;">Displays & Shows</h4>
+            </a>
+            <!-- Small Image Box -->
+            <a href="pages/entertainment.html#competitions-games"
+                class="bento-item bento-item-tall bg-brand-marian-blue text-decoration-none"
+                style="background-image: url('images/sports.png'); background-size: cover; background-position: center;">
+                <h4 style="font-family: 'Poller One', cursive;">Sports & Games</h4>
+            </a>
+            <!-- Large Image Box -->
+            <a href="pages/map.html" class="bento-item bento-item-large text-decoration-none"
+                style="background-image: url('images/map-thumbnail.png'); background-size: cover; background-position: center;">
+                <h4 style="font-family: 'Poller One', cursive;">Event Map</h4>
+            </a>
+            <!-- Small Color Box -->
+            <a href="pages/stalls.html" class="bento-item bg-brand-glaucous text-decoration-none">
+                <h4 style="font-family: 'Poller One', cursive;">Stalls</h4>
+            </a>
+            <!-- Small Color Box -->
+            <a href="#facilities" class="bento-item bg-brand-giants-orange text-decoration-none">
+                <h4 style="font-family: 'Poller One', cursive;">Facilities</h4>
+            </a>
+            <!-- Small Color Box -->
+            <a href="pages/gallery.html" class="bento-item bento-item-wide text-decoration-none"
+                style="background-image: url('images/picnic.jpg'); background-size: cover; background-position: center;">
+                <h4 style="font-family: 'Poller One', cursive;">Gallery</h4>
+            </a>
+            <!-- Small Color Box -->
+            <a href="#sponsors" class="bento-item bg-brand-saffron text-decoration-none">
+                <h4 style="font-family: 'Poller One', cursive;">Our Sponsors</h4>
+            </a>
+            <!-- Small Color Box -->
+            <a href="pages/getting-here.html" class="bento-item bg-brand-marian-blue text-decoration-none"
+                style="background-image: url('images/map-icon.png'); background-size: cover; background-position: top;">
+                <h4 style="font-family: 'Poller One', cursive;">Getting Here</h4>
+            </a>
+        </div>
+    </section>
+
+    <section class="container my-5">
+        <div class="text-center mb-5">
+            <h2 class="display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Vendor
+                Information</h2>
+            <p class="lead text-muted">Join us! Information for all our vendor partners.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <!-- Stall Holders -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4"
+                    style="background-color: var(--brand-light-blue);">
+                    <div class="card-body">
+                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-store fa-2x" style="color: var(--brand-marian-blue);"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3" style="color: var(--brand-marian-blue);">Stall Holders</h3>
+                        <p class="mb-4">Standard pitches for local businesses, crafters, charities, and community
+                            groups.</p>
+                        <a href="info/stall-holders.html" class="btn btn-outline-primary fw-bold stretched-link"
+                            style="border-width: 2px;">
+                            Find Out More
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Food & Drink -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4"
+                    style="background-color: var(--brand-light-pink);">
+                    <div class="card-body">
+                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-utensils fa-2x" style="color: var(--brand-thulian-pink);"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3" style="color: var(--brand-thulian-pink);">Food Vendors</h3>
+                        <p class="mb-4">Information for caterers, ice cream vans, and other food & drink providers.</p>
+                        <a href="info/caterers-info.html" class="btn btn-outline-danger fw-bold stretched-link"
+                            style="border-width: 2px; color: var(--brand-thulian-pink); border-color: var(--brand-thulian-pink);">
+                            Find Out More
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rides & Games -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4"
+                    style="background-color: var(--brand-light-yellow);">
+                    <div class="card-body">
+                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-ticket-alt fa-2x" style="color: var(--brand-saffron);"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3" style="color: var(--brand-marian-blue);">Rides & Games</h3>
+                        <p class="mb-4">Details for fairground rides, inflatables, and authorized game operators.</p>
+                        <a href="info/ride-vendors-info.html" class="btn btn-outline-warning fw-bold stretched-link"
+                            style="border-width: 2px; background-color: transparent; border-color: var(--brand-saffron); color: var(--brand-marian-blue);">
+                            Find Out More
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Agenda section with ID for scrollspy -->
-<!-- <section id="involved" class="my-5 py-5 bg-brand-saffron text-dark">
+    <!-- Agenda section with ID for scrollspy -->
+    <!-- <section id="involved" class="my-5 py-5 bg-brand-saffron text-dark">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-8">  
@@ -269,116 +384,123 @@
 </div>
 </section> -->
 
-<!-- Facilities section with ID for scrollspy -->
-<section id="facilities" class="container my-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-12">
-            <div class="bg-white rounded-4 shadow-sm py-3 px-4 d-flex flex-wrap justify-content-center align-items-center gap-4 text-secondary">
-                <h3 class="h5 fw-bold mb-0 me-md-3 text-uppercase" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Facilities:</h3>
-                
-                <div class="d-flex align-items-center gap-2" title="Restrooms available">
-                    <i class="fas fa-restroom text-black-50"></i>
-                    <span class="small fw-bold">Toilets</span>
-                </div>
-                
-                <span class="text-muted opacity-25 d-none d-md-inline">|</span>
-                
-                <div class="d-flex align-items-center gap-2" title="Accessible parking available">
-                    <i class="fas fa-wheelchair text-black-50"></i>
-                    <span class="small fw-bold">Accessible Parking</span>
-                </div>
+    <!-- Facilities section with ID for scrollspy -->
+    <section id="facilities" class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div
+                    class="bg-white rounded-4 shadow-sm py-3 px-4 d-flex flex-wrap justify-content-center align-items-center gap-4 text-secondary">
+                    <h3 class="h5 fw-bold mb-0 me-md-3 text-uppercase"
+                        style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Facilities:</h3>
 
-                <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+                    <div class="d-flex align-items-center gap-2" title="Restrooms available">
+                        <i class="fas fa-restroom text-black-50"></i>
+                        <span class="small fw-bold">Toilets</span>
+                    </div>
 
-                <div class="d-flex align-items-center gap-2" title="First aid station on site">
-                    <i class="fas fa-first-aid text-black-50"></i>
-                    <span class="small fw-bold">First Aid</span>
-                </div>
+                    <span class="text-muted opacity-25 d-none d-md-inline">|</span>
 
-                <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+                    <div class="d-flex align-items-center gap-2" title="Accessible parking available">
+                        <i class="fas fa-wheelchair text-black-50"></i>
+                        <span class="small fw-bold">Accessible Parking</span>
+                    </div>
 
-                <div class="d-flex align-items-center gap-2" title="Lost property point">
-                    <i class="fas fa-box-open text-black-50"></i>
-                    <span class="small fw-bold">Lost & Found</span>
-                </div>
+                    <span class="text-muted opacity-25 d-none d-md-inline">|</span>
 
-                <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+                    <div class="d-flex align-items-center gap-2" title="First aid station on site">
+                        <i class="fas fa-first-aid text-black-50"></i>
+                        <span class="small fw-bold">First Aid</span>
+                    </div>
 
-                <div class="d-flex align-items-center gap-2" title="Only guide dogs allowed">
-                    <i class="fas fa-dog text-black-50"></i>
-                    <span class="small fw-bold">No Dogs <span class="text-muted fw-normal" style="font-size: 0.9em;">(except guide dogs)</span></span>
-                </div>
+                    <span class="text-muted opacity-25 d-none d-md-inline">|</span>
 
-                <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+                    <div class="d-flex align-items-center gap-2" title="Lost property point">
+                        <i class="fas fa-box-open text-black-50"></i>
+                        <span class="small fw-bold">Lost & Found</span>
+                    </div>
 
-                <div class="d-flex align-items-center gap-2" title="Smoke-free event">
-                    <i class="fas fa-smoking-ban text-black-50"></i>
-                    <span class="small fw-bold">No Smoking</span>
+                    <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+
+                    <div class="d-flex align-items-center gap-2" title="Only guide dogs allowed">
+                        <i class="fas fa-dog text-black-50"></i>
+                        <span class="small fw-bold">No Dogs <span class="text-muted fw-normal"
+                                style="font-size: 0.9em;">(except guide dogs)</span></span>
+                    </div>
+
+                    <span class="text-muted opacity-25 d-none d-md-inline">|</span>
+
+                    <div class="d-flex align-items-center gap-2" title="Smoke-free event">
+                        <i class="fas fa-smoking-ban text-black-50"></i>
+                        <span class="small fw-bold">No Smoking</span>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Get involved! section with ID for scrollspy -->
-<section id="involved" class="my-5 py-5 bg-brand-glaucous text-white">
-    <div class="container">
-        <div class="row align-items-center">
-            <!-- Text content on the left -->
-            <div class="col-lg-7 col-md-12 mb-4 mb-lg-0">
-                <h2 class="fw-bold mb-3 display-6" style="font-family: 'Poller One', cursive; letter-spacing: 1px;">
-                    Get involved!
-                </h2>
-                <p class="mt-4 mb-4 fs-5">
-                    There are lots of ways to make a difference in your community. Whether you want to volunteer your time, donate resources, or simply spread the word, we welcome your support!
-                </p>
-                <a href="pages/contact.html" class="btn btn-light btn-lg fs-5 fw-bold" style="color: var(--brand-marian-blue);">
-                    <i class="fas fa-envelope me-2"></i>Contact Us
-                </a>
-            </div>
-            <!-- Goose image on the right -->
-            <div class="col-lg-5 col-md-12 text-center">
-                <img src="images/helping-goose.svg" alt="Helping goose illustration" style="max-width: 100%; height: auto; max-height: 400px;">
+    <!-- Get involved! section with ID for scrollspy -->
+    <section id="involved" class="my-5 py-5 bg-brand-glaucous text-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <!-- Text content on the left -->
+                <div class="col-lg-7 col-md-12 mb-4 mb-lg-0">
+                    <h2 class="fw-bold mb-3 display-6" style="font-family: 'Poller One', cursive; letter-spacing: 1px;">
+                        Get involved!
+                    </h2>
+                    <p class="mt-4 mb-4 fs-5">
+                        There are lots of ways to make a difference in your community. Whether you want to volunteer
+                        your time, donate resources, or simply spread the word, we welcome your support!
+                    </p>
+                    <a href="pages/contact.html" class="btn btn-light btn-lg fs-5 fw-bold"
+                        style="color: var(--brand-marian-blue);">
+                        <i class="fas fa-envelope me-2"></i>Contact Us
+                    </a>
+                </div>
+                <!-- Goose image on the right -->
+                <div class="col-lg-5 col-md-12 text-center">
+                    <img src="images/helping-goose.svg" alt="Helping goose illustration"
+                        style="max-width: 100%; height: auto; max-height: 400px;">
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Sponsors section with ID for scrollspy -->
-<section id="sponsors" class="container bg-white rounded my-5 py-5">
-    <div class="text-center">
-        <!-- Updated the h2 color to be consistent with the other headers -->
-        <h2 class="mb-4 display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Thank you to our Sponsors</h2>
-        <p class="lead mb-4 fs-5">We are grateful for the support of our sponsors who make this event possible.</p>
-        <!-- Updated the 'Contact us' link to be a styled button with a mailto link -->
-        <a href="pages/contact.html" class="btn btn-light">
-            <i class="fas fa-envelope me-2"></i>Contact us
-        </a>
-    </div>
-    <!-- Dynamic sponsors container -->
-    <div id="marquee-container" class="overflow-hidden py-2 mt-4">
-        <div class="d-flex align-items-center gap-4 animate-marquee">
-            <!-- Sponsor images will be loaded dynamically by script.js -->
+    <!-- Sponsors section with ID for scrollspy -->
+    <section id="sponsors" class="container bg-white rounded my-5 py-5">
+        <div class="text-center">
+            <!-- Updated the h2 color to be consistent with the other headers -->
+            <h2 class="mb-4 display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
+                Thank you to our Sponsors</h2>
+            <p class="lead mb-4 fs-5">We are grateful for the support of our sponsors who make this event possible.</p>
+            <!-- Updated the 'Contact us' link to be a styled button with a mailto link -->
+            <a href="pages/contact.html" class="btn btn-light">
+                <i class="fas fa-envelope me-2"></i>Contact us
+            </a>
         </div>
-    </div>
-</section>
+        <!-- Dynamic sponsors container -->
+        <div id="marquee-container" class="overflow-hidden py-2 mt-4">
+            <div class="d-flex align-items-center gap-4 animate-marquee">
+                <!-- Sponsor images will be loaded dynamically by script.js -->
+            </div>
+        </div>
+    </section>
 
-<!-- Scroll to top button -->
-<button onclick="topFunction()" id="scrollToTopBtn" title="Go to top">
-    <i class="fas fa-arrow-up"></i>
-</button>
+    <!-- Scroll to top button -->
+    <button onclick="topFunction()" id="scrollToTopBtn" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-<!-- Footer Placeholder -->
-<div id="footer-placeholder"></div>
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
 
-        <!-- Bootstrap JS Bundle from CDN -->
+    <!-- Bootstrap JS Bundle from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="js/email-protection.js"></script>
     <script src="js/script.js"></script> <!-- Link to the new external script file -->
     <script>
         let mybutton = document.getElementById("scrollToTopBtn");
-        window.onscroll = function() {scrollFunction()};
+        window.onscroll = function () { scrollFunction() };
         function scrollFunction() {
             if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
                 mybutton.style.display = "flex";
@@ -403,12 +525,12 @@
     </script>
     <script>
         // This script will un-hide the hero section once the component is loaded by script.js
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const heroSection = document.getElementById('hero-section');
             if (heroSection) heroSection.style.display = 'block';
         });
     </script>
-    
+
     <!-- Service Worker Registration for PWA -->
     <script>
         if ('serviceWorker' in navigator) {
@@ -423,5 +545,6 @@
             });
         }
     </script>
-    </body>
+</body>
+
 </html>

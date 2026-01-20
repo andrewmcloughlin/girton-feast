@@ -46,6 +46,18 @@ body {
     padding: 1rem;
 }
 
+/* Normalize carousel image heights */
+#entertainmentCarousel .carousel-item img {
+    height: 500px;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    #entertainmentCarousel .carousel-item img {
+        height: 300px;
+    }
+}
+
 /* Marquee animation for the sponsor section */
 @keyframes marquee {
     0% {

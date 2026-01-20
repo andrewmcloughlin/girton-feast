@@ -2,5 +2,17 @@
     {
         "image": "gray_toynbee.png",
         "url": "https://www.grayandtoynbee.com/"
+    },
+    {
+        "image": "polarglaze.png",
+        "url": "https://www.polarglaze-ltd.co.uk/"
+    },
+    {
+        "image": "wheeliefreshbins.png",
+        "url": "https://www.wheeliefreshbins.com/"
+    },
+    {
+        "image": "lumb.png",
+        "url": "https://www.guttering-cambridge.co.uk/"
     }
 ]
