@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
     <!-- Google Fonts: Sigmar One and Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poppins:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -24,14 +26,17 @@
     <!-- Favicon Placeholder (replace with your actual favicon) -->
     <link rel="icon" href="../images/mascot.png" type="image/png">
 </head>
-<body class="bg-brand-light-yellow" data-bs-spy="scroll" data-bs-target="#gallery-nav" data-bs-smooth-scroll="true" tabindex="0">
+
+<body class="bg-brand-light-yellow" data-bs-spy="scroll" data-bs-target="#gallery-nav" data-bs-smooth-scroll="true"
+    tabindex="0">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
 
     <main class="container my-5">
         <div class="text-center pt-5 mb-5">
-            <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Relive the memories</h1>
+            <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Relive
+                the memories</h1>
             <p class="lead text-muted">A look back at previous years of the Girton Feast.</p>
         </div>
 
@@ -50,7 +55,8 @@
                 <!-- Mobile Dropdown Navigation -->
                 <div class="d-lg-none mb-4 sticky-top" style="top: 80px; z-index: 100;">
                     <div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="galleryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="galleryDropdown"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                             Select a Year
                         </button>
                         <ul id="gallery-dropdown-ul" class="dropdown-menu w-100" aria-labelledby="galleryDropdown">
@@ -133,7 +139,7 @@
                 `;
 
                 for (let i = 1; i <= config.imageCount; i++) {
-                    const imagePath = `images/previous/${config.year}/${i}.jpg`;
+                    const imagePath = `../images/previous/${config.year}/${i}.jpg`;
                     const delay = (i - 1) * 50; // 50ms delay for each image
                     allYearsHtml += `
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -174,7 +180,7 @@
             const imagePromises = [];
 
             for (let i = 1; i <= config.imageCount; i++) {
-                const imageUrl = `images/previous/${year}/${i}.jpg`;
+                const imageUrl = `../images/previous/${year}/${i}.jpg`;
                 const promise = fetch(imageUrl)
                     .then(response => {
                         if (!response.ok) throw new Error(`Image ${i}.jpg not found`);
@@ -190,7 +196,7 @@
             await Promise.all(imagePromises);
 
             zip.generateAsync({ type: "blob" })
-                .then(function(content) {
+                .then(function (content) {
                     const link = document.createElement('a');
                     link.href = URL.createObjectURL(content);
                     link.download = `girton-feast-${year}-photos.zip`;
@@ -213,4 +219,5 @@
         });
     </script>
 </body>
+
 </html>
