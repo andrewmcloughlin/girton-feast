@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,8 @@
     <!-- Google Fonts: Sigmar One and Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poppins:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -21,6 +23,7 @@
     <!-- Favicon Placeholder -->
     <link rel="icon" href="../images/mascot.png" type="image/png">
 </head>
+
 <body class="bg-brand-light-pink">
 
     <!-- Placeholder for the navigation bar -->
@@ -29,7 +32,8 @@
     <main class="container my-5">
         <!-- Header -->
         <div class="text-center pt-5 mb-5">
-            <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Food & Drink</h1>
+            <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Food &
+                Drink</h1>
             <p class="lead text-muted">Explore the delicious food and refreshing drinks available at the Feast.</p>
         </div>
 
@@ -37,7 +41,8 @@
         <div class="bg-brand-glaucous text-white p-5 rounded-4 text-center mb-5 shadow">
             <h2 class="fw-bold mb-3">Want to be a food or drink vendor?</h2>
             <p class="fs-5 mb-4">We'd love to have you! Click the button below to apply.</p>
-            <a href="../info/caterers-info.html" class="btn btn-light btn-lg fw-bold" style="color: var(--brand-marian-blue);">
+            <a href="../info/caterers-info.html" class="btn btn-light btn-lg fw-bold"
+                style="color: var(--brand-marian-blue);">
                 <i class="fas fa-info-circle"></i> Food & Drink Vendor Info
             </a>
         </div>
@@ -46,25 +51,12 @@
         <div class="filter-section bg-white p-4 rounded-4 mb-5 shadow-sm">
             <h5 class="fw-bold mb-3" style="color: var(--brand-marian-blue);">Filter by dietary options:</h5>
             <div id="dietary-filters" class="d-flex flex-wrap gap-2">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input diet-filter" type="checkbox" id="filter-vegetarian" value="vegetarian">
-                    <label class="form-check-label" for="filter-vegetarian">Vegetarian</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input diet-filter" type="checkbox" id="filter-vegan" value="vegan">
-                    <label class="form-check-label" for="filter-vegan">Vegan</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input diet-filter" type="checkbox" id="filter-gluten-free" value="gluten-free">
-                    <label class="form-check-label" for="filter-gluten-free">Gluten-Free</label>
-                </div>
+                <!-- Filters will be dynamically generated here -->
             </div>
         </div>
 
-        <div class="text-center py-5">
-            <i class="fas fa-hammer fa-3x mb-3" style="color: var(--brand-glaucous);"></i>
-            <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Coming Soon!</h3>
-            <p class="lead text-muted">We are currently curating our list of amazing food vendors for 2026.<br>Check back closer to the event!</p>
+        <div id="vendor-container" class="row g-4">
+            <!-- Vendor cards will be dynamically loaded here -->
         </div>
     </main>
 
@@ -78,33 +70,7 @@
         loadComponent("#navbar-placeholder", "../components/navbar.html");
         loadComponent("#footer-placeholder", "../components/footer.html").then(() => setCopyrightYear());
 
-        // --- Dietary Filter Logic ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const filters = document.querySelectorAll('.diet-filter');
-            const vendorCards = document.querySelectorAll('.vendor-card');
-
-            function applyFilters() {
-                const selectedTags = Array.from(filters)
-                    .filter(i => i.checked)
-                    .map(i => i.value);
-
-                vendorCards.forEach(card => {
-                    const cardTags = card.dataset.tags.split(' ');
-                    
-                    // If no filters are selected, show all cards.
-                    if (selectedTags.length === 0) {
-                        card.style.display = 'block';
-                        return;
-                    }
-
-                    // Show card if at least one of its tags is in the selected tags.
-                    const hasMatch = selectedTags.some(tag => cardTags.includes(tag) || cardTags.includes(tag + '-option'));
-                    card.style.display = hasMatch ? 'block' : 'none';
-                });
-            }
-
-            filters.forEach(filter => filter.addEventListener('change', applyFilters));
-        });
     </script>
 </body>
+
 </html>

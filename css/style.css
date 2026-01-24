@@ -466,3 +466,96 @@ body {
 .hover-scale:hover {
     transform: scale(1.02);
 }
+
+/* ========================================
+   Vendor Card Styles
+   ======================================== */
+.vendor-card {
+    min-height: 280px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 1.5rem;
+    transition: all 0.3s ease-in-out;
+    background-color: white;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    border: none;
+}
+
+.vendor-card-bg {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    z-index: 0;
+    transition: transform 0.3s ease;
+}
+
+.vendor-card:hover .vendor-card-bg {
+    transform: scale(1.05);
+}
+
+.vendor-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+.vendor-card-content {
+    padding: 1.5rem;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 50%, rgba(255, 255, 255, 0) 100%);
+    height: 100%;
+}
+
+.vendor-card-title {
+    font-family: 'Poller One', cursive;
+    color: var(--brand-marian-blue);
+    margin-bottom: 0.5rem;
+}
+
+.vendor-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.vendor-badges .badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.4em 0.8em;
+    border-radius: 50rem;
+}
+
+.badge-veg {
+    background-color: #4caf50 !important;
+}
+
+.badge-vegan {
+    background-color: #2e7d32 !important;
+}
+
+.badge-gf {
+    background-color: #ff9800 !important;
+}
+
+.badge-main {
+    background-color: var(--brand-glaucous) !important;
+}
+
+.badge-dessert {
+    background-color: var(--brand-thulian-pink) !important;
+}
+
+.badge-drink {
+    background-color: var(--brand-marian-blue) !important;
+}

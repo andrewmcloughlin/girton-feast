@@ -115,9 +115,93 @@ function initializeCountdown() {
             countdownElement.innerHTML = "The Feast is on!";
         }
     }, 1000);
+}
 
+// --- Dynamic Vendors Logic ---
+function loadVendors() {
+    const vendorContainer = document.getElementById('vendor-container');
+    const filterContainer = document.getElementById('dietary-filters');
+    if (!vendorContainer) return;
 
+    const currentPagePath = window.location.pathname;
+    const isIndexPage = (currentPagePath.endsWith('index.html') || currentPagePath.endsWith('/'));
+    const jsonPath = isIndexPage ? 'vendors.json' : '../vendors.json';
+    const imagePrefix = isIndexPage ? '' : '../';
 
+    fetch(jsonPath)
+        .then(response => response.json())
+        .then(vendors => {
+            // 1. Collect unique tags
+            const allTags = new Set();
+            vendors.forEach(v => v.tags.forEach(t => allTags.add(t)));
+
+            // 2. Generate Filters (if filterContainer exists)
+            if (filterContainer) {
+                let filtersHtml = '';
+                Array.from(allTags).sort().forEach(tag => {
+                    const label = tag.charAt(0).toUpperCase() + tag.slice(1).replace('-', ' ');
+                    filtersHtml += `
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input diet-filter" type="checkbox" id="filter-${tag}" value="${tag}">
+                            <label class="form-check-label" for="filter-${tag}">${label}</label>
+                        </div>
+                    `;
+                });
+                filterContainer.innerHTML = filtersHtml;
+
+                // 3. Attach filter logic
+                const filters = filterContainer.querySelectorAll('.diet-filter');
+                const applyFilters = () => {
+                    const selectedTags = Array.from(filters).filter(i => i.checked).map(i => i.value);
+                    const vendorCards = document.querySelectorAll('.vendor-card-wrapper');
+
+                    vendorCards.forEach(card => {
+                        if (selectedTags.length === 0) {
+                            card.style.display = 'block';
+                            return;
+                        }
+                        const cardTags = card.dataset.tags.split(' ');
+                        const hasMatch = selectedTags.some(tag => cardTags.includes(tag));
+                        card.style.display = hasMatch ? 'block' : 'none';
+                    });
+                };
+                filters.forEach(f => f.addEventListener('change', applyFilters));
+            }
+
+            // 4. Generate Vendor Cards
+            let html = '';
+            vendors.forEach(vendor => {
+                const tagsHtml = vendor.tags.map(tag => {
+                    let badgeClass = 'bg-secondary';
+                    let label = tag.charAt(0).toUpperCase() + tag.slice(1);
+
+                    if (tag.toLowerCase().includes('vegetarian')) badgeClass = 'badge-veg';
+                    if (tag.toLowerCase().includes('vegan')) badgeClass = 'badge-vegan';
+                    if (tag.toLowerCase().includes('gluten-free')) { badgeClass = 'badge-gf'; label = 'GF'; }
+                    if (tag.toLowerCase().includes('main')) badgeClass = 'badge-main';
+                    if (tag.toLowerCase().includes('dessert')) badgeClass = 'badge-dessert';
+                    if (tag.toLowerCase().includes('drink')) badgeClass = 'badge-drink';
+
+                    return `<span class="badge ${badgeClass}">${label}</span>`;
+                }).join('');
+
+                html += `
+                    <div class="col-md-6 col-lg-4 vendor-card-wrapper" data-tags="${vendor.tags.join(' ')}">
+                        <a href="${vendor.url}" target="_blank" class="card vendor-card shadow-sm h-100">
+                            <div class="vendor-card-bg" style="background-image: url('${imagePrefix}${vendor.image}'); background-size: cover; background-position: center;"></div>
+                            <div class="vendor-card-content">
+                                <h4 class="vendor-card-title">${vendor.name}</h4>
+                                <div class="vendor-badges">
+                                    ${tagsHtml}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `;
+            });
+            vendorContainer.innerHTML = html;
+        })
+        .catch(err => console.error('Failed to load vendors:', err));
 }
 
 // --- Dynamic Sponsors Logic ---
@@ -125,7 +209,12 @@ function loadSponsors() {
     const marqueeInner = document.querySelector('.animate-marquee');
     if (!marqueeInner) return;
 
-    fetch('sponsors.json')
+    const currentPagePath = window.location.pathname;
+    const isIndexPage = (currentPagePath.endsWith('index.html') || currentPagePath.endsWith('/'));
+    const jsonPath = isIndexPage ? 'sponsors.json' : '../sponsors.json';
+    const imagePrefix = isIndexPage ? 'images/sponsors/' : '../images/sponsors/';
+
+    fetch(jsonPath)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -143,7 +232,7 @@ function loadSponsors() {
                     const imageName = typeof sponsor === 'string' ? sponsor : sponsor.image;
                     const url = typeof sponsor === 'object' ? sponsor.url : null;
 
-                    const imgTag = `<img src="images/sponsors/${imageName}" class="mx-2 rounded border border-2 bg-white shadow-sm sponsor-logo" alt="Logo of an official event sponsor." height="100">`;
+                    const imgTag = `<img src="${imagePrefix}${imageName}" class="mx-2 rounded border border-2 bg-white shadow-sm sponsor-logo" alt="Logo of an official event sponsor." height="100">`;
 
                     // If there's a URL, wrap the image in a link
                     if (url) {
@@ -204,4 +293,5 @@ function setCopyrightYear() {
 document.addEventListener('DOMContentLoaded', () => {
     initializeCountdown();
     loadSponsors();
+    loadVendors();
 });
