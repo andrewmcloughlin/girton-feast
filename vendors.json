@@ -1,7 +1,7 @@
 [
     {
         "name": "Wrapunzel's Yorkshire Pudding Wraps",
-        "image": "images/food/wrapunzel-bgr.png",
+        "image": "images/food/wrapunzels-bgr.png",
         "url": "https://www.facebook.com/p/Wrapunzel-100092729754323/",
         "tags": [
             "vegetarian",
@@ -9,8 +9,8 @@
         ]
     },
     {
-        "name": "Tutledove Cafe",
-        "image": "images/food/turtledove-bgr.png",
+        "name": "Tutle Dove Cafe",
+        "image": "images/food/turtle-dove-bgr.png",
         "url": "https://www.turtledovecambridge.com/",
         "tags": [
             "cakes",
