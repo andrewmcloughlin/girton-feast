@@ -139,7 +139,10 @@ function loadVendors() {
             if (filterContainer) {
                 let filtersHtml = '';
                 Array.from(allTags).sort().forEach(tag => {
-                    const label = tag.charAt(0).toUpperCase() + tag.slice(1).replace('-', ' ');
+                    let label = tag.charAt(0).toUpperCase() + tag.slice(1).replace('-', ' ');
+                    if (tag.toLowerCase() === 'deserts' || tag.toLowerCase() === 'desert') label = 'Dessert';
+                    if (tag.toLowerCase() === 'ice cream') label = 'Ice Cream';
+
                     filtersHtml += `
                         <div class="form-check form-check-inline">
                             <input class="form-check-input diet-filter" type="checkbox" id="filter-${tag}" value="${tag}">
@@ -179,8 +182,14 @@ function loadVendors() {
                     if (tag.toLowerCase().includes('vegan')) badgeClass = 'badge-vegan';
                     if (tag.toLowerCase().includes('gluten-free')) { badgeClass = 'badge-gf'; label = 'GF'; }
                     if (tag.toLowerCase().includes('main')) badgeClass = 'badge-main';
-                    if (tag.toLowerCase().includes('dessert')) badgeClass = 'badge-dessert';
+                    if (tag.toLowerCase().includes('dessert') || tag.toLowerCase().includes('desert')) { badgeClass = 'badge-dessert'; label = 'Dessert'; }
                     if (tag.toLowerCase().includes('drink')) badgeClass = 'badge-drink';
+                    if (tag.toLowerCase().includes('pizza')) badgeClass = 'badge-pizzas';
+                    if (tag.toLowerCase().includes('burger')) badgeClass = 'badge-burgers';
+                    if (tag.toLowerCase().includes('churros')) badgeClass = 'badge-churros';
+                    if (tag.toLowerCase().includes('mexican')) badgeClass = 'badge-mexican';
+                    if (tag.toLowerCase().includes('ice cream')) { badgeClass = 'badge-ice-cream'; label = 'Ice Cream'; }
+                    if (tag.toLowerCase().includes('cake')) badgeClass = 'badge-cakes';
 
                     return `<span class="badge ${badgeClass}">${label}</span>`;
                 }).join('');
