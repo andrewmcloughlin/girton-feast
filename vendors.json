@@ -61,5 +61,14 @@
             "ice cream",
             "deserts"
         ]
+    },
+    {
+        "name": "Beer Tent",
+        "image": "images/food/beer.png",
+        "url": "#",
+        "tags": [
+            "beer",
+            "drinks"
+        ]
     }
 ]

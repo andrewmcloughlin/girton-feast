@@ -1,4 +1,7 @@
-<footer class="bg-brand-marian-blue text-white pt-5 pb-3">
+<footer class="bg-brand-marian-blue text-white pt-5 pb-3 position-relative overflow-hidden">
+    <!-- Silly Goose Background Image -->
+    <img src="../images/silly_goose.svg" alt="" class="footer-goose-bg">
+
     <div class="container">
         <div class="row g-4">
             <!-- About Section -->
@@ -107,5 +110,22 @@
     .hover-link:hover {
         color: var(--brand-saffron) !important;
         transition: color 0.2s ease;
+    }
+
+    .footer-goose-bg {
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+        width: 300px;
+        height: auto;
+        opacity: 0.1;
+        transform: rotate(-15deg);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    footer .container {
+        position: relative;
+        z-index: 1;
     }
 </style>
