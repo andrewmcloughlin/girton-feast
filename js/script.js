@@ -44,28 +44,31 @@ function loadComponent(selector, url) {
                 link.classList.remove('active');
 
                 if (isIndexPage) {
-                    // On the index page (or root):
-                    // A link is active if:
-                    // 1. It's the 'Home' link (index.html#hero-section) AND the current page has no hash (i.e., at the very top).
-                    // 2. It's a hash link (e.g., #events) AND its hash matches the current URL hash.
-                    // 3. It's the 'Home' link (index.html#hero-section) AND the current URL hash is #hero-section.
-                    //    (This covers cases where someone explicitly navigates to index.html#hero-section)
-
                     const linkHash = href.includes('#') ? '#' + href.split('#')[1] : '';
 
                     if (
-                        (href === 'index.html#hero-section' && currentHash === '') || // Case 1: Home link, no hash in URL
-                        (linkHash !== '' && currentHash === linkHash) || // Case 2: Hash link matches current hash
-                        (href === 'index.html#hero-section' && currentHash === '#hero-section') // Case 3: Home link, explicit #hero-section hash
+                        (href === 'index.html#hero-section' && currentHash === '') ||
+                        (linkHash !== '' && currentHash === linkHash) ||
+                        (href === 'index.html#hero-section' && currentHash === '#hero-section')
                     ) {
                         link.classList.add('active');
+                        // Highlight parent dropdown if it exists
+                        const parentDropdown = link.closest('.dropdown');
+                        if (parentDropdown) {
+                            const toggle = parentDropdown.querySelector('.dropdown-toggle');
+                            if (toggle) toggle.classList.add('active');
+                        }
                     }
                 } else {
-                    // On other pages (e.g., gallery.html):
-                    // Highlight if the link's filename (without hash) matches the current page's filename.
                     const linkFileNameWithoutHash = href.substring(href.lastIndexOf('/') + 1).split('#')[0];
                     if (currentFileName === linkFileNameWithoutHash) {
                         link.classList.add('active');
+                        // Highlight parent dropdown if it exists
+                        const parentDropdown = link.closest('.dropdown');
+                        if (parentDropdown) {
+                            const toggle = parentDropdown.querySelector('.dropdown-toggle');
+                            if (toggle) toggle.classList.add('active');
+                        }
                     }
                 }
             });
@@ -298,9 +301,91 @@ function setCopyrightYear() {
     if (yearElement) yearElement.textContent = new Date().getFullYear();
 }
 
+// --- Event Day Toggling Logic ---
+function initializeEventToggling() {
+    const cards = document.querySelectorAll('.event-card');
+    const toggleBtns = document.querySelectorAll('.segmented-toggle .toggle-btn');
+    const toggleBg = document.getElementById('toggle-bg');
+    const day1Content = document.getElementById('day1-content');
+    const day2Content = document.getElementById('day2-content');
+
+    if (!day1Content || !day2Content) return;
+
+    function updateUI(day) {
+        // Update cards
+        cards.forEach(c => {
+            if (c.getAttribute('data-event-day') === day) {
+                c.classList.add('active');
+            } else {
+                c.classList.remove('active');
+            }
+        });
+
+        // Update toggle buttons
+        toggleBtns.forEach(btn => {
+            if (btn.getAttribute('data-toggle-day') === day) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
+
+        // Update sliding background
+        if (toggleBg) {
+            if (day === '2') {
+                toggleBg.classList.add('day2');
+            } else {
+                toggleBg.classList.remove('day2');
+            }
+        }
+
+        // Toggle content visibility
+        if (day === '1') {
+            day1Content.style.display = 'block';
+            day2Content.style.display = 'none';
+        } else {
+            day1Content.style.display = 'none';
+            day2Content.style.display = 'block';
+        }
+    }
+
+    // Add listeners to cards
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            updateUI(card.getAttribute('data-event-day'));
+        });
+    });
+
+    // Add listeners to toggle buttons
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            updateUI(btn.getAttribute('data-toggle-day'));
+        });
+    });
+
+    // Handle initial hash on load
+    const currentHash = window.location.hash;
+    if (currentHash === '#headliners' || currentHash === '#day1-content') {
+        updateUI('1');
+    } else if (currentHash === '#whatson' || currentHash === '#day2-content') {
+        updateUI('2');
+    }
+
+    // Handle hash change
+    window.addEventListener('hashchange', () => {
+        const newHash = window.location.hash;
+        if (newHash === '#headliners' || newHash === '#day1-content') {
+            updateUI('1');
+        } else if (newHash === '#whatson' || newHash === '#day2-content') {
+            updateUI('2');
+        }
+    });
+}
+
 // Initialize everything when the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     initializeCountdown();
     loadSponsors();
     loadVendors();
+    initializeEventToggling();
 });

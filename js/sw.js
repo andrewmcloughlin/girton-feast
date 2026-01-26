@@ -10,7 +10,6 @@ const urlsToCache = [
     '/girton-feast/components/navbar.html',
     '/girton-feast/components/footer.html',
     '/girton-feast/pages/contact.html',
-    '/girton-feast/pages/main-event.html',
     '/girton-feast/pages/entertainment.html',
     '/girton-feast/pages/food.html',
     '/girton-feast/pages/gallery.html',
