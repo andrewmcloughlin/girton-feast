@@ -254,6 +254,7 @@ body {
     /* Reduced gap for smaller screens */
     grid-auto-rows: minmax(160px, auto);
     /* Reduced min-height for smaller screens */
+    grid-auto-flow: dense;
 }
 
 .bento-item {
@@ -289,7 +290,8 @@ body {
 .bento-item-large {
     /* On mobile, it spans both columns to be full-width */
     grid-column: span 2;
-    grid-row: span 1;
+    grid-row: span 2;
+    /* Increased span on mobile for better tessellation */
 }
 
 .bento-item-tall {
@@ -695,4 +697,100 @@ body {
 
 .badge-cakes {
     background-color: #c2185b !important;
+}
+
+body,
+html {
+    overflow-x: clip;
+    width: 100%;
+}
+
+/* ========================================
+   Mobile Bottom Navigation Styles (Floating & Centered)
+   ======================================== */
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    max-width: 400px;
+    height: 65px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1050;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.mobile-nav-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand-marian-blue);
+    opacity: 0.6;
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
+}
+
+.mobile-nav-item i {
+    font-size: 1.2rem;
+    margin-bottom: 2px;
+}
+
+.mobile-nav-item.active {
+    color: var(--brand-thulian-pink);
+    opacity: 1;
+}
+
+.mobile-nav-item.active i {
+    color: var(--brand-thulian-pink);
+}
+
+
+/* Adjust body padding on mobile */
+@media (max-width: 767px) {
+    body {
+        padding-bottom: 100px;
+        /* Space for the floating nav and clearance */
+    }
+
+    #scrollToTopBtn {
+        bottom: 95px;
+        /* Above floating nav */
+    }
+}
+
+/* ========================================
+   Filter Toggle Styles
+   ======================================== */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.transition-300 {
+    transition: all 0.3s ease;
+}
+
+.filter-chevron {
+    font-size: 0.9rem;
+    color: var(--brand-marian-blue);
+    opacity: 0.7;
+}
+
+[aria-expanded="false"] .filter-chevron {
+    transform: rotate(-90deg);
+}
+
+[aria-expanded="true"] .filter-chevron {
+    transform: rotate(0deg);
 }

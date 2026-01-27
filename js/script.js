@@ -74,6 +74,20 @@ function loadComponent(selector, url) {
             });
             document.querySelector(selector).innerHTML = tempDiv.innerHTML;
 
+            // Handle mobile nav active states if the mobile nav was just loaded
+            if (selector === '#mobile-nav-placeholder') {
+                const mobileLinks = document.querySelectorAll('.mobile-nav-item');
+                mobileLinks.forEach(link => {
+                    const href = link.getAttribute('href');
+                    if (!href) return;
+
+                    const linkFileName = href.substring(href.lastIndexOf('/') + 1);
+                    if (currentFileName === linkFileName || (currentFileName === '' && linkFileName === 'index.html')) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
             // Re-attach listeners because innerHTML replacement removes them. 
             const insertedLinks = document.querySelector(selector).querySelectorAll('.nav-link, .dropdown-item');
             insertedLinks.forEach(link => {
@@ -388,4 +402,13 @@ document.addEventListener('DOMContentLoaded', () => {
     loadSponsors();
     loadVendors();
     initializeEventToggling();
+
+    // Load mobile nav on all pages
+    const mobileNavPlaceholder = document.getElementById('mobile-nav-placeholder');
+    if (mobileNavPlaceholder) {
+        const currentPagePath = window.location.pathname;
+        const isIndexPage = (currentPagePath.endsWith('index.html') || currentPagePath.endsWith('/'));
+        const componentPath = isIndexPage ? 'components/mobile-nav.html' : '../components/mobile-nav.html';
+        loadComponent('#mobile-nav-placeholder', componentPath);
+    }
 });
