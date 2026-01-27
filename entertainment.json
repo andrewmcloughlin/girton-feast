@@ -1,0 +1,26 @@
+[
+    {
+        "name": "Pom Pom The Magic Fox",
+        "image": "images/vendors/pompom.png",
+        "url": "https://pompomkidsparties.co.uk/",
+        "description": "Magical children's entertainment",
+        "tags": [
+            "shows",
+            "magic",
+            "kids",
+            "family"
+        ]
+    },
+    {
+        "name": "The Munroes",
+        "image": "images/vendors/munroes.png",
+        "url": "https://www.facebook.com/music.themunroes/",
+        "description": "Five piece band playing a range of pop, rock and acoustic tracks from the 60's to today",
+        "tags": [
+            "music",
+            "live-band",
+            "family",
+            "adults"
+        ]
+    }
+]

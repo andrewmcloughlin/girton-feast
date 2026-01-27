@@ -699,6 +699,44 @@ body {
     background-color: #c2185b !important;
 }
 
+/* Entertainment Badge Styles */
+.badge-shows {
+    background-color: #9c27b0 !important;
+}
+
+.badge-music {
+    background-color: #e91e63 !important;
+}
+
+.badge-live-band {
+    background-color: #f06292 !important;
+}
+
+.badge-magic {
+    background-color: #ab47bc !important;
+}
+
+.badge-rides {
+    background-color: #ff5722 !important;
+}
+
+.badge-games {
+    background-color: #ff9800 !important;
+}
+
+.badge-kids {
+    background-color: #4caf50 !important;
+}
+
+.badge-family {
+    background-color: #2196f3 !important;
+}
+
+.badge-adults {
+    background-color: #607d8b !important;
+}
+
+
 body,
 html {
     overflow-x: clip;

@@ -134,35 +134,38 @@ function initializeCountdown() {
     }, 1000);
 }
 
-// --- Dynamic Vendors Logic ---
-function loadVendors() {
-    const vendorContainer = document.getElementById('vendor-container');
-    const filterContainer = document.getElementById('dietary-filters');
-    if (!vendorContainer) return;
+// --- Dynamic Cards Logic (Unified for Food & Entertainment) ---
+function loadCards(jsonFile, containerSelector, filterSelector) {
+    const cardContainer = document.querySelector(containerSelector);
+    const filterContainer = filterSelector ? document.querySelector(filterSelector) : null;
+
+    if (!cardContainer) return;
 
     const currentPagePath = window.location.pathname;
     const isIndexPage = (currentPagePath.endsWith('index.html') || currentPagePath.endsWith('/'));
-    const jsonPath = isIndexPage ? 'vendors.json' : '../vendors.json';
+    const jsonPath = isIndexPage ? jsonFile : '../' + jsonFile;
     const imagePrefix = isIndexPage ? '' : '../';
 
     fetch(jsonPath)
         .then(response => response.json())
-        .then(vendors => {
+        .then(items => {
             // 1. Collect unique tags
             const allTags = new Set();
-            vendors.forEach(v => v.tags.forEach(t => allTags.add(t)));
+            items.forEach(item => item.tags.forEach(t => allTags.add(t)));
 
             // 2. Generate Filters (if filterContainer exists)
             if (filterContainer) {
                 let filtersHtml = '';
                 Array.from(allTags).sort().forEach(tag => {
-                    let label = tag.charAt(0).toUpperCase() + tag.slice(1).replace('-', ' ');
+                    let label = tag.charAt(0).toUpperCase() + tag.slice(1).replace(/-/g, ' ');
+                    // Special label formatting
                     if (tag.toLowerCase() === 'deserts' || tag.toLowerCase() === 'desert') label = 'Dessert';
-                    if (tag.toLowerCase() === 'ice cream') label = 'Ice Cream';
+                    if (tag.toLowerCase() === 'ice-cream') label = 'Ice Cream';
+                    if (tag.toLowerCase() === 'live-band') label = 'Live Band';
 
                     filtersHtml += `
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input diet-filter" type="checkbox" id="filter-${tag}" value="${tag}">
+                            <input class="form-check-input card-filter" type="checkbox" id="filter-${tag}" value="${tag}">
                             <label class="form-check-label" for="filter-${tag}">${label}</label>
                         </div>
                     `;
@@ -170,12 +173,12 @@ function loadVendors() {
                 filterContainer.innerHTML = filtersHtml;
 
                 // 3. Attach filter logic
-                const filters = filterContainer.querySelectorAll('.diet-filter');
+                const filters = filterContainer.querySelectorAll('.card-filter');
                 const applyFilters = () => {
                     const selectedTags = Array.from(filters).filter(i => i.checked).map(i => i.value);
-                    const vendorCards = document.querySelectorAll('.vendor-card-wrapper');
+                    const cardWrappers = document.querySelectorAll('.card-wrapper');
 
-                    vendorCards.forEach(card => {
+                    cardWrappers.forEach(card => {
                         if (selectedTags.length === 0) {
                             card.style.display = 'block';
                             return;
@@ -188,13 +191,14 @@ function loadVendors() {
                 filters.forEach(f => f.addEventListener('change', applyFilters));
             }
 
-            // 4. Generate Vendor Cards
+            // 4. Generate Cards
             let html = '';
-            vendors.forEach(vendor => {
-                const tagsHtml = vendor.tags.map(tag => {
+            items.forEach(item => {
+                const tagsHtml = item.tags.map(tag => {
                     let badgeClass = 'bg-secondary';
                     let label = tag.charAt(0).toUpperCase() + tag.slice(1);
 
+                    // Food badges
                     if (tag.toLowerCase().includes('vegetarian')) badgeClass = 'badge-veg';
                     if (tag.toLowerCase().includes('vegan')) badgeClass = 'badge-vegan';
                     if (tag.toLowerCase().includes('gluten-free')) { badgeClass = 'badge-gf'; label = 'GF'; }
@@ -205,18 +209,33 @@ function loadVendors() {
                     if (tag.toLowerCase().includes('burger')) badgeClass = 'badge-burgers';
                     if (tag.toLowerCase().includes('churros')) badgeClass = 'badge-churros';
                     if (tag.toLowerCase().includes('mexican')) badgeClass = 'badge-mexican';
-                    if (tag.toLowerCase().includes('ice cream')) { badgeClass = 'badge-ice-cream'; label = 'Ice Cream'; }
+                    if (tag.toLowerCase().includes('ice-cream')) { badgeClass = 'badge-ice-cream'; label = 'Ice Cream'; }
                     if (tag.toLowerCase().includes('cake')) badgeClass = 'badge-cakes';
+
+                    // Entertainment badges
+                    if (tag.toLowerCase().includes('shows')) badgeClass = 'badge-shows';
+                    if (tag.toLowerCase().includes('music')) badgeClass = 'badge-music';
+                    if (tag.toLowerCase().includes('live-band')) { badgeClass = 'badge-live-band'; label = 'Live Band'; }
+                    if (tag.toLowerCase().includes('magic')) badgeClass = 'badge-magic';
+                    if (tag.toLowerCase().includes('rides')) badgeClass = 'badge-rides';
+                    if (tag.toLowerCase().includes('games')) badgeClass = 'badge-games';
+                    if (tag.toLowerCase().includes('kids')) badgeClass = 'badge-kids';
+                    if (tag.toLowerCase().includes('family')) badgeClass = 'badge-family';
+                    if (tag.toLowerCase().includes('adults')) badgeClass = 'badge-adults';
 
                     return `<span class="badge ${badgeClass}">${label}</span>`;
                 }).join('');
 
+                // Optional description support
+                const description = item.description ? `<p class="mb-0 text-white-50 small" style="text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);">${item.description}</p>` : '';
+
                 html += `
-                    <div class="col-md-6 col-lg-4 vendor-card-wrapper" data-tags="${vendor.tags.join(' ')}">
-                        <a href="${vendor.url}" target="_blank" class="card vendor-card shadow-sm h-100">
-                            <div class="vendor-card-bg" style="background-image: url('${imagePrefix}${vendor.image}'); background-size: cover; background-position: center;"></div>
+                    <div class="col-md-6 col-lg-4 card-wrapper" data-tags="${item.tags.join(' ')}">
+                        <a href="${item.url}" target="_blank" class="card vendor-card shadow-sm h-100">
+                            <div class="vendor-card-bg" style="background-image: url('${imagePrefix}${item.image}'); background-size: cover; background-position: center;"></div>
                             <div class="vendor-card-content">
-                                <h4 class="vendor-card-title">${vendor.name}</h4>
+                                <h4 class="vendor-card-title">${item.name}</h4>
+                                ${description}
                                 <div class="vendor-badges">
                                     ${tagsHtml}
                                 </div>
@@ -225,9 +244,14 @@ function loadVendors() {
                     </div>
                 `;
             });
-            vendorContainer.innerHTML = html;
+            cardContainer.innerHTML = html;
         })
-        .catch(err => console.error('Failed to load vendors:', err));
+        .catch(err => console.error('Failed to load cards:', err));
+}
+
+// Legacy function for backward compatibility
+function loadVendors() {
+    loadCards('vendors.json', '#vendor-container', '#dietary-filters');
 }
 
 // --- Dynamic Sponsors Logic ---
