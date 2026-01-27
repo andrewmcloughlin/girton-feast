@@ -227,7 +227,7 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                 }).join('');
 
                 // Optional description support
-                const description = item.description ? `<p class="mb-0 text-white-50 small" style="text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);">${item.description}</p>` : '';
+                const description = item.description ? `<p class="mb-2 text-white small" style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.8);">${item.description}</p>` : '';
 
                 html += `
                     <div class="col-md-6 col-lg-4 card-wrapper" data-tags="${item.tags.join(' ')}">
