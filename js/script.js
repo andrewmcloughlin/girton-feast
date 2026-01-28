@@ -436,3 +436,204 @@ document.addEventListener('DOMContentLoaded', () => {
         loadComponent('#mobile-nav-placeholder', componentPath);
     }
 });
+
+// --- Beer Tent Logic ---
+function initBeerTent() {
+    const mapContainer = document.getElementById('brewery-map');
+    const beerListContainer = document.getElementById('beer-list');
+    const searchInput = document.getElementById('beer-search');
+    const sortBtns = document.querySelectorAll('.sort-btn');
+    const sortDropdown = document.getElementById('sortDropdown');
+
+    if (!mapContainer || !beerListContainer) return;
+
+    // Load Data
+    fetch('../beer-tent.json')
+        .then(response => response.json())
+        .then(breweries => {
+            // Flatten beer list for easier display/search/sort
+            let allBeers = [];
+            breweries.forEach(brewery => {
+                // Pre-process brewery data for the map
+                brewery.imagePath = '../' + brewery.logo;
+
+                brewery.beers.forEach(beer => {
+                    allBeers.push({
+                        ...beer,
+                        breweryName: brewery.name,
+                        breweryId: brewery.id,
+                        breweryLogo: brewery.imagePath
+                    });
+                });
+            });
+
+            // 1. Initialize Map
+            initBreweryMap(mapContainer, breweries);
+
+            // 2. Render Brewery Cards
+            renderBreweryCards(breweries);
+
+            // 3. Initial Render of Beer List
+            renderBeerList(allBeers);
+
+            // ... (rest of the code)
+
+            // 4. Search Logic
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const filtered = allBeers.filter(beer =>
+                    beer.name.toLowerCase().includes(term) ||
+                    beer.breweryName.toLowerCase().includes(term) ||
+                    beer.style.toLowerCase().includes(term)
+                );
+                renderBeerList(filtered);
+            });
+
+            // 4. Sort Logic
+            sortBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sortType = e.target.dataset.sort;
+                    const btnText = e.target.textContent;
+
+                    // Update dropdown text
+                    sortDropdown.textContent = "Sort By: " + btnText;
+
+                    let sorted = [...allBeers];
+                    // Note: If we had filtered currently, we should sort the filtered list. 
+                    // But for simplicity, let's just sort various slices or re-grab current filter
+                    // To do it right: get current value of search, filter, then sort.
+                    const term = searchInput.value.toLowerCase();
+                    if (term) {
+                        sorted = sorted.filter(beer =>
+                            beer.name.toLowerCase().includes(term) ||
+                            beer.breweryName.toLowerCase().includes(term) ||
+                            beer.style.toLowerCase().includes(term)
+                        );
+                    }
+
+                    if (sortType === 'name') {
+                        sorted.sort((a, b) => a.name.localeCompare(b.name));
+                    } else if (sortType === 'abv-asc') {
+                        sorted.sort((a, b) => a.abv - b.abv);
+                    } else if (sortType === 'abv-desc') {
+                        sorted.sort((a, b) => b.abv - a.abv);
+                    } else if (sortType === 'brewery') {
+                        sorted.sort((a, b) => a.breweryName.localeCompare(b.breweryName));
+                    }
+
+                    renderBeerList(sorted);
+                });
+            });
+
+        })
+        .catch(err => console.error('Failed to load beer data:', err));
+}
+
+function initBreweryMap(container, breweries) {
+    // Initialize OpenStreetMap
+    // Center on Girton Recreation Ground
+    var girtonCoords = [52.240069, 0.084899];
+    var map = L.map(container.id).setView(girtonCoords, 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    // Girton Feast Marker ("You are here")
+    var feastIcon = L.divIcon({
+        className: 'feast-marker',
+        html: '<i class="fas fa-flag fa-2x" style="color: #e91e63; text-shadow: 2px 2px 0 #fff;"></i>',
+        iconSize: [30, 30],
+        iconAnchor: [15, 30],
+        popupAnchor: [0, -30]
+    });
+    var feastMarker = L.marker(girtonCoords, { icon: feastIcon, zIndexOffset: 1000 }).addTo(map);
+    feastMarker.bindPopup('<div class="text-center"><h6 class="fw-bold mb-0">Girton Feast</h6><p class="small mb-0">You are here!</p></div>');
+    var markers = [feastMarker];
+    breweries.forEach(brewery => {
+        // Coords in JSON are now [lat, lng]
+        let lat = brewery.coords[0];
+        let lng = brewery.coords[1];
+        // Create Custom Icon using the brewery logo
+        var logoIcon = L.divIcon({
+            className: 'brewery-logo-marker',
+            // Create a circular white badge with the logo inside
+            html: `<div style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                    <img src="${brewery.imagePath}" style="width: 100%; height: 100%; object-fit: contain;">
+                   </div>`,
+            iconSize: [50, 50],
+            iconAnchor: [25, 25],
+            popupAnchor: [0, -25]
+        });
+        const marker = L.marker([lat, lng], { icon: logoIcon }).addTo(map);
+
+        const popupContent = `
+            <div class="text-center">
+                <img src="${brewery.imagePath}" width="50" class="mb-2">
+                <h6 class="fw-bold mb-1">${brewery.name}</h6>
+                <p class="small mb-0 text-muted">${brewery.description || ''}</p>
+            </div>
+        `;
+
+        marker.bindPopup(popupContent);
+        markers.push(marker);
+    });
+    // Fit bounds to show all markers
+    if (markers.length > 0) {
+        var group = new L.featureGroup(markers);
+        map.fitBounds(group.getBounds().pad(0.1));
+    }
+}
+
+function renderBeerList(beers) {
+    const container = document.getElementById('beer-list');
+    if (beers.length === 0) {
+        container.innerHTML = '<div class="col-12 text-center text-muted py-5">No beers found matching your criteria.</div>';
+        return;
+    }
+
+    let html = '';
+    beers.forEach(beer => {
+        html += `
+            <div class="col-md-6 col-lg-4">
+                <div class="beer-card bg-white h-100">
+                    <div class="d-flex align-items-center">
+                        <img src="${beer.breweryLogo}" class="brewery-logo-small rounded-circle border p-1" alt="${beer.breweryName} logo">
+                        <div>
+                            <h5 class="mb-0 fw-bold">${beer.name}</h5>
+                            <div class="brewery-name">${beer.breweryName}</div>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <span class="abv-badge">${beer.abv.toFixed(1)}%</span>
+                        <div class="small text-muted mt-1">${beer.style}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+function renderBreweryCards(breweries) {
+    const container = document.getElementById('brewery-list');
+    if (!container) return;
+
+    let html = '';
+    breweries.forEach(brewery => {
+        const websiteLink = brewery.website ? `<a href="${brewery.website}" target="_blank" class="btn btn-sm btn-outline-primary mt-3">Visit Website</a>` : '';
+
+        html += `
+            <div class="col-md-4 col-sm-6">
+                <div class="card h-100 shadow-sm border-0 hover-scale">
+                    <div class="card-body text-center d-flex flex-column align-items-center justify-content-center p-4">
+                        <img src="${brewery.imagePath}" alt="${brewery.name} Logo" class="img-fluid mb-3" style="max-height: 100px; max-width: 100px; object-fit: contain;">
+                        <h5 class="card-title fw-bold" style="color: var(--brand-marian-blue); font-family: 'Sigmar One', cursive;">${brewery.name}</h5>
+                        <p class="card-text small text-muted">${brewery.description || 'Proud local brewery.'}</p>
+                        ${websiteLink}
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+    container.innerHTML = html;
+}

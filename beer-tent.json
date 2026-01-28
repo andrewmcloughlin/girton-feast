@@ -1,0 +1,121 @@
+[
+    {
+        "id": "blue-barrel-cider",
+        "name": "Blue Barrel Cider",
+        "logo": "images/breweries/logo_blue_barrel_cider.png",
+        "coords": [
+            52.2644,
+            0.0655
+        ],
+        "website": "https://www.bluebarrelcider.com/",
+        "description": "Award Winning Pure Juice Cider & Perry",
+        "beers": [
+            {
+                "name": "Trees Are Good",
+                "abv": 5.5,
+                "style": "Cider"
+            }
+        ]
+    },
+    {
+        "id": "milton-brewery",
+        "name": "Milton Brewery",
+        "logo": "images/breweries/logo_milton_brewery.png",
+        "coords": [
+            52.2662,
+            0.1873
+        ],
+        "website": "https://www.miltonbrewery.co.uk/",
+        "description": "The Milton brewery is a traditional English Ale brewery, albeit lurking in the cunning disguise of a 1980s industrial unit.",
+        "beers": [
+            {
+                "name": "Pegasus",
+                "abv": 4.1,
+                "style": "Pale Ale"
+            },
+            {
+                "name": "Justinian",
+                "abv": 3.9,
+                "style": "Golden Ale"
+            },
+            {
+                "name": "Sparta",
+                "abv": 4.3,
+                "style": "Bitter"
+            }
+        ]
+    },
+    {
+        "id": "lord-conrads-brewery",
+        "name": "Lord Conrad's Brewery",
+        "logo": "images/breweries/logo_lord_conrads_brewery.png",
+        "coords": [
+            52.2444,
+            0.0034
+        ],
+        "website": "https://lordconradsbrewery.co.uk/",
+        "description": "Small batch brewing in Dry Drayton.",
+        "beers": [
+            {
+                "name": "A-Bomb",
+                "abv": 4.0,
+                "style": "Session Golden Ale",
+                "vegan": false,
+                "gluten_free": false
+            }
+        ]
+    },
+    {
+        "id": "papworth-brewery",
+        "name": "Papworth Brewery",
+        "logo": "images/breweries/logo_papworth_brewery.png",
+        "coords": [
+            52.3619,
+            0.0487
+        ],
+        "website": "https://papworthbrewery.com/",
+        "description": "Award-winning beers from Earith.",
+        "beers": [
+            {
+                "name": "Old Riverport Stout",
+                "abv": 4.5,
+                "style": "Stout",
+                "vegan": false,
+                "gluten_free": false
+            },
+            {
+                "name": "Red Kite",
+                "abv": 4.5,
+                "style": "Bitter",
+                "vegan": false,
+                "gluten_free": false
+            },
+            {
+                "name": "The Whitfield Citrabolt",
+                "abv": 3.8,
+                "style": "Pale Golden Ale",
+                "vegan": false,
+                "gluten_free": false
+            },
+            {
+                "name": "Hop Priest",
+                "abv": 4.4,
+                "style": "Pale Golden Ale",
+                "vegan": false,
+                "gluten_free": false
+            }
+        ]
+    },
+    {
+        "id": "moonshine-brewery",
+        "name": "Moonshine Brewery",
+        "logo": "images/breweries/logo_moonshine_brewery.png",
+        "coords": [
+            52.1788,
+            0.1983
+        ],
+        "website": "https://moonshinebrewery.co.uk/",
+        "description": "Distinctive beers from Fulbourn.",
+        "beers": []
+    }
+]
