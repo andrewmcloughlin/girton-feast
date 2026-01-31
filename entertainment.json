@@ -22,5 +22,46 @@
             "family",
             "adults"
         ]
+    },
+    {
+        "name": "Helter Skelter",
+        "image": "",
+        "url": "",
+        "description": "A classic tall slide for all the family",
+        "tags": [
+            "rides",
+            "family"
+        ]
+    },
+    {
+        "name": "Bouncy Castle",
+        "image": "",
+        "url": "",
+        "description": "Jump and play in our inflatable castle",
+        "tags": [
+            "kids",
+            "family"
+        ]
+    },
+    {
+        "name": "Land Train",
+        "image": "",
+        "url": "",
+        "description": "Take a fun ride around the fete grounds",
+        "tags": [
+            "rides",
+            "kids",
+            "family"
+        ]
+    },
+    {
+        "name": "Crazy Golf",
+        "image": "",
+        "url": "",
+        "description": "Test your skills on our fun mini-golf course",
+        "tags": [
+            "games",
+            "family"
+        ]
     }
 ]
