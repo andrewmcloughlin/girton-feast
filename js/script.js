@@ -74,6 +74,18 @@ function loadComponent(selector, url) {
             });
             document.querySelector(selector).innerHTML = tempDiv.innerHTML;
 
+            // Handle theme toggle state if the navbar was just loaded
+            if (selector === '#navbar-placeholder') {
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    const icon = themeToggle.querySelector('i');
+                    if (document.body.classList.contains('dark-mode')) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    }
+                }
+            }
+
             // Handle mobile nav active states if the mobile nav was just loaded
             if (selector === '#mobile-nav-placeholder') {
                 const mobileLinks = document.querySelectorAll('.mobile-nav-item');
@@ -422,6 +434,7 @@ function initializeEventToggling() {
 
 // Initialize everything when the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
+    initializeDarkMode();
     initializeCountdown();
     loadSponsors();
     loadVendors();
@@ -636,4 +649,65 @@ function renderBreweryCards(breweries) {
         `;
     });
     container.innerHTML = html;
+}
+
+// --- Dark Mode Logic ---
+function initializeDarkMode() {
+    const body = document.body;
+
+    // 1. Determine and apply initial theme
+    const savedTheme = localStorage.getItem('theme');
+    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
+        body.classList.add('dark-mode');
+    }
+
+    // 2. Handle Toggle (using event delegation for dynamic content)
+    document.addEventListener('click', (e) => {
+        const toggleBtn = e.target.closest('#theme-toggle');
+        if (!toggleBtn) return;
+
+        const isNowDark = body.classList.toggle('dark-mode');
+        const icon = toggleBtn.querySelector('i');
+
+        if (isNowDark) {
+            localStorage.setItem('theme', 'dark');
+            if (icon) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            }
+        } else {
+            localStorage.setItem('theme', 'light');
+            if (icon) {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+    });
+
+    // 3. Listen for system preference changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('theme')) {
+            if (e.matches) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+            // Update icon if navbar is present
+            const toggleBtn = document.getElementById('theme-toggle');
+            if (toggleBtn) {
+                const icon = toggleBtn.querySelector('i');
+                if (icon) {
+                    if (e.matches) {
+                        icon.classList.remove('fa-moon');
+                        icon.classList.add('fa-sun');
+                    } else {
+                        icon.classList.remove('fa-sun');
+                        icon.classList.add('fa-moon');
+                    }
+                }
+            }
+        }
+    });
 }

@@ -13,13 +13,65 @@ Global Styles & Variables
     --brand-light-blue: #e9eff9;
     --brand-light-pink: #f7e9ed;
     --brand-light-yellow: #fff8e1;
+
+    /* Theme variables - Light (Default) */
+    --bg-primary: #f8f9fa;
+    --bg-secondary: #ffffff;
+    --text-primary: #353535;
+    --text-secondary: #6c757d;
+    --card-bg: #ffffff;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --input-bg: #ffffff;
+    --input-text: #353535;
+}
+
+/* Dark Mode Overrides */
+.dark-mode {
+    --bg-primary: #121212;
+    --bg-secondary: #1e1e1e;
+    --text-primary: #e0e0e0;
+    --text-secondary: #b0b0b0;
+    --card-bg: #242424;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --input-bg: #333333;
+    --input-text: #f8f9fa;
+
+    /* Adjust accent backgrounds for dark mode */
+    --brand-light-blue: #1e2a44;
+    --brand-light-pink: #441e30;
+    --brand-light-yellow: #44401e;
+
+    --brand-marian-blue: #8988dd;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    color: #353535;
+    color: var(--text-primary);
+    background-color: var(--bg-primary) !important;
     padding-top: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* Override Bootstrap bg-light if it's explicitly used on body or other containers */
+.dark-mode .bg-light, 
+.dark-mode.bg-light {
+    background-color: var(--bg-primary) !important;
+}
+
+.dark-mode .bg-white {
+    background-color: var(--bg-secondary) !important;
+}
+
+.dark-mode .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+.dark-mode .card {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
 
 .o-container {
     position: relative;
@@ -148,38 +200,108 @@ body {
     background-color: var(--brand-thulian-pink);
 }
 
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 1rem;
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+.theme-toggle-btn i {
+    font-size: 1.1rem;
+}
+
+.dark-mode .theme-toggle-btn {
+    color: var(--brand-saffron);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Dark Mode Overrides for Navigation */
+.dark-mode #main-navbar.bg-brand-marian-blue {
+    background-color: #0d0d0d !important;
+}
+
+.dark-mode .dropdown-menu {
+    background-color: #1a1a1a !important;
+    border: 1px solid var(--border-color);
+}
+
+.dark-mode .mobile-bottom-nav {
+    background-color: #1e1e1e;
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .mobile-nav-item {
+    color: var(--text-primary);
+}
+
+.dark-mode .mobile-nav-item.active {
+    color: var(--brand-saffron);
+}
+
+.dark-mode #gallery-nav {
+    background-color: #1e1e1e !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .segmented-toggle {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Form elements in dark mode */
+.dark-mode .form-control,
+.dark-mode .form-select {
+    background-color: var(--input-bg);
+    border-color: var(--border-color);
+    color: var(--input-text);
+}
+
+.dark-mode .form-control:focus {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border-color: var(--brand-glaucous);
+}
+
+
 /* Custom class for a new green background */
-.bg-brand-marian-blue {
-    background-color: var(--brand-marian-blue) !important;
+/* Brand Background Utilities */
+.bg-brand-marian-blue { background-color: var(--brand-marian-blue) !important; }
+.bg-brand-glaucous { background-color: var(--brand-glaucous) !important; }
+.bg-brand-thulian-pink { background-color: var(--brand-thulian-pink) !important; }
+.bg-brand-saffron { background-color: var(--brand-saffron) !important; }
+.bg-brand-giants-orange { background-color: var(--brand-giants-orange) !important; }
+.bg-brand-light-blue { background-color: var(--brand-light-blue) !important; }
+.bg-brand-light-pink { background-color: var(--brand-light-pink) !important; }
+.bg-brand-light-yellow { background-color: var(--brand-light-yellow) !important; }
+
+/* Dark Mode Overrides for Brand Backgrounds */
+.dark-mode .bg-brand-marian-blue { background-color: #0d0d0d !important; }
+.dark-mode .bg-brand-glaucous { background-color: #1a2a44 !important; }
+.dark-mode .bg-brand-thulian-pink { background-color: #3d1a2a !important; }
+.dark-mode .bg-brand-saffron { background-color: #44401e !important; color: #e9c253 !important; }
+
+/* Ensure text in brand backgrounds remains readable in dark mode */
+.dark-mode .bg-brand-glaucous,
+.dark-mode .bg-brand-thulian-pink,
+.dark-mode .bg-brand-marian-blue {
+    color: var(--text-primary) !important;
 }
 
-.bg-brand-glaucous {
-    background-color: var(--brand-glaucous) !important;
-}
-
-.bg-brand-thulian-pink {
-    background-color: var(--brand-thulian-pink) !important;
-}
-
-.bg-brand-saffron {
-    background-color: var(--brand-saffron) !important;
-}
-
-.bg-brand-giants-orange {
-    background-color: var(--brand-giants-orange) !important;
-}
-
-.bg-brand-light-blue {
-    background-color: var(--brand-light-blue) !important;
-}
-
-.bg-brand-light-pink {
-    background-color: var(--brand-light-pink) !important;
-}
-
-.bg-brand-light-yellow {
-    background-color: var(--brand-light-yellow) !important;
-}
 
 .navbar-nav .nav-link.active {
     color: var(--brand-saffron) !important;
