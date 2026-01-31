@@ -244,7 +244,7 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                 html += `
                     <div class="col-md-6 col-lg-4 card-wrapper" data-tags="${item.tags.join(' ')}">
                         <a href="${item.url}" target="_blank" class="card vendor-card shadow-sm h-100">
-                            <div class="vendor-card-bg" style="background-image: url('${imagePrefix}${item.image}'); background-size: cover; background-position: center;"></div>
+                            <div class="vendor-card-bg" style="background-image: url('${imagePrefix}${item.image}'); background-size: cover; background-position: top center;"></div>
                             <div class="vendor-card-content">
                                 <h4 class="vendor-card-title">${item.name}</h4>
                                 ${description}

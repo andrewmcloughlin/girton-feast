@@ -25,7 +25,7 @@
     },
     {
         "name": "Helter Skelter",
-        "image": "",
+        "image": "images/helter-skelter.webp",
         "url": "",
         "description": "A classic tall slide for all the family",
         "tags": [
@@ -37,7 +37,7 @@
         "name": "Bouncy Castle",
         "image": "",
         "url": "",
-        "description": "Jump and play in our inflatable castle",
+        "description": "Jump and play in our inflatable assault course",
         "tags": [
             "kids",
             "family"

@@ -54,14 +54,15 @@
             0.0034
         ],
         "website": "https://lordconradsbrewery.co.uk/",
-        "description": "Small batch brewing in Dry Drayton.",
+        "description": "",
         "beers": [
             {
                 "name": "A-Bomb",
                 "abv": 4.0,
                 "style": "Session Golden Ale",
                 "vegan": false,
-                "gluten_free": false
+                "gluten_free": false,
+                "camra_link": "https://camra.org.uk/beers/lord-conrads-a-bomb-session-golden-ale-26032"
             }
         ]
     },
@@ -74,7 +75,7 @@
             0.0487
         ],
         "website": "https://papworthbrewery.com/",
-        "description": "Award-winning beers from Earith.",
+        "description": "It's All About The Beer,",
         "beers": [
             {
                 "name": "Old Riverport Stout",
@@ -115,7 +116,7 @@
             0.1983
         ],
         "website": "https://moonshinebrewery.co.uk/",
-        "description": "Distinctive beers from Fulbourn.",
+        "description": "Our beers are characterised by their clean, fresh taste which is thanks in no small part to the natural spring water that is used to make them.",
         "beers": []
     }
 ]
