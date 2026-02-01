@@ -1,31 +1,49 @@
 // Service Worker for Girton Feast PWA
-const CACHE_NAME = 'girton-feast-v2';
-const urlsToCache = [
-    '/girton-feast/',
-    '/girton-feast/index.html',
-    '/girton-feast/css/style.css',
-    '/girton-feast/js/script.js',
-    '/girton-feast/js/email-protection.js',
-    '/girton-feast/sponsors.json',
-    '/girton-feast/components/navbar.html',
-    '/girton-feast/components/footer.html',
-    '/girton-feast/pages/contact.html',
-    '/girton-feast/pages/entertainment.html',
-    '/girton-feast/pages/food.html',
-    '/girton-feast/pages/gallery.html',
-    '/girton-feast/pages/getting-here.html',
-    '/girton-feast/pages/map.html',
-    '/girton-feast/pages/stalls.html',
-    '/girton-feast/info/stall-holders.html',
-    '/girton-feast/info/caterers-info.html',
-    '/girton-feast/info/ride-vendors-info.html',
-    '/girton-feast/images/mascot.png',
-    '/girton-feast/images/hero.png',
-    '/girton-feast/images/helping-goose.svg',
-    '/girton-feast/images/rule-the-world-jump.png',
-    '/girton-feast/images/silly_goose.svg',
+const CACHE_NAME = 'girton-feast-v3';
+const PRE_CACHE_RESOURCES = [
+    './',
+    './index.html',
+    './css/style.css',
+    './js/script.js',
+    './js/email-protection.js',
+    './js/sw.js',
+    // JSON Data
+    './vendors.json',
+    './entertainment.json',
+    './sponsors.json',
+    './beer-tent.json',
+    // Pages
+    './pages/contact.html',
+    './pages/entertainment.html',
+    './pages/food.html',
+    './pages/gallery.html',
+    './pages/getting-here.html',
+    './pages/map.html',
+    './pages/stalls.html',
+    './pages/beer-tent.html',
+    './pages/agenda-map.html',
+    // Info Pages
+    './info/stall-holders.html',
+    './info/caterers-info.html',
+    './info/ride-vendors-info.html',
+    // Components
+    './components/navbar.html',
+    './components/footer.html',
+    './components/mobile-nav.html',
+    // Images (Core UI)
+    './images/mascot.png',
+    './images/hero.png',
+    './images/helping-goose.svg',
+    './images/rule-the-world-jump.png',
+    './images/silly_goose.svg',
+    './images/girton-feast-logo-text.svg',
+    './images/goose_golf.svg',
+    // External Libraries (Pre-caching core versions)
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
     'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
+    'https://unpkg.com/leaflet/dist/leaflet.css',
+    'https://unpkg.com/leaflet/dist/leaflet.js',
     'https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poller+One&family=Poppins:wght@400;700&display=swap'
 ];
 
@@ -35,23 +53,43 @@ self.addEventListener('install', (event) => {
         caches.open(CACHE_NAME)
             .then((cache) => {
                 console.log('Opened cache');
-                return cache.addAll(urlsToCache);
+                // We use addAll but catch individual failures to avoid the whole pre-cache failing
+                // if one tiny asset is missing during development.
+                return Promise.allSettled(
+                    PRE_CACHE_RESOURCES.map(url => cache.add(url))
+                ).then(results => {
+                    const failed = results.filter(r => r.status === 'rejected');
+                    if (failed.length > 0) {
+                        console.warn('Some resources failed to pre-cache:', failed.map(f => f.reason));
+                    }
+                    return cache;
+                });
             })
     );
 });
 
 // Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', (event) => {
+    // Strategy: Stale-While-Revalidate
+    // We serve the cached version immediately, but also fetch the latest from the network
+    // and update the cache in the background.
     event.respondWith(
-        caches.match(event.request)
-            .then((response) => {
-                // Cache hit - return response
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request);
-            }
-            )
+        caches.open(CACHE_NAME).then((cache) => {
+            return cache.match(event.request).then((cachedResponse) => {
+                const fetchedResponse = fetch(event.request).then((networkResponse) => {
+                    // Only cache successful GET requests
+                    if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic' && event.request.method === 'GET') {
+                        cache.put(event.request, networkResponse.clone());
+                    }
+                    return networkResponse;
+                }).catch(() => {
+                    // If network fails, return cached response if we have it
+                    return cachedResponse;
+                });
+
+                return cachedResponse || fetchedResponse;
+            });
+        })
     );
 });
 
