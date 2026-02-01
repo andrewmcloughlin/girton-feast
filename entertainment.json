@@ -1,7 +1,7 @@
 [
     {
         "name": "Pom Pom The Magic Fox",
-        "image": "images/vendors/pompom.png",
+        "image": "images/vendors/pompom_rainbow.png",
         "url": "https://pompomkidsparties.co.uk/",
         "description": "Magical children's entertainment",
         "tags": [
@@ -13,11 +13,10 @@
     },
     {
         "name": "The Munroes",
-        "image": "images/vendors/munroes.png",
+        "image": "images/vendors/munroes_singer.png",
         "url": "https://www.facebook.com/music.themunroes/",
         "description": "Five piece band playing a range of pop, rock and acoustic tracks from the 60's to today",
         "tags": [
-            "music",
             "live-band",
             "adults",
             "free"
@@ -53,7 +52,7 @@
     },
     {
         "name": "Crazy Golf",
-        "image": "",
+        "image": "images/golf.png",
         "url": "",
         "description": "Test your skills on our fun mini-golf course",
         "tags": [
