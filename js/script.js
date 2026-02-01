@@ -165,29 +165,43 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
             const allTags = new Set();
             items.forEach(item => item.tags.forEach(t => allTags.add(t)));
 
-            // 2. Generate Filters (if filterContainer exists)
-            if (filterContainer) {
+            const filterContainers = filterSelector ? document.querySelectorAll(filterSelector) : [];
+            
+            if (filterContainers.length > 0) {
                 let filtersHtml = '';
                 Array.from(allTags).sort().forEach(tag => {
                     let label = tag.charAt(0).toUpperCase() + tag.slice(1).replace(/-/g, ' ');
-                    // Special label formatting
                     if (tag.toLowerCase() === 'deserts' || tag.toLowerCase() === 'desert') label = 'Dessert';
                     if (tag.toLowerCase() === 'ice-cream') label = 'Ice Cream';
                     if (tag.toLowerCase() === 'live-band') label = 'Live Band';
 
                     filtersHtml += `
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input card-filter" type="checkbox" id="filter-${tag}" value="${tag}">
-                            <label class="form-check-label" for="filter-${tag}">${label}</label>
+                        <div class="filter-item d-flex align-items-center justify-content-between p-2 mb-2 rounded-3 border-0 transition-300 cursor-pointer" 
+                            data-tag="${tag}" style="background-color: #f8f9fa;">
+                            <div class="d-flex align-items-center gap-3 w-100">
+                                <div class="filter-checkbox-custom d-flex align-items-center justify-content-center transition-300" 
+                                    style="width: 20px; height: 20px; border: 2px solid #dee2e6; border-radius: 4px;">
+                                    <i class="fas fa-check text-white small" style="display: none;"></i>
+                                </div>
+                                <span class="filter-label fw-medium text-dark" style="font-size: 0.95rem;">${label}</span>
+                                <input type="checkbox" class="card-filter d-none" value="${tag}" data-tag="${tag}">
+                            </div>
                         </div>
                     `;
                 });
-                filterContainer.innerHTML = filtersHtml;
 
-                // 3. Attach filter logic
-                const filters = filterContainer.querySelectorAll('.card-filter');
+                filterContainers.forEach(container => {
+                    container.innerHTML = filtersHtml;
+                });
+
+                // 3. Attach filter logic to all checkboxes across all containers
+                const allFilterCheckboxes = [];
+                filterContainers.forEach(container => {
+                    allFilterCheckboxes.push(...container.querySelectorAll('.card-filter'));
+                });
+
                 const applyFilters = () => {
-                    const selectedTags = Array.from(filters).filter(i => i.checked).map(i => i.value);
+                    const selectedTags = allFilterCheckboxes.filter(i => i.checked).map(i => i.value);
                     const cardWrappers = document.querySelectorAll('.card-wrapper');
 
                     cardWrappers.forEach(card => {
@@ -200,7 +214,51 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                         card.style.display = hasMatch ? 'block' : 'none';
                     });
                 };
-                filters.forEach(f => f.addEventListener('change', applyFilters));
+
+                allFilterCheckboxes.forEach(f => {
+                    const filterItem = f.closest('.filter-item');
+                    if (!filterItem) return;
+
+                    filterItem.addEventListener('click', (e) => {
+                        const tag = f.value;
+                        const isChecked = !f.checked; // Toggle current state
+                        
+                        // Sync all components with same tag
+                        document.querySelectorAll(`.card-filter[data-tag="${tag}"]`).forEach(checkbox => {
+                            checkbox.checked = isChecked;
+                            const item = checkbox.closest('.filter-item');
+                            if (!item) return;
+                            
+                            // Visual updates for all synced items
+                            const checkIcon = item.querySelector('.fa-check');
+                            const checkboxCustom = item.querySelector('.filter-checkbox-custom');
+                            
+                            if (isChecked) {
+                                item.classList.add('active');
+                                item.style.backgroundColor = 'var(--brand-marian-blue)';
+                                const label = item.querySelector('.filter-label');
+                                if (label) label.classList.replace('text-dark', 'text-white');
+                                if (checkIcon) checkIcon.style.display = 'block';
+                                if (checkboxCustom) {
+                                    checkboxCustom.style.borderColor = 'white';
+                                    checkboxCustom.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                                }
+                            } else {
+                                item.classList.remove('active');
+                                item.style.backgroundColor = '#f8f9fa';
+                                const label = item.querySelector('.filter-label');
+                                if (label) label.classList.replace('text-white', 'text-dark');
+                                if (checkIcon) checkIcon.style.display = 'none';
+                                if (checkboxCustom) {
+                                    checkboxCustom.style.borderColor = '#dee2e6';
+                                    checkboxCustom.style.backgroundColor = 'transparent';
+                                }
+                            }
+                        });
+                        
+                        applyFilters();
+                    });
+                });
             }
 
             // 4. Generate Cards
