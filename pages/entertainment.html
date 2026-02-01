@@ -29,16 +29,14 @@
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
 
-    <main class="container my-5">
-        <!-- Header -->
-        <div class="text-center pt-5 mb-5">
-            <img src="../images/titles/whats-on-text.svg" alt="What's On Header" class="img-fluid"
-                style="max-width: min(500px, 90vw);">
-        </div>
-
+    <main class="container mt-5">
+        
         <div class="row pt-2">
             <!-- Sidebar for Desktop Filters -->
             <aside class="col-lg-3 d-none d-lg-block">
+                <div class="text-center">
+                    <img src="../images/goose_golf.svg" alt="A badly drawn goose attempting to play mini golf" class="img-fluid mt-5">
+                </div>
                 <div class="filter-sidebar bg-white p-4 rounded-4 shadow-sm sticky-top" style="top: 100px;">
                     <h5 class="fw-bold mb-3" style="color: var(--brand-marian-blue);">
                         <i class="fas fa-filter me-2 small"></i>Filters
@@ -48,14 +46,26 @@
                     </div>
                 </div>
             </aside>
-
+            
             <!-- Main Content Area -->
             <div class="col-lg-9">
+                <!-- Header -->
+                <div class="text-center pt-5 mb-5">
+                    <img src="../images/titles/whats-on-text.svg" alt="What's On Header" class="img-fluid"
+                        style="max-width: min(500px, 90vw);">
+                </div>
                 <div id="entertainment-container" class="row g-4">
                     <!-- Entertainment cards will be dynamically loaded here -->
                 </div>
             </div>
         </div>
+
+        <div class="d-lg-none text-end">
+            <img src="../images/goose_golf.svg" 
+                alt="A badly drawn goose attempting to play mini golf" 
+                class="img-fluid mt-5">
+        </div>
+
 
         <!-- Floating Action Button for Mobile Filters -->
         <button class="fab-filter d-lg-none" type="button" data-bs-toggle="offcanvas" 
