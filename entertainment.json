@@ -8,7 +8,7 @@
             "shows",
             "magic",
             "kids",
-            "family"
+            "free"
         ]
     },
     {
@@ -19,8 +19,8 @@
         "tags": [
             "music",
             "live-band",
-            "family",
-            "adults"
+            "adults",
+            "free"
         ]
     },
     {
@@ -29,8 +29,7 @@
         "url": "",
         "description": "A classic tall slide for all the family",
         "tags": [
-            "rides",
-            "family"
+            "rides"
         ]
     },
     {
@@ -39,8 +38,7 @@
         "url": "",
         "description": "Jump and play in our inflatable assault course",
         "tags": [
-            "kids",
-            "family"
+            "kids"
         ]
     },
     {
@@ -50,8 +48,7 @@
         "description": "Take a fun ride around the fete grounds",
         "tags": [
             "rides",
-            "kids",
-            "family"
+            "kids"
         ]
     },
     {
@@ -61,7 +58,7 @@
         "description": "Test your skills on our fun mini-golf course",
         "tags": [
             "games",
-            "family"
+            "kids"
         ]
     }
 ]

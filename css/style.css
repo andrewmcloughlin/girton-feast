@@ -73,19 +73,7 @@ body {
 }
 
 
-.o-container {
-    position: relative;
-}
-
-.mascot-image {
-    position: absolute;
-    width: 5.6em;
-    height: auto;
-    top: -1.98em;
-    left: -3.48em;
-    clip-path: inset(0 0);
-    z-index: 1;
-}
+/* Mascot styles removed in favor of SVG logo */
 
 .content-container {
     overflow: hidden;
@@ -863,6 +851,10 @@ body {
     background-color: #e91e63 !important;
 }
 
+.badge-free {
+    background-color: #4caf50 !important;
+}
+
 .badge-live-band {
     background-color: #f06292 !important;
 }
@@ -888,7 +880,7 @@ body {
 }
 
 .badge-adults {
-    background-color: #607d8b !important;
+    background-color: #733d85 !important;
 }
 
 

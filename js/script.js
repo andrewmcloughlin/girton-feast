@@ -234,6 +234,7 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                     if (tag.toLowerCase().includes('kids')) badgeClass = 'badge-kids';
                     if (tag.toLowerCase().includes('family')) badgeClass = 'badge-family';
                     if (tag.toLowerCase().includes('adults')) badgeClass = 'badge-adults';
+                    if (tag.toLowerCase().includes('free')) badgeClass = 'badge-free';
 
                     return `<span class="badge ${badgeClass}">${label}</span>`;
                 }).join('');
