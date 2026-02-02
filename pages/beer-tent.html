@@ -71,15 +71,13 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
         }
 
+
         .beer-card {
             border: 1px solid #eee;
             border-radius: 0.5rem;
             padding: 1rem;
-            margin-bottom: 1rem;
             transition: transform 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            position: relative;
         }
 
         .beer-card:hover {
@@ -110,7 +108,18 @@
         .sort-control:hover {
             color: var(--brand-giants-orange);
         }
-    </style>
+
+        .brewery-card-container {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .brewery-card-container.active-brewery-card .card {
+            border-color: var(--brand-giants-orange) !important;
+            background-color: #fff8f0; /* Light orange tint */
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(255, 127, 80, 0.3) !important;
+        }    </style>
 </head>
 
 <body class="bg-light">
@@ -121,9 +130,9 @@
     <!-- Header -->
     <header class="beer-header text-center">
         <div class="container position-relative z-1">
-            <h1>The Beer Tent</h1>
+            <img src="../images/titles/beer-tent-title.png" style="width: 30%;" alt="Beer Tent" class="img-fluid mb-3">
             <p class="lead mb-0">Proudly Supporting Local Breweries</p>
-            <p class="lead mb-0">We're also stocking a range of wines, lagers and prosecco.</p>
+            <p class="mb-0">Also stocking a range of wines, lagers and prosecco.</p>
         </div>
     </header>
 
@@ -135,18 +144,16 @@
                 <h2 class="mb-3" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Brewery
                     Locations</h2>
                 <div id="brewery-map" class="map-container"></div>
-                <p class="text-muted text-center"><small>
-                    Explore where our beer comes from.</small></p>
             </div>
         </div>
 
         <!-- Brewery Cards Section -->
-        <div class="row mb-5">
+        <div class="row">
             <div class="col-12">
                 <h2 class="mb-3" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">
-                    With Beer from
+                    Filter by Brewery
                 </h2>
-                <div id="brewery-list" class="row g-4">
+                <div id="brewery-list" class="d-flex flex-nowrap overflow-auto pb-3 gap-3" style="scroll-behavior: smooth;">
                     <!-- Brewery cards injected here -->
                 </div>
             </div>
@@ -155,38 +162,39 @@
         <!-- Beer List Section -->
         <div class="row">
             <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-                    <h2 class="mb-0" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Our
-                        Beer Selection</h2>
-
-                    <div class="d-flex gap-2">
-                        <div class="dropdown">
-                            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="sortDropdown"
-                                data-bs-toggle="dropdown">
-                                Sort By
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item sort-btn" data-sort="name" href="#">Name (A-Z)</a></li>
-                                <li><a class="dropdown-item sort-btn" data-sort="abv-asc" href="#">ABV (Low to High)</a>
-                                </li>
-                                <li><a class="dropdown-item sort-btn" data-sort="abv-desc" href="#">ABV (High to
-                                        Low)</a></li>
-                                <li><a class="dropdown-item sort-btn" data-sort="brewery" href="#">Brewery</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2" id="beer-list-section">
                 </div>
 
                 <div class="beer-list-container">
-                    <!-- Search/Filter -->
-                    <div class="input-group mb-4">
-                        <span class="input-group-text bg-white border-end-0"><i
-                                class="fas fa-search text-muted"></i></span>
-                        <input type="text" id="beer-search" class="form-control border-start-0"
-                            placeholder="Search for a beer or brewery...">
+                    <!-- Filter Bar -->
+                    <div class="filter-bar bg-white p-3 rounded-3 shadow-sm mb-4 border d-flex flex-wrap gap-3 align-items-center">
+                        <div class="flex-grow-1">
+                            <div class="input-group">
+                                <span class="input-group-text bg-white border-end-0"><i
+                                        class="fas fa-search text-muted"></i></span>
+                                <input type="text" id="beer-search" class="form-control border-start-0"
+                                    placeholder="Search for a beer or brewery...">
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                             <div class="dropdown">
+                                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="sortDropdown"
+                                    data-bs-toggle="dropdown">
+                                    Sort By: Name (A-Z)
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item sort-btn" data-sort="name" href="#">Name (A-Z)</a></li>
+                                    <li><a class="dropdown-item sort-btn" data-sort="abv-asc" href="#">ABV (Low to High)</a>
+                                    </li>
+                                    <li><a class="dropdown-item sort-btn" data-sort="abv-desc" href="#">ABV (High to
+                                            Low)</a></li>
+                                    <li><a class="dropdown-item sort-btn" data-sort="brewery" href="#">Brewery</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
-                    <div id="beer-list" class="row">
+                    <div id="beer-list" class="row g-4">
                         <!-- Beer items will be injected here -->
                         <div class="col-12 text-center py-5">
                             <div class="spinner-border text-primary" role="status">

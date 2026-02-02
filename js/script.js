@@ -519,18 +519,29 @@ function initBeerTent() {
 
     if (!mapContainer || !beerListContainer) return;
 
+    // State
+    let state = {
+        allBeers: [],
+        breweries: [],
+        filterBrewery: null, // Name of the brewery to filter by
+        filterSearch: '',
+        sortBy: 'name' // Default sort
+    };
+
     // Load Data
     fetch('../beer-tent.json')
         .then(response => response.json())
         .then(breweries => {
+            state.breweries = breweries;
+            
             // Flatten beer list for easier display/search/sort
-            let allBeers = [];
+            state.allBeers = [];
             breweries.forEach(brewery => {
                 // Pre-process brewery data for the map
                 brewery.imagePath = '../' + brewery.logo;
 
                 brewery.beers.forEach(beer => {
-                    allBeers.push({
+                    state.allBeers.push({
                         ...beer,
                         breweryName: brewery.name,
                         breweryId: brewery.id,
@@ -539,62 +550,79 @@ function initBeerTent() {
                 });
             });
 
+            // Master Application Function
+            const applyFiltersAndRender = () => {
+                let filtered = [...state.allBeers];
+
+                // 1. Filter by Brewery
+                if (state.filterBrewery) {
+                    filtered = filtered.filter(beer => beer.breweryName === state.filterBrewery);
+                }
+
+                // 2. Filter by Search Term
+                if (state.filterSearch) {
+                    const term = state.filterSearch.toLowerCase();
+                    filtered = filtered.filter(beer =>
+                        beer.name.toLowerCase().includes(term) ||
+                        beer.breweryName.toLowerCase().includes(term) ||
+                        beer.style.toLowerCase().includes(term)
+                    );
+                }
+
+                // 3. Sort
+                if (state.sortBy === 'name') {
+                    filtered.sort((a, b) => a.name.localeCompare(b.name));
+                } else if (state.sortBy === 'abv-asc') {
+                    filtered.sort((a, b) => a.abv - b.abv);
+                } else if (state.sortBy === 'abv-desc') {
+                    filtered.sort((a, b) => b.abv - a.abv);
+                } else if (state.sortBy === 'brewery') {
+                    filtered.sort((a, b) => a.breweryName.localeCompare(b.breweryName));
+                }
+
+                renderBeerList(filtered);
+                updateBreweryCardStyles(state.filterBrewery);
+            };
+
+            // Actions
+            const setBreweryFilter = (breweryName) => {
+                // Toggle if clicking same brewery
+                if (state.filterBrewery === breweryName) {
+                    state.filterBrewery = null;
+                } else {
+                    state.filterBrewery = breweryName;
+                }
+                applyFiltersAndRender();
+                
+                // Scroll to beer list if filter is active
+                if (state.filterBrewery) {
+                    document.getElementById('beer-list-section').scrollIntoView({ behavior: 'smooth' });
+                }
+            };
+
             // 1. Initialize Map
-            initBreweryMap(mapContainer, breweries);
+            initBreweryMap(mapContainer, breweries, setBreweryFilter);
 
             // 2. Render Brewery Cards
-            renderBreweryCards(breweries);
+            renderBreweryCards(breweries, setBreweryFilter);
 
-            // 3. Initial Render of Beer List
-            renderBeerList(allBeers);
-
-            // ... (rest of the code)
+            // 3. Initial Render
+            applyFiltersAndRender();
 
             // 4. Search Logic
             searchInput.addEventListener('input', (e) => {
-                const term = e.target.value.toLowerCase();
-                const filtered = allBeers.filter(beer =>
-                    beer.name.toLowerCase().includes(term) ||
-                    beer.breweryName.toLowerCase().includes(term) ||
-                    beer.style.toLowerCase().includes(term)
-                );
-                renderBeerList(filtered);
+                state.filterSearch = e.target.value;
+                applyFiltersAndRender();
             });
 
-            // 4. Sort Logic
+            // 5. Sort Logic
             sortBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const sortType = e.target.dataset.sort;
+                    state.sortBy = e.target.dataset.sort;
                     const btnText = e.target.textContent;
-
-                    // Update dropdown text
                     sortDropdown.textContent = "Sort By: " + btnText;
-
-                    let sorted = [...allBeers];
-                    // Note: If we had filtered currently, we should sort the filtered list. 
-                    // But for simplicity, let's just sort various slices or re-grab current filter
-                    // To do it right: get current value of search, filter, then sort.
-                    const term = searchInput.value.toLowerCase();
-                    if (term) {
-                        sorted = sorted.filter(beer =>
-                            beer.name.toLowerCase().includes(term) ||
-                            beer.breweryName.toLowerCase().includes(term) ||
-                            beer.style.toLowerCase().includes(term)
-                        );
-                    }
-
-                    if (sortType === 'name') {
-                        sorted.sort((a, b) => a.name.localeCompare(b.name));
-                    } else if (sortType === 'abv-asc') {
-                        sorted.sort((a, b) => a.abv - b.abv);
-                    } else if (sortType === 'abv-desc') {
-                        sorted.sort((a, b) => b.abv - a.abv);
-                    } else if (sortType === 'brewery') {
-                        sorted.sort((a, b) => a.breweryName.localeCompare(b.breweryName));
-                    }
-
-                    renderBeerList(sorted);
+                    applyFiltersAndRender();
                 });
             });
 
@@ -602,7 +630,21 @@ function initBeerTent() {
         .catch(err => console.error('Failed to load beer data:', err));
 }
 
-function initBreweryMap(container, breweries) {
+function updateBreweryCardStyles(activeBreweryName) {
+    const cards = document.querySelectorAll('.brewery-card-container');
+    cards.forEach(cardWrapper => {
+        if (activeBreweryName && cardWrapper.dataset.breweryName === activeBreweryName) {
+            cardWrapper.classList.add('active-brewery-card');
+        } else {
+            cardWrapper.classList.remove('active-brewery-card');
+        }
+        
+        // Also update opacity/dimming for others if we want to be fancy, 
+        // but active state border is probably enough for now.
+    });
+}
+
+function initBreweryMap(container, breweries, onPinClick) {
     // Initialize OpenStreetMap
     // Center on Girton Recreation Ground
     var girtonCoords = [52.240069, 0.084899];
@@ -629,24 +671,48 @@ function initBreweryMap(container, breweries) {
         var logoIcon = L.divIcon({
             className: 'brewery-logo-marker',
             // Create a circular white badge with the logo inside
-            html: `<div style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                    <img src="${brewery.imagePath}" style="width: 100%; height: 100%; object-fit: contain;">
+            html: `<div style="width: 50px; height: 100px; display: flex; flex-direction:column; align-items: center; justify-content: flex-start;">
+                    <div style="width: 50px; height: 50px; background:white; border-radius:50%; border: 2px solid #ccc; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                     <img src="${brewery.imagePath}" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <div class="map-pin-arrow" style="width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #ccc; margin-top:-2px;"></div>
                    </div>`,
-            iconSize: [50, 50],
-            iconAnchor: [25, 25],
-            popupAnchor: [0, -25]
+            iconSize: [50, 70],
+            iconAnchor: [25, 65], // Tip of the "pin"
+            popupAnchor: [0, -65]
         });
         const marker = L.marker([lat, lng], { icon: logoIcon }).addTo(map);
 
         const popupContent = `
-            <div class="text-center">
+            <div class="text-center" style="cursor: pointer;">
                 <img src="${brewery.imagePath}" width="50" class="mb-2">
                 <h6 class="fw-bold mb-1">${brewery.name}</h6>
                 <p class="small mb-0 text-muted">${brewery.description || ''}</p>
+                <button class="btn btn-sm btn-primary mt-2 filter-map-btn">Show Beers</button>
             </div>
         `;
-
+        
+        // We bind popup but also allow clicking the marker itself to trigger action
         marker.bindPopup(popupContent);
+        
+        marker.on('click', () => {
+             // We can let the popup open, but also filter. 
+             // Or we just rely on the "Show Beers" button in popup?
+             // User request: "Clicking a pin should scroll the user down to that specific brewery's card or highlight the beers"
+             onPinClick(brewery.name);
+        });
+        
+        // Also handle the button inside the popup if user clicks that
+        marker.on('popupopen', () => {
+             const btn = document.querySelector('.filter-map-btn');
+             if(btn) {
+                 btn.addEventListener('click', (e) => {
+                     e.preventDefault();
+                     onPinClick(brewery.name);
+                 });
+             }
+        });
+
         markers.push(marker);
     });
     // Fit bounds to show all markers
@@ -668,16 +734,20 @@ function renderBeerList(beers) {
         html += `
             <div class="col-md-6 col-lg-4">
                 <div class="beer-card bg-white h-100">
-                    <div class="d-flex align-items-center">
-                        <img src="${beer.breweryLogo}" class="brewery-logo-small rounded-circle border p-1" alt="${beer.breweryName} logo">
-                        <div>
-                            <h5 class="mb-0 fw-bold">${beer.name}</h5>
-                            <div class="brewery-name">${beer.breweryName}</div>
+                    <div class="d-flex align-items-start">
+                         <div style="flex-shrink: 0;" class="me-3">
+                             <img src="${beer.breweryLogo}" class="brewery-logo-small rounded-circle border p-1" alt="${beer.breweryName} logo" style="width:50px; height:50px;">
+                         </div>
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                <h5 class="mb-0 fw-bold text-dark lh-sm">${beer.name}</h5>
+                                <span class="abv-badge ms-2" style="flex-shrink:0;">${beer.abv.toFixed(1)}%</span>
+                            </div>
+                            <div class="brewery-name small mb-2">${beer.breweryName}</div>
+                            <span class="badge rounded-pill text-bg-light border border-secondary-subtle text-secondary fw-normal">
+                                <i class="fas fa-beer me-1 opacity-50"></i> ${beer.style}
+                            </span>
                         </div>
-                    </div>
-                    <div class="text-end">
-                        <span class="abv-badge">${beer.abv.toFixed(1)}%</span>
-                        <div class="small text-muted mt-1">${beer.style}</div>
                     </div>
                 </div>
             </div>
@@ -686,28 +756,46 @@ function renderBeerList(beers) {
     container.innerHTML = html;
 }
 
-function renderBreweryCards(breweries) {
+function renderBreweryCards(breweries, onCardClick) {
     const container = document.getElementById('brewery-list');
     if (!container) return;
 
     let html = '';
     breweries.forEach(brewery => {
-        const websiteLink = brewery.website ? `<a href="${brewery.website}" target="_blank" class="btn btn-sm btn-outline-primary mt-3">Visit Website</a>` : '';
-
+        // Use Javascript to handle navigation to website to avoid bubbling issues if card is clickable
+        // Or keep it simple: card click filters, button click goes to website.
+        
         html += `
-            <div class="col-md-4 col-sm-6">
+            <div class="brewery-card-container" data-brewery-name="${brewery.name}" style="min-width: 260px; max-width: 260px;">
                 <div class="card h-100 shadow-sm border-0 hover-scale">
                     <div class="card-body text-center d-flex flex-column align-items-center justify-content-center p-4">
-                        <img src="${brewery.imagePath}" alt="${brewery.name} Logo" class="img-fluid mb-3" style="max-height: 100px; max-width: 100px; object-fit: contain;">
-                        <h5 class="card-title fw-bold" style="color: var(--brand-marian-blue); font-family: 'Sigmar One', cursive;">${brewery.name}</h5>
-                        <p class="card-text small text-muted">${brewery.description || 'Proud local brewery.'}</p>
-                        ${websiteLink}
+                        <div style="height: 80px; width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                            <img src="${brewery.imagePath}" alt="${brewery.name} Logo" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                        </div>
+                        <h5 class="card-title fw-bold text-truncate w-100" style="color: var(--brand-marian-blue); font-family: 'Sigmar One', cursive;">${brewery.name}</h5>
+                        <p class="card-text small text-muted text-truncate w-100">${brewery.description || 'Proud local brewery.'}</p>
+                        <a href="${brewery.website || '#'}" target="_blank" class="btn btn-sm btn-outline-primary mt-3 website-btn">Visit Website</a>
                     </div>
                 </div>
             </div>
         `;
     });
     container.innerHTML = html;
+    
+    // Attach listeners
+    // We need to wait for innerHTML to be set
+    setTimeout(() => {
+        const cards = container.querySelectorAll('.brewery-card-container');
+        cards.forEach(card => {
+             card.addEventListener('click', (e) => {
+                 // Prevent filter if they clicked the website button
+                 if(e.target.classList.contains('website-btn')) return;
+                 
+                 const name = card.dataset.breweryName;
+                 onCardClick(name);
+             });
+        });
+    }, 0);
 }
 
 // --- Dark Mode Logic ---
