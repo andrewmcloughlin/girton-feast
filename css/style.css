@@ -13,6 +13,34 @@ Global Styles & Variables
     --brand-light-blue: #e9eff9;
     --brand-light-pink: #f7e9ed;
     --brand-light-yellow: #fff8e1;
+    
+    /* Bootstrap Theme Overrides - Hex */
+    --bs-primary: var(--brand-marian-blue);
+    --bs-secondary: var(--brand-glaucous);
+    --bs-success: #4caf50;
+    --bs-info: var(--brand-light-blue);
+    --bs-warning: var(--brand-saffron);
+    --bs-danger: var(--brand-giants-orange);
+    --bs-light: #f8f9fa;
+    --bs-dark: #212529;
+
+    /* Bootstrap Theme Overrides - RGB (Required for background-color utilities) */
+    /* Marian Blue #3d3b8e */
+    --bs-primary-rgb: 61, 59, 142;
+    /* Glaucous #6883ba */
+    --bs-secondary-rgb: 104, 131, 186;
+    /* Success #4caf50 */
+    --bs-success-rgb: 76, 175, 80;
+    /* Light Blue #e9eff9 */
+    --bs-info-rgb: 233, 239, 249;
+    /* Saffron #e9c253 */
+    --bs-warning-rgb: 233, 194, 83;
+    /* Giants Orange #ff521b */
+    --bs-danger-rgb: 255, 82, 27;
+    /* Light #f8f9fa */
+    --bs-light-rgb: 248, 249, 250;
+    /* Dark #212529 */
+    --bs-dark-rgb: 33, 37, 41;
 
     /* Theme variables - Light (Default) */
     --bg-primary: #f8f9fa;

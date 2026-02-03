@@ -32,94 +32,16 @@
     <link rel="stylesheet" href="../css/style.css">
 
     <style>
-        .beer-header {
-            background-color: var(--brand-marian-blue);
-            color: white;
-            padding: 4rem 0;
-            margin-bottom: 2rem;
-            position: relative;
-            overflow: hidden;
+        /* Minimal custom overrides for specific dimensions not covered by Bootstrap */
+        .map-container {
+            height: 600px;
         }
-
-        .beer-header h1 {
-            font-family: 'Sigmar One', cursive;
-            font-size: 3rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
         .brewery-logo-small {
             width: 50px;
             height: 50px;
             object-fit: contain;
-            margin-right: 15px;
         }
-
-        .map-container {
-            height: 400px;
-            width: 100%;
-            border-radius: 1rem;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
-            border: 5px solid white;
-        }
-
-        .beer-list-container {
-            background-color: #fff;
-            border-radius: 1rem;
-            padding: 2rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-
-
-        .beer-card {
-            border: 1px solid #eee;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            transition: transform 0.2s;
-            position: relative;
-        }
-
-        .beer-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            border-color: var(--brand-saffron);
-        }
-
-        .abv-badge {
-            background-color: var(--brand-giants-orange);
-            color: white;
-            font-weight: bold;
-            padding: 0.25rem 0.5rem;
-            border-radius: 0.25rem;
-        }
-
-        .brewery-name {
-            color: var(--brand-glaucous);
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .sort-control {
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .sort-control:hover {
-            color: var(--brand-giants-orange);
-        }
-
-        .brewery-card-container {
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .brewery-card-container.active-brewery-card .card {
-            border-color: var(--brand-giants-orange) !important;
-            background-color: #fff8f0; /* Light orange tint */
-            transform: scale(1.02);
-            box-shadow: 0 4px 15px rgba(255, 127, 80, 0.3) !important;
-        }    </style>
+    </style>
 </head>
 
 <body class="bg-light">
@@ -128,11 +50,11 @@
     <div id="navbar-placeholder"></div>
 
     <!-- Header -->
-    <header class="beer-header text-center">
+    <header class="bg-secondary text-white py-5 mb-5 text-center position-relative overflow-hidden shadow">
         <div class="container position-relative z-1">
-            <img src="../images/titles/beer-tent-title.png" style="width: 30%;" alt="Beer Tent" class="img-fluid mb-3">
-            <p class="lead mb-0">Proudly Supporting Local Breweries</p>
-            <p class="mb-0">Also stocking a range of wines, lagers and prosecco.</p>
+            <img src="../images/titles/beer-tent-title.png" style="width: 30%; min-width: 250px;" alt="Beer Tent" class="img-fluid mb-3 filter-drop-shadow">
+            <p class="lead mb-0 fs-4 fw-light">Proudly Supporting Local Breweries</p>
+            <p class="mb-0 opacity-75">Also stocking a range of wines, lagers and prosecco.</p>
         </div>
     </header>
 
@@ -151,19 +73,10 @@
 
         <!-- BREWERY VIEW -->
         <div id="brewery-view">
-            <!-- Map Section -->
-            <div class="row mb-5">
-                <div class="col-12">
-                    <h2 class="mb-3" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Brewery
-                        Locations</h2>
-                    <div id="brewery-map" class="map-container"></div>
-                </div>
-            </div>
-
             <!-- Brewery Cards / Slider Section -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2 class="mb-3" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">
+                    <h2 class="mb-3 text-primary" style="font-family: 'Sigmar One', cursive;">
                         Our Breweries
                     </h2>
                     <div id="brewery-list" class="d-flex flex-nowrap overflow-auto pb-3 gap-3" style="scroll-behavior: smooth;">
@@ -171,6 +84,13 @@
                     </div>
                 </div>
             </div>
+            <!-- Map Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div id="brewery-map" class="map-container rounded-4 shadow border border-5 border-white"></div>
+                </div>
+            </div>
+
         </div>
 
         <!-- BEER VIEW (Hidden by default) -->
@@ -181,7 +101,7 @@
                         <!-- Header can go here if needed, or rely on toggle context -->
                     </div>
 
-                    <div class="beer-list-container">
+                    <div class="beer-list-container bg-white p-4 rounded-4 shadow-sm">
                         <!-- Enhanced Filter Bar -->
                         <div class="filter-bar bg-white p-3 rounded-3 shadow-sm mb-4 border">
                             <div class="row g-3 align-items-end">
