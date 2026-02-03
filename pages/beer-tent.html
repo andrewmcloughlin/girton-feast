@@ -138,73 +138,103 @@
 
     <div class="container mb-5">
 
-        <!-- Map Section -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <h2 class="mb-3" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Brewery
-                    Locations</h2>
-                <div id="brewery-map" class="map-container"></div>
+        <!-- View Toggle -->
+        <div class="d-flex justify-content-center mb-5">
+            <div class="btn-group" role="group" aria-label="View Toggle">
+                <input type="radio" class="btn-check view-toggle" name="btnradio" id="btn-breweries" autocomplete="off" checked data-target="brewery-view">
+                <label class="btn btn-outline-primary px-4 py-2 fw-bold" for="btn-breweries">Breweries</label>
+
+                <input type="radio" class="btn-check view-toggle" name="btnradio" id="btn-beers" autocomplete="off" data-target="beer-view">
+                <label class="btn btn-outline-primary px-4 py-2 fw-bold" for="btn-beers">Beers</label>
             </div>
         </div>
 
-        <!-- Brewery Cards Section -->
-        <div class="row">
-            <div class="col-12">
-                <h2 class="mb-3" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">
-                    Filter by Brewery
-                </h2>
-                <div id="brewery-list" class="d-flex flex-nowrap overflow-auto pb-3 gap-3" style="scroll-behavior: smooth;">
-                    <!-- Brewery cards injected here -->
+        <!-- BREWERY VIEW -->
+        <div id="brewery-view">
+            <!-- Map Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 class="mb-3" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Brewery
+                        Locations</h2>
+                    <div id="brewery-map" class="map-container"></div>
                 </div>
             </div>
-        </div>
 
-        <!-- Beer List Section -->
-        <div class="row">
-            <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2" id="beer-list-section">
-                </div>
-
-                <div class="beer-list-container">
-                    <!-- Filter Bar -->
-                    <div class="filter-bar bg-white p-3 rounded-3 shadow-sm mb-4 border d-flex flex-wrap gap-3 align-items-center">
-                        <div class="flex-grow-1">
-                            <div class="input-group">
-                                <span class="input-group-text bg-white border-end-0"><i
-                                        class="fas fa-search text-muted"></i></span>
-                                <input type="text" id="beer-search" class="form-control border-start-0"
-                                    placeholder="Search for a beer or brewery...">
-                            </div>
-                        </div>
-                        <div class="d-flex gap-2">
-                             <div class="dropdown">
-                                <button class="btn btn-outline-primary dropdown-toggle" type="button" id="sortDropdown"
-                                    data-bs-toggle="dropdown">
-                                    Sort By: Name (A-Z)
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item sort-btn" data-sort="name" href="#">Name (A-Z)</a></li>
-                                    <li><a class="dropdown-item sort-btn" data-sort="abv-asc" href="#">ABV (Low to High)</a>
-                                    </li>
-                                    <li><a class="dropdown-item sort-btn" data-sort="abv-desc" href="#">ABV (High to
-                                            Low)</a></li>
-                                    <li><a class="dropdown-item sort-btn" data-sort="brewery" href="#">Brewery</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="beer-list" class="row g-4">
-                        <!-- Beer items will be injected here -->
-                        <div class="col-12 text-center py-5">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                        </div>
+            <!-- Brewery Cards / Slider Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 class="mb-3" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">
+                        Our Breweries
+                    </h2>
+                    <div id="brewery-list" class="d-flex flex-nowrap overflow-auto pb-3 gap-3" style="scroll-behavior: smooth;">
+                        <!-- Brewery cards injected here -->
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- BEER VIEW (Hidden by default) -->
+        <div id="beer-view" class="d-none">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2" id="beer-list-section">
+                        <!-- Header can go here if needed, or rely on toggle context -->
+                    </div>
+
+                    <div class="beer-list-container">
+                        <!-- Enhanced Filter Bar -->
+                        <div class="filter-bar bg-white p-3 rounded-3 shadow-sm mb-4 border">
+                            <div class="row g-3 align-items-end">
+                                <!-- Search -->
+                                <div class="col-md-4">
+                                    <label class="form-label small fw-bold text-muted mb-1">Search</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
+                                        <input type="text" id="beer-search" class="form-control border-start-0" placeholder="Name, style...">
+                                    </div>
+                                </div>
+                                <!-- Brewery Filter -->
+                                <div class="col-md-3">
+                                    <label class="form-label small fw-bold text-muted mb-1">Brewery</label>
+                                    <select class="form-select" id="filter-brewery">
+                                        <option value="">All Breweries</option>
+                                        <!-- Populated via JS -->
+                                    </select>
+                                </div>
+                                <!-- Type/Style Filter -->
+                                <div class="col-md-3">
+                                    <label class="form-label small fw-bold text-muted mb-1">Type</label>
+                                    <select class="form-select" id="filter-type">
+                                        <option value="">All Types</option>
+                                        <!-- Populated via JS -->
+                                    </select>
+                                </div>
+                                <!-- Sort -->
+                                <div class="col-md-2">
+                                    <label class="form-label small fw-bold text-muted mb-1">Sort By</label>
+                                    <select class="form-select" id="sort-select">
+                                        <option value="name">Name (A-Z)</option>
+                                        <option value="abv-asc">ABV (Low)</option>
+                                        <option value="abv-desc">ABV (High)</option>
+                                        <option value="brewery">Brewery</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="beer-list" class="row g-4">
+                            <!-- Beer items will be injected here -->
+                            <div class="col-12 text-center py-5">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- Mobile Nav Placeholder -->

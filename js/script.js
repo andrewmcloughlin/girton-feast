@@ -510,12 +510,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // --- Beer Tent Logic ---
+// --- Beer Tent Logic ---
 function initBeerTent() {
     const mapContainer = document.getElementById('brewery-map');
     const beerListContainer = document.getElementById('beer-list');
+    
+    // Controls
+    const viewToggles = document.querySelectorAll('.view-toggle');
+    const breweryView = document.getElementById('brewery-view');
+    const beerView = document.getElementById('beer-view');
+    
+    // Filters
     const searchInput = document.getElementById('beer-search');
-    const sortBtns = document.querySelectorAll('.sort-btn');
-    const sortDropdown = document.getElementById('sortDropdown');
+    const brewerySelect = document.getElementById('filter-brewery');
+    const typeSelect = document.getElementById('filter-type');
+    const sortSelect = document.getElementById('sort-select');
 
     if (!mapContainer || !beerListContainer) return;
 
@@ -523,10 +532,41 @@ function initBeerTent() {
     let state = {
         allBeers: [],
         breweries: [],
-        filterBrewery: null, // Name of the brewery to filter by
+        filterBrewery: '', // From dropdown
+        filterType: '',    // From dropdown
         filterSearch: '',
-        sortBy: 'name' // Default sort
+        sortBy: 'name'
     };
+    
+    // View Switching Logic
+    const switchView = (targetId) => {
+        // Sync Radio Buttons
+        viewToggles.forEach(t => {
+            if (t.dataset.target === targetId) t.checked = true;
+        });
+
+        if (targetId === 'brewery-view') {
+            breweryView.classList.remove('d-none');
+            beerView.classList.add('d-none');
+            // Re-render map tiles if needed when becoming visible
+            // Leaflet sometimes needs a resize trigger
+            setTimeout(() => {
+                window.dispatchEvent(new Event('resize')); 
+            }, 100);
+        } else {
+            breweryView.classList.add('d-none');
+            beerView.classList.remove('d-none');
+        }
+    };
+    
+    // Attach toggle listeners
+    viewToggles.forEach(toggle => {
+        toggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                switchView(e.target.dataset.target);
+            }
+        });
+    });
 
     // Load Data
     fetch('../beer-tent.json')
@@ -534,12 +574,12 @@ function initBeerTent() {
         .then(breweries => {
             state.breweries = breweries;
             
-            // Flatten beer list for easier display/search/sort
+            // Flatten beer list and collect types
             state.allBeers = [];
+            let allTypes = new Set();
+            
             breweries.forEach(brewery => {
-                // Pre-process brewery data for the map
                 brewery.imagePath = '../' + brewery.logo;
-
                 brewery.beers.forEach(beer => {
                     state.allBeers.push({
                         ...beer,
@@ -547,7 +587,25 @@ function initBeerTent() {
                         breweryId: brewery.id,
                         breweryLogo: brewery.imagePath
                     });
+                    if (beer.style) allTypes.add(beer.style);
                 });
+            });
+
+            // Populate Dropdowns
+            // 1. Breweries
+            state.breweries.sort((a,b) => a.name.localeCompare(b.name)).forEach(b => {
+                const opt = document.createElement('option');
+                opt.value = b.name;
+                opt.textContent = b.name;
+                brewerySelect.appendChild(opt);
+            });
+            
+            // 2. Types
+            Array.from(allTypes).sort().forEach(t => {
+                const opt = document.createElement('option');
+                opt.value = t;
+                opt.textContent = t;
+                typeSelect.appendChild(opt);
             });
 
             // Master Application Function
@@ -558,8 +616,13 @@ function initBeerTent() {
                 if (state.filterBrewery) {
                     filtered = filtered.filter(beer => beer.breweryName === state.filterBrewery);
                 }
+                
+                // 2. Filter by Type
+                if (state.filterType) {
+                    filtered = filtered.filter(beer => beer.style === state.filterType);
+                }
 
-                // 2. Filter by Search Term
+                // 3. Filter by Search Term
                 if (state.filterSearch) {
                     const term = state.filterSearch.toLowerCase();
                     filtered = filtered.filter(beer =>
@@ -569,7 +632,7 @@ function initBeerTent() {
                     );
                 }
 
-                // 3. Sort
+                // 4. Sort
                 if (state.sortBy === 'name') {
                     filtered.sort((a, b) => a.name.localeCompare(b.name));
                 } else if (state.sortBy === 'abv-asc') {
@@ -581,49 +644,48 @@ function initBeerTent() {
                 }
 
                 renderBeerList(filtered);
-                updateBreweryCardStyles(state.filterBrewery);
             };
 
-            // Actions
-            const setBreweryFilter = (breweryName) => {
-                // Toggle if clicking same brewery
-                if (state.filterBrewery === breweryName) {
-                    state.filterBrewery = null;
-                } else {
-                    state.filterBrewery = breweryName;
-                }
-                applyFiltersAndRender();
+            // Helpers to update UI from map/card interactions
+            const activateBreweryFilter = (breweryName) => {
+                state.filterBrewery = breweryName;
+                brewerySelect.value = breweryName; // Sync dropdown
                 
-                // Scroll to beer list if filter is active
-                if (state.filterBrewery) {
-                    document.getElementById('beer-list-section').scrollIntoView({ behavior: 'smooth' });
-                }
+                // Switch to Beer View
+                switchView('beer-view');
+                
+                applyFiltersAndRender();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             };
 
             // 1. Initialize Map
-            initBreweryMap(mapContainer, breweries, setBreweryFilter);
+            initBreweryMap(mapContainer, breweries, activateBreweryFilter);
 
-            // 2. Render Brewery Cards
-            renderBreweryCards(breweries, setBreweryFilter);
+            // 2. Render Brewery Cards (Slider)
+            renderBreweryCards(breweries, activateBreweryFilter);
 
             // 3. Initial Render
             applyFiltersAndRender();
 
-            // 4. Search Logic
+            // 4. Event Listeners for Filters
             searchInput.addEventListener('input', (e) => {
                 state.filterSearch = e.target.value;
                 applyFiltersAndRender();
             });
-
-            // 5. Sort Logic
-            sortBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    state.sortBy = e.target.dataset.sort;
-                    const btnText = e.target.textContent;
-                    sortDropdown.textContent = "Sort By: " + btnText;
-                    applyFiltersAndRender();
-                });
+            
+            brewerySelect.addEventListener('change', (e) => {
+                state.filterBrewery = e.target.value;
+                applyFiltersAndRender();
+            });
+            
+            typeSelect.addEventListener('change', (e) => {
+                state.filterType = e.target.value;
+                applyFiltersAndRender();
+            });
+            
+            sortSelect.addEventListener('change', (e) => {
+                state.sortBy = e.target.value;
+                applyFiltersAndRender();
             });
 
         })
@@ -631,17 +693,7 @@ function initBeerTent() {
 }
 
 function updateBreweryCardStyles(activeBreweryName) {
-    const cards = document.querySelectorAll('.brewery-card-container');
-    cards.forEach(cardWrapper => {
-        if (activeBreweryName && cardWrapper.dataset.breweryName === activeBreweryName) {
-            cardWrapper.classList.add('active-brewery-card');
-        } else {
-            cardWrapper.classList.remove('active-brewery-card');
-        }
-        
-        // Also update opacity/dimming for others if we want to be fancy, 
-        // but active state border is probably enough for now.
-    });
+    // Deprecated in new view model, but keeping empty to avoid errors if called
 }
 
 function initBreweryMap(container, breweries, onPinClick) {
@@ -670,7 +722,6 @@ function initBreweryMap(container, breweries, onPinClick) {
         // Create Custom Icon using the brewery logo
         var logoIcon = L.divIcon({
             className: 'brewery-logo-marker',
-            // Create a circular white badge with the logo inside
             html: `<div style="width: 50px; height: 100px; display: flex; flex-direction:column; align-items: center; justify-content: flex-start;">
                     <div style="width: 50px; height: 50px; background:white; border-radius:50%; border: 2px solid #ccc; display:flex; align-items:center; justify-content:center; overflow:hidden;">
                      <img src="${brewery.imagePath}" style="width: 100%; height: 100%; object-fit: contain;">
@@ -692,17 +743,17 @@ function initBreweryMap(container, breweries, onPinClick) {
             </div>
         `;
         
-        // We bind popup but also allow clicking the marker itself to trigger action
         marker.bindPopup(popupContent);
         
+        // Handle Map Pin Click -> Go to Beer View filtered by this brewery
         marker.on('click', () => {
-             // We can let the popup open, but also filter. 
-             // Or we just rely on the "Show Beers" button in popup?
-             // User request: "Clicking a pin should scroll the user down to that specific brewery's card or highlight the beers"
+             // We can allow popup for info, or just jump? 
+             // Requirement: "Clicking a pin should scroll... or highlight"
+             // In new model: Switch to beer view.
              onPinClick(brewery.name);
         });
         
-        // Also handle the button inside the popup if user clicks that
+        // Handle "Show Beers" button inside popup
         marker.on('popupopen', () => {
              const btn = document.querySelector('.filter-map-btn');
              if(btn) {
@@ -721,6 +772,7 @@ function initBreweryMap(container, breweries, onPinClick) {
         map.fitBounds(group.getBounds().pad(0.1));
     }
 }
+
 
 function renderBeerList(beers) {
     const container = document.getElementById('beer-list');
