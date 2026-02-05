@@ -1,9 +1,9 @@
 [
     {
-        "name": "Pom Pom The Magic Fox",
-        "image": "images/vendors/pompom_rainbow.png",
+        "name": "Kid's Magic Show",
+        "image": "images/pompom_rainbow.png",
         "url": "https://pompomkidsparties.co.uk/",
-        "description": "Magical children's entertainment",
+        "description": "Pom Pom The Magic Fox will make your children disappear for 30min",
         "tags": [
             "shows",
             "magic",
@@ -42,7 +42,7 @@
     },
     {
         "name": "Land Train",
-        "image": "",
+        "image": "images/land-train.png",
         "url": "",
         "description": "Take a fun ride around the fete grounds",
         "tags": [
