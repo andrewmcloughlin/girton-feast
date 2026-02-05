@@ -44,7 +44,7 @@
         "name": "Land Train",
         "image": "images/land-train.png",
         "url": "",
-        "description": "Take a fun ride around the fete grounds",
+        "description": "Take a fun ride around the rec",
         "tags": [
             "rides",
             "kids"
@@ -74,7 +74,7 @@
     {
         "name": "'Have a Go' Tennis",
         "image": "images/tennis.png",
-        "url": "",
+        "url": "https://girtontennisclub.uk/",
         "description": "Run by Girton Tennis Club",
         "tags": [
             "games",
