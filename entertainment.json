@@ -59,5 +59,38 @@
             "games",
             "kids"
         ]
+    },
+    {
+        "name": "Table Tennis Tournament",
+        "image": "images/table-tennis.png",
+        "url": "",
+        "description": "",
+        "tags": [
+            "games",
+            "adults",
+            "free"
+        ]
+    },
+    {
+        "name": "'Have a Go' Tennis",
+        "image": "images/tennis.png",
+        "url": "",
+        "description": "Run by Girton Tennis Club",
+        "tags": [
+            "games",
+            "adults",
+            "free"
+        ]
+    },
+    {
+        "name": "Fun Run",
+        "image": "images/fun-run.png",
+        "url": "",
+        "description": "",
+        "tags": [
+            "games",
+            "adults",
+            "free"
+        ]
     }
 ]
