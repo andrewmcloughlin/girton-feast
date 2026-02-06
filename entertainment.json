@@ -6,7 +6,6 @@
         "description": "Pom Pom The Magic Fox will make your children disappear for 30min",
         "tags": [
             "shows",
-            "magic",
             "kids",
             "free"
         ]
@@ -17,8 +16,7 @@
         "url": "https://www.facebook.com/music.themunroes/",
         "description": "Five piece band playing a range of pop, rock and acoustic tracks from the 60's to today",
         "tags": [
-            "live-band",
-            "adults",
+            "music",
             "free"
         ]
     },
@@ -26,9 +24,9 @@
         "name": "Helter Skelter",
         "image": "images/helter-skelter.webp",
         "url": "",
-        "description": "A classic tall slide for all the family",
+        "description": "",
         "tags": [
-            "rides"
+            "kids"
         ]
     },
     {
@@ -46,7 +44,6 @@
         "url": "",
         "description": "Take a fun ride around the rec",
         "tags": [
-            "rides",
             "kids"
         ]
     },
@@ -54,7 +51,7 @@
         "name": "Crazy Golf",
         "image": "images/golf.png",
         "url": "",
-        "description": "Test your skills on our fun mini-golf course",
+        "description": "",
         "tags": [
             "games",
             "kids"
@@ -67,8 +64,8 @@
         "description": "",
         "tags": [
             "games",
-            "adults",
-            "free"
+            "free",
+            "sports"
         ]
     },
     {
@@ -78,8 +75,8 @@
         "description": "Run by Girton Tennis Club",
         "tags": [
             "games",
-            "adults",
-            "free"
+            "free",
+            "sports"
         ]
     },
     {
@@ -89,8 +86,8 @@
         "description": "",
         "tags": [
             "games",
-            "adults",
-            "free"
+            "free",
+            "sports"
         ]
     },
     {
@@ -99,8 +96,8 @@
         "url": "",
         "description": "",
         "tags": [
-            "adults",
-            "free"
+            "free",
+            "shows"
         ]
     },
     {
@@ -109,8 +106,27 @@
         "url": "",
         "description": "",
         "tags": [
-            "adults",
             "games"
+        ]
+    },
+    {
+        "name": "Rock Choir",
+        "image": "images/rock-choir.png",
+        "url": "https://rockchoir.com/",
+        "description": "",
+        "tags": [
+            "music",
+            "shows",
+            "free"
+        ]
+    },
+    {
+        "name": "Beat the Goalie",
+        "image": "images/football.png",
+        "url": "https://girtoncolts.co.uk/",
+        "description": "Run by Girton Colts",
+        "tags": [
+            "sports"
         ]
     }
 ]
