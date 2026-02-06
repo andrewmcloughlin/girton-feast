@@ -1034,8 +1034,23 @@ html {
 }
 
 .offcanvas-body .filter-item {
-    flex: 1 1 calc(50% - 10px);
-    min-width: 140px;
+    border-radius: 50px !important;
+    padding: 8px 16px !important;
+    background-color: #f1f3f5 !important;
+}
+
+.offcanvas-body .filter-item.active {
+    background-color: var(--brand-marian-blue) !important;
+}
+
+.mobile-filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.letter-spacing-1 {
+    letter-spacing: 1px;
 }
 
 

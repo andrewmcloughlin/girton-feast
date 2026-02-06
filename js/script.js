@@ -169,28 +169,33 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
 
             // --- Helper Functions in Scope ---
             const applyFilters = () => {
-                const selectedTags = Array.from(document.querySelectorAll('.card-filter:checked')).map(i => i.value);
+                // Get selected tags, avoiding duplicates from multiple filter containers
+                const selectedTags = new Set(
+                    Array.from(document.querySelectorAll('.card-filter:checked')).map(i => i.value)
+                );
+                
                 const selectedDayElement = document.querySelector('.date-filter:checked') || document.querySelector('.date-filter-mobile:checked');
                 const selectedDay = selectedDayElement ? selectedDayElement.value : 'all';
                 
                 const cardWrappers = document.querySelectorAll('.card-wrapper');
 
                 cardWrappers.forEach(card => {
-                    // Tag filter logic
+                    const cardTags = card.dataset.tags ? card.dataset.tags.split(' ') : [];
+                    const cardDays = card.dataset.days ? card.dataset.days.split(' ') : [];
+
+                    // 1. Day Filtering (AND)
+                    // Must match selection or selection is 'all'
+                    const matchesDay = (selectedDay === 'all') || cardDays.includes(selectedDay);
+
+                    // 2. Tag Filtering (OR between selected tags)
+                    // If no tags selected, show all (true). If tags are selected, must match at least one.
                     let matchesTags = true;
-                    if (selectedTags.length > 0) {
-                        const cardTags = card.dataset.tags.split(' ');
-                        matchesTags = selectedTags.some(tag => cardTags.includes(tag));
+                    if (selectedTags.size > 0) {
+                        matchesTags = Array.from(selectedTags).some(tag => cardTags.includes(tag));
                     }
 
-                    // Day filter logic
-                    let matchesDay = true;
-                    if (selectedDay !== 'all') {
-                        const cardDays = card.dataset.days ? card.dataset.days.split(' ') : [];
-                        matchesDay = cardDays.includes(selectedDay);
-                    }
-
-                    card.style.display = (matchesTags && matchesDay) ? 'block' : 'none';
+                    // Combined Logic: (Matches Selected Day) AND (Matches Any Selected Tag)
+                    card.style.display = (matchesDay && matchesTags) ? 'block' : 'none';
                 });
             };
 

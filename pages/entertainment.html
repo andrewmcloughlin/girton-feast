@@ -91,10 +91,16 @@
 
         <!-- Offcanvas Moblie Filters -->
         <div class="offcanvas offcanvas-bottom rounded-top-4" tabindex="-1" id="offcanvasFilters" 
-        aria-labelledby="offcanvasFiltersLabel" style="height: auto; max-height: 70vh;">
-            <div class="offcanvas-header border-bottom">
+        aria-labelledby="offcanvasFiltersLabel" style="height: auto; max-height: 85vh;">
+            <div class="offcanvas-header border-bottom py-3">
+                <h5 class="offcanvas-title fw-bold" id="offcanvasFiltersLabel" style="color: var(--brand-marian-blue);">
+                    <i class="fas fa-sliders-h me-2"></i>Filter Activities
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-4">
                 <div class="mb-4">
-                    <h6 class="fw-bold mb-3" style="color: var(--brand-marian-blue);">Day</h6>
+                    <h6 class="fw-bold mb-3 text-muted small text-uppercase letter-spacing-1">Day</h6>
                     <div class="btn-group w-100 segmented-control" role="group" aria-label="Day Filter Mobile">
                         <input type="radio" class="btn-check date-filter-mobile" name="day-filter-mobile" id="day-all-mobile" value="all" checked>
                         <label class="btn btn-outline-primary py-2" for="day-all-mobile">Both</label>
@@ -107,12 +113,15 @@
                     </div>
                 </div>
 
-                <h6 class="fw-bold mb-3" style="color: var(--brand-marian-blue);">Categories</h6>
-                <div id="entertainment-filters-mobile" class="d-flex flex-wrap gap-2">
-                    <!-- Filters will be dynamically generated here -->
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3 text-muted small text-uppercase letter-spacing-1">Categories</h6>
+                    <div id="entertainment-filters-mobile" class="mobile-filter-grid">
+                        <!-- Filters will be dynamically generated here -->
+                    </div>
                 </div>
-                <div class="mt-4 text-center">
-                    <button type="button" class="btn btn-brand-marian-blue w-100 rounded-pill py-2" data-bs-dismiss="offcanvas">
+
+                <div class="mt-4 pt-2">
+                    <button type="button" class="btn btn-brand-marian-blue w-100 rounded-pill py-3 fw-bold shadow-sm" data-bs-dismiss="offcanvas">
                         Show Results
                     </button>
                 </div>
