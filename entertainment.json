@@ -8,7 +8,8 @@
             "shows",
             "kids",
             "free"
-        ]
+        ],
+        "days": ["Friday","Saturday"]
     },
     {
         "name": "The Munroes",
@@ -18,7 +19,8 @@
         "tags": [
             "music",
             "free"
-        ]
+        ],
+        "days": ["Friday","Saturday"]
     },
     {
         "name": "Helter Skelter",
@@ -27,7 +29,8 @@
         "description": "",
         "tags": [
             "kids"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Bouncy Castle",
@@ -36,7 +39,8 @@
         "description": "Jump and play in our inflatable assault course",
         "tags": [
             "kids"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Land Train",
@@ -45,7 +49,8 @@
         "description": "Take a fun ride around the rec",
         "tags": [
             "kids"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Crazy Golf",
@@ -55,7 +60,8 @@
         "tags": [
             "games",
             "kids"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Table Tennis Tournament",
@@ -66,7 +72,8 @@
             "games",
             "free",
             "sports"
-        ]
+        ],
+        "days": ["Saturday"]
     },
     {
         "name": "'Have a Go' Tennis",
@@ -77,7 +84,8 @@
             "games",
             "free",
             "sports"
-        ]
+        ],
+        "days": ["Saturday"]
     },
     {
         "name": "Fun Run",
@@ -88,7 +96,8 @@
             "games",
             "free",
             "sports"
-        ]
+        ],
+        "days": ["Saturday"]
     },
     {
         "name": "Maypole Dancing",
@@ -98,7 +107,8 @@
         "tags": [
             "free",
             "shows"
-        ]
+        ],
+        "days": ["Saturday"]
     },
     {
         "name": "Target Bowls",
@@ -107,7 +117,8 @@
         "description": "",
         "tags": [
             "games"
-        ]
+        ],
+        "days": ["Saturday"]
     },
     {
         "name": "Rock Choir",
@@ -118,7 +129,8 @@
             "music",
             "shows",
             "free"
-        ]
+        ],
+        "days": ["Friday"]
     },
     {
         "name": "Beat the Goalie",
@@ -127,7 +139,8 @@
         "description": "Run by Girton Colts",
         "tags": [
             "sports"
-        ]
+        ],
+        "days": ["Saturday"]
     },
     {
         "name": "Rule The World",
@@ -136,16 +149,18 @@
         "description": "",
         "tags": [
             "shows"
-        ]
+        ],
+        "days": ["Friday"]
     },
     {
         "name": "Model Aircraft Display",
         "image": "images/aircraft.png",
         "url": "https://ivcmac.bmfa.uk/",
-        "description": "",
+        "description": "By Histon & Impington Model Aircraft Club",
         "tags": [
             "shows",
             "free"
-        ]
+        ],
+        "days": ["Saturday"]
     }
 ]

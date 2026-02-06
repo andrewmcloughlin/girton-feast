@@ -45,7 +45,23 @@
                 </div>
                 <div class="filter-sidebar bg-white p-4 rounded-4 shadow-sm sticky-top" style="top: 100px;">
                     <h5 class="fw-bold mb-3" style="color: var(--brand-marian-blue);">
-                        <i class="fas fa-filter me-2 small"></i>Filters
+                        <i class="fas fa-calendar-alt me-2 small"></i>Days
+                    </h5>
+                    <div id="entertainment-date-filters-sidebar" class="mb-4">
+                        <div class="btn-group w-100 segmented-control" role="group" aria-label="Day Filter">
+                            <input type="radio" class="btn-check date-filter" name="day-filter" id="day-all" value="all" checked>
+                            <label class="btn btn-outline-primary py-2" for="day-all">Both</label>
+                            
+                            <input type="radio" class="btn-check date-filter" name="day-filter" id="day-fri" value="Friday">
+                            <label class="btn btn-outline-primary py-2" for="day-fri">Fri</label>
+                            
+                            <input type="radio" class="btn-check date-filter" name="day-filter" id="day-sat" value="Saturday">
+                            <label class="btn btn-outline-primary py-2" for="day-sat">Sat</label>
+                        </div>
+                    </div>
+
+                    <h5 class="fw-bold mb-3" style="color: var(--brand-marian-blue);">
+                        <i class="fas fa-filter me-2 small"></i>Categories
                     </h5>
                     <div id="entertainment-filters-sidebar" class="d-flex flex-column gap-2">
                         <!-- Filters will be dynamically generated here -->
@@ -77,12 +93,21 @@
         <div class="offcanvas offcanvas-bottom rounded-top-4" tabindex="-1" id="offcanvasFilters" 
         aria-labelledby="offcanvasFiltersLabel" style="height: auto; max-height: 70vh;">
             <div class="offcanvas-header border-bottom">
-                <h5 class="offcanvas-title fw-bold" id="offcanvasFiltersLabel" style="color: var(--brand-marian-blue);">
-                    <i class="fas fa-filter me-2 small"></i>Filters
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body">
+                <div class="mb-4">
+                    <h6 class="fw-bold mb-3" style="color: var(--brand-marian-blue);">Day</h6>
+                    <div class="btn-group w-100 segmented-control" role="group" aria-label="Day Filter Mobile">
+                        <input type="radio" class="btn-check date-filter-mobile" name="day-filter-mobile" id="day-all-mobile" value="all" checked>
+                        <label class="btn btn-outline-primary py-2" for="day-all-mobile">Both</label>
+                        
+                        <input type="radio" class="btn-check date-filter-mobile" name="day-filter-mobile" id="day-fri-mobile" value="Friday">
+                        <label class="btn btn-outline-primary py-2" for="day-fri-mobile">Fri</label>
+                        
+                        <input type="radio" class="btn-check date-filter-mobile" name="day-filter-mobile" id="day-sat-mobile" value="Saturday">
+                        <label class="btn btn-outline-primary py-2" for="day-sat-mobile">Sat</label>
+                    </div>
+                </div>
+
+                <h6 class="fw-bold mb-3" style="color: var(--brand-marian-blue);">Categories</h6>
                 <div id="entertainment-filters-mobile" class="d-flex flex-wrap gap-2">
                     <!-- Filters will be dynamically generated here -->
                 </div>

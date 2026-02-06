@@ -202,16 +202,27 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
 
                 const applyFilters = () => {
                     const selectedTags = allFilterCheckboxes.filter(i => i.checked).map(i => i.value);
+                    const selectedDayElement = document.querySelector('.date-filter:checked') || document.querySelector('.date-filter-mobile:checked');
+                    const selectedDay = selectedDayElement ? selectedDayElement.value : 'all';
+                    
                     const cardWrappers = document.querySelectorAll('.card-wrapper');
 
                     cardWrappers.forEach(card => {
-                        if (selectedTags.length === 0) {
-                            card.style.display = 'block';
-                            return;
+                        // Tag filter logic
+                        let matchesTags = true;
+                        if (selectedTags.length > 0) {
+                            const cardTags = card.dataset.tags.split(' ');
+                            matchesTags = selectedTags.some(tag => cardTags.includes(tag));
                         }
-                        const cardTags = card.dataset.tags.split(' ');
-                        const hasMatch = selectedTags.some(tag => cardTags.includes(tag));
-                        card.style.display = hasMatch ? 'block' : 'none';
+
+                        // Day filter logic
+                        let matchesDay = true;
+                        if (selectedDay !== 'all') {
+                            const cardDays = card.dataset.days ? card.dataset.days.split(' ') : [];
+                            matchesDay = cardDays.includes(selectedDay);
+                        }
+
+                        card.style.display = (matchesTags && matchesDay) ? 'block' : 'none';
                     });
                 };
 
@@ -259,6 +270,19 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                         applyFilters();
                     });
                 });
+
+                // --- Day Filter Logic ---
+                const dateFilters = document.querySelectorAll('.date-filter, .date-filter-mobile');
+                dateFilters.forEach(df => {
+                    df.addEventListener('change', (e) => {
+                        const val = e.target.value;
+                        // Sync desktop and mobile toggles
+                        document.querySelectorAll(`.date-filter[value="${val}"], .date-filter-mobile[value="${val}"]`).forEach(input => {
+                            input.checked = true;
+                        });
+                        applyFilters();
+                    });
+                });
             }
 
             // 4. Generate Cards
@@ -300,8 +324,10 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                 // Optional description support
                 const description = item.description ? `<p class="mb-2 text-white small" style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.8);">${item.description}</p>` : '';
 
+                const itemDays = item.days ? item.days.join(' ') : '';
+
                 html += `
-                    <div class="col-md-6 col-lg-4 card-wrapper" data-tags="${item.tags.join(' ')}">
+                    <div class="col-md-6 col-lg-4 card-wrapper" data-tags="${item.tags.join(' ')}" data-days="${itemDays}">
                         <a href="${item.url}" target="_blank" class="card vendor-card shadow-sm h-100">
                             <div class="vendor-card-bg" style="background-image: url('${imagePrefix}${item.image}'); background-size: cover; background-position: top center;"></div>
                             <div class="vendor-card-content">
