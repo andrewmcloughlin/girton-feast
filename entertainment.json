@@ -128,5 +128,24 @@
         "tags": [
             "sports"
         ]
+    },
+    {
+        "name": "Rule The World",
+        "image": "images/main_event/1.jpg",
+        "url": "https://www.ruletheworld.co.uk/",
+        "description": "",
+        "tags": [
+            "shows"
+        ]
+    },
+    {
+        "name": "Model Aircraft Display",
+        "image": "images/aircraft.png",
+        "url": "https://ivcmac.bmfa.uk/",
+        "description": "",
+        "tags": [
+            "shows",
+            "free"
+        ]
     }
 ]
