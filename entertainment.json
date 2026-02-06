@@ -92,5 +92,25 @@
             "adults",
             "free"
         ]
+    },
+    {
+        "name": "Maypole Dancing",
+        "image": "images/maypole.png",
+        "url": "",
+        "description": "",
+        "tags": [
+            "adults",
+            "free"
+        ]
+    },
+    {
+        "name": "Target Bowls",
+        "image": "images/bowls.png",
+        "url": "",
+        "description": "",
+        "tags": [
+            "adults",
+            "games"
+        ]
     }
 ]
