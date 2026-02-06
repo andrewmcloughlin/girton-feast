@@ -166,7 +166,74 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
             items.forEach(item => item.tags.forEach(t => allTags.add(t)));
 
             const filterContainers = filterSelector ? document.querySelectorAll(filterSelector) : [];
-            
+
+            // --- Helper Functions in Scope ---
+            const applyFilters = () => {
+                const selectedTags = Array.from(document.querySelectorAll('.card-filter:checked')).map(i => i.value);
+                const selectedDayElement = document.querySelector('.date-filter:checked') || document.querySelector('.date-filter-mobile:checked');
+                const selectedDay = selectedDayElement ? selectedDayElement.value : 'all';
+                
+                const cardWrappers = document.querySelectorAll('.card-wrapper');
+
+                cardWrappers.forEach(card => {
+                    // Tag filter logic
+                    let matchesTags = true;
+                    if (selectedTags.length > 0) {
+                        const cardTags = card.dataset.tags.split(' ');
+                        matchesTags = selectedTags.some(tag => cardTags.includes(tag));
+                    }
+
+                    // Day filter logic
+                    let matchesDay = true;
+                    if (selectedDay !== 'all') {
+                        const cardDays = card.dataset.days ? card.dataset.days.split(' ') : [];
+                        matchesDay = cardDays.includes(selectedDay);
+                    }
+
+                    card.style.display = (matchesTags && matchesDay) ? 'block' : 'none';
+                });
+            };
+
+            const toggleTagFilter = (tag, isChecked) => {
+                document.querySelectorAll(`.card-filter[data-tag="${tag}"]`).forEach(checkbox => {
+                    checkbox.checked = isChecked;
+                    const item = checkbox.closest('.filter-item');
+                    if (!item) return;
+                    
+                    const checkIcon = item.querySelector('.fa-check');
+                    const checkboxCustom = item.querySelector('.filter-checkbox-custom');
+                    
+                    if (isChecked) {
+                        item.classList.add('active');
+                        item.style.backgroundColor = 'var(--brand-marian-blue)';
+                        const label = item.querySelector('.filter-label');
+                        if (label) {
+                            label.classList.remove('text-dark');
+                            label.classList.add('text-white');
+                        }
+                        if (checkIcon) checkIcon.style.display = 'block';
+                        if (checkboxCustom) {
+                            checkboxCustom.style.borderColor = 'white';
+                            checkboxCustom.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                        }
+                    } else {
+                        item.classList.remove('active');
+                        item.style.backgroundColor = '#f8f9fa';
+                        const label = item.querySelector('.filter-label');
+                        if (label) {
+                            label.classList.remove('text-white');
+                            label.classList.add('text-dark');
+                        }
+                        if (checkIcon) checkIcon.style.display = 'none';
+                        if (checkboxCustom) {
+                            checkboxCustom.style.borderColor = '#dee2e6';
+                            checkboxCustom.style.backgroundColor = 'transparent';
+                        }
+                    }
+                });
+            };
+
+            // 2. Generate Filters
             if (filterContainers.length > 0) {
                 let filtersHtml = '';
                 Array.from(allTags).sort().forEach(tag => {
@@ -174,6 +241,10 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                     if (tag.toLowerCase() === 'deserts' || tag.toLowerCase() === 'desert') label = 'Dessert';
                     if (tag.toLowerCase() === 'ice-cream') label = 'Ice Cream';
                     if (tag.toLowerCase() === 'live-band') label = 'Live Band';
+                    if (tag.toLowerCase() === 'rides') label = 'Fun Fair Rides';
+                    if (tag.toLowerCase() === 'shows') label = 'Displays & Shows';
+                    if (tag.toLowerCase() === 'sports') label = 'Sports & Games';
+                    if (tag.toLowerCase() === 'kids') label = 'Kids & Family';
 
                     filtersHtml += `
                         <div class="filter-item d-flex align-items-center justify-content-between p-2 mb-2 rounded-3 border-0 transition-300 cursor-pointer" 
@@ -194,80 +265,16 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                     container.innerHTML = filtersHtml;
                 });
 
-                // 3. Attach filter logic to all checkboxes across all containers
-                const allFilterCheckboxes = [];
+                // Attach filter logic to all checkboxes
                 filterContainers.forEach(container => {
-                    allFilterCheckboxes.push(...container.querySelectorAll('.card-filter'));
-                });
-
-                const applyFilters = () => {
-                    const selectedTags = allFilterCheckboxes.filter(i => i.checked).map(i => i.value);
-                    const selectedDayElement = document.querySelector('.date-filter:checked') || document.querySelector('.date-filter-mobile:checked');
-                    const selectedDay = selectedDayElement ? selectedDayElement.value : 'all';
-                    
-                    const cardWrappers = document.querySelectorAll('.card-wrapper');
-
-                    cardWrappers.forEach(card => {
-                        // Tag filter logic
-                        let matchesTags = true;
-                        if (selectedTags.length > 0) {
-                            const cardTags = card.dataset.tags.split(' ');
-                            matchesTags = selectedTags.some(tag => cardTags.includes(tag));
+                    container.querySelectorAll('.card-filter').forEach(f => {
+                        const filterItem = f.closest('.filter-item');
+                        if (filterItem) {
+                            filterItem.addEventListener('click', (e) => {
+                                toggleTagFilter(f.value, !f.checked);
+                                applyFilters();
+                            });
                         }
-
-                        // Day filter logic
-                        let matchesDay = true;
-                        if (selectedDay !== 'all') {
-                            const cardDays = card.dataset.days ? card.dataset.days.split(' ') : [];
-                            matchesDay = cardDays.includes(selectedDay);
-                        }
-
-                        card.style.display = (matchesTags && matchesDay) ? 'block' : 'none';
-                    });
-                };
-
-                allFilterCheckboxes.forEach(f => {
-                    const filterItem = f.closest('.filter-item');
-                    if (!filterItem) return;
-
-                    filterItem.addEventListener('click', (e) => {
-                        const tag = f.value;
-                        const isChecked = !f.checked; // Toggle current state
-                        
-                        // Sync all components with same tag
-                        document.querySelectorAll(`.card-filter[data-tag="${tag}"]`).forEach(checkbox => {
-                            checkbox.checked = isChecked;
-                            const item = checkbox.closest('.filter-item');
-                            if (!item) return;
-                            
-                            // Visual updates for all synced items
-                            const checkIcon = item.querySelector('.fa-check');
-                            const checkboxCustom = item.querySelector('.filter-checkbox-custom');
-                            
-                            if (isChecked) {
-                                item.classList.add('active');
-                                item.style.backgroundColor = 'var(--brand-marian-blue)';
-                                const label = item.querySelector('.filter-label');
-                                if (label) label.classList.replace('text-dark', 'text-white');
-                                if (checkIcon) checkIcon.style.display = 'block';
-                                if (checkboxCustom) {
-                                    checkboxCustom.style.borderColor = 'white';
-                                    checkboxCustom.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                                }
-                            } else {
-                                item.classList.remove('active');
-                                item.style.backgroundColor = '#f8f9fa';
-                                const label = item.querySelector('.filter-label');
-                                if (label) label.classList.replace('text-white', 'text-dark');
-                                if (checkIcon) checkIcon.style.display = 'none';
-                                if (checkboxCustom) {
-                                    checkboxCustom.style.borderColor = '#dee2e6';
-                                    checkboxCustom.style.backgroundColor = 'transparent';
-                                }
-                            }
-                        });
-                        
-                        applyFilters();
                     });
                 });
 
@@ -342,6 +349,23 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                 `;
             });
             cardContainer.innerHTML = html;
+
+            // --- URL Parameter Handling (Cards are in DOM) ---
+            const urlParams = new URLSearchParams(window.location.search);
+            const tagParam = urlParams.get('tag');
+            const dayParam = urlParams.get('day');
+
+            if (tagParam) {
+                toggleTagFilter(tagParam, true);
+            }
+            if (dayParam) {
+                document.querySelectorAll(`.date-filter[value="${dayParam}"], .date-filter-mobile[value="${dayParam}"]`).forEach(input => {
+                    input.checked = true;
+                });
+            }
+            if (tagParam || dayParam) {
+                applyFilters();
+            }
         })
         .catch(err => console.error('Failed to load cards:', err));
 }

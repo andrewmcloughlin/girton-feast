@@ -9,7 +9,7 @@
             "kids",
             "free"
         ],
-        "days": ["Friday","Saturday"]
+        "days": ["Saturday"]
     },
     {
         "name": "The Munroes",
@@ -20,7 +20,7 @@
             "music",
             "free"
         ],
-        "days": ["Friday","Saturday"]
+        "days": ["Friday"]
     },
     {
         "name": "Helter Skelter",
@@ -28,7 +28,8 @@
         "url": "",
         "description": "",
         "tags": [
-            "kids"
+            "kids",
+            "rides"
         ],
         "days": ["Friday", "Saturday"]
     },
@@ -38,7 +39,8 @@
         "url": "",
         "description": "Jump and play in our inflatable assault course",
         "tags": [
-            "kids"
+            "kids",
+            "rides"
         ],
         "days": ["Friday", "Saturday"]
     },
@@ -48,7 +50,8 @@
         "url": "",
         "description": "Take a fun ride around the rec",
         "tags": [
-            "kids"
+            "kids",
+            "rides"
         ],
         "days": ["Friday", "Saturday"]
     },
@@ -59,7 +62,8 @@
         "description": "",
         "tags": [
             "games",
-            "kids"
+            "kids",
+            "rides"
         ],
         "days": ["Friday", "Saturday"]
     },
@@ -148,6 +152,7 @@
         "url": "https://www.ruletheworld.co.uk/",
         "description": "",
         "tags": [
+            "music",
             "shows"
         ],
         "days": ["Friday"]
@@ -156,7 +161,7 @@
         "name": "Model Aircraft Display",
         "image": "images/aircraft.png",
         "url": "https://ivcmac.bmfa.uk/",
-        "description": "By Histon & Impington Model Aircraft Club",
+        "description": "",
         "tags": [
             "shows",
             "free"
