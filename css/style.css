@@ -78,11 +78,53 @@ body {
     background-color: var(--bg-primary) !important;
     padding-top: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
+    
+    /* Custom Cursor */
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%233d3b8e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/svg%3E") 12 12, auto;
+}
+
+/* Custom Selection Highlight */
+::selection {
+    background-color: var(--brand-marian-blue);
+    color: white;
+}
+::-moz-selection {
+    background-color: var(--brand-marian-blue);
+    color: white;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 18px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--brand-marian-blue);
+    border-radius: 20px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+    transition: background-color 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--brand-marian-blue);
+}
+
+/* Selection variants for interactive elements */
+a, button, .cursor-pointer, input, select, textarea {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e072a4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='6'/%3E%3C/svg%3E") 12 12, pointer;
+}
+
+.dark-mode ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
 }
 
 /* Override Bootstrap bg-light if it's explicitly used on body or other containers */
 .dark-mode .bg-light, 
-.dark-mode.bg-light {
+.dark-mode.bg-light,
+.dark-mode .bg-brand-glaucous,
+.dark-mode.bg-brand-glaucous {
     background-color: var(--bg-primary) !important;
 }
 
@@ -94,10 +136,33 @@ body {
     color: var(--text-secondary) !important;
 }
 
-.dark-mode .card {
-    background-color: var(--card-bg);
+.dark-mode .card,
+.dark-mode .filter-sidebar {
+    background-color: var(--card-bg) !important;
     color: var(--text-primary);
     border-color: var(--border-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
+}
+
+.dark-mode .filter-item {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.dark-mode .filter-item:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.dark-mode .filter-item.active {
+    background-color: var(--brand-marian-blue) !important;
+}
+
+.dark-mode .offcanvas {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.dark-mode .offcanvas-header {
+    border-bottom-color: var(--border-color) !important;
 }
 
 
@@ -1013,6 +1078,7 @@ html {
     cursor: pointer;
     user-select: none;
     border: 1px solid transparent !important;
+    background-color: #f8f9fa !important;
 }
 
 .filter-item:hover {
@@ -1020,8 +1086,20 @@ html {
     transform: translateX(4px);
 }
 
-.filter-item.active:hover {
+.filter-item.active {
     background-color: var(--brand-marian-blue) !important;
+}
+
+.filter-item.active .filter-label {
+    color: white !important;
+}
+
+.filter-item.active .filter-checkbox-custom {
+    border-color: white !important;
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.filter-item.active:hover {
     opacity: 0.9;
 }
 

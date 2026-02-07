@@ -174,10 +174,9 @@
         "url": "/pages/food.html",
         "description": "",
         "tags": [
-            "food",
-            "drink"
+            "food-and-drink"
         ],
-        "days": ["Saturday","Sunday"]
+        "days": ["Saturday","Friday"]
     },
     {
         "name": "Beer Tent",
@@ -185,8 +184,8 @@
         "url": "/pages/beer-tent.html",
         "description": "",
         "tags": [
-            "drink"
+            "food-and-drink"
         ],
-        "days": ["Saturday","Sunday"]
+        "days": ["Saturday","Friday"]
     }
 ]

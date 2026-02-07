@@ -210,30 +210,10 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                     
                     if (isChecked) {
                         item.classList.add('active');
-                        item.style.backgroundColor = 'var(--brand-marian-blue)';
-                        const label = item.querySelector('.filter-label');
-                        if (label) {
-                            label.classList.remove('text-dark');
-                            label.classList.add('text-white');
-                        }
                         if (checkIcon) checkIcon.style.display = 'block';
-                        if (checkboxCustom) {
-                            checkboxCustom.style.borderColor = 'white';
-                            checkboxCustom.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
-                        }
                     } else {
                         item.classList.remove('active');
-                        item.style.backgroundColor = '#f8f9fa';
-                        const label = item.querySelector('.filter-label');
-                        if (label) {
-                            label.classList.remove('text-white');
-                            label.classList.add('text-dark');
-                        }
                         if (checkIcon) checkIcon.style.display = 'none';
-                        if (checkboxCustom) {
-                            checkboxCustom.style.borderColor = '#dee2e6';
-                            checkboxCustom.style.backgroundColor = 'transparent';
-                        }
                     }
                 });
             };
@@ -253,13 +233,13 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
 
                     filtersHtml += `
                         <div class="filter-item d-flex align-items-center justify-content-between p-2 mb-2 rounded-3 border-0 transition-300 cursor-pointer" 
-                            data-tag="${tag}" style="background-color: #f8f9fa;">
+                            data-tag="${tag}">
                             <div class="d-flex align-items-center gap-3 w-100">
                                 <div class="filter-checkbox-custom d-flex align-items-center justify-content-center transition-300" 
                                     style="width: 20px; height: 20px; border: 2px solid #dee2e6; border-radius: 4px;">
                                     <i class="fas fa-check text-white small" style="display: none;"></i>
                                 </div>
-                                <span class="filter-label fw-medium text-dark" style="font-size: 0.95rem;">${label}</span>
+                                <span class="filter-label fw-medium" style="font-size: 0.95rem;">${label}</span>
                                 <input type="checkbox" class="card-filter d-none" value="${tag}" data-tag="${tag}">
                             </div>
                         </div>
