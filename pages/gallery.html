@@ -151,9 +151,9 @@
                             <a href="${imagePath}" 
                                data-fancybox="gallery-${config.year}" 
                                data-caption="Girton Feast ${config.year} - Photo ${i}" 
-                               class="gallery-img-container"
+                               class="gallery-img-container ratio ratio-4x3 d-block rounded shadow-sm overflow-hidden hover-scale fadeInUp"
                                style="animation-delay: ${delay}ms;">
-                                <img src="${imagePath}" class="gallery-img" alt="Girton Feast ${config.year} - Photo ${i}" loading="lazy" onload="this.classList.add('loaded')">
+                                <img src="${imagePath}" class="object-fit-cover w-100 h-100 gallery-img" alt="Girton Feast ${config.year} - Photo ${i}" loading="lazy" onload="this.classList.add('loaded')">
                             </a>
                         </div>
                     `;

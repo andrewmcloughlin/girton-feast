@@ -80,7 +80,7 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
     
     /* Custom Cursor */
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%233d3b8e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/svg%3E") 12 12, auto;
+    cursor: url("../images/cursor.svg") 0 0, auto;
 }
 
 /* Custom Selection Highlight */
@@ -112,8 +112,8 @@ body {
 }
 
 /* Selection variants for interactive elements */
-a, button, .cursor-pointer, input, select, textarea {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23e072a4' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='6'/%3E%3C/svg%3E") 12 12, pointer;
+a, button, .cursor-pointer, input, select, textarea, [style*="cursor: pointer"] {
+    cursor: url("../images/cursor-active.svg") 0 0, pointer !important;
 }
 
 .dark-mode ::-webkit-scrollbar-track {
@@ -474,17 +474,7 @@ a, button, .cursor-pointer, input, select, textarea {
 }
 
 .bento-item {
-    border-radius: 1rem;
-    padding: 1rem;
-    /* Reduced padding for smaller screens */
-    color: white;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
     transition: all 0.3s ease-in-out;
-    /* Smooth transition for hover effects */
     position: relative;
     overflow: hidden;
 }
@@ -517,31 +507,23 @@ a, button, .cursor-pointer, input, select, textarea {
 }
 
 .bento-item h4 {
-    font-family: 'Sigmar One', cursive;
     font-size: 1.5rem;
     /* Reduced font size for smaller screens */
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
 .bento-item-large {
-    /* On mobile, it spans both columns to be full-width */
     grid-column: span 2;
     grid-row: span 2;
-    /* Increased span on mobile for better tessellation */
 }
 
 .bento-item-tall {
-    /* This item will span two rows */
     grid-column: span 1;
-    /* On mobile, it's a full-width item */
     grid-row: span 2;
-    min-height: 350px;
 }
 
 .bento-item-wide {
-    /* This item will span two columns */
     grid-column: span 2;
-    /* On mobile, it's a full-width item */
     grid-row: span 1;
 }
 
@@ -630,24 +612,11 @@ a, button, .cursor-pointer, input, select, textarea {
 
 /* Thumbnail Container */
 .gallery-img-container {
-    display: block;
-    /* Make the anchor tag a block-level element */
-    width: 100%;
-    /* Take full width of its column */
-    padding-bottom: 75%;
-    /* Maintain a 4:3 aspect ratio (height is 75% of width) */
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
     /* Apply the animation */
     opacity: 0;
     /* Start hidden */
     animation: fadeInUp 0.5s ease-out forwards;
     animation-fill-mode: forwards;
-    /* Keep the 'to' state after animation */
     /* Add the shimmer effect as a background */
     background-color: #e0e0e0;
     background-image: linear-gradient(to right, #e0e0e0 0%, #f0f0f0 20%, #e0e0e0 40%, #e0e0e0 100%);
@@ -659,20 +628,8 @@ a, button, .cursor-pointer, input, select, textarea {
     animation-iteration-count: 1, infinite;
 }
 
-.gallery-img-container:hover {
-    transform: scale(1.03);
-}
-
 /* Thumbnail Image */
 .gallery-img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* Crop to cover the container while maintaining aspect ratio */
-    border-radius: 0.5rem;
     /* Fade the image in when it loads */
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -707,6 +664,9 @@ a, button, .cursor-pointer, input, select, textarea {
     color: #fff;
     border: 1px solid var(--brand-glaucous);
     transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+    border-radius: 0.375rem; /* Standard Bootstrap border-radius */
+    padding: 0.375rem 0.75rem;
+    font-weight: 600;
 }
 
 .download-btn:hover {
@@ -809,173 +769,34 @@ a, button, .cursor-pointer, input, select, textarea {
     padding-bottom: 5rem;
 }
 
-/* ========================================
-   Vendor Card Styles
-   ======================================== */
-.vendor-card {
-    min-height: 280px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 1.5rem;
-    transition: all 0.3s ease-in-out;
-    background-color: white;
-    cursor: pointer;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    position: relative;
-    border: none;
+/* Brand Hover Utilities */
+.hover-brand-saffron:hover {
+    color: var(--brand-saffron) !important;
 }
 
-.vendor-card-bg {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    background-size: contain;
-    background-position: bottom right;
-    background-repeat: no-repeat;
-    z-index: 0;
-    transition: transform 0.3s ease;
+.hover-scale {
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.vendor-card:hover .vendor-card-bg {
+.hover-scale:hover {
     transform: scale(1.05);
 }
 
-.vendor-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
+.transition-200 {
+    transition: all 0.2s ease-in-out;
 }
 
-.vendor-card-content {
-    padding: 1.2rem;
-    position: relative;
-    z-index: 1;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 30%, rgba(0, 0, 0, 0) 100%);
-    height: 100%;
+.transition-300 {
+    transition: all 0.3s ease-in-out;
 }
 
-.vendor-card-title {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 700;
-    color: white;
-    margin-bottom: 0.5rem;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-    line-height: 1.2;
+.pointer-events-none {
+    pointer-events: none;
 }
 
-.vendor-badges {
-    position: absolute;
-    bottom: 1.2rem;
-    right: 1.2rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    justify-content: flex-end;
+.opacity-10 {
+    opacity: 0.1;
 }
-
-.vendor-badges .badge {
-    font-size: 0.7rem;
-    font-weight: 700;
-    padding: 0.4em 0.8em;
-    border-radius: 50rem;
-    text-transform: uppercase;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.badge-veg {
-    background-color: #4caf50 !important;
-}
-
-.badge-vegan {
-    background-color: #2e7d32 !important;
-}
-
-.badge-gf {
-    background-color: #ff9800 !important;
-}
-
-.badge-main {
-    background-color: var(--brand-glaucous) !important;
-}
-
-.badge-dessert {
-    background-color: var(--brand-thulian-pink) !important;
-}
-
-.badge-drink {
-    background-color: var(--brand-marian-blue) !important;
-}
-
-.badge-pizzas {
-    background-color: #d32f2f !important;
-}
-
-.badge-burgers {
-    background-color: #6d4c41 !important;
-}
-
-.badge-churros {
-    background-color: #ffa000 !important;
-}
-
-.badge-mexican {
-    background-color: #f4511e !important;
-}
-
-.badge-ice-cream {
-    background-color: #00acc1 !important;
-}
-
-.badge-cakes {
-    background-color: #c2185b !important;
-}
-
-/* Entertainment Badge Styles */
-.badge-shows {
-    background-color: #9c27b0 !important;
-}
-
-.badge-music {
-    background-color: #e91e63 !important;
-}
-
-.badge-free {
-    background-color: #4caf50 !important;
-}
-
-.badge-live-band {
-    background-color: #f06292 !important;
-}
-
-.badge-magic {
-    background-color: #ab47bc !important;
-}
-
-.badge-rides {
-    background-color: #ff5722 !important;
-}
-
-.badge-games {
-    background-color: #ff9800 !important;
-}
-
-.badge-kids {
-    background-color: #4caf50 !important;
-}
-
-.badge-family {
-    background-color: #2196f3 !important;
-}
-
-.badge-adults {
-    background-color: #733d85 !important;
-}
-
 
 body,
 html {
@@ -987,34 +808,14 @@ html {
    Mobile Bottom Navigation Styles (Floating & Centered)
    ======================================== */
 .mobile-bottom-nav {
-    position: fixed;
-    bottom: 20px;
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
+    /* Custom width constraints not covered by Bootstrap */
     width: 90%;
     max-width: 400px;
-    height: 65px;
-    background-color: white;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 1050;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    border-radius: 50px;
-    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .mobile-nav-item {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     color: var(--brand-marian-blue);
     opacity: 0.6;
-    text-decoration: none;
     font-size: 0.7rem;
     font-weight: 600;
     transition: all 0.2s ease-in-out;
@@ -1022,7 +823,6 @@ html {
 
 .mobile-nav-item i {
     font-size: 1.2rem;
-    margin-bottom: 2px;
 }
 
 .mobile-nav-item.active {
@@ -1074,64 +874,7 @@ html {
     transform: scale(0.9);
 }
 
-.filter-item {
-    cursor: pointer;
-    user-select: none;
-    border: 1px solid transparent !important;
-    background-color: #f8f9fa !important;
-}
-
-.filter-item:hover {
-    background-color: #f1f3f5 !important;
-    transform: translateX(4px);
-}
-
-.filter-item.active {
-    background-color: var(--brand-marian-blue) !important;
-}
-
-.filter-item.active .filter-label {
-    color: white !important;
-}
-
-.filter-item.active .filter-checkbox-custom {
-    border-color: white !important;
-    background-color: rgba(255, 255, 255, 0.2) !important;
-}
-
-.filter-item.active:hover {
-    opacity: 0.9;
-}
-
-.filter-checkbox-custom {
-    flex-shrink: 0;
-}
-
-.filter-label {
-    transition: color 0.2s ease;
-}
-
-.offcanvas-body .filter-item {
-    border-radius: 50px !important;
-    padding: 8px 16px !important;
-    background-color: #f1f3f5 !important;
-}
-
-.offcanvas-body .filter-item.active {
-    background-color: var(--brand-marian-blue) !important;
-}
-
-.mobile-filter-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
-}
-
-.letter-spacing-1 {
-    letter-spacing: 1px;
-}
-
-
+/* Offcanvas tweaks */
 .offcanvas-bottom {
     border-top-left-radius: 1.5rem !important;
     border-top-right-radius: 1.5rem !important;
@@ -1152,25 +895,16 @@ html {
     color: white;
 }
 
-/* Segmented Control Styling */
-.segmented-control {
-    background: rgba(0, 0, 0, 0.05);
-    padding: 4px;
-    border-radius: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
+/* Segmented Control - Minimal overrides for custom interaction */
 .segmented-control .btn-outline-primary {
     border: none;
     color: var(--brand-marian-blue);
-    border-radius: 8px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .segmented-control .btn-outline-primary:hover {
     background-color: rgba(61, 59, 142, 0.1);
-    color: var(--brand-marian-blue);
 }
 
 .segmented-control .btn-check:checked + .btn-outline-primary {
@@ -1179,18 +913,8 @@ html {
     box-shadow: 0 4px 12px rgba(61, 59, 142, 0.2);
 }
 
-.dark-mode .segmented-control {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-}
-
 .dark-mode .segmented-control .btn-outline-primary {
     color: var(--text-primary);
-}
-
-.dark-mode .segmented-control .btn-outline-primary:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
 }
 
 /* Ultra-Wide Screen Optimization */

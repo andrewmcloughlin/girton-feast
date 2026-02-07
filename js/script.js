@@ -221,7 +221,9 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
             // 2. Generate Filters
             if (filterContainers.length > 0) {
                 let filtersHtml = '';
-                Array.from(allTags).sort().forEach(tag => {
+                const sortedTags = Array.from(allTags).sort();
+
+                sortedTags.forEach(tag => {
                     let label = tag.charAt(0).toUpperCase() + tag.slice(1).replace(/-/g, ' ');
                     if (tag.toLowerCase() === 'deserts' || tag.toLowerCase() === 'desert') label = 'Dessert';
                     if (tag.toLowerCase() === 'ice-cream') label = 'Ice Cream';
@@ -232,19 +234,44 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                     if (tag.toLowerCase() === 'kids') label = 'Kids & Family';
 
                     filtersHtml += `
-                        <div class="filter-item d-flex align-items-center justify-content-between p-2 mb-2 rounded-3 border-0 transition-300 cursor-pointer" 
+                        <div class="filter-item d-flex align-items-center justify-content-between p-2 mb-1 rounded-3 bg-opacity-10 bg-dark-subtle cursor-pointer transition-300 hover-scale" 
                             data-tag="${tag}">
                             <div class="d-flex align-items-center gap-3 w-100">
-                                <div class="filter-checkbox-custom d-flex align-items-center justify-content-center transition-300" 
-                                    style="width: 20px; height: 20px; border: 2px solid #dee2e6; border-radius: 4px;">
+                                <div class="filter-checkbox-custom d-flex align-items-center justify-content-center border border-2 border-secondary-subtle rounded-1 transition-300" 
+                                    style="width: 20px; height: 20px;">
                                     <i class="fas fa-check text-white small" style="display: none;"></i>
                                 </div>
-                                <span class="filter-label fw-medium" style="font-size: 0.95rem;">${label}</span>
+                                <span class="filter-label fw-medium small">${label}</span>
                                 <input type="checkbox" class="card-filter d-none" value="${tag}" data-tag="${tag}">
                             </div>
                         </div>
                     `;
                 });
+
+                filterContainers.forEach(container => {
+                    container.innerHTML = filtersHtml;
+                });
+
+                // Generate mobile categories
+                const mobileFilterContainer = document.querySelector('#entertainment-filters-mobile');
+                if (mobileFilterContainer) {
+                    let mobileHtml = '';
+                    sortedTags.forEach(tag => {
+                        let label = tag.charAt(0).toUpperCase() + tag.slice(1);
+                        if (tag.toLowerCase() === 'shows') label = 'Live Shows';
+                        if (tag.toLowerCase() === 'music') label = 'Live Music';
+                        if (tag.toLowerCase() === 'games') label = 'Fun & Games';
+                        if (tag.toLowerCase() === 'kids') label = 'Kids & Family';
+                        
+                        mobileHtml += `
+                            <div class="filter-item d-flex align-items-center justify-content-between p-3 rounded-pill bg-dark bg-opacity-10 cursor-pointer transition-300" data-tag="${tag}">
+                                <span class="filter-label fw-bold small text-uppercase letter-spacing-1">${label}</span>
+                                <input type="checkbox" class="card-filter d-none" value="${tag}" data-tag="${tag}">
+                            </div>
+                        `;
+                    });
+                    mobileFilterContainer.innerHTML = mobileHtml;
+                }
 
                 filterContainers.forEach(container => {
                     container.innerHTML = filtersHtml;
@@ -320,13 +347,16 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
 
                 html += `
                     <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 card-wrapper" data-tags="${item.tags.join(' ')}" data-days="${itemDays}">
-                        <a href="${item.url}" target="_blank" class="card vendor-card shadow-sm h-100">
-                            <div class="vendor-card-bg" style="background-image: url('${imagePrefix}${item.image}'); background-size: cover; background-position: top center;"></div>
-                            <div class="vendor-card-content">
-                                <h4 class="vendor-card-title">${item.name}</h4>
-                                ${description}
-                                <div class="vendor-badges">
-                                    ${tagsHtml}
+                        <a href="${item.url}" target="_blank" class="card border-0 shadow-sm h-100 overflow-hidden text-decoration-none hover-scale">
+                            <div class="ratio ratio-4x3 p-5">
+                                <img src="${imagePrefix}${item.image}" class="card-img object-fit-cover" alt="${item.name}">
+                            </div>
+                            <div class="card-img-overlay d-flex flex-column justify-content-end" 
+                                style="background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);">
+                                <h4 class="card-title fw-bold text-white mb-1" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">${item.name}</h4>
+                                <div class="text-white-50 small mb-2">${description.replace(/<[^>]*>?/gm, '').substring(0, 100)}...</div>
+                                <div class="d-flex flex-wrap gap-1">
+                                    ${item.tags.map(tag => `<span class="badge rounded-pill bg-brand-${tag} shadow-sm" style="font-size: 0.65rem;">${tag.replace(/-/g, ' ')}</span>`).join('')}
                                 </div>
                             </div>
                         </a>
