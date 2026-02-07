@@ -20,7 +20,7 @@
             "music",
             "free"
         ],
-        "days": ["Friday"]
+        "days": ["Saturday"]
     },
     {
         "name": "Helter Skelter",
@@ -53,7 +53,7 @@
             "kids",
             "rides"
         ],
-        "days": ["Friday", "Saturday"]
+        "days": ["Saturday"]
     },
     {
         "name": "Crazy Golf",
@@ -65,7 +65,7 @@
             "kids",
             "rides"
         ],
-        "days": ["Friday", "Saturday"]
+        "days": ["Saturday"]
     },
     {
         "name": "Table Tennis Tournament",
@@ -134,7 +134,7 @@
             "shows",
             "free"
         ],
-        "days": ["Friday"]
+        "days": ["Saturday"]
     },
     {
         "name": "Beat the Goalie",
@@ -161,7 +161,7 @@
         "name": "Model Aircraft Display",
         "image": "images/aircraft.png",
         "url": "https://ivcmac.bmfa.uk/",
-        "description": "",
+        "description": "By Histon & Impington Model Aircraft Club",
         "tags": [
             "shows",
             "free"
