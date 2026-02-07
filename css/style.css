@@ -1115,6 +1115,19 @@ html {
     color: white;
 }
 
+/* Ultra-Wide Screen Optimization */
+@media (min-width: 1600px) {
+    .container-xxl {
+        max-width: 1540px !important;
+    }
+}
+
+@media (min-width: 1900px) {
+    .container-xxl {
+        max-width: 1820px !important;
+    }
+}
+
 .dark-mode .segmented-control .btn-check:checked + .btn-outline-primary {
     background-color: var(--brand-marian-blue);
     color: white;

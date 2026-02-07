@@ -339,7 +339,7 @@ function loadCards(jsonFile, containerSelector, filterSelector) {
                 const itemDays = item.days ? item.days.join(' ') : '';
 
                 html += `
-                    <div class="col-md-6 col-lg-4 card-wrapper" data-tags="${item.tags.join(' ')}" data-days="${itemDays}">
+                    <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 card-wrapper" data-tags="${item.tags.join(' ')}" data-days="${itemDays}">
                         <a href="${item.url}" target="_blank" class="card vendor-card shadow-sm h-100">
                             <div class="vendor-card-bg" style="background-image: url('${imagePrefix}${item.image}'); background-size: cover; background-position: top center;"></div>
                             <div class="vendor-card-content">

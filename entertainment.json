@@ -149,7 +149,7 @@
     {
         "name": "Rule The World",
         "image": "images/main_event/1.jpg",
-        "url": "https://www.ruletheworld.co.uk/",
+        "url": "https://ruletheworldofficial.com/",
         "description": "",
         "tags": [
             "music",
@@ -167,5 +167,26 @@
             "free"
         ],
         "days": ["Saturday"]
+    },
+    {
+        "name": "Food Vans",
+        "image": "images/food/burger-bgr.png",
+        "url": "/pages/food.html",
+        "description": "",
+        "tags": [
+            "food",
+            "drink"
+        ],
+        "days": ["Saturday","Sunday"]
+    },
+    {
+        "name": "Beer Tent",
+        "image": "images/food/beer.png",
+        "url": "/pages/beer-tent.html",
+        "description": "",
+        "tags": [
+            "drink"
+        ],
+        "days": ["Saturday","Sunday"]
     }
 ]
