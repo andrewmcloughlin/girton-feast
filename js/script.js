@@ -73,17 +73,10 @@ function loadComponent(selector, url) {
                 }
             });
             document.querySelector(selector).innerHTML = tempDiv.innerHTML;
-
-            // Handle theme toggle state if the navbar was just loaded
-            if (selector === '#navbar-placeholder') {
-                const themeToggle = document.getElementById('theme-toggle');
-                if (themeToggle) {
-                    const icon = themeToggle.querySelector('i');
-                    if (document.body.classList.contains('dark-mode')) {
-                        icon.classList.remove('fa-moon');
-                        icon.classList.add('fa-sun');
-                    }
-                }
+            
+            // Re-initialize Alpine on the new content if Alpine is loaded
+            if (window.Alpine) {
+                Alpine.initTree(document.querySelector(selector));
             }
 
             // Handle mobile nav active states if the mobile nav was just loaded
@@ -118,514 +111,10 @@ function loadComponent(selector, url) {
 }
 
 // --- Countdown Timer Logic ---
-function initializeCountdown() {
-    const countdownElement = document.getElementById('countdown-timer');
-    if (!countdownElement) return;
-
-    // Set the date for the event (June 14, 2026, 10:00 AM)
-    const eventDate = new Date("June 14, 2026 10:00:00").getTime();
-
-    const interval = setInterval(function () {
-        const now = new Date().getTime();
-        const distance = eventDate - now;
-
-        // Time calculations for days, hours, minutes and seconds
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        // Display the result in the element with id="countdown-timer"
-        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-
-        // If the countdown is finished, write some text
-        if (distance < 0) {
-            clearInterval(interval);
-            countdownElement.innerHTML = "The Feast is on!";
-        }
-    }, 1000);
-}
-
-// --- Dynamic Cards Logic (Unified for Food & Entertainment) ---
-function loadCards(jsonFile, containerSelector, filterSelector) {
-    const cardContainer = document.querySelector(containerSelector);
-    const filterContainer = filterSelector ? document.querySelector(filterSelector) : null;
-
-    if (!cardContainer) return;
-
-    const currentPagePath = window.location.pathname;
-    const isIndexPage = (currentPagePath.endsWith('index.html') || currentPagePath.endsWith('/'));
-    const jsonPath = isIndexPage ? jsonFile : '../' + jsonFile;
-    const imagePrefix = isIndexPage ? '' : '../';
-
-    fetch(jsonPath)
-        .then(response => response.json())
-        .then(items => {
-            // 1. Collect unique tags
-            const allTags = new Set();
-            items.forEach(item => item.tags.forEach(t => allTags.add(t)));
-
-            const filterContainers = filterSelector ? document.querySelectorAll(filterSelector) : [];
-
-            // --- Helper Functions in Scope ---
-            const applyFilters = () => {
-                // Get selected tags, avoiding duplicates from multiple filter containers
-                const selectedTags = new Set(
-                    Array.from(document.querySelectorAll('.card-filter:checked')).map(i => i.value)
-                );
-                
-                const selectedDayElement = document.querySelector('.date-filter:checked') || document.querySelector('.date-filter-mobile:checked');
-                const selectedDay = selectedDayElement ? selectedDayElement.value : 'all';
-                
-                const cardWrappers = document.querySelectorAll('.card-wrapper');
-
-                cardWrappers.forEach(card => {
-                    const cardTags = card.dataset.tags ? card.dataset.tags.split(' ') : [];
-                    const cardDays = card.dataset.days ? card.dataset.days.split(' ') : [];
-
-                    // 1. Day Filtering (AND)
-                    // Must match selection or selection is 'all'
-                    const matchesDay = (selectedDay === 'all') || cardDays.includes(selectedDay);
-
-                    // 2. Tag Filtering (OR between selected tags)
-                    // If no tags selected, show all (true). If tags are selected, must match at least one.
-                    let matchesTags = true;
-                    if (selectedTags.size > 0) {
-                        matchesTags = Array.from(selectedTags).some(tag => cardTags.includes(tag));
-                    }
-
-                    // Combined Logic: (Matches Selected Day) AND (Matches Any Selected Tag)
-                    card.style.display = (matchesDay && matchesTags) ? 'block' : 'none';
-                });
-            };
-
-            const toggleTagFilter = (tag, isChecked) => {
-                document.querySelectorAll(`.card-filter[data-tag="${tag}"]`).forEach(checkbox => {
-                    checkbox.checked = isChecked;
-                    const item = checkbox.closest('.filter-item');
-                    if (!item) return;
-                    
-                    const checkIcon = item.querySelector('.fa-check');
-                    const checkboxCustom = item.querySelector('.filter-checkbox-custom');
-                    
-                    if (isChecked) {
-                        item.classList.add('active');
-                        if (checkIcon) checkIcon.style.display = 'block';
-                    } else {
-                        item.classList.remove('active');
-                        if (checkIcon) checkIcon.style.display = 'none';
-                    }
-                });
-            };
-
-            // 2. Generate Filters
-            if (filterContainers.length > 0) {
-                let filtersHtml = '';
-                const sortedTags = Array.from(allTags).sort();
-
-                sortedTags.forEach(tag => {
-                    let label = tag.charAt(0).toUpperCase() + tag.slice(1).replace(/-/g, ' ');
-                    if (tag.toLowerCase() === 'deserts' || tag.toLowerCase() === 'desert') label = 'Dessert';
-                    if (tag.toLowerCase() === 'ice-cream') label = 'Ice Cream';
-                    if (tag.toLowerCase() === 'live-band') label = 'Live Band';
-                    if (tag.toLowerCase() === 'rides') label = 'Fun Fair Rides';
-                    if (tag.toLowerCase() === 'shows') label = 'Displays & Shows';
-                    if (tag.toLowerCase() === 'sports') label = 'Sports & Games';
-                    if (tag.toLowerCase() === 'kids') label = 'Kids & Family';
-
-                    filtersHtml += `
-                        <div class="filter-item d-flex align-items-center justify-content-between p-2 mb-1 rounded-3 bg-opacity-10 bg-dark-subtle cursor-pointer transition-300 hover-scale" 
-                            data-tag="${tag}">
-                            <div class="d-flex align-items-center gap-3 w-100">
-                                <div class="filter-checkbox-custom d-flex align-items-center justify-content-center border border-2 border-secondary-subtle rounded-1 transition-300" 
-                                    style="width: 20px; height: 20px;">
-                                    <i class="fas fa-check text-white small" style="display: none;"></i>
-                                </div>
-                                <span class="filter-label fw-medium small">${label}</span>
-                                <input type="checkbox" class="card-filter d-none" value="${tag}" data-tag="${tag}">
-                            </div>
-                        </div>
-                    `;
-                });
-
-                filterContainers.forEach(container => {
-                    container.innerHTML = filtersHtml;
-                });
-
-                // Generate mobile categories
-                const mobileFilterContainer = document.querySelector('#entertainment-filters-mobile');
-                if (mobileFilterContainer) {
-                    let mobileHtml = '';
-                    sortedTags.forEach(tag => {
-                        let label = tag.charAt(0).toUpperCase() + tag.slice(1);
-                        if (tag.toLowerCase() === 'shows') label = 'Live Shows';
-                        if (tag.toLowerCase() === 'music') label = 'Live Music';
-                        if (tag.toLowerCase() === 'games') label = 'Fun & Games';
-                        if (tag.toLowerCase() === 'kids') label = 'Kids & Family';
-                        
-                        mobileHtml += `
-                            <div class="filter-item d-flex align-items-center justify-content-between p-3 rounded-pill bg-dark bg-opacity-10 cursor-pointer transition-300" data-tag="${tag}">
-                                <span class="filter-label fw-bold small text-uppercase letter-spacing-1">${label}</span>
-                                <input type="checkbox" class="card-filter d-none" value="${tag}" data-tag="${tag}">
-                            </div>
-                        `;
-                    });
-                    mobileFilterContainer.innerHTML = mobileHtml;
-                }
-
-                filterContainers.forEach(container => {
-                    container.innerHTML = filtersHtml;
-                });
-
-                // Attach filter logic to all checkboxes
-                filterContainers.forEach(container => {
-                    container.querySelectorAll('.card-filter').forEach(f => {
-                        const filterItem = f.closest('.filter-item');
-                        if (filterItem) {
-                            filterItem.addEventListener('click', (e) => {
-                                toggleTagFilter(f.value, !f.checked);
-                                applyFilters();
-                            });
-                        }
-                    });
-                });
-
-                // --- Day Filter Logic ---
-                const dateFilters = document.querySelectorAll('.date-filter, .date-filter-mobile');
-                dateFilters.forEach(df => {
-                    df.addEventListener('change', (e) => {
-                        const val = e.target.value;
-                        // Sync desktop and mobile toggles
-                        document.querySelectorAll(`.date-filter[value="${val}"], .date-filter-mobile[value="${val}"]`).forEach(input => {
-                            input.checked = true;
-                        });
-                        applyFilters();
-                    });
-                });
-            }
-
-            // 4. Generate Cards
-            let html = '';
-            items.forEach(item => {
-                const tagsHtml = item.tags.map(tag => {
-                    let badgeClass = 'bg-secondary';
-                    let label = tag.charAt(0).toUpperCase() + tag.slice(1);
-
-                    // Food badges
-                    if (tag.toLowerCase().includes('vegetarian')) badgeClass = 'badge-veg';
-                    if (tag.toLowerCase().includes('vegan')) badgeClass = 'badge-vegan';
-                    if (tag.toLowerCase().includes('gluten-free')) { badgeClass = 'badge-gf'; label = 'GF'; }
-                    if (tag.toLowerCase().includes('main')) badgeClass = 'badge-main';
-                    if (tag.toLowerCase().includes('dessert') || tag.toLowerCase().includes('desert')) { badgeClass = 'badge-dessert'; label = 'Dessert'; }
-                    if (tag.toLowerCase().includes('drink')) badgeClass = 'badge-drink';
-                    if (tag.toLowerCase().includes('pizza')) badgeClass = 'badge-pizzas';
-                    if (tag.toLowerCase().includes('burger')) badgeClass = 'badge-burgers';
-                    if (tag.toLowerCase().includes('churros')) badgeClass = 'badge-churros';
-                    if (tag.toLowerCase().includes('mexican')) badgeClass = 'badge-mexican';
-                    if (tag.toLowerCase().includes('ice-cream')) { badgeClass = 'badge-ice-cream'; label = 'Ice Cream'; }
-                    if (tag.toLowerCase().includes('cake')) badgeClass = 'badge-cakes';
-
-                    // Entertainment badges
-                    if (tag.toLowerCase().includes('shows')) badgeClass = 'badge-shows';
-                    if (tag.toLowerCase().includes('music')) badgeClass = 'badge-music';
-                    if (tag.toLowerCase().includes('live-band')) { badgeClass = 'badge-live-band'; label = 'Live Band'; }
-                    if (tag.toLowerCase().includes('magic')) badgeClass = 'badge-magic';
-                    if (tag.toLowerCase().includes('rides')) badgeClass = 'badge-rides';
-                    if (tag.toLowerCase().includes('games')) badgeClass = 'badge-games';
-                    if (tag.toLowerCase().includes('kids')) badgeClass = 'badge-kids';
-                    if (tag.toLowerCase().includes('family')) badgeClass = 'badge-family';
-                    if (tag.toLowerCase().includes('adults')) badgeClass = 'badge-adults';
-                    if (tag.toLowerCase().includes('free')) badgeClass = 'badge-free';
-
-                    return `<span class="badge ${badgeClass}">${label}</span>`;
-                }).join('');
-
-                // Optional description support
-                const description = item.description ? `<p class="mb-2 text-white small" style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.8);">${item.description}</p>` : '';
-
-                const itemDays = item.days ? item.days.join(' ') : '';
-
-                html += `
-                    <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 card-wrapper" data-tags="${item.tags.join(' ')}" data-days="${itemDays}">
-                        <a href="${item.url}" target="_blank" class="card border-0 shadow-sm h-100 overflow-hidden text-decoration-none hover-scale">
-                            <div class="ratio ratio-4x3 p-5">
-                                <img src="${imagePrefix}${item.image}" class="card-img object-fit-cover" alt="${item.name}">
-                            </div>
-                            <div class="card-img-overlay d-flex flex-column justify-content-end" 
-                                style="background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);">
-                                <h4 class="card-title fw-bold text-white mb-1" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);">${item.name}</h4>
-                                <div class="text-white-50 small mb-2">${description.replace(/<[^>]*>?/gm, '').substring(0, 100)}...</div>
-                                <div class="d-flex flex-wrap gap-1">
-                                    ${item.tags.map(tag => `<span class="badge rounded-pill bg-brand-${tag} shadow-sm" style="font-size: 0.65rem;">${tag.replace(/-/g, ' ')}</span>`).join('')}
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                `;
-            });
-            cardContainer.innerHTML = html;
-
-            // --- URL Parameter Handling (Cards are in DOM) ---
-            const urlParams = new URLSearchParams(window.location.search);
-            const tagParam = urlParams.get('tag');
-            const dayParam = urlParams.get('day');
-
-            if (tagParam) {
-                toggleTagFilter(tagParam, true);
-            }
-            if (dayParam) {
-                document.querySelectorAll(`.date-filter[value="${dayParam}"], .date-filter-mobile[value="${dayParam}"]`).forEach(input => {
-                    input.checked = true;
-                });
-            }
-            if (tagParam || dayParam) {
-                applyFilters();
-            }
-        })
-        .catch(err => console.error('Failed to load cards:', err));
-}
-
-// Legacy function for backward compatibility
-function loadVendors() {
-    loadCards('vendors.json', '#vendor-container', '#dietary-filters');
-}
-
-// --- Dynamic Sponsors Logic ---
-function loadSponsors() {
-    const marqueeInner = document.querySelector('.animate-marquee');
-    if (!marqueeInner) return;
-
-    const currentPagePath = window.location.pathname;
-    const isIndexPage = (currentPagePath.endsWith('index.html') || currentPagePath.endsWith('/'));
-    const jsonPath = isIndexPage ? 'sponsors.json' : '../sponsors.json';
-    const imagePrefix = isIndexPage ? 'images/sponsors/' : '../images/sponsors/';
-
-    fetch(jsonPath)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.text();
-        })
-        .then(text => {
-            try {
-                const sponsors = JSON.parse(text);
-                let html = '';
-
-                // Helper function to render a single sponsor
-                const renderSponsor = (sponsor) => {
-                    // Support both old string format and new object format
-                    const imageName = typeof sponsor === 'string' ? sponsor : sponsor.image;
-                    const url = typeof sponsor === 'object' ? sponsor.url : null;
-
-                    const imgTag = `<img src="${imagePrefix}${imageName}" class="mx-2 rounded border border-2 bg-white shadow-sm sponsor-logo" alt="Logo of an official event sponsor." height="100">`;
-
-                    // If there's a URL, wrap the image in a link
-                    if (url) {
-                        return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="sponsor-link">${imgTag}</a>`;
-                    }
-                    return imgTag;
-                };
-
-                // If we have fewer than 4 sponsors, display them statically and centered
-                if (sponsors.length < 4) {
-                    marqueeInner.classList.remove('animate-marquee');
-                    marqueeInner.classList.add('static-sponsors');
-
-                    sponsors.forEach(sponsor => {
-                        html += renderSponsor(sponsor);
-                    });
-                } else {
-                    // Otherwise, scroll them smoothly
-                    marqueeInner.classList.add('animate-marquee');
-                    marqueeInner.classList.remove('static-sponsors');
-
-                    // We duplicate the list to ensure there's enough content to scroll smoothly
-                    const fullList = [...sponsors, ...sponsors];
-                    fullList.forEach(sponsor => {
-                        html += renderSponsor(sponsor);
-                    });
-
-                    // Add hover Pause logic
-                    const marqueeContainer = marqueeInner.parentElement;
-                    if (marqueeContainer) {
-                        marqueeContainer.addEventListener('mouseenter', () => {
-                            marqueeInner.style.animationPlayState = 'paused';
-                        });
-                        marqueeContainer.addEventListener('mouseleave', () => {
-                            marqueeInner.style.animationPlayState = 'running';
-                        });
-                    }
-                }
-
-                marqueeInner.innerHTML = html;
-            } catch (err) {
-                console.error('Failed to parse sponsors JSON:', err);
-                console.log('Raw response text:', text);
-            }
-        })
-        .catch(err => console.error('Failed to load sponsors:', err));
-}
-
-/**
- * Sets the copyright year in the footer to the current year.
- */
-// --- START: Konami Code & Custom Cursor Toggle ---
-// Sequence: ↑ ↑ ↓ ↓ ← → ← → b a
-const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-let konamiIndex = 0;
-
-document.addEventListener('keydown', (e) => {
-    // Check if the key matches the next step in the sequence
-    if (e.key === konamiCode[konamiIndex]) {
-        konamiIndex++;
-        // If the full sequence is entered
-        if (konamiIndex === konamiCode.length) {
-            toggleGooseCursor();
-            konamiIndex = 0;
-        }
-    } else {
-        // Reset index if a wrong key is pressed
-        konamiIndex = 0;
-    }
-});
-
-function toggleGooseCursor() {
-    const isEnabled = document.body.classList.toggle('goose-cursor-enabled');
-    localStorage.setItem('gooseCursorEnabled', isEnabled);
-    
-    // Visual feedback (optional but nice)
-    showToast(isEnabled ? "Silly Goose Mode: ON 🦢" : "Silly Goose Mode: OFF", isEnabled ? "#3d3b8e" : "#6c757d");
-}
-
-// Initialize cursor state from localStorage
-function initCursorState() {
-    if (localStorage.getItem('gooseCursorEnabled') === 'true') {
-        document.body.classList.add('goose-cursor-enabled');
-    }
-}
-initCursorState();
-
-// Simple toast notification for feedback
-function showToast(message, bgColor) {
-    const toast = document.createElement('div');
-    toast.textContent = message;
-    toast.style.position = 'fixed';
-    toast.style.bottom = '100px';
-    toast.style.left = '50%';
-    toast.style.transform = 'translateX(-50%)';
-    toast.style.backgroundColor = bgColor;
-    toast.style.color = 'white';
-    toast.style.padding = '12px 24px';
-    toast.style.borderRadius = '50px';
-    toast.style.zIndex = '9999';
-    toast.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
-    toast.style.transition = 'opacity 0.5s ease-in-out';
-    toast.style.pointerEvents = 'none';
-    
-    document.body.appendChild(toast);
-    
-    setTimeout(() => {
-        toast.style.opacity = '0';
-        setTimeout(() => document.body.removeChild(toast), 500);
-    }, 2000);
-}
-// --- END: Konami Code & Custom Cursor Toggle ---
-
-function setCopyrightYear() {
-    const yearElement = document.getElementById('copyright-year');
-    if (yearElement) yearElement.textContent = new Date().getFullYear();
-}
-
-// --- Event Day Toggling Logic ---
-function initializeEventToggling() {
-    const cards = document.querySelectorAll('.event-card');
-    const toggleBtns = document.querySelectorAll('.segmented-toggle .toggle-btn');
-    const toggleBg = document.getElementById('toggle-bg');
-    const day1Content = document.getElementById('day1-content');
-    const day2Content = document.getElementById('day2-content');
-
-    if (!day1Content || !day2Content) return;
-
-    function updateUI(day) {
-        // Update cards
-        cards.forEach(c => {
-            if (c.getAttribute('data-event-day') === day) {
-                c.classList.add('active');
-            } else {
-                c.classList.remove('active');
-            }
-        });
-
-        // Update toggle buttons
-        toggleBtns.forEach(btn => {
-            if (btn.getAttribute('data-toggle-day') === day) {
-                btn.classList.add('active');
-            } else {
-                btn.classList.remove('active');
-            }
-        });
-
-        // Update sliding background
-        if (toggleBg) {
-            if (day === '2') {
-                toggleBg.classList.add('day2');
-            } else {
-                toggleBg.classList.remove('day2');
-            }
-        }
-
-        // Toggle content visibility
-        if (day === '1') {
-            day1Content.style.display = 'block';
-            day2Content.style.display = 'none';
-        } else {
-            day1Content.style.display = 'none';
-            day2Content.style.display = 'block';
-        }
-    }
-
-    // Add listeners to cards
-    cards.forEach(card => {
-        card.addEventListener('click', () => {
-            updateUI(card.getAttribute('data-event-day'));
-        });
-    });
-
-    // Add listeners to toggle buttons
-    toggleBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            updateUI(btn.getAttribute('data-toggle-day'));
-        });
-    });
-
-    // Handle initial hash on load
-    const currentHash = window.location.hash;
-    if (currentHash === '#headliners' || currentHash === '#day1-content') {
-        updateUI('1');
-    } else if (currentHash === '#whatson' || currentHash === '#day2-content') {
-        updateUI('2');
-    }
-
-    // Handle hash change
-    window.addEventListener('hashchange', () => {
-        const newHash = window.location.hash;
-        if (newHash === '#headliners' || newHash === '#day1-content') {
-            updateUI('1');
-        } else if (newHash === '#whatson' || newHash === '#day2-content') {
-            updateUI('2');
-        }
-    });
-}
+// --- Legacy functions removed: loadCards, loadVendors, loadSponsors, legacy Konami, initializeCountdown, setCopyrightYear ---
 
 // Initialize everything when the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    initializeDarkMode();
-    initializeCountdown();
-    loadSponsors();
-    loadVendors();
-    initializeEventToggling();
-
     // Load mobile nav on all pages
     const mobileNavPlaceholder = document.getElementById('mobile-nav-placeholder');
     if (mobileNavPlaceholder) {
@@ -977,63 +466,83 @@ function renderBreweryCards(breweries, onCardClick) {
     }, 0);
 }
 
-// --- Dark Mode Logic ---
-function initializeDarkMode() {
-    const body = document.body;
-
-    // 1. Determine and apply initial theme
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme === 'dark' || (!savedTheme && systemPrefersDark)) {
-        body.classList.add('dark-mode');
-    }
-
-    // 2. Handle Toggle (using event delegation for dynamic content)
-    document.addEventListener('click', (e) => {
-        const toggleBtn = e.target.closest('#theme-toggle');
-        if (!toggleBtn) return;
-
-        const isNowDark = body.classList.toggle('dark-mode');
-        const icon = toggleBtn.querySelector('i');
-
-        if (isNowDark) {
-            localStorage.setItem('theme', 'dark');
-            if (icon) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            }
-        } else {
-            localStorage.setItem('theme', 'light');
-            if (icon) {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-        }
-    });
-
-    // 3. Listen for system preference changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        if (!localStorage.getItem('theme')) {
-            if (e.matches) {
-                body.classList.add('dark-mode');
+// --- Alpine.js Global Store ---
+document.addEventListener('alpine:init', () => {
+    Alpine.data('countdown', () => ({
+        timeLeft: '',
+        eventDate: new Date("June 14, 2026 10:00:00").getTime(),
+        init() {
+            this.update();
+            setInterval(() => this.update(), 1000);
+        },
+        update() {
+            const now = new Date().getTime();
+            const distance = this.eventDate - now;
+            if (distance < 0) {
+                this.timeLeft = "The Feast is on!";
             } else {
-                body.classList.remove('dark-mode');
-            }
-            // Update icon if navbar is present
-            const toggleBtn = document.getElementById('theme-toggle');
-            if (toggleBtn) {
-                const icon = toggleBtn.querySelector('i');
-                if (icon) {
-                    if (e.matches) {
-                        icon.classList.remove('fa-moon');
-                        icon.classList.add('fa-sun');
-                    } else {
-                        icon.classList.remove('fa-sun');
-                        icon.classList.add('fa-moon');
-                    }
-                }
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                this.timeLeft = `${days}d ${hours}h ${minutes}m ${seconds}s`;
             }
         }
+    }));
+
+    Alpine.store('app', {
+        theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
+        gooseEnabled: localStorage.getItem('gooseCursorEnabled') === 'true',
+        konamiIndex: 0,
+        konamiCode: ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'],
+        scrolled: false,
+
+        init() {
+            // Watch for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+                if (!localStorage.getItem('theme')) {
+                    this.theme = e.matches ? 'dark' : 'light';
+                }
+            });
+
+            // Watch for scroll
+            window.addEventListener('scroll', () => {
+                this.scrolled = window.scrollY > 200;
+            });
+        },
+
+        toggleTheme() {
+            this.theme = this.theme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', this.theme);
+        },
+
+        handleKonami(key) {
+            if (key === this.konamiCode[this.konamiIndex]) {
+                this.konamiIndex++;
+                if (this.konamiIndex === this.konamiCode.length) {
+                    this.toggleGoose();
+                    this.konamiIndex = 0;
+                }
+            } else {
+                this.konamiIndex = 0;
+            }
+        },
+
+        toggleGoose() {
+            this.gooseEnabled = !this.gooseEnabled;
+            localStorage.setItem('gooseCursorEnabled', this.gooseEnabled);
+            showToast(this.gooseEnabled ? "Silly Goose Mode: ON 🦢" : "Silly Goose Mode: OFF", this.gooseEnabled ? "#3d3b8e" : "#6c757d");
+        },
+
+        scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     });
-}
+
+    // Reactive effects for body classes
+    Alpine.effect(() => {
+        const app = Alpine.store('app');
+        document.body.classList.toggle('dark-mode', app.theme === 'dark');
+        document.body.classList.toggle('goose-cursor-enabled', app.gooseEnabled);
+    });
+});

@@ -27,8 +27,9 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- Custom Stylesheet -->
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
 
     <style>
@@ -44,7 +45,7 @@
     </style>
 </head>
 
-<body class="bg-light">
+<body class="bg-light" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
 
     <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>

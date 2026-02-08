@@ -20,14 +20,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome CDN -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- Custom Stylesheet -->
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <!-- Favicon Placeholder -->
 </head>
-<body class="bg-brand-light-blue">
+<body class="bg-brand-light-blue" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>

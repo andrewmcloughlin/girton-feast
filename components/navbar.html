@@ -92,10 +92,10 @@
                 </li>
             </ul>
             <!-- Controls Area: Countdown and Theme Toggle -->
-            <div class="d-flex align-items-center ms-auto">
-                <span id="countdown-timer" class="navbar-text text-white d-none d-md-inline" style="font-size: 0.9rem;"></span>
-                <button id="theme-toggle" class="theme-toggle-btn ms-3" title="Toggle dark mode">
-                    <i class="fas fa-moon"></i>
+            <div class="d-flex align-items-center ms-auto" x-data>
+                <span id="countdown-timer" x-data="countdown" x-text="timeLeft" class="navbar-text text-white d-none d-md-inline" style="font-size: 0.9rem;"></span>
+                <button id="theme-toggle" class="theme-toggle-btn ms-3" title="Toggle dark mode" @click="$store.app.toggleTheme()">
+                    <i class="fas" :class="$store.app.theme === 'dark' ? 'fa-sun' : 'fa-moon'"></i>
                 </button>
             </div>
         </div>

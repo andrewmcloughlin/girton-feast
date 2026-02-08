@@ -28,6 +28,9 @@
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <!-- Favicons -->
     <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
@@ -47,7 +50,7 @@
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#main-navbar" data-bs-smooth-scroll="true" tabindex="0"
-    class="px-0 mx-0 w-100 bg-light">
+    class="px-0 mx-0 w-100 bg-light" x-data="{ activeDay: 2 }" x-on:keydown.window="$store.app.handleKonami($event.key)">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
@@ -108,17 +111,19 @@
                 <!-- NEW Segmented Toggle Bar -->
                 <div class="col-12 event-toggle-wrapper">
                     <div class="segmented-toggle">
-                        <div id="toggle-bg" class="toggle-pill-bg day2"></div>
-                        <button type="button" class="toggle-btn" data-toggle-day="1">Friday Evening
-                            Concert</button>
-                        <button type="button" class="toggle-btn active" data-toggle-day="2">Saturday Village
-                            Fête</button>
+                        <div id="toggle-bg" class="toggle-pill-bg" :class="{ 'day2': activeDay === 2 }"></div>
+                        <button type="button" class="toggle-btn" :class="{ 'active': activeDay === 1 }" @click="activeDay = 1">
+                            Friday Evening Concert
+                        </button>
+                        <button type="button" class="toggle-btn" :class="{ 'active': activeDay === 2 }" @click="activeDay = 2">
+                            Saturday Village Fête
+                        </button>
                     </div>
                 </div>
 
                 <div class="col-12 col-lg-6 mb-4 mb-lg-0" style="overflow: visible;">
                     <div id="card-day1" class="card border-0 shadow-sm position-relative hover-scale h-100 event-card"
-                        data-event-day="1"
+                        :class="{ 'active': activeDay === 1 }" @click="activeDay = 1"
                         style="border-radius: 1.5rem; background: var(--brand-marian-blue); min-height: 200px; overflow: visible; margin-top: 1rem;">
                         <div class="card-body d-flex align-items-center p-4">
                             <!-- Image behind text -->
@@ -143,7 +148,8 @@
                 </div>
                 <div class="col-12 col-lg-6" style="overflow: visible;">
                     <div id="card-day2"
-                        class="card border-0 shadow-sm position-relative hover-scale h-100 event-card active"
+                        class="card border-0 shadow-sm position-relative hover-scale h-100 event-card"
+                        :class="{ 'active': activeDay === 2 }" @click="activeDay = 2"
                         data-event-day="2"
                         style="border-radius: 1.5rem; background: var(--brand-thulian-pink); min-height: 200px; overflow: visible; margin-top: 1rem;">
                         <div class="card-body d-flex align-items-center p-4">
@@ -169,8 +175,8 @@
             </div>
     </section>
 
-    <!-- Day 1 Content: Headliners (Hidden by default) -->
-    <div id="day1-content" class="toggle-section" style="display: none;">
+    <!-- Day 1 Content: Evening Concert -->
+    <div id="day1-content" class="toggle-section" x-show="activeDay === 1" x-cloak>
         <section id="headliners" class="container-fluid py-5 bg-brand-light-blue section-spacing">
             <h2 class="text-center display-5 mb-5"
                 style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Evening Concert: Rule The
@@ -238,7 +244,7 @@
     </div>
 
     <!-- Day 2 Content: Village Fete & Vendors (Visible by default) -->
-    <div id="day2-content" class="toggle-section">
+    <div id="day2-content" class="toggle-section" x-show="activeDay === 2" x-cloak>
         <!-- What's On Bento Grid Section -->
         <section id="whatson" class="bento-container container-fluid py-5 bg-brand-light-pink section-spacing">
             <h2 class="text-center display-5 mb-5"
@@ -495,7 +501,9 @@
     </section>
 
     <!-- Sponsors section (Permanent) -->
-    <section id="sponsors" class="container bg-white rounded py-5 section-spacing">
+    <section id="sponsors" class="container bg-white rounded py-5 section-spacing"
+             x-data="{ sponsors: [], imagePrefix: window.location.pathname.includes('pages/') ? '../images/sponsors/' : 'images/sponsors/' }"
+             x-init="sponsors = await (await fetch('sponsors.json')).json()">
         <div class="text-center">
             <!-- Updated the h2 color to be consistent with the other headers -->
             <h2 class="mb-4 display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
@@ -507,15 +515,33 @@
             </a>
         </div>
         <!-- Dynamic sponsors container -->
-        <div id="marquee-container" class="overflow-hidden py-2 mt-4">
-            <div class="d-flex align-items-center gap-4 animate-marquee">
-                <!-- Sponsor images will be loaded dynamically by script.js -->
+        <div id="marquee-container" class="overflow-hidden py-2 mt-4" 
+             @mouseenter="$refs.track.style.animationPlayState = 'paused'" 
+             @mouseleave="$refs.track.style.animationPlayState = 'running'">
+            <div x-ref="track" class="d-flex align-items-center gap-4" 
+                 :class="sponsors.length < 4 ? 'static-sponsors' : 'animate-marquee'">
+                <template x-for="sponsor in (sponsors.length < 4 ? sponsors : [...sponsors, ...sponsors])">
+                    <div class="d-inline-block">
+                        <template x-if="typeof sponsor === 'object' && sponsor.url">
+                            <a :href="sponsor.url" target="_blank" rel="noopener noreferrer" class="sponsor-link">
+                                <img :src="imagePrefix + (typeof sponsor === 'string' ? sponsor : sponsor.image)" 
+                                     class="mx-2 rounded border border-2 bg-white shadow-sm sponsor-logo" 
+                                     alt="Logo of an official event sponsor." height="100">
+                            </a>
+                        </template>
+                        <template x-if="typeof sponsor === 'string' || !sponsor.url">
+                            <img :src="imagePrefix + (typeof sponsor === 'string' ? sponsor : sponsor.image)" 
+                                 class="mx-2 rounded border border-2 bg-white shadow-sm sponsor-logo" 
+                                 alt="Logo of an official event sponsor." height="100">
+                        </template>
+                    </div>
+                </template>
             </div>
         </div>
     </section>
 
     <!-- Scroll to top button -->
-    <button onclick="topFunction()" id="scrollToTopBtn" title="Go to top">
+    <button x-data x-show="$store.app.scrolled" @click="$store.app.scrollToTop()" id="scrollToTopBtn" title="Go to top" x-cloak>
         <i class="fas fa-arrow-up"></i>
     </button>
 

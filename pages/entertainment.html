@@ -22,20 +22,50 @@
     <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poppins:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <!-- Font Awesome CDN -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- Custom Stylesheet -->
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <!-- Favicon Placeholder -->
 </head>
 
-<body class="bg-brand-glaucous">
+<body class="bg-brand-glaucous" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
 
-    <main class="container-xxl my-5">
+    <main class="container-xxl my-5" 
+          x-data="{ 
+            items: [], 
+            selectedDay: 'all', 
+            selectedTag: 'all', 
+            async init() {
+                const response = await fetch('../entertainment.json');
+                this.items = await response.json();
+                
+                // Handle initial filters from URL
+                const params = new URLSearchParams(window.location.search);
+                if (params.has('tag')) this.selectedTag = params.get('tag');
+                if (params.has('day')) this.selectedDay = params.get('day');
+            },
+            get filteredItems() {
+                return this.items.filter(item => {
+                    const dayMatch = this.selectedDay === 'all' || 
+                                   item.days.includes(this.selectedDay) || 
+                                   item.days.includes('Both');
+                    const tagMatch = this.selectedTag === 'all' || 
+                                   item.tags.includes(this.selectedTag);
+                    return dayMatch && tagMatch;
+                });
+            },
+            get uniqueTags() {
+                const tags = new Set();
+                this.items.forEach(item => item.tags.forEach(tag => tags.add(tag)));
+                return Array.from(tags).sort();
+            }
+          }">
         
         <div class="row pt-2">
             <!-- Sidebar for Desktop Filters -->
@@ -46,18 +76,47 @@
                 <div class="p-4 rounded-4 shadow-sm sticky-top bg-light" style="top: 100px;">
                     <div class="mb-5">
                         <div class="segmented-control d-flex gap-1 p-1 bg-dark bg-opacity-10 rounded-pill">
-                            <input type="radio" class="btn-check date-filter" name="day-filter" id="day-all" value="all" checked>
+                            <input type="radio" class="btn-check" name="day-filter" id="day-all" value="all" x-model="selectedDay">
                             <label class="btn btn-sm btn-outline-primary border-0 rounded-pill flex-fill py-2 fw-bold" for="day-all">Both</label>
                             
-                            <input type="radio" class="btn-check date-filter" name="day-filter" id="day-fri" value="Friday">
+                            <input type="radio" class="btn-check" name="day-filter" id="day-fri" value="Friday" x-model="selectedDay">
                             <label class="btn btn-sm btn-outline-primary border-0 rounded-pill flex-fill py-2 fw-bold" for="day-fri">Fri</label>
                             
-                            <input type="radio" class="btn-check date-filter" name="day-filter" id="day-sat" value="Saturday">
+                            <input type="radio" class="btn-check" name="day-filter" id="day-sat" value="Saturday" x-model="selectedDay">
                             <label class="btn btn-sm btn-outline-primary border-0 rounded-pill flex-fill py-2 fw-bold" for="day-sat">Sat</label>
                         </div>
                     </div>
                     <div id="entertainment-filters-sidebar" class="d-flex flex-column gap-2">
-                        <!-- Filters will be dynamically generated here -->
+                        <!-- All Categories Toggle -->
+                        <div class="filter-item d-flex align-items-center justify-content-between p-3 rounded-4 transition-300"
+                             :class="selectedTag === 'all' ? 'bg-brand-marian-blue text-white shadow' : 'bg-white hover-light'"
+                             @click="selectedTag = 'all'">
+                            <div class="d-flex align-items-center">
+                                <div class="filter-checkbox-custom me-3 rounded-circle border border-2 d-flex align-items-center justify-content-center"
+                                     :class="selectedTag === 'all' ? 'border-white bg-white-opacity-20' : 'border-secondary'">
+                                    <i class="fas fa-check small" x-show="selectedTag === 'all'"></i>
+                                </div>
+                                <span class="filter-label fw-bold">All Activities</span>
+                            </div>
+                            <span class="badge rounded-pill bg-white text-dark small" x-text="items.length"></span>
+                        </div>
+
+                        <!-- Dynamic Tag Filters -->
+                        <template x-for="tag in uniqueTags">
+                            <div class="filter-item d-flex align-items-center justify-content-between p-3 rounded-4 transition-300 text-capitalize"
+                                 :class="selectedTag === tag ? 'bg-brand-marian-blue text-white shadow' : 'bg-white hover-light'"
+                                 @click="selectedTag = tag">
+                                <div class="d-flex align-items-center">
+                                    <div class="filter-checkbox-custom me-3 rounded-circle border border-2 d-flex align-items-center justify-content-center"
+                                         :class="selectedTag === tag ? 'border-white bg-white-opacity-20' : 'border-secondary'">
+                                        <i class="fas fa-check small" x-show="selectedTag === tag"></i>
+                                    </div>
+                                    <span class="filter-label fw-bold" x-text="tag.replace(/-/g, ' ')"></span>
+                                </div>
+                                <span class="badge rounded-pill bg-white text-dark small" 
+                                      x-text="items.filter(i => i.tags.includes(tag)).length"></span>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </aside>
@@ -70,7 +129,28 @@
                         style="max-width: min(500px, 90vw);">
                 </div>
                 <div id="entertainment-container" class="row g-4">
-                    <!-- Entertainment cards will be dynamically loaded here -->
+                    <template x-for="item in filteredItems" :key="item.name">
+                        <div class="col-md-6 col-lg-4 col-xl-4 col-xxl-3 card-wrapper" x-show="true" x-transition>
+                            <a :href="item.url" target="_blank" class="card border-0 shadow-sm h-100 overflow-hidden text-decoration-none hover-scale">
+                                <div class="ratio ratio-4x3 p-5">
+                                    <img :src="'../' + item.image" class="card-img object-fit-cover" :alt="item.name">
+                                </div>
+                                <div class="card-img-overlay d-flex flex-column justify-content-end" 
+                                    style="background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);">
+                                    <h4 class="card-title fw-bold text-white mb-1" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);" x-text="item.name"></h4>
+                                    <div class="text-white-50 small mb-2" x-text="item.description.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...'"></div>
+                                    <div class="d-flex flex-wrap gap-1">
+                                        <template x-for="tag in item.tags">
+                                            <span class="badge rounded-pill shadow-sm" 
+                                                  :class="'bg-brand-' + tag" 
+                                                  style="font-size: 0.65rem;" 
+                                                  x-text="tag.replace(/-/g, ' ')"></span>
+                                        </template>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
@@ -95,21 +175,34 @@
                 <div class="mb-4">
                     <h6 class="fw-bold mb-3 text-muted small text-uppercase letter-spacing-1">Day</h6>
                     <div class="btn-group w-100 segmented-control" role="group" aria-label="Day Filter Mobile">
-                        <input type="radio" class="btn-check date-filter-mobile" name="day-filter-mobile" id="day-all-mobile" value="all" checked>
+                        <input type="radio" class="btn-check" name="day-filter-mobile" id="day-all-mobile" value="all" x-model="selectedDay">
                         <label class="btn btn-outline-primary py-2" for="day-all-mobile">Both</label>
                         
-                        <input type="radio" class="btn-check date-filter-mobile" name="day-filter-mobile" id="day-fri-mobile" value="Friday">
+                        <input type="radio" class="btn-check" name="day-filter-mobile" id="day-fri-mobile" value="Friday" x-model="selectedDay">
                         <label class="btn btn-outline-primary py-2" for="day-fri-mobile">Fri</label>
                         
-                        <input type="radio" class="btn-check date-filter-mobile" name="day-filter-mobile" id="day-sat-mobile" value="Saturday">
+                        <input type="radio" class="btn-check" name="day-filter-mobile" id="day-sat-mobile" value="Saturday" x-model="selectedDay">
                         <label class="btn btn-outline-primary py-2" for="day-sat-mobile">Sat</label>
                     </div>
                 </div>
 
-                <div class="mb-4">
+                <div>
                     <h6 class="fw-bold mb-3 text-muted small text-uppercase letter-spacing-1">Categories</h6>
-                    <div id="entertainment-filters-mobile" class="mobile-filter-grid">
-                        <!-- Filters will be dynamically generated here -->
+                    <div class="mobile-filter-grid overflow-auto pb-2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                        <!-- All Categories Toggle -->
+                        <div class="filter-item text-center p-2 rounded-3 border transition-200"
+                             :class="selectedTag === 'all' ? 'bg-brand-marian-blue text-white border-brand-marian-blue shadow-sm' : 'bg-light border-light-subtle'"
+                             @click="selectedTag = 'all'">
+                            <span class="small fw-bold">All</span>
+                        </div>
+                        <!-- Dynamic Tag Filters -->
+                        <template x-for="tag in uniqueTags">
+                            <div class="filter-item text-center p-2 rounded-3 border transition-200 text-capitalize"
+                                 :class="selectedTag === tag ? 'bg-brand-marian-blue text-white border-brand-marian-blue shadow-sm' : 'bg-light border-light-subtle'"
+                                 @click="selectedTag = tag">
+                                <span class="small fw-bold" x-text="tag.replace(/-/g, ' ')"></span>
+                            </div>
+                        </template>
                     </div>
                 </div>
 
@@ -142,9 +235,6 @@
         loadComponent("#navbar-placeholder", "../components/navbar.html");
         loadComponent("#footer-placeholder", "../components/footer.html")
             .then(() => setCopyrightYear());
-
-        // Load entertainment cards with sidebar and mobile filters
-        loadCards('entertainment.json', '#entertainment-container', '#entertainment-filters-sidebar, #entertainment-filters-mobile');
     </script>
 </body>
 

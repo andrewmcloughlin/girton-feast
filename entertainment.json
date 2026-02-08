@@ -1,5 +1,16 @@
 [
     {
+        "name": "Rule The World",
+        "image": "images/main_event/1.jpg",
+        "url": "https://ruletheworldofficial.com/",
+        "description": "Take That tribute band",
+        "tags": [
+            "music",
+            "shows"
+        ],
+        "days": ["Friday"]
+    },
+    {
         "name": "Kid's Magic Show",
         "image": "images/pompom_rainbow.png",
         "url": "https://pompomkidsparties.co.uk/",
@@ -145,17 +156,6 @@
             "sports"
         ],
         "days": ["Saturday"]
-    },
-    {
-        "name": "Rule The World",
-        "image": "images/main_event/1.jpg",
-        "url": "https://ruletheworldofficial.com/",
-        "description": "",
-        "tags": [
-            "music",
-            "shows"
-        ],
-        "days": ["Friday"]
     },
     {
         "name": "Model Aircraft Display",

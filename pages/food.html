@@ -22,35 +22,38 @@
     <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poppins:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <!-- Font Awesome CDN -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <!-- Custom Stylesheet -->
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body class="bg-light">
+<body class="bg-light" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
 
-    <main class="container my-5">
+    <main class="container my-5" 
+          x-data="{ 
+            vendors: [], 
+            selectedDiet: 'all',
+            get uniqueDiets() {
+                return [...new Set(this.vendors.flatMap(v => v.tags))].sort();
+            },
+            get filteredVendors() {
+                if (this.selectedDiet === 'all') return this.vendors;
+                return this.vendors.filter(v => v.tags.includes(this.selectedDiet));
+            }
+          }"
+          x-init="vendors = await (await fetch('../vendors.json')).json()">
         <!-- Header -->
         <div class="text-center pt-5 mb-5">
             <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Food &
                 Drink</h1>
             <p class="lead text-muted">Explore the delicious food and refreshing drinks available at the Feast.</p>
         </div>
-
-        <!-- Call to Action for Food & Drink Vendors -->
-        <!-- <div class="bg-brand-glaucous text-white p-5 rounded-4 text-center mb-5 shadow">
-            <h2 class="fw-bold mb-3">Want to be a food or drink vendor?</h2>
-            <p class="fs-5 mb-4">We'd love to have you! Click the button below to apply.</p>
-            <a href="../info/caterers-info.html" class="btn btn-light btn-lg fw-bold"
-                style="color: var(--brand-marian-blue);">
-                <i class="fas fa-info-circle"></i> Food & Drink Vendor Info
-            </a>
-        </div> -->
 
         <!-- Dietary Filter Section -->
         <div class="filter-section bg-white p-4 rounded-4 mb-5 shadow-sm sticky-top" style="z-index: 1020;">
@@ -64,13 +67,50 @@
             </div>
             <div class="collapse" id="dietary-filters-collapse">
                 <div id="dietary-filters" class="d-flex flex-wrap gap-2 mt-3">
-                    <!-- Filters will be dynamically generated here -->
+                    <button class="btn btn-sm rounded-pill px-3 transition-200"
+                            :class="selectedDiet === 'all' ? 'btn-brand-marian-blue text-white shadow-sm' : 'btn-outline-secondary opacity-75'"
+                            @click="selectedDiet = 'all'">
+                        All
+                    </button>
+                    <template x-for="diet in uniqueDiets">
+                        <button class="btn btn-sm rounded-pill px-3 transition-200 text-capitalize"
+                                :class="selectedDiet === diet ? 'btn-brand-marian-blue text-white shadow-sm' : 'btn-outline-secondary opacity-75'"
+                                @click="selectedDiet = diet"
+                                x-text="diet.replace(/-/g, ' ')">
+                        </button>
+                    </template>
                 </div>
             </div>
         </div>
 
         <div id="vendor-container" class="row g-4">
-            <!-- Vendor cards will be dynamically loaded here -->
+            <template x-for="vendor in filteredVendors">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 border-0 shadow-sm hover-lift overflow-hidden rounded-4">
+                        <a :href="vendor.url !== '#' ? vendor.url : 'javascript:void(0)'" 
+                           :target="vendor.url.startsWith('http') ? '_blank' : '_self'"
+                           class="text-decoration-none h-100 d-flex flex-column">
+                            <div class="position-relative overflow-hidden" style="aspect-ratio: 16/9;">
+                                <img :src="'../' + vendor.image" 
+                                     class="card-img-top w-100 h-100 object-cover transition-500" 
+                                     :alt="vendor.name">
+                            </div>
+                            <div class="card-body p-4 d-flex flex-column">
+                                <h5 class="card-title fw-bold mb-3" style="color: var(--brand-marian-blue);" x-text="vendor.name"></h5>
+                                <div class="mt-auto d-flex flex-wrap gap-2">
+                                    <template x-for="tag in vendor.tags">
+                                        <span class="badge rounded-pill shadow-sm py-1 px-3 text-capitalize"
+                                              :class="'bg-brand-' + tag"
+                                              style="font-size: 0.7rem; font-weight: 500;"
+                                              x-text="tag.replace(/-/g, ' ')">
+                                        </span>
+                                    </template>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </template>
         </div>
     </main>
 

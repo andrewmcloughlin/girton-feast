@@ -22,8 +22,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poppins:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <!-- Font Awesome CDN -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Alpine.js -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- 1. Add Fancybox CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
@@ -33,7 +35,7 @@
 </head>
 
 <body class="bg-brand-light-yellow" data-bs-spy="scroll" data-bs-target="#gallery-nav" data-bs-smooth-scroll="true"
-    tabindex="0">
+    tabindex="0" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
