@@ -78,8 +78,10 @@ body {
     background-color: var(--bg-primary) !important;
     padding-top: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
-    
-    /* Custom Cursor */
+}
+
+body.goose-cursor-enabled {
+    /* Custom Cursor enabled via Konami Code */
     cursor: url("../images/cursor.svg") 0 0, auto;
 }
 
@@ -112,7 +114,13 @@ body {
 }
 
 /* Selection variants for interactive elements */
-a, button, .cursor-pointer, input, select, textarea, [style*="cursor: pointer"] {
+body.goose-cursor-enabled a, 
+body.goose-cursor-enabled button, 
+body.goose-cursor-enabled .cursor-pointer, 
+body.goose-cursor-enabled input, 
+body.goose-cursor-enabled select, 
+body.goose-cursor-enabled textarea, 
+body.goose-cursor-enabled [style*="cursor: pointer"] {
     cursor: url("../images/cursor-active.svg") 0 0, pointer !important;
 }
 

@@ -470,6 +470,68 @@ function loadSponsors() {
 /**
  * Sets the copyright year in the footer to the current year.
  */
+// --- START: Konami Code & Custom Cursor Toggle ---
+// Sequence: ↑ ↑ ↓ ↓ ← → ← → b a
+const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+let konamiIndex = 0;
+
+document.addEventListener('keydown', (e) => {
+    // Check if the key matches the next step in the sequence
+    if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        // If the full sequence is entered
+        if (konamiIndex === konamiCode.length) {
+            toggleGooseCursor();
+            konamiIndex = 0;
+        }
+    } else {
+        // Reset index if a wrong key is pressed
+        konamiIndex = 0;
+    }
+});
+
+function toggleGooseCursor() {
+    const isEnabled = document.body.classList.toggle('goose-cursor-enabled');
+    localStorage.setItem('gooseCursorEnabled', isEnabled);
+    
+    // Visual feedback (optional but nice)
+    showToast(isEnabled ? "Silly Goose Mode: ON 🦢" : "Silly Goose Mode: OFF", isEnabled ? "#3d3b8e" : "#6c757d");
+}
+
+// Initialize cursor state from localStorage
+function initCursorState() {
+    if (localStorage.getItem('gooseCursorEnabled') === 'true') {
+        document.body.classList.add('goose-cursor-enabled');
+    }
+}
+initCursorState();
+
+// Simple toast notification for feedback
+function showToast(message, bgColor) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.style.position = 'fixed';
+    toast.style.bottom = '100px';
+    toast.style.left = '50%';
+    toast.style.transform = 'translateX(-50%)';
+    toast.style.backgroundColor = bgColor;
+    toast.style.color = 'white';
+    toast.style.padding = '12px 24px';
+    toast.style.borderRadius = '50px';
+    toast.style.zIndex = '9999';
+    toast.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+    toast.style.transition = 'opacity 0.5s ease-in-out';
+    toast.style.pointerEvents = 'none';
+    
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => document.body.removeChild(toast), 500);
+    }, 2000);
+}
+// --- END: Konami Code & Custom Cursor Toggle ---
+
 function setCopyrightYear() {
     const yearElement = document.getElementById('copyright-year');
     if (yearElement) yearElement.textContent = new Date().getFullYear();
