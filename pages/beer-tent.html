@@ -45,7 +45,7 @@
     </style>
 </head>
 
-<body class="bg-light" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
+<body class="bg-light" x-data="beerTent" x-on:keydown.window="$store.app.handleKonami($event.key)">
 
     <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
@@ -64,16 +64,16 @@
         <!-- View Toggle -->
         <div class="d-flex justify-content-center mb-5">
             <div class="btn-group" role="group" aria-label="View Toggle">
-                <input type="radio" class="btn-check view-toggle" name="btnradio" id="btn-breweries" autocomplete="off" checked data-target="brewery-view">
+                <input type="radio" class="btn-check" name="btnradio" id="btn-breweries" autocomplete="off" value="breweries" x-model="view">
                 <label class="btn btn-outline-primary px-4 py-2 fw-bold" for="btn-breweries">Breweries</label>
 
-                <input type="radio" class="btn-check view-toggle" name="btnradio" id="btn-beers" autocomplete="off" data-target="beer-view">
+                <input type="radio" class="btn-check" name="btnradio" id="btn-beers" autocomplete="off" value="beers" x-model="view">
                 <label class="btn btn-outline-primary px-4 py-2 fw-bold" for="btn-beers">Beers</label>
             </div>
         </div>
 
         <!-- BREWERY VIEW -->
-        <div id="brewery-view">
+        <div id="brewery-view" x-show="view === 'breweries'">
             <!-- Brewery Cards / Slider Section -->
             <div class="row mb-5">
                 <div class="col-12">
@@ -81,7 +81,20 @@
                         Our Breweries
                     </h2>
                     <div id="brewery-list" class="d-flex flex-nowrap overflow-auto pb-3 gap-3" style="scroll-behavior: smooth;">
-                        <!-- Brewery cards injected here -->
+                        <template x-for="brewery in sortedBreweries" :key="brewery.name">
+                            <div class="brewery-card-container" style="min-width: 260px; max-width: 260px;">
+                                <div class="card h-100 shadow-sm border-0 hover-scale" @click="activateBreweryFilter(brewery.name)" style="cursor: pointer;">
+                                    <div class="card-body text-center d-flex flex-column align-items-center justify-content-center p-4">
+                                        <div style="height: 80px; width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                                            <img :src="brewery.imagePath" :alt="brewery.name + ' Logo'" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                        </div>
+                                        <h5 class="card-title fw-bold text-truncate w-100" style="color: var(--brand-marian-blue); font-family: 'Sigmar One', cursive;" x-text="brewery.name"></h5>
+                                        <p class="card-text small text-muted text-truncate w-100" x-text="brewery.description || 'Proud local brewery.'"></p>
+                                        <a :href="brewery.website || '#'" target="_blank" class="btn btn-sm btn-outline-primary mt-3 website-btn" @click.stop>Visit Website</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -95,7 +108,7 @@
         </div>
 
         <!-- BEER VIEW (Hidden by default) -->
-        <div id="beer-view" class="d-none">
+        <div id="beer-view" x-show="view === 'beers'" x-cloak>
             <div class="row">
                 <div class="col-12">
                     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2" id="beer-list-section">
@@ -111,29 +124,33 @@
                                     <label class="form-label small fw-bold text-muted mb-1">Search</label>
                                     <div class="input-group">
                                         <span class="input-group-text bg-white border-end-0"><i class="fas fa-search text-muted"></i></span>
-                                        <input type="text" id="beer-search" class="form-control border-start-0" placeholder="Name, style...">
+                                        <input type="text" id="beer-search" class="form-control border-start-0" placeholder="Name, style..." x-model="filterSearch">
                                     </div>
                                 </div>
                                 <!-- Brewery Filter -->
                                 <div class="col-md-3">
                                     <label class="form-label small fw-bold text-muted mb-1">Brewery</label>
-                                    <select class="form-select" id="filter-brewery">
+                                    <select class="form-select" id="filter-brewery" x-model="filterBrewery">
                                         <option value="">All Breweries</option>
-                                        <!-- Populated via JS -->
+                                        <template x-for="b in sortedBreweries" :key="b.name">
+                                            <option :value="b.name" x-text="b.name"></option>
+                                        </template>
                                     </select>
                                 </div>
                                 <!-- Type/Style Filter -->
                                 <div class="col-md-3">
                                     <label class="form-label small fw-bold text-muted mb-1">Type</label>
-                                    <select class="form-select" id="filter-type">
+                                    <select class="form-select" id="filter-type" x-model="filterType">
                                         <option value="">All Types</option>
-                                        <!-- Populated via JS -->
+                                        <template x-for="t in filterTypes" :key="t">
+                                            <option :value="t" x-text="t"></option>
+                                        </template>
                                     </select>
                                 </div>
                                 <!-- Sort -->
                                 <div class="col-md-2">
                                     <label class="form-label small fw-bold text-muted mb-1">Sort By</label>
-                                    <select class="form-select" id="sort-select">
+                                    <select class="form-select" id="sort-select" x-model="sortBy">
                                         <option value="name">Name (A-Z)</option>
                                         <option value="abv-asc">ABV (Low)</option>
                                         <option value="abv-desc">ABV (High)</option>
@@ -144,12 +161,39 @@
                         </div>
 
                         <div id="beer-list" class="row g-4">
-                            <!-- Beer items will be injected here -->
-                            <div class="col-12 text-center py-5">
+                            <!-- Empty State -->
+                            <div class="col-12 text-center text-muted py-5" x-show="filteredBeers.length === 0 && allBeers.length > 0" style="display: none;">
+                                No beers found matching your criteria.
+                            </div>
+                            <!-- Loading State -->
+                             <div class="col-12 text-center py-5" x-show="allBeers.length === 0">
                                 <div class="spinner-border text-primary" role="status">
                                     <span class="visually-hidden">Loading...</span>
                                 </div>
                             </div>
+
+                            <!-- Beer Items -->
+                            <template x-for="beer in filteredBeers" :key="beer.name + beer.breweryName">
+                                <div class="col-md-6 col-lg-4">
+                                    <div class="beer-card bg-white h-100">
+                                        <div class="d-flex align-items-start">
+                                             <div style="flex-shrink: 0;" class="me-3">
+                                                 <img :src="beer.breweryLogo" class="brewery-logo-small rounded-circle border p-1" :alt="beer.breweryName + ' logo'" style="width:50px; height:50px;">
+                                             </div>
+                                            <div class="flex-grow-1">
+                                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                                    <h5 class="mb-0 fw-bold text-dark lh-sm" x-text="beer.name"></h5>
+                                                    <span class="abv-badge ms-2" style="flex-shrink:0;" x-text="beer.abv.toFixed(1) + '%'"></span>
+                                                </div>
+                                                <div class="brewery-name small mb-2" x-text="beer.breweryName"></div>
+                                                <span class="badge rounded-pill text-bg-light border border-secondary-subtle text-secondary fw-normal">
+                                                    <i class="fas fa-beer me-1 opacity-50"></i> <span x-text="beer.style"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -171,6 +215,169 @@
     <!-- Main Script -->
     <script src="../js/script.js"></script>
 
+    <!-- Alpine Component: Beer Tent -->
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('beerTent', () => ({
+                allBeers: [],
+                breweries: [],
+                view: 'breweries', // 'breweries' or 'beers'
+                filterBrewery: '',
+                filterType: '',
+                filterSearch: '',
+                sortBy: 'name',
+                map: null,
+
+                get filterTypes() {
+                    const types = new Set();
+                    this.allBeers.forEach(b => { if(b.style) types.add(b.style); });
+                    return Array.from(types).sort();
+                },
+
+                get sortedBreweries() {
+                     return [...this.breweries].sort((a,b) => a.name.localeCompare(b.name));
+                },
+
+                get filteredBeers() {
+                    let filtered = [...this.allBeers];
+
+                    if (this.filterBrewery) {
+                        filtered = filtered.filter(beer => beer.breweryName === this.filterBrewery);
+                    }
+                    if (this.filterType) {
+                        filtered = filtered.filter(beer => beer.style === this.filterType);
+                    }
+                    if (this.filterSearch) {
+                        const term = this.filterSearch.toLowerCase();
+                        filtered = filtered.filter(beer =>
+                            beer.name.toLowerCase().includes(term) ||
+                            beer.breweryName.toLowerCase().includes(term) ||
+                            beer.style.toLowerCase().includes(term)
+                        );
+                    }
+
+                    if (this.sortBy === 'name') {
+                        filtered.sort((a, b) => a.name.localeCompare(b.name));
+                    } else if (this.sortBy === 'abv-asc') {
+                        filtered.sort((a, b) => a.abv - b.abv);
+                    } else if (this.sortBy === 'abv-desc') {
+                        filtered.sort((a, b) => b.abv - a.abv);
+                    } else if (this.sortBy === 'brewery') {
+                        filtered.sort((a, b) => a.breweryName.localeCompare(b.breweryName));
+                    }
+                    return filtered;
+                },
+
+                init() {
+                    fetch('../beer-tent.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            this.breweries = data;
+                            this.allBeers = [];
+                            this.breweries.forEach(brewery => {
+                                brewery.imagePath = '../' + brewery.logo;
+                                brewery.beers.forEach(beer => {
+                                    this.allBeers.push({
+                                        ...beer,
+                                        breweryName: brewery.name,
+                                        breweryId: brewery.id,
+                                        breweryLogo: brewery.imagePath
+                                    });
+                                });
+                            });
+                            
+                            this.$nextTick(() => {
+                                this.initMap();
+                            });
+                        })
+                        .catch(err => console.error('Failed to load beer data:', err));
+                        
+                    this.$watch('view', value => {
+                        if (value === 'breweries' && this.map) {
+                            setTimeout(() => { this.map.invalidateSize(); }, 100);
+                        }
+                    });
+
+                    document.addEventListener('brewery-selected', (e) => {
+                        this.activateBreweryFilter(e.detail);
+                    });
+                },
+
+                setView(v) {
+                    this.view = v;
+                },
+
+                activateBreweryFilter(name) {
+                    this.filterBrewery = name;
+                    this.view = 'beers';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                },
+
+                initMap() {
+                    const container = document.getElementById('brewery-map');
+                    if (!container || this.map) return;
+
+                    var girtonCoords = [52.240069, 0.084899];
+                    this.map = L.map(container).setView(girtonCoords, 11);
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(this.map);
+
+                    var feastIcon = L.divIcon({
+                        className: 'feast-marker',
+                        html: '<i class="fas fa-flag fa-2x" style="color: #e91e63; text-shadow: 2px 2px 0 #fff;"></i>',
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 30],
+                        popupAnchor: [0, -30]
+                    });
+                    var feastMarker = L.marker(girtonCoords, { icon: feastIcon, zIndexOffset: 1000 }).addTo(this.map);
+                    feastMarker.bindPopup('<div class="text-center"><h6 class="fw-bold mb-0">Girton Feast</h6><p class="small mb-0">You are here!</p></div>');
+                    
+                    var markers = [feastMarker];
+                    
+                    this.breweries.forEach(brewery => {
+                        let lat = brewery.coords[0];
+                        let lng = brewery.coords[1];
+                        var logoIcon = L.divIcon({
+                            className: 'brewery-logo-marker',
+                            html: `<div style="width: 50px; height: 100px; display: flex; flex-direction:column; align-items: center; justify-content: flex-start;">
+                                    <div style="width: 50px; height: 50px; background:white; border-radius:50%; border: 2px solid #ccc; display:flex; align-items:center; justify-content:center; overflow:hidden;">
+                                     <img src="${brewery.imagePath}" style="width: 100%; height: 100%; object-fit: contain;">
+                                    </div>
+                                    <div class="map-pin-arrow" style="width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #ccc; margin-top:-2px;"></div>
+                                   </div>`,
+                            iconSize: [50, 70],
+                            iconAnchor: [25, 65],
+                            popupAnchor: [0, -65]
+                        });
+                        const marker = L.marker([lat, lng], { icon: logoIcon }).addTo(this.map);
+
+                        const popupContent = `
+                            <div class="text-center" style="cursor: pointer;">
+                                <img src="${brewery.imagePath}" width="50" class="mb-2">
+                                <h6 class="fw-bold mb-1">${brewery.name}</h6>
+                                <p class="small mb-0 text-muted">${brewery.description || ''}</p>
+                                <button class="btn btn-sm btn-primary mt-2 filter-map-btn" onclick="document.dispatchEvent(new CustomEvent('brewery-selected', { detail: '${brewery.name}' }))">Show Beers</button>
+                            </div>
+                        `;
+                        
+                        marker.bindPopup(popupContent);
+                        marker.on('click', () => {
+                             this.activateBreweryFilter(brewery.name);
+                        });
+                        
+                        markers.push(marker);
+                    });
+                    
+                    if (markers.length > 0) {
+                         var group = new L.featureGroup(markers);
+                         this.map.fitBounds(group.getBounds().pad(0.1));
+                    }
+                }
+            }));
+        });
+    </script>
+
     <!-- Page Specific Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -179,7 +386,8 @@
                 .then(() => setCopyrightYear());
 
             // Initialize functionality
-            initBeerTent();
+            // initBeerTent() removed - handled by Alpine
+
         });
     </script>
 </body>
