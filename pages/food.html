@@ -30,12 +30,12 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body class="bg-light" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
+<body class="bg-brand-glaucous" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
 
-    <main class="container my-5" 
+    <main class="container-xxl my-5" 
           x-data="{ 
             vendors: [], 
             selectedDiet: 'all',
@@ -48,69 +48,134 @@
             }
           }"
           x-init="vendors = await (await fetch('../vendors.json')).json()">
-        <!-- Header -->
-        <div class="text-center pt-5 mb-5">
-            <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Food &
-                Drink</h1>
-            <p class="lead text-muted">Explore the delicious food and refreshing drinks available at the Feast.</p>
-        </div>
+        
+        <div class="row pt-2">
+            <!-- Sidebar for Desktop Filters -->
+            <aside class="col-lg-3 d-none d-lg-block">
+                <div class="text-center mb-4">
+                    <!-- header image to go here -->
+                </div>
+                <div class="p-4 rounded-4 shadow-sm sticky-top bg-light" style="top: 100px;">
+                    <h5 class="fw-bold mb-4" style="color: var(--brand-marian-blue);">
+                        <i class="fas fa-filter me-2 small"></i>Filters
+                    </h5>
+                    
+                    <div id="food-filters-sidebar" class="d-flex flex-column gap-2">
+                        <!-- All Categories Toggle -->
+                        <div class="filter-item d-flex align-items-center justify-content-between p-3 rounded-4 transition-300 cursor-pointer"
+                             :class="selectedDiet === 'all' ? 'bg-brand-marian-blue text-white shadow' : 'bg-white hover-light'"
+                             @click="selectedDiet = 'all'">
+                            <div class="d-flex align-items-center">
+                                <div class="filter-checkbox-custom me-3 rounded-circle border border-2 d-flex align-items-center justify-content-center"
+                                     :class="selectedDiet === 'all' ? 'border-white bg-white-opacity-20' : 'border-secondary'">
+                                    <i class="fas fa-check small" x-show="selectedDiet === 'all'"></i>
+                                </div>
+                                <span class="filter-label fw-bold">All Food & Drink</span>
+                            </div>
+                            <span class="badge rounded-pill bg-white text-dark small" x-text="vendors.length"></span>
+                        </div>
 
-        <!-- Dietary Filter Section -->
-        <div class="filter-section bg-white p-4 rounded-4 mb-5 shadow-sm sticky-top" style="z-index: 1020;">
-            <div class="d-flex justify-content-between align-items-center cursor-pointer" data-bs-toggle="collapse"
-                data-bs-target="#dietary-filters-collapse" aria-expanded="false"
-                aria-controls="dietary-filters-collapse">
-                <h5 class="fw-bold mb-0" style="color: var(--brand-marian-blue);">
-                    <i class="fas fa-filter me-2 small"></i>Filters
-                </h5>
-                <i class="fas fa-chevron-down filter-chevron transition-300"></i>
-            </div>
-            <div class="collapse" id="dietary-filters-collapse">
-                <div id="dietary-filters" class="d-flex flex-wrap gap-2 mt-3">
-                    <button class="btn btn-sm rounded-pill px-3 transition-200"
-                            :class="selectedDiet === 'all' ? 'btn-brand-marian-blue text-white shadow-sm' : 'btn-outline-secondary opacity-75'"
-                            @click="selectedDiet = 'all'">
-                        All
-                    </button>
-                    <template x-for="diet in uniqueDiets">
-                        <button class="btn btn-sm rounded-pill px-3 transition-200 text-capitalize"
-                                :class="selectedDiet === diet ? 'btn-brand-marian-blue text-white shadow-sm' : 'btn-outline-secondary opacity-75'"
-                                @click="selectedDiet = diet"
-                                x-text="diet.replace(/-/g, ' ')">
-                        </button>
+                        <!-- Dynamic Tag Filters -->
+                        <template x-for="diet in uniqueDiets">
+                            <div class="filter-item d-flex align-items-center justify-content-between p-3 rounded-4 transition-300 text-capitalize cursor-pointer"
+                                 :class="selectedDiet === diet ? 'bg-brand-marian-blue text-white shadow' : 'bg-white hover-light'"
+                                 @click="selectedDiet = diet">
+                                <div class="d-flex align-items-center">
+                                    <div class="filter-checkbox-custom me-3 rounded-circle border border-2 d-flex align-items-center justify-content-center"
+                                         :class="selectedDiet === diet ? 'border-white bg-white-opacity-20' : 'border-secondary'">
+                                        <i class="fas fa-check small" x-show="selectedDiet === diet"></i>
+                                    </div>
+                                    <span class="filter-label fw-bold" x-text="diet.replace(/-/g, ' ')"></span>
+                                </div>
+                                <span class="badge rounded-pill bg-white text-dark small" 
+                                      x-text="vendors.filter(v => v.tags.includes(diet)).length"></span>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <div class="col-lg-9">
+                <!-- Header -->
+                <div class="text-center pt-5 mb-5">
+                    <img src="../images/titles/food-and-drink-text.svg" alt="Food & Drink Header" class="img-fluid"
+                        style="max-height: min(150px, 90vw);">
+                </div>
+
+                <div id="vendor-container" class="row g-4">
+                    <template x-for="vendor in filteredVendors">
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card border-0 shadow-sm h-100 overflow-hidden text-decoration-none hover-scale rounded-4">
+                                <a :href="vendor.url !== '#' ? vendor.url : 'javascript:void(0)'" 
+                                   :target="vendor.url.startsWith('http') ? '_blank' : '_self'"
+                                   class="text-decoration-none h-100 d-flex flex-column">
+                                    <div class="ratio ratio-4x3">
+                                        <img :src="'../' + vendor.image" 
+                                             class="card-img object-fit-cover" 
+                                             :alt="vendor.name">
+                                    </div>
+                                    <div class="card-img-overlay d-flex flex-column justify-content-end" 
+                                        style="background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);">
+                                        <h4 class="card-title fw-bold text-white mb-2" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);" x-text="vendor.name"></h4>
+                                        <div class="d-flex flex-wrap gap-1">
+                                            <template x-for="tag in vendor.tags">
+                                                <span class="badge rounded-pill shadow-sm text-capitalize"
+                                                      :class="'bg-brand-' + tag"
+                                                      style="font-size: 0.65rem;"
+                                                      x-text="tag.replace(/-/g, ' ')">
+                                                </span>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </template>
                 </div>
             </div>
         </div>
 
-        <div id="vendor-container" class="row g-4">
-            <template x-for="vendor in filteredVendors">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 border-0 shadow-sm hover-lift overflow-hidden rounded-4">
-                        <a :href="vendor.url !== '#' ? vendor.url : 'javascript:void(0)'" 
-                           :target="vendor.url.startsWith('http') ? '_blank' : '_self'"
-                           class="text-decoration-none h-100 d-flex flex-column">
-                            <div class="position-relative overflow-hidden" style="aspect-ratio: 16/9;">
-                                <img :src="'../' + vendor.image" 
-                                     class="card-img-top w-100 h-100 object-cover transition-500" 
-                                     :alt="vendor.name">
-                            </div>
-                            <div class="card-body p-4 d-flex flex-column">
-                                <h5 class="card-title fw-bold mb-3" style="color: var(--brand-marian-blue);" x-text="vendor.name"></h5>
-                                <div class="mt-auto d-flex flex-wrap gap-2">
-                                    <template x-for="tag in vendor.tags">
-                                        <span class="badge rounded-pill shadow-sm py-1 px-3 text-capitalize"
-                                              :class="'bg-brand-' + tag"
-                                              style="font-size: 0.7rem; font-weight: 500;"
-                                              x-text="tag.replace(/-/g, ' ')">
-                                        </span>
-                                    </template>
-                                </div>
-                            </div>
-                        </a>
+        <!-- Floating Action Button for Mobile Filters -->
+        <button class="fab-filter d-lg-none" type="button" data-bs-toggle="offcanvas" 
+            data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
+            <i class="fas fa-filter"></i>
+        </button>
+
+        <!-- Offcanvas Mobile Filters -->
+        <div class="offcanvas offcanvas-bottom rounded-top-4" tabindex="-1" id="offcanvasFilters" 
+        aria-labelledby="offcanvasFiltersLabel" style="height: auto; max-height: 85vh;">
+            <div class="offcanvas-header border-bottom py-3">
+                <h5 class="offcanvas-title fw-bold" id="offcanvasFiltersLabel" style="color: var(--brand-marian-blue);">
+                    <i class="fas fa-sliders-h me-2"></i>Filter Food & Drink
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-4">
+                <h6 class="fw-bold mb-3 text-muted small text-uppercase letter-spacing-1">Categories</h6>
+                <div class="mobile-filter-grid overflow-auto pb-2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <!-- All Categories Toggle -->
+                    <div class="filter-item text-center p-2 rounded-3 border transition-200 cursor-pointer"
+                         :class="selectedDiet === 'all' ? 'bg-brand-marian-blue text-white border-brand-marian-blue shadow-sm' : 'bg-light border-light-subtle'"
+                         @click="selectedDiet = 'all'">
+                        <span class="small fw-bold">All</span>
                     </div>
+                    <!-- Dynamic Tag Filters -->
+                    <template x-for="diet in uniqueDiets">
+                        <div class="filter-item text-center p-2 rounded-3 border transition-200 text-capitalize cursor-pointer"
+                             :class="selectedDiet === diet ? 'bg-brand-marian-blue text-white border-brand-marian-blue shadow-sm' : 'bg-light border-light-subtle'"
+                             @click="selectedDiet = diet">
+                            <span class="small fw-bold" x-text="diet.replace(/-/g, ' ')"></span>
+                        </div>
+                    </template>
                 </div>
-            </template>
+
+                <div class="mt-4 pt-2">
+                    <button type="button" class="btn btn-brand-marian-blue w-100 rounded-pill py-3 fw-bold shadow-sm" data-bs-dismiss="offcanvas">
+                        Show Results
+                    </button>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -130,5 +195,6 @@
 
     </script>
 </body>
+
 
 </html>

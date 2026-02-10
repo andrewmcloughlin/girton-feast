@@ -13,6 +13,10 @@ Global Styles & Variables
     --brand-light-blue: #e9eff9;
     --brand-light-pink: #f7e9ed;
     --brand-light-yellow: #fff8e1;
+
+    /* Default Badge Style */
+    --badge-bg: var(--brand-glaucous);
+    --badge-text: #ffffff;
     
     /* Bootstrap Theme Overrides - Hex */
     --bs-primary: var(--brand-marian-blue);
@@ -79,6 +83,7 @@ body {
     padding-top: 0;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 
 body.goose-cursor-enabled {
     /* Custom Cursor enabled via Konami Code */
@@ -377,6 +382,33 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
 .bg-brand-light-blue { background-color: var(--brand-light-blue) !important; }
 .bg-brand-light-pink { background-color: var(--brand-light-pink) !important; }
 .bg-brand-light-yellow { background-color: var(--brand-light-yellow) !important; }
+
+/* Tag Specific Brand Backgrounds */
+.bg-brand-vegetarian { background-color: #2e7d32 !important; color: white !important; }
+.bg-brand-main-course { background-color: var(--brand-marian-blue) !important; color: white !important; }
+.bg-brand-cakes { background-color: var(--brand-thulian-pink) !important; color: white !important; }
+.bg-brand-deserts { background-color: #8e24aa !important; color: white !important; }
+.bg-brand-pizzas { background-color: #bf360c !important; color: white !important; }
+.bg-brand-burgers { background-color: #795548 !important; color: white !important; }
+.bg-brand-churros { background-color: #ff8f00 !important; color: white !important; }
+.bg-brand-mexican { background-color: #d32f2f !important; color: white !important; }
+.bg-brand-ice-cream { background-color: #00acc1 !important; color: white !important; }
+.bg-brand-beer { background-color: var(--brand-saffron) !important; color: var(--brand-marian-blue) !important; }
+.bg-brand-drinks { background-color: #03a9f4 !important; color: white !important; }
+.bg-brand-music { background-color: var(--brand-glaucous) !important; color: white !important; }
+.bg-brand-shows { background-color: var(--brand-giants-orange) !important; color: white !important; }
+.bg-brand-kids { background-color: #ba68c8 !important; color: white !important; }
+.bg-brand-free { background-color: #00796b !important; color: white !important; }
+.bg-brand-rides { background-color: #f4511e !important; color: white !important; }
+.bg-brand-games { background-color: #9ebc3a !important; color: var(--brand-marian-blue) !important; }
+.bg-brand-sports { background-color: #1a237e !important; color: white !important; }
+.bg-brand-food-and-drink { background-color: #455a64 !important; color: white !important; }
+
+/* Consolidated Food Tags */
+.bg-brand-mains { background-color: var(--brand-marian-blue) !important; color: white !important; }
+.bg-brand-desserts { background-color: var(--brand-thulian-pink) !important; color: white !important; }
+
+
 
 /* Dark Mode Overrides for Brand Backgrounds */
 .dark-mode .bg-brand-marian-blue { background-color: #0d0d0d !important; }
