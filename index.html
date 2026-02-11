@@ -76,15 +76,18 @@
                         <b>Fri 10 July - Concert</b>
                     </a>
                     <a target="_blank"
-                        class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale"
+                        class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale border-start border-white-25"
                         href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Village+Fete&dates=20260711T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
                         <b>Sat 11 July - Village Fete</b>
                     </a>
                 </div>
-                <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank"
-                    class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale">
-                    Girton Rec
-                </a>
+                <div class="btn-group rounded-pill overflow-hidden shadow-sm" role="group" aria-label="Calendar events">
+                    <a target="_blank"
+                        class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale"
+                        href="getting-here.html">
+                        <b>Girton Rec</b>
+                    </a>
+                </div>
             </div>
         </div>
         <div class="text-center pt-4 text-white">
@@ -226,7 +229,7 @@
                     <div class="p-5 pt-1">
 
                         <h2 class="display-6 fw-bold mb-4" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
-                            Rule The World:<br>The&nbsp;Ultimate&nbsp;Tribute
+                            Rule The World:<br>The Ultimate Tribute
                         </h2>
                         
                         <div class="row justify-content-center g-4 mb-5 text-start">
@@ -496,25 +499,47 @@
 
 
 
-    <!-- Get involved! section center-aligned -->
-    <section id="involved" class="container py-5 section-spacing">
-        <div class="row justify-content-center">
-            <div class="col-lg-10 col-xl-8 bg-brand-glaucous text-white p-5 rounded-4 shadow-sm text-center">
-                <img src="images/get-involved.svg" alt="Get Involved"
+    <div id="get-involved">
+        <section id="get-involved" class="container-fluid py-5 bg-brand-light-blue section-spacing">
+            <div class="row">
+                <div class="text-center bg-white p-0 pt-4 rounded-4 shadow mt-4">
+                    <img src="images/get-involved.svg" alt="Get Involved"
                      style="max-width: 100%; height: auto; max-height: 200px;"
-                     class="mb-4">
-                <p class="mx-4 fs-5">
-                    There are lots of ways to make a difference in your community.
-                    Whether you want to volunteer your time, donate resources,
-                    or simply spread the word, we welcome your support!
-                </p>
-                <a href="pages/contact.html" class="btn btn-light btn-lg fs-5 fw-bold"
-                   style="color: var(--brand-marian-blue);">
-                    Contact Us
-                </a>
+                     class="m-4 pt-6">
+                     <div class="p-4">
+                         <p>Girton Feast is a community event run by local volunteers for the benefit of the village.</p>
+                     </div>
+                    <div class="p-5 pt-1">
+                        
+                        <div class="row justify-content-center g-4 mb-5 text-start">
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-1 h-100 border-start shadow-sm">
+                                <h5 class="fw-bold text-brand-marian-blue mb-2">
+                                    Volunteer
+                                </h5>
+                                <p class="mb-0 small">From hanging up bunting to helping with the beer tent, there are lots of ways to get involved.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-1 h-100 border-start shadow-sm">
+                                <h5 class="fw-bold text-brand-thulian-pink mb-2">
+                                    Sponsor
+                                </h5>
+                                <p class="mb-2 small">We're looking for sponsors.
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="/pages/contact.html" target="_blank" rel="noopener noreferrer" 
+                        class="btn btn-lg fw-bold px-5 py-3 shadow hover-scale transition-300 animate-pulse"
+                        style="background-color: #FFC107; color: #000; font-size: 1.4rem; border-radius: 50px; border: none;">
+                        Contact Us
+                    </a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <!-- Sponsors section -->
     <section id="sponsors" class="container bg-white rounded py-5 section-spacing"
