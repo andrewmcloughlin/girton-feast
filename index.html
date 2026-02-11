@@ -50,7 +50,7 @@
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#main-navbar" data-bs-smooth-scroll="true" tabindex="0"
-    class="px-0 mx-0 w-100 bg-light" x-data="{ activeDay: 2 }" x-on:keydown.window="$store.app.handleKonami($event.key)">
+    class="px-0 mx-0 w-100 bg-light" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
@@ -68,17 +68,19 @@
                 2026</h2>
         </div>
         <div class="p-4">
-            <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2">
-                <a target="_blank"
-                    class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale"
-                    href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Concert&dates=20260710T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
-                    Fri 10 July - Concert
-                </a>
-                <a target="_blank"
-                    class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale"
-                    href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Village+Fete&dates=20260711T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
-                    Sat 11 July - Village Fete
-                </a>
+            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center text-center gap-3">
+                <div class="btn-group rounded-pill overflow-hidden shadow-sm" role="group" aria-label="Calendar events">
+                    <a target="_blank"
+                        class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale border-end border-white-25"
+                        href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Concert&dates=20260710T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
+                        <b>Fri 10 July - Concert</b>
+                    </a>
+                    <a target="_blank"
+                        class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale"
+                        href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Village+Fete&dates=20260711T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
+                        <b>Sat 11 July - Village Fete</b>
+                    </a>
+                </div>
                 <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank"
                     class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale">
                     Girton Rec
@@ -97,6 +99,9 @@
             class="img-fluid mx-auto d-block mb-0" style="max-width: 100%; height: auto; display: none;"
             onload="this.style.display='block'">
     </section>
+
+
+
     <section class="mb-4">
         <div class="container mb-4">
             <div class="row mb-4">
@@ -108,77 +113,76 @@
                     </h1>
                 </div>
 
-                <!-- NEW Segmented Toggle Bar -->
-                <div class="col-12 event-toggle-wrapper">
-                    <div class="segmented-toggle">
-                        <div id="toggle-bg" class="toggle-pill-bg" :class="{ 'day2': activeDay === 2 }"></div>
-                        <button type="button" class="toggle-btn" :class="{ 'active': activeDay === 1 }" @click="activeDay = 1">
-                            Friday Evening Concert
-                        </button>
-                        <button type="button" class="toggle-btn" :class="{ 'active': activeDay === 2 }" @click="activeDay = 2">
-                            Saturday Village Fête
-                        </button>
-                    </div>
-                </div>
+    <!-- Feast Events Timeline Section -->
+    <section id="events-timeline" class="py-5 bg-white">
+        <div class="container py-4">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="timeline position-relative">
+                        <!-- Vertical line -->
+                        <div class="timeline-line position-absolute start-50 translate-middle-x h-100 d-none d-md-block" 
+                             style="width: 4px; background-color: var(--brand-glaucous); opacity: 0.2; top: 0;"></div>
 
-                <div class="col-12 col-lg-6 mb-4 mb-lg-0" style="overflow: visible;">
-                    <div id="card-day1" class="card border-0 shadow-sm position-relative hover-scale h-100 event-card"
-                        :class="{ 'active': activeDay === 1 }" @click="activeDay = 1"
-                        style="border-radius: 1.5rem; background: var(--brand-marian-blue); min-height: 200px; overflow: visible; margin-top: 1rem;">
-                        <div class="card-body d-flex align-items-center p-4">
-                            <!-- Image behind text -->
-                            <div class="position-absolute overflow-visible"
-                                style="right: 1rem; bottom: 0; z-index: 0; pointer-events: none;">
-                                <img src="images/rule-the-world-jump-right.png"
-                                    alt="Rule the World band member jumping into the air"
-                                    style="height: 260px; width: auto; object-fit: contain; opacity: 0.7;">
-                            </div>
-                            <!-- Text content full width -->
-                            <div class="position-relative w-100 text-white" style="z-index: 1;">
-                                <h3 class="fw-bold mb-2" style="font-family: 'Poller One', cursive;">
-                                    Day 1: Evening Concert
-                                </h3>
-                                <i>Friday 10<sup>th</sup> July</i>
-                                <p class="mb-0" style="font-family: 'Poppins', sans-serif;">The world’s greatest Take
-                                    That tribute band <strong>Rule&nbsp;The&nbsp;World</strong> are coming to Girton.
-                                </p>
+                        <!-- Friday Node -->
+                        <div class="timeline-item mb-5 position-relative">
+                            <div class="row align-items-center g-4">
+                                <div class="col-md-6 order-md-1">
+                                    <div class="timeline-content p-4 rounded-4 shadow-sm bg-brand-marian-blue text-white hover-scale">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div>
+                                                <h3 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Evening Concert</h3>
+                                                <small class="opacity-75 fw-bold">Friday 10th July 2026</small>
+                                            </div>
+                                        </div>
+                                        <p class="mb-3">The world’s greatest Take That tribute band <strong>Rule The World</strong> are coming to Girton for an unforgettable night.</p>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="badge bg-white text-brand-marian-blue px-3 py-2 rounded-pill text-dark">7:00 PM</span>
+                                            <a href="#concert-details" class="btn btn-sm btn-light rounded-pill fw-bold">Details Below</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 order-md-2 text-center text-md-start position-relative">
+                                    <div class="timeline-dot position-absolute start-0 top-50 translate-middle d-none d-md-block bg-brand-marian-blue border border-4 border-white rounded-circle shadow-sm" style="width: 24px; height: 24px; margin-left: -2px;"></div>
+                                    <img src="images/rule-the-world-jump-right.png" alt="Rule The World" class="img-fluid d-none d-md-block" style="max-height: 200px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-6" style="overflow: visible;">
-                    <div id="card-day2"
-                        class="card border-0 shadow-sm position-relative hover-scale h-100 event-card"
-                        :class="{ 'active': activeDay === 2 }" @click="activeDay = 2"
-                        data-event-day="2"
-                        style="border-radius: 1.5rem; background: var(--brand-thulian-pink); min-height: 200px; overflow: visible; margin-top: 1rem;">
-                        <div class="card-body d-flex align-items-center p-4">
-                            <!-- Image behind text -->
-                            <div class="position-absolute overflow-visible"
-                                style="right: 1rem; bottom: 0; z-index: 0; pointer-events: none;">
-                                <img src="images/stilts.png" alt="A performer on stilts"
-                                    style="height: 260px; width: auto; object-fit: contain; opacity: 0.7;">
-                            </div>
-                            <!-- Text content full width -->
-                            <div class="position-relative w-100 text-white" style="z-index: 1;">
-                                <h3 class="fw-bold mb-2" style="font-family: 'Poller One', cursive;">
-                                    Day 2: Village Fête
-                                </h3>
-                                <i>Saturday 11<sup>th</sup> July</i>
-                                <p class="mb-0" style="font-family: 'Poppins', sans-serif;">
-                                    Join us for a day of food, fun, and games.
-                                </p>
+
+                        <!-- Saturday Node -->
+                        <div class="timeline-item mb-0 position-relative">
+                            <div class="row align-items-center g-4">
+                                <div class="col-md-6 order-md-2">
+                                    <div class="timeline-content p-4 rounded-4 shadow-sm bg-brand-thulian-pink text-white hover-scale">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div>
+                                                <h3 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Village Fête</h3>
+                                                <small class="opacity-75 fw-bold">Saturday 11th July 2026</small>
+                                            </div>
+                                        </div>
+                                        <p class="mb-3">Our traditional village celebration! A full day of shows, games, stalls, and community spirit for the whole family.</p>
+                                        <div class="d-flex align-items-center gap-3">
+                                            <span class="badge bg-white text-brand-thulian-pink px-3 py-2 rounded-pill text-dark">12:00 PM - 5:00 PM</span>
+                                            <a href="#whatson" class="btn btn-sm btn-light rounded-pill fw-bold">Explore Content</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 order-md-1 text-center text-md-end position-relative">
+                                    <div class="timeline-dot position-absolute end-0 top-50 translate-middle d-none d-md-block bg-brand-thulian-pink border border-4 border-white rounded-circle shadow-sm" style="width: 24px; height: 24px; margin-right: -26px;"></div>
+                                    <img src="images/stilts.png" alt="Village Fete" class="img-fluid d-none d-md-block" style="max-height: 200px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </section>
 
+
     <!-- Day 1 Content: Evening Concert -->
-    <div id="day1-content" class="toggle-section" x-show="activeDay === 1" x-cloak>
+    <div id="concert-details">
         <section id="headliners" class="container-fluid py-5 bg-brand-light-blue section-spacing">
-            <h2 class="text-center display-5 mb-5"
+            <h2 class="text-center display-5"
                 style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Evening Concert: Rule The
                 World
             </h2>
@@ -231,7 +235,7 @@
                             </button>
                         </div>
                     </div>
-                    <h2 class="fw-bold mx-5" style="color: var(--brand-marian-blue);">Don't Miss Out!</h2>
+                    <h2 class="fw-bold mx-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Don't Miss Out!</h2>
                     <p class="fs-5 mb-4">Tickets are limited for this special performance.<br>
                         Book now to secure your spot for a night of fantastic music and entertainment.<br>
                         Fri 10 Jul 2026, 7:00PM<br>
@@ -246,79 +250,157 @@
         </section>
     </div>
 
-    <!-- Day 2 Content: Village Fete & Vendors (Visible by default) -->
-    <div id="day2-content" class="toggle-section" x-show="activeDay === 2" x-cloak>
+    <!-- Day 2 Content: Village Fete -->
+    <div id="day2-details">
         <!-- What's On Bento Grid Section -->
-        <section id="whatson" class="bento-container container-fluid py-5 bg-brand-light-pink section-spacing">
+        <section id="whatson" class="bento-container container-fluid py-5 bg-light section-spacing">
             <h2 class="text-center display-5 mb-5"
-                style="font-family: 'Poller One', cursive; color: var(--brand-thulian-pink);">What's On at the Village
-                Fete?
+                style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">What's On?
             </h2>
             <div class="bento-grid">
-                <!-- Fun Fair Rides (Tall) -->
-                <a href="pages/entertainment.html?tag=rides"
-                    class="bento-item bento-item-tall bg-brand-giants-orange p-4 rounded-4 shadow-sm h-100 d-flex flex-column justify-content-start text-white text-decoration-none transition-300 hover-scale position-relative overflow-hidden"
-                    style="background-image: url('images/helterskelter.png'); background-size: cover; background-position: right;">
-                    <h4 class="position-relative z-2" style="font-family: 'Poller One', cursive;">Fun Fair Rides</h4>
-                </a>
                 <!-- Displays & Shows (Wide) -->
                 <a href="pages/entertainment.html?tag=shows"
-                    class="bento-item bento-item-wide bg-brand-glaucous p-4 rounded-4 shadow-sm h-100 d-flex flex-column justify-content-start text-white text-decoration-none transition-300 hover-scale position-relative overflow-hidden"
-                    style="background-image: url('images/aircraft.png'); background-size: cover; background-position: top;">
-                    <h4 class="position-relative z-2" style="font-family: 'Poller One', cursive;">Displays & Shows</h4>
+                   class="bento-item bento-item-wide text-white text-decoration-none shadow-sm transition-300 hover-scale"
+                   style="background-image: url('images/maypole.png');">
+                    <div class="mb-auto">
+                        <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Displays & Shows</h4>
                 </a>
+
+                <!-- Live Music  -->
+                <a href="pages/entertainment.html?tag=music"
+                   class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale bg-brand-thulian-pink"
+                   style="background-image: url('images/vendors/munroes.png'); background-size: cover; background-position: top;">
+                    <div class="mb-auto">
+                        <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Live Music</h4>
+                </a>
+
+                <!-- Stalls -->
+                <a href="pages/stalls.html"
+                   class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
+                   style="background-image: url('images/stall-blue.svg'); background-color: var(--brand-glaucous); background-size: 60%; background-repeat: no-repeat;">
+                    <div class="mb-auto">
+                        <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Local Stalls</h4>
+                </a>
+
                 <!-- Sports & Games (Tall) -->
                 <a href="pages/entertainment.html?tag=sports"
-                    class="bento-item bento-item-tall bg-brand-saffron p-4 rounded-4 shadow-sm h-100 d-flex flex-column justify-content-start text-white text-decoration-none transition-300 hover-scale position-relative overflow-hidden"
-                    style="background-image: url('images/sports.png'); background-size: cover; background-position: center;">
-                    <h4 class="position-relative z-2" style="font-family: 'Poller One', cursive;">Sports & Games</h4>
-                </a>
-
-                <!-- Event Map (Large) -->
-                <a href="javascript:void(0)" class="bento-item bento-item-large bg-light p-4 rounded-4 shadow-sm h-100 d-flex flex-column justify-content-start text-white text-decoration-none transition-300 hover-scale position-relative overflow-hidden"
-                    style="background-image: url('images/map-thumbnail.png'); background-size: cover; background-position: center; cursor: default; pointer-events: none;">
-                    <div class="d-flex align-items-center gap-3 position-relative z-2">
-                        <h4 style="font-family: 'Poller One', cursive; margin-bottom: 0;">Event Map</h4>
-                        <span class="badge rounded-pill bg-brand-marian-blue fs-6 shadow-sm">Coming Soon</span>
+                   class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
+                   style="background-image: url('images/football.png');">
+                    <div class="mb-auto">
+                        <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
                     </div>
-                </a>
-                <!-- Food & Drink (Small) -->
-                <a href="pages/food.html" class="bento-item bg-brand-thulian-pink p-4 rounded-4 shadow-sm h-100 d-flex flex-column justify-content-start text-white text-decoration-none transition-300 hover-scale position-relative overflow-hidden"
-                    style="background-image: url('images/food/burger-bgr.png'); background-size: cover; background-position: center;">
-                    <h4 class="position-relative z-2" style="font-family: 'Poller One', cursive;">Food & Drink</h4>
+                    <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Sports & Games</h4>
                 </a>
 
-                <!-- Stalls (Small) -->
-                <a href="pages/stalls.html" class="bento-item bg-brand-glaucous p-4 rounded-4 shadow-sm h-100 d-flex flex-column justify-content-start text-white text-decoration-none transition-300 hover-scale position-relative overflow-hidden"
-                    style="background-image: url('images/stall-blue.svg'); background-size: cover; background-position: center;">
-                    <h4 class="position-relative z-2" style="font-family: 'Poller One', cursive;">Stalls</h4>
+
+                <!-- Fun Fair Ride (Tall) -->
+                <a href="pages/entertainment.html?tag=rides"
+                   class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale"
+                   style="background-image: url('images/helterskelter.png');">
+                    <div class="mb-auto">
+                        <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Fun Fair Ride</h4>
                 </a>
-                <!-- Live Music (Wide) -->
-                <a href="pages/entertainment.html?tag=music"
-                    class="bento-item bento-item-wide bg-brand-thulian-pink p-4 rounded-4 shadow-sm h-100 d-flex flex-column justify-content-start text-white text-decoration-none transition-300 hover-scale position-relative overflow-hidden"
-                    style="background-image: url('images/vendors/munroes.png'); background-size: cover; background-position: top;">
-                    <h4 class="position-relative z-2" style="font-family: 'Poller One', cursive;">Live Music</h4>
+
+                                <!-- Food Trucks -->
+                <a href="pages/food.html"
+                   class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale"
+                   style="background-image: url('images/food/burger-bgr.png');">
+                    <div class="mb-auto">
+                        <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Food & Drink</h4>
                 </a>
+
+
                 <!-- Kids & Family -->
                 <a href="pages/entertainment.html?tag=kids"
-                    class="bento-item bg-brand-giants-orange p-4 rounded-4 shadow-sm h-100 d-flex flex-column justify-content-start text-white text-decoration-none transition-300 hover-scale position-relative overflow-hidden"
-                    style="background-image: url('images/vendors/pompom_wow.png'); background-size: cover; background-position: top;">
-                    <h4 class="position-relative z-2" style="font-family: 'Poller One', cursive;">Kids & Family</h4>
+                   class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
+                   style="background-image: url('images/pompom_rainbow.png');">
+                    <div class="mb-auto">
+                        <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Kids & Family</h4>
                 </a>
-                <!-- Beer -->
-                <a href="pages/beer-tent.html" class="bento-item bg-brand-saffron p-4 rounded-4 shadow-sm h-100 d-flex flex-column justify-content-start text-white text-decoration-none transition-300 hover-scale position-relative overflow-hidden"
-                    style="background-image: url('images/food/beer.png'); background-size: cover; background-position: top;">
-                    <h4 class="position-relative z-2" style="font-family: 'Poller One', cursive;">Local Beers</h4>
+
+                <!-- Beer Tent -->
+                <a href="pages/beer-tent.html"
+                   class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
+                   style="background-image: url('images/food/beer.png');">
+                    <div class="mb-auto">
+                        <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
+                    </div>
+                    <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Local Beers</h4>
                 </a>
+
+
             </div>
         </section>
 
+        <!-- Available All Weekend Section -->
+    <section id="amenities" class="py-5 section-spacing border-top border-bottom">
+        <div class="container py-4">
+            <div class="row g-4 justify-content-center">
+
+                <!-- Facilities Grid -->
+                <div class="col-lg-10 mt-5">
+                    <div class="bg-white p-4 rounded-4 shadow-sm border">
+                        <div class="row g-4 text-center">
+                            <div class="col-6 col-md-4">
+                                <div class="p-3">
+                                    <i class="fas fa-info-circle fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                    <h6 class="fw-bold mb-0">Information</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="p-3">
+                                    <i class="fas fa-restroom fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                    <h6 class="fw-bold mb-0">Toilets / Disabled</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="p-3">
+                                    <i class="fas fa-baby fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                    <h6 class="fw-bold mb-0">Baby Changing</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="p-3">
+                                    <i class="fas fa-car fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                    <h6 class="fw-bold mb-0">Accessible Parking</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="p-3">
+                                    <i class="fas fa-search fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                    <h6 class="fw-bold mb-0">Lost & Found</h6>
+                                </div>
+                            </div>
+                            <div class="col-6 col-md-4">
+                                <div class="p-3">
+                                    <i class="fas fa-first-aid fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                    <h6 class="fw-bold mb-0">First Aid</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
         <!-- Vendor Information Section -->
-        <section class="container py-5 section-spacing bg-brand-light-pink">
+        <section class="container py-5 section-spacing">
             <div class="text-center mb-5">
                 <h2 class="display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
-                    Vendor
-                    Information</h2>
+                    Vendor Information
+                </h2>
                 <p class="lead text-muted">Join us! Information for all our vendor partners.</p>
             </div>
 
@@ -348,13 +430,13 @@
                         <div class="card-body">
                             <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
                                 style="width: 80px; height: 80px;">
-                                <i class="fas fa-utensils fa-2x" style="color: var(--brand-thulian-pink);"></i>
+                                <i class="fas fa-utensils fa-2x"></i>
                             </div>
-                            <h3 class="h4 fw-bold mb-3" style="color: var(--brand-thulian-pink);">Food Vendors</h3>
+                            <h3 class="h4 fw-bold mb-3">Food Vendors</h3>
                             <p class="mb-4">Information for caterers, ice cream vans, and other food & drink providers.
                             </p>
                             <a href="info/caterers-info.html" class="btn btn-outline-danger fw-bold stretched-link"
-                                style="border-width: 2px; color: var(--brand-thulian-pink); border-color: var(--brand-thulian-pink);">
+                                style="border-width: 2px;">
                                 Find Out More
                             </a>
                         </div>
@@ -382,6 +464,8 @@
             </div>
         </section>
     </div> <!-- End Day 2 Content -->
+
+    
 
     <!-- Agenda section with ID for scrollspy -->
     <!-- <section id="involved" class="my-5 py-5 bg-brand-saffron text-dark">
@@ -422,88 +506,28 @@
 </div>
 </section> -->
 
-    <!-- Facilities section with ID for scrollspy -->
-    <section id="facilities" class="container py-5 section-spacing">
+
+    <!-- Get involved! section center-aligned -->
+    <section id="involved" class="container py-5 section-spacing">
         <div class="row justify-content-center">
-            <div class="col-lg-12">
-                <div
-                    class="bg-white rounded-4 shadow-sm py-3 px-4 d-flex flex-wrap justify-content-center align-items-center gap-4 text-secondary">
-                    <h3 class="h5 fw-bold mb-0 me-md-3 text-uppercase"
-                        style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">Facilities:</h3>
-
-                    <div class="d-flex align-items-center gap-2" title="Restrooms available">
-                        <i class="fas fa-restroom text-black-50"></i>
-                        <span class="small fw-bold">Toilets</span>
-                    </div>
-
-                    <span class="text-muted opacity-25 d-none d-md-inline">|</span>
-
-                    <div class="d-flex align-items-center gap-2" title="Accessible parking available">
-                        <i class="fas fa-wheelchair text-black-50"></i>
-                        <span class="small fw-bold">Accessible Parking</span>
-                    </div>
-
-                    <span class="text-muted opacity-25 d-none d-md-inline">|</span>
-
-                    <div class="d-flex align-items-center gap-2" title="First aid station on site">
-                        <i class="fas fa-first-aid text-black-50"></i>
-                        <span class="small fw-bold">First Aid (Saint John's Ambulance)</span>
-                    </div>
-
-                    <span class="text-muted opacity-25 d-none d-md-inline">|</span>
-
-                    <div class="d-flex align-items-center gap-2" title="Lost property point">
-                        <i class="fas fa-box-open text-black-50"></i>
-                        <span class="small fw-bold">Lost & Found</span>
-                    </div>
-
-                    <span class="text-muted opacity-25 d-none d-md-inline">|</span>
-
-                    <div class="d-flex align-items-center gap-2" title="Only guide dogs allowed">
-                        <i class="fas fa-dog text-black-50"></i>
-                        <span class="small fw-bold">No Dogs <span class="text-muted fw-normal"
-                                style="font-size: 0.9em;">(except guide dogs)</span></span>
-                    </div>
-
-                    <span class="text-muted opacity-25 d-none d-md-inline">|</span>
-
-                    <div class="d-flex align-items-center gap-2" title="Smoke-free event">
-                        <i class="fas fa-smoking-ban text-black-50"></i>
-                        <span class="small fw-bold">No Smoking</span>
-                    </div>
-                </div>
+            <div class="col-lg-10 col-xl-8 bg-brand-glaucous text-white p-5 rounded-4 shadow-sm text-center">
+                <img src="images/get-involved.svg" alt="Get Involved"
+                     style="max-width: 100%; height: auto; max-height: 200px;"
+                     class="mb-4">
+                <p class="mx-4 fs-5">
+                    There are lots of ways to make a difference in your community.
+                    Whether you want to volunteer your time, donate resources,
+                    or simply spread the word, we welcome your support!
+                </p>
+                <a href="pages/contact.html" class="btn btn-light btn-lg fs-5 fw-bold"
+                   style="color: var(--brand-marian-blue);">
+                    Contact Us
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Get involved! section (Permanent) -->
-    <section id="involved" class="py-5 bg-brand-glaucous text-white section-spacing">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Text content on the left -->
-                <div class="col-lg-7 col-md-12 mb-4 mb-lg-0">
-                    <h2 class="fw-bold mb-3 display-6" style="font-family: 'Poller One', cursive; letter-spacing: 1px;">
-                        Get involved!
-                    </h2>
-                    <p class="mt-4 mb-4 fs-5">
-                        There are lots of ways to make a difference in your community. Whether you want to volunteer
-                        your time, donate resources, or simply spread the word, we welcome your support!
-                    </p>
-                    <a href="pages/contact.html" class="btn btn-light btn-lg fs-5 fw-bold"
-                        style="color: var(--brand-marian-blue);">
-                        <i class="fas fa-envelope me-2"></i>Contact Us
-                    </a>
-                </div>
-                <!-- Goose image on the right -->
-                <div class="col-lg-5 col-md-12 text-center">
-                    <img src="images/helping-goose.svg" alt="Helping goose illustration"
-                        style="max-width: 100%; height: auto; max-height: 400px;">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Sponsors section (Permanent) -->
+    <!-- Sponsors section -->
     <section id="sponsors" class="container bg-white rounded py-5 section-spacing"
              x-data="{ sponsors: [], imagePrefix: window.location.pathname.includes('pages/') ? '../images/sponsors/' : 'images/sponsors/' }"
              x-init="sponsors = await (await fetch('sponsors.json')).json()">
@@ -543,11 +567,28 @@
         </div>
     </section>
 
+        <!-- Site Rules -->
+    <div class="container text-center my-4">
+        <div class="site-rules-container shadow-sm border border-brand-glaucous border-opacity-25">
+            <div class="rule-item">
+                <i class="fas fa-smoking-ban"></i>
+                <span>No Smoking</span>
+            </div>
+            <div class="rule-item">
+                <i class="fas fa-dog"></i>
+                <span>No Dogs <small class="opacity-75 fw-normal">(Except assistance dogs)</small></span>
+            </div>
+        </div>
+    </div>
+
     <!-- Scroll to top button -->
     <button x-data x-show="$store.app.scrolled" @click="$store.app.scrollToTop()" id="scrollToTopBtn" title="Go to top" x-cloak>
         <i class="fas fa-arrow-up"></i>
     </button>
 
+    </div>
+    </div>
+    </section>
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
