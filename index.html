@@ -531,7 +531,7 @@
                         </div>
                     </div>
                     
-                    <a href="/pages/contact.html" target="_blank" rel="noopener noreferrer" 
+                    <a href="pages/contact.html" target="_blank" rel="noopener noreferrer" 
                         class="btn btn-lg fw-bold px-5 py-3 shadow hover-scale transition-300 animate-pulse"
                         style="background-color: #FFC107; color: #000; font-size: 1.4rem; border-radius: 50px; border: none;">
                         Contact Us
@@ -546,11 +546,9 @@
              x-data="{ sponsors: [], imagePrefix: window.location.pathname.includes('pages/') ? '../images/sponsors/' : 'images/sponsors/' }"
              x-init="sponsors = await (await fetch('sponsors.json')).json()">
         <div class="text-center">
-            <!-- Updated the h2 color to be consistent with the other headers -->
             <h2 class="mb-4 display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
                 Thank you to our Sponsors</h2>
             <p class="lead mb-4 fs-5">We are grateful for the support of our sponsors who make this event possible.</p>
-            <!-- Updated the 'Contact us' link to be a styled button with a mailto link -->
             <a href="pages/contact.html" class="btn btn-light">
                 <i class="fas fa-envelope me-2"></i>Contact us
             </a>
