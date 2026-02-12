@@ -750,26 +750,7 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     transform: scale(1.02);
 }
 
-/* ========================================
-   Timeline Styles
-   ======================================== */
-.timeline-dot {
-    z-index: 10;
-    transition: all 0.3s ease;
-}
 
-.timeline-content {
-    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.timeline-item:hover .timeline-dot {
-    transform: translate(-50%, -50%) scale(1.5) !important;
-}
-
-/* Fix for right-side dot hover */
-.timeline-item:hover .timeline-dot.end-0 {
-    transform: translate(50%, -50%) scale(1.5) !important;
-}
 
 .section-spacing {
     padding-top: 5rem;
@@ -795,6 +776,32 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
 
 .transition-300 {
     transition: all 0.3s ease-in-out;
+}
+
+/* ========================================
+   Floating Scrollspy Sidebar
+   ======================================== */
+#scrollspy-sidebar {
+    pointer-events: none; /* Let clicks through the container */
+}
+
+#scrollspy-sidebar .card {
+    pointer-events: auto; /* Re-enable for the card itself */
+}
+
+.hover-bg-light:hover {
+    background-color: rgba(var(--bs-light-rgb), 0.5);
+}
+
+.dark-mode .hover-bg-light:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Hide on screens smaller than 1800px (User preference) */
+@media (max-width: 1800px) {
+    #scrollspy-sidebar {
+        display: none !important;
+    }
 }
 
 .pointer-events-none {

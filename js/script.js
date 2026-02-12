@@ -110,6 +110,7 @@ function loadComponent(selector, url) {
         });
 }
 
+
 // --- Countdown Timer Logic ---
 // --- Legacy functions removed: loadCards, loadVendors, loadSponsors, legacy Konami, initializeCountdown, setCopyrightYear ---
 

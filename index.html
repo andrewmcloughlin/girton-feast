@@ -55,6 +55,58 @@
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
 
+    <!-- Floating Scrollspy Sidebar (Wide Screens Only) -->
+    <nav id="scrollspy-sidebar" class="d-none d-xxl-block position-fixed translate-middle-y" 
+         style="top: 50%; right: 2rem; width: 250px; z-index: 1040;"
+         x-data="{ 
+            activeSection: '', 
+            sections: [],
+            init() {
+                this.sections = Array.from(document.querySelectorAll('#sidebar-nav .nav-link')).map(link => {
+                    const id = link.getAttribute('href').substring(1);
+                    return { id, element: document.getElementById(id) };
+                }).filter(s => s.element);
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.activeSection = entry.target.id;
+                        }
+                    });
+                }, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
+
+                this.sections.forEach(s => observer.observe(s.element));
+            }
+         }">
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden" 
+             style="background: rgba(var(--bs-white-rgb), 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
+            <div class="card-body p-4">
+                <h6 class="fw-bold mb-3 text-primary" style="font-family: 'Poller One', cursive;">Navigation</h6>
+                <div class="nav flex-column nav-pills" id="sidebar-nav">
+                    <template x-for="link in [
+                        { id: 'hero-section', label: 'Home' },
+                        { id: 'concert-details', label: 'Evening Concert' },
+                        { id: 'whatson', label: 'What\'s On?' },
+                        { id: 'amenities', label: 'Amenities' },
+                        { id: 'get-involved', label: 'Get Involved' },
+                        { id: 'sponsors', label: 'Sponsors' }
+                    ]">
+                        <a class="nav-link mb-1 rounded-3 transition-300" 
+                           :class="activeSection === link.id ? 'active bg-primary shadow-sm' : 'text-secondary hover-bg-light'"
+                           :href="'#' + link.id" 
+                           x-text="link.label"></a>
+                    </template>
+                </div>
+                <div class="mt-3 pt-3 border-top">
+                    <a href="https://www.ticketsource.co.uk/girtonfeast" target="_blank" rel="noopener noreferrer" 
+                       class="btn btn-warning w-100 fw-bold rounded-pill shadow-sm hover-scale transition-300">
+                        <i class="fas fa-ticket-alt me-2"></i>Book Tickets
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
 
     <section id="hero-section" class="container-fluid bg-brand-glaucous content-container pb-0 px-0"
         style="display: none;">
@@ -65,19 +117,20 @@
             </h1>
             <h2 class="display-4 fw-bold"
                 style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue); position: relative; z-index: 10; margin-top: -0.7em; transform: translateX(12%);">
-                2026</h2>
+                2026
+            </h2>
         </div>
         <div class="p-4">
-            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center text-center gap-3">
-                <div class="btn-group rounded-pill overflow-hidden shadow-sm" role="group" aria-label="Calendar events">
-                    <a target="_blank"
+            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center text-center gap-3 d-none d-md-block">
+                <div class="btn-group rounded-pill overflow-hidden shadow-sm" role="group" aria-label="Event navigation">
+                    <a
                         class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale border-end border-white-25"
-                        href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Concert&dates=20260710T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
+                        href="#concert-details">
                         <b>Fri 10 July - Concert</b>
                     </a>
-                    <a target="_blank"
+                    <a
                         class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale border-start border-white-25"
-                        href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Village+Fete&dates=20260711T100000Z/20260711T220000Z&details=Join+us+for+a+free+weekend+of+food,+fun,+and+festivities.&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK">
+                        href="#whatson">
                         <b>Sat 11 July - Village Fete</b>
                     </a>
                 </div>
@@ -88,6 +141,17 @@
                         <b>Girton Rec</b>
                     </a>
                 </div>
+            </div>
+            <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2 d-block d-md-none">
+                <a class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale" href="#concert-details">
+                    Fri 10 July - Concert
+                </a>
+                <a class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale" href="#whatson">
+                    Sat 11 July - Village Fete
+                </a>
+                <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale">
+                    Girton Rec
+                </a>
             </div>
         </div>
         <div class="text-center pt-4 text-white">
@@ -105,81 +169,7 @@
 
 
 
-    <section class="mb-4">
-        <div class="container mb-4">
-            <div class="row mb-4">
-                <!-- section title -->
-                <div class="col-12 text-center mb-5">
-                    <h1 class="display-4 mb-2 mt-5"
-                        style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
-                        Girton Feast Events
-                    </h1>
-                </div>
 
-    <!-- Feast Events Timeline Section -->
-    <section id="events-timeline" class="py-5 bg-white">
-        <div class="container py-4">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="timeline position-relative">
-                        <!-- Vertical line -->
-                        <div class="timeline-line position-absolute start-50 translate-middle-x h-100 d-none d-md-block" 
-                             style="width: 4px; background-color: var(--brand-glaucous); opacity: 0.2; top: 0;"></div>
-
-                        <!-- Friday Node -->
-                        <div class="timeline-item mb-5 position-relative">
-                            <div class="row align-items-center g-4">
-                                <div class="col-md-6 order-md-1">
-                                    <div class="timeline-content p-4 rounded-4 shadow-sm bg-brand-marian-blue text-white hover-scale">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <div>
-                                                <h3 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Evening Concert</h3>
-                                                <small class="opacity-75 fw-bold">Friday 10th July 2026</small>
-                                            </div>
-                                        </div>
-                                        <p class="mb-3">The world’s greatest Take That tribute band <strong>Rule The World</strong> are coming to Girton for an unforgettable night.</p>
-                                        <div class="d-flex align-items-center gap-3">
-                                            <span class="badge bg-white text-brand-marian-blue px-3 py-2 rounded-pill text-dark">7:00 PM</span>
-                                            <a href="#concert-details" class="btn btn-sm btn-light rounded-pill fw-bold">Details Below</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 order-md-2 text-center text-md-start position-relative">
-                                    <div class="timeline-dot position-absolute start-0 top-50 translate-middle d-none d-md-block bg-brand-marian-blue border border-4 border-white rounded-circle shadow-sm" style="width: 24px; height: 24px; margin-left: -2px;"></div>
-                                    <img src="images/rule-the-world-jump-right.png" alt="Rule The World" class="img-fluid d-none d-md-block" style="max-height: 200px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Saturday Node -->
-                        <div class="timeline-item mb-0 position-relative">
-                            <div class="row align-items-center g-4">
-                                <div class="col-md-6 order-md-2">
-                                    <div class="timeline-content p-4 rounded-4 shadow-sm bg-brand-thulian-pink text-white hover-scale">
-                                        <div class="d-flex align-items-center mb-3">
-                                            <div>
-                                                <h3 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Village Fête</h3>
-                                                <small class="opacity-75 fw-bold">Saturday 11th July 2026</small>
-                                            </div>
-                                        </div>
-                                        <p class="mb-3">Our traditional village celebration! A full day of shows, games, stalls, and community spirit for the whole family.</p>
-                                        <div class="d-flex align-items-center gap-3">
-                                            <span class="badge bg-white text-brand-thulian-pink px-3 py-2 rounded-pill text-dark">12:00 PM - 5:00 PM</span>
-                                            <a href="#whatson" class="btn btn-sm btn-light rounded-pill fw-bold">Explore Content</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 order-md-1 text-center text-md-end position-relative">
-                                    <div class="timeline-dot position-absolute end-0 top-50 translate-middle d-none d-md-block bg-brand-thulian-pink border border-4 border-white rounded-circle shadow-sm" style="width: 24px; height: 24px; margin-right: -26px;"></div>
-                                    <img src="images/stilts.png" alt="Village Fete" class="img-fluid d-none d-md-block" style="max-height: 200px; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
     <!-- Day 1 Content: Evening Concert -->
@@ -244,6 +234,12 @@
                                     <span class="me-3">Doors: 5:45 PM</span><br>
                                     <span>Show: 7:00 PM</span>
                                 </div>
+                                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Concert&dates=20260710T174500Z/20260710T220000Z&details=Rule+The+World+-+The+Ultimate+Take+That+Tribute+Band&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK" 
+                                   target="_blank" 
+                                   rel="noopener noreferrer"
+                                   class="btn btn-sm btn-outline-primary mt-3 w-100">
+                                    <i class="fas fa-calendar-plus me-1"></i> Add to Calendar
+                                </a>
                             </div>
                         </div>
                         <!-- Where -->
@@ -285,9 +281,18 @@
     <div id="day2-details">
         <!-- What's On Bento Grid Section -->
         <section id="whatson" class="bento-container container-fluid py-5 bg-light section-spacing">
-            <h2 class="text-center display-5 mb-5"
-                style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">What's On?
-            </h2>
+            <div class="text-center mb-5">
+                <h2 class="display-5 mb-3"
+                    style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">What's On?
+                </h2>
+                <p class="lead text-muted mb-3">Saturday, 11 July 2026 • 12:00 PM - 5:00 PM</p>
+                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Village+Fete&dates=20260711T110000Z/20260711T160000Z&details=A+full+day+of+shows,+games,+stalls,+and+community+spirit+for+the+whole+family&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK" 
+                   target="_blank" 
+                   rel="noopener noreferrer"
+                   class="btn btn-outline-primary">
+                    <i class="fas fa-calendar-plus me-2"></i> Add Village Fête to Calendar
+                </a>
+            </div>
             <div class="bento-grid">
                 <!-- Displays & Shows (Wide) -->
                 <a href="pages/entertainment.html?tag=shows"
