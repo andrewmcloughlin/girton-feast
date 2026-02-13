@@ -85,8 +85,7 @@
                             <div class="brewery-card-container" style="min-width: 260px; max-width: 260px;">
                                 <div class="card h-100 shadow-sm border-0 hover-scale" @click="activateBreweryFilter(brewery.name)" style="cursor: pointer;">
                                     <div class="card-body text-center d-flex flex-column align-items-center justify-content-center p-4">
-                                        <div style="height: 80px; width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
-                                            <img :src="brewery.imagePath" :alt="brewery.name + ' Logo'" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                                        <div style="height: 80px; width: 100%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;"> #noqa
                                         </div>
                                         <h5 class="card-title fw-bold text-truncate w-100" style="color: var(--brand-marian-blue); font-family: 'Sigmar One', cursive;" x-text="brewery.name"></h5>
                                         <p class="card-text small text-muted text-truncate w-100" x-text="brewery.description || 'Proud local brewery.'"></p>
@@ -285,13 +284,13 @@
                                     });
                                 });
                             });
-                            
+
                             this.$nextTick(() => {
                                 this.initMap();
                             });
                         })
                         .catch(err => console.error('Failed to load beer data:', err));
-                        
+
                     this.$watch('view', value => {
                         if (value === 'breweries' && this.map) {
                             setTimeout(() => { this.map.invalidateSize(); }, 100);
@@ -332,9 +331,9 @@
                     });
                     var feastMarker = L.marker(girtonCoords, { icon: feastIcon, zIndexOffset: 1000 }).addTo(this.map);
                     feastMarker.bindPopup('<div class="text-center"><h6 class="fw-bold mb-0">Girton Feast</h6><p class="small mb-0">You are here!</p></div>');
-                    
+
                     var markers = [feastMarker];
-                    
+
                     this.breweries.forEach(brewery => {
                         let lat = brewery.coords[0];
                         let lng = brewery.coords[1];
@@ -360,15 +359,15 @@
                                 <button class="btn btn-sm btn-primary mt-2 filter-map-btn" onclick="document.dispatchEvent(new CustomEvent('brewery-selected', { detail: '${brewery.name}' }))">Show Beers</button>
                             </div>
                         `;
-                        
+
                         marker.bindPopup(popupContent);
                         marker.on('click', () => {
                              this.activateBreweryFilter(brewery.name);
                         });
-                        
+
                         markers.push(marker);
                     });
-                    
+
                     if (markers.length > 0) {
                          var group = new L.featureGroup(markers);
                          this.map.fitBounds(group.getBounds().pad(0.1));

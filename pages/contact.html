@@ -51,7 +51,7 @@
                             <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Carol</h3>
                             <p class="text-muted mb-0">Advertising & stall-spacing</p>
                         </div>
-                        
+
                         <div class="mb-3">
                             <h6 class="fw-bold mb-2" style="color: var(--brand-glaucous);">Contact For:</h6>
                             <ul class="list-unstyled ms-3">
@@ -92,7 +92,7 @@
                             <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Rowena</h3>
                             <p class="text-muted mb-0">Sponsorship, Event Management & General Inquiries</p>
                         </div>
-                        
+
                         <div class="mb-3">
                             <h6 class="fw-bold mb-2" style="color: var(--brand-thulian-pink);">Contact For:</h6>
                             <ul class="list-unstyled ms-3">
@@ -128,7 +128,7 @@
                             <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Website Issues</h3>
                             <p class="text-muted">Spot a bug or have a suggestion for the website? Let us know!</p>
                         </div>
-                        
+
                         <form id="website-feedback-form" onsubmit="event.preventDefault(); sendFeedbackEmail();">
                             <div class="mb-3">
                                 <label for="issueType" class="form-label fw-bold" style="color: var(--brand-marian-blue);">Issue Type</label>
@@ -201,13 +201,13 @@
             const user = 'andrew.michael.mcloughlin+girtonfeast';
             const domain = 'gmail.com';
             const email = user + '@' + domain;
-            
+
             const issueType = document.getElementById('issueType').value;
             const description = document.getElementById('issueDescription').value;
-            
+
             const subject = encodeURIComponent(`Website Feedback: ${issueType}`);
             const body = encodeURIComponent(`Issue Type: ${issueType}\n\nDescription:\n${description}\n\nSent from: ${window.location.href}`);
-            
+
             window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
         }
     </script>

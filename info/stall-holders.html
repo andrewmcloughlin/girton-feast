@@ -42,7 +42,7 @@
             <!-- Main Content - Accordions -->
             <div class="col-lg-8">
                 <div class="accordion" id="stallholderAccordion">
-                    
+
                     <!-- Event Details Accordion -->
                     <div class="accordion-item" id="event-details">
                         <h2 class="accordion-header">
@@ -99,7 +99,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-lg-7">
                                         <p>Stall pitches will be <strong>3m x 3m</strong>. To ensure safety and comfort, 3m gaps will be left between each stall to facilitate social distancing and reduce crowding.</p>
-                                        
+
                                         <div class="alert alert-info border-0 bg-brand-light-blue mt-3">
                                             <h5 class="fw-bold"><i class="fas fa-truck me-2"></i> Setup Instructions</h5>
                                             <p class="mb-0">
@@ -151,13 +151,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="alert alert-warning border-0 mb-4">
                                     <h6 class="fw-bold mb-2"><i class="fas fa-tools me-2"></i>Equipment</h6>
                                     <p class="mb-0">Please supply your own <strong>tables and gazebo</strong>.<br>
                                     Tables available for hire: <strong>£5 each</strong>.</p>
                                 </div>
-                                
+
                                 <hr>
                                 <h5 class="fw-bold mt-3">How to Pay</h5>
                                 <p class="mb-2"><strong>Bank Transfer:</strong></p>
@@ -221,9 +221,9 @@
                                     Stall bookings for 2026 will open on <strong>March 1st</strong>.
                                 </p>
                             </div>
-                            
+
                             <hr class="border-white-50 my-4">
-                            
+
                             <h6 class="fw-bold mb-2">Questions?</h6>
                             <p class="mb-1 small">Contact Carol Noble</p>
                             <p class="mb-0 small"><span data-email-user="carol" data-email-domain="girtonfeast.org.uk" class="text-white"></span></p>
@@ -248,25 +248,25 @@
         loadComponent("#navbar-placeholder", "../components/navbar.html");
         loadComponent("#footer-placeholder", "../components/footer.html")
             .then(() => setCopyrightYear());
-        
+
         // Scroll spy for sidebar navigation
         document.querySelectorAll('#sidebar-nav .nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
-                
+
                 // Expand the accordion
                 const accordionButton = targetElement.querySelector('.accordion-button');
                 if (accordionButton && accordionButton.classList.contains('collapsed')) {
                     accordionButton.click();
                 }
-                
+
                 // Scroll to element
                 setTimeout(() => {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);
-                
+
                 // Update active state
                 document.querySelectorAll('#sidebar-nav .nav-link').forEach(l => l.classList.remove('active'));
                 this.classList.add('active');

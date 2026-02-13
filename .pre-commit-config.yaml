@@ -1,0 +1,68 @@
+# Pre-commit hooks configuration
+# See https://pre-commit.com for more information
+
+repos:
+  # General file checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+        name: Remove trailing whitespace
+      - id: end-of-file-fixer
+        name: Fix end of files
+      - id: check-json
+        name: Validate JSON files
+      - id: check-yaml
+        name: Validate YAML files
+      - id: check-added-large-files
+        name: Check for large files
+        args: ['--maxkb=500']
+      - id: mixed-line-ending
+        name: Check line endings
+        args: ['--fix=lf']
+
+  # HTML linting with HTMLHint
+  - repo: https://github.com/lucas-c/pre-commit-hooks-nodejs
+    rev: v1.1.2
+    hooks:
+      - id: htmlhint
+        name: Lint HTML files
+        files: \.html$
+
+  # CSS linting with Stylelint
+  - repo: https://github.com/awebdeveloper/pre-commit-stylelint
+    rev: '0.0.2'
+    hooks:
+      - id: stylelint
+        name: Lint CSS files
+        files: \.css$
+        additional_dependencies:
+          - stylelint@15.10.3
+          - stylelint-config-standard@34.0.0
+
+  # JavaScript linting with ESLint
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.51.0
+    hooks:
+      - id: eslint
+        name: Lint JavaScript files
+        files: \.js$
+        args: ['--fix']
+        additional_dependencies:
+          - eslint@8.51.0
+          - eslint-config-standard@17.1.0
+          - eslint-plugin-import@2.28.1
+          - eslint-plugin-n@16.1.0
+          - eslint-plugin-promise@6.1.1
+
+  # Custom link checker
+  - repo: local
+    hooks:
+      - id: check-links
+        name: Check for broken internal links
+        entry: node scripts/check-links.js
+        language: node
+        files: \.html$
+        pass_filenames: true
+        additional_dependencies:
+          - cheerio@1.0.0-rc.12

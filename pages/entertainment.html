@@ -36,15 +36,15 @@
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
 
-    <main class="container-xxl my-5" 
-          x-data="{ 
-            items: [], 
-            selectedDay: 'all', 
-            selectedTag: 'all', 
+    <main class="container-xxl my-5"
+          x-data="{
+            items: [],
+            selectedDay: 'all',
+            selectedTag: 'all',
             async init() {
                 const response = await fetch('../entertainment.json');
                 this.items = await response.json();
-                
+
                 // Handle initial filters from URL
                 const params = new URLSearchParams(window.location.search);
                 if (params.has('tag')) this.selectedTag = params.get('tag');
@@ -52,10 +52,10 @@
             },
             get filteredItems() {
                 return this.items.filter(item => {
-                    const dayMatch = this.selectedDay === 'all' || 
-                                   item.days.includes(this.selectedDay) || 
+                    const dayMatch = this.selectedDay === 'all' ||
+                                   item.days.includes(this.selectedDay) ||
                                    item.days.includes('Both');
-                    const tagMatch = this.selectedTag === 'all' || 
+                    const tagMatch = this.selectedTag === 'all' ||
                                    item.tags.includes(this.selectedTag);
                     return dayMatch && tagMatch;
                 });
@@ -66,7 +66,7 @@
                 return Array.from(tags).sort();
             }
           }">
-        
+
         <div class="row pt-2">
             <!-- Sidebar for Desktop Filters -->
             <aside class="col-lg-3 col-xl-3 col-xxl-3 d-none d-lg-block">
@@ -78,10 +78,10 @@
                         <div class="segmented-control d-flex gap-1 p-1 bg-dark bg-opacity-10 rounded-pill">
                             <input type="radio" class="btn-check" name="day-filter" id="day-all" value="all" x-model="selectedDay">
                             <label class="btn btn-sm btn-outline-primary border-0 rounded-pill flex-fill py-2 fw-bold" for="day-all">Both</label>
-                            
+
                             <input type="radio" class="btn-check" name="day-filter" id="day-fri" value="Friday" x-model="selectedDay">
                             <label class="btn btn-sm btn-outline-primary border-0 rounded-pill flex-fill py-2 fw-bold" for="day-fri">Fri</label>
-                            
+
                             <input type="radio" class="btn-check" name="day-filter" id="day-sat" value="Saturday" x-model="selectedDay">
                             <label class="btn btn-sm btn-outline-primary border-0 rounded-pill flex-fill py-2 fw-bold" for="day-sat">Sat</label>
                         </div>
@@ -113,14 +113,14 @@
                                     </div>
                                     <span class="filter-label fw-bold" x-text="tag.replace(/-/g, ' ')"></span>
                                 </div>
-                                <span class="badge rounded-pill bg-white text-dark small" 
+                                <span class="badge rounded-pill bg-white text-dark small"
                                       x-text="items.filter(i => i.tags.includes(tag)).length"></span>
                             </div>
                         </template>
                     </div>
                 </div>
             </aside>
-            
+
             <!-- Main Content Area -->
             <div class="col-lg-9 col-xl-9 col-xxl-9">
                 <!-- Header -->
@@ -135,15 +135,15 @@
                                 <div class="ratio ratio-4x3 p-5">
                                     <img :src="'../' + item.image" class="card-img object-fit-cover" :alt="item.name">
                                 </div>
-                                <div class="card-img-overlay d-flex flex-column justify-content-end" 
+                                <div class="card-img-overlay d-flex flex-column justify-content-end"
                                     style="background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);">
                                     <h4 class="card-title fw-bold text-white mb-1" style="text-shadow: 0 2px 4px rgba(0,0,0,0.5);" x-text="item.name"></h4>
                                     <div class="text-white-50 small mb-2" x-text="item.description.replace(/<[^>]*>?/gm, '').substring(0, 100) + '...'"></div>
                                     <div class="d-flex flex-wrap gap-1">
                                         <template x-for="tag in item.tags">
-                                            <span class="badge rounded-pill shadow-sm" 
-                                                  :class="'bg-brand-' + tag" 
-                                                  style="font-size: 0.65rem;" 
+                                            <span class="badge rounded-pill shadow-sm"
+                                                  :class="'bg-brand-' + tag"
+                                                  style="font-size: 0.65rem;"
                                                   x-text="tag.replace(/-/g, ' ')"></span>
                                         </template>
                                     </div>
@@ -154,16 +154,16 @@
                 </div>
             </div>
         </div>
-        
-        
+
+
         <!-- Floating Action Button for Mobile Filters -->
-        <button class="fab-filter d-lg-none" type="button" data-bs-toggle="offcanvas" 
+        <button class="fab-filter d-lg-none" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
             <i class="fas fa-filter"></i>
         </button>
 
         <!-- Offcanvas Moblie Filters -->
-        <div class="offcanvas offcanvas-bottom rounded-top-4" tabindex="-1" id="offcanvasFilters" 
+        <div class="offcanvas offcanvas-bottom rounded-top-4" tabindex="-1" id="offcanvasFilters"
         aria-labelledby="offcanvasFiltersLabel" style="height: auto; max-height: 85vh;">
             <div class="offcanvas-header border-bottom py-3">
                 <h5 class="offcanvas-title fw-bold" id="offcanvasFiltersLabel" style="color: var(--brand-marian-blue);">
@@ -177,10 +177,10 @@
                     <div class="btn-group w-100 segmented-control" role="group" aria-label="Day Filter Mobile">
                         <input type="radio" class="btn-check" name="day-filter-mobile" id="day-all-mobile" value="all" x-model="selectedDay">
                         <label class="btn btn-outline-primary py-2" for="day-all-mobile">Both</label>
-                        
+
                         <input type="radio" class="btn-check" name="day-filter-mobile" id="day-fri-mobile" value="Friday" x-model="selectedDay">
                         <label class="btn btn-outline-primary py-2" for="day-fri-mobile">Fri</label>
-                        
+
                         <input type="radio" class="btn-check" name="day-filter-mobile" id="day-sat-mobile" value="Saturday" x-model="selectedDay">
                         <label class="btn btn-outline-primary py-2" for="day-sat-mobile">Sat</label>
                     </div>
@@ -216,14 +216,14 @@
     </main>
 
     <div class="d-lg-none text-end">
-        <img src="../images/goose_golf.svg" 
-            alt="A badly drawn goose attempting to play mini golf" 
+        <img src="../images/goose_golf.svg"
+            alt="A badly drawn goose attempting to play mini golf"
             class="img-fluid mt-5">
     </div>
-    
+
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
-    
+
     <!-- Mobile Nav Placeholder -->
     <div id="mobile-nav-placeholder"></div>
 

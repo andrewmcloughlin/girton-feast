@@ -238,21 +238,21 @@
                 icon.className = 'fa-solid fa-compress';
             }
         }
-        
+
         // Find the top-most visible event as the user scrolls
         const scheduleContainer = document.getElementById('container1');
         const scheduleItems = document.querySelectorAll('.schedule-item');
         let lastHighlightedElement = null;
-        
+
         // The stickyOffset is now increased to ensure the highlight appears below the sticky elements.
-        const stickyOffset = 90; 
+        const stickyOffset = 90;
 
         // Function to highlight the top-most visible event
         function highlightTopEvent() {
             // Check if the user is manually interacting with the scroll
             let topMostEvent = null;
             let minDistance = Infinity;
-            
+
             // Loop through each event item to find the one closest to the top of the container
             scheduleItems.forEach(item => {
                 const rect = item.getBoundingClientRect();
@@ -277,7 +277,7 @@
                 lastHighlightedElement = topMostEvent;
             }
         }
-        
+
         // Add a scroll event listener to the schedule container to trigger the highlight function
         scheduleContainer.addEventListener('scroll', highlightTopEvent);
 
@@ -313,12 +313,12 @@
             L.marker([51.505, -0.09]).addTo(map)
                 .bindPopup('A sample location!')
                 .openPopup();
-            
+
             return map;
         }
 
         const map = initMap();
-        
+
         // Use a MutationObserver to watch for changes in the container's height
         // This is a more reliable way to update the map's size on transition end
         const mapContainer = document.getElementById('container2');

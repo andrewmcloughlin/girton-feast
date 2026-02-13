@@ -42,7 +42,7 @@
             <!-- Main Content - Accordions -->
             <div class="col-lg-8">
                 <div class="accordion" id="stallholderAccordion">
-                    
+
                     <!-- Event Details Accordion -->
                     <div class="accordion-item" id="event-details">
                         <h2 class="accordion-header">
@@ -132,9 +132,9 @@
                                     Book a Ride or Game
                                 </a>
                             </div>
-                            
+
                             <hr class="border-white-50 my-4">
-                            
+
                             <h6 class="fw-bold mb-2">Questions?</h6>
                             <p class="mb-1 small">Contact Carol Noble</p>
                             <p class="mb-0 small"><span data-email-user="carol" data-email-domain="girtonfeast.org.uk" class="text-white"></span></p>
@@ -159,25 +159,25 @@
         loadComponent("#navbar-placeholder", "../components/navbar.html");
         loadComponent("#footer-placeholder", "../components/footer.html")
             .then(() => setCopyrightYear());
-        
+
         // Scroll spy for sidebar navigation
         document.querySelectorAll('#sidebar-nav .nav-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
                 const targetElement = document.querySelector(targetId);
-                
+
                 // Expand the accordion
                 const accordionButton = targetElement.querySelector('.accordion-button');
                 if (accordionButton && accordionButton.classList.contains('collapsed')) {
                     accordionButton.click();
                 }
-                
+
                 // Scroll to element
                 setTimeout(() => {
                     targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);
-                
+
                 // Update active state
                 document.querySelectorAll('#sidebar-nav .nav-link').forEach(l => l.classList.remove('active'));
                 this.classList.add('active');

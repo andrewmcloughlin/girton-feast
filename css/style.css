@@ -1,4 +1,4 @@
-/* 
+/*
 ========================================
 Global Styles & Variables
 ========================================
@@ -16,8 +16,8 @@ Global Styles & Variables
 
     /* Default Badge Style */
     --badge-bg: var(--brand-glaucous);
-    --badge-text: #ffffff;
-    
+    --badge-text: #fff;
+
     /* Bootstrap Theme Overrides - Hex */
     --bs-primary: var(--brand-marian-blue);
     --bs-secondary: var(--brand-glaucous);
@@ -48,12 +48,12 @@ Global Styles & Variables
 
     /* Theme variables - Light (Default) */
     --bg-primary: #f8f9fa;
-    --bg-secondary: #ffffff;
+    --bg-secondary: #fff;
     --text-primary: #353535;
     --text-secondary: #6c757d;
-    --card-bg: #ffffff;
+    --card-bg: #fff;
     --border-color: rgba(0, 0, 0, 0.1);
-    --input-bg: #ffffff;
+    --input-bg: #fff;
     --input-text: #353535;
 }
 
@@ -65,19 +65,18 @@ Global Styles & Variables
     --text-secondary: #b0b0b0;
     --card-bg: #242424;
     --border-color: rgba(255, 255, 255, 0.1);
-    --input-bg: #333333;
+    --input-bg: #333;
     --input-text: #f8f9fa;
 
     /* Adjust accent backgrounds for dark mode */
     --brand-light-blue: #1e2a44;
     --brand-light-pink: #441e30;
     --brand-light-yellow: #44401e;
-
     --brand-marian-blue: #8988dd;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: Poppins, sans-serif;
     color: var(--text-primary);
     background-color: var(--bg-primary) !important;
     padding-top: 0;
@@ -119,12 +118,12 @@ body.goose-cursor-enabled {
 }
 
 /* Selection variants for interactive elements */
-body.goose-cursor-enabled a, 
-body.goose-cursor-enabled button, 
-body.goose-cursor-enabled .cursor-pointer, 
-body.goose-cursor-enabled input, 
-body.goose-cursor-enabled select, 
-body.goose-cursor-enabled textarea, 
+body.goose-cursor-enabled a,
+body.goose-cursor-enabled button,
+body.goose-cursor-enabled .cursor-pointer,
+body.goose-cursor-enabled input,
+body.goose-cursor-enabled select,
+body.goose-cursor-enabled textarea,
 body.goose-cursor-enabled [style*="cursor: pointer"] {
     cursor: url("../images/cursor-active.svg") 0 0, pointer !important;
 }
@@ -134,7 +133,7 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
 }
 
 /* Override Bootstrap bg-light if it's explicitly used on body or other containers */
-.dark-mode .bg-light, 
+.dark-mode .bg-light,
 .dark-mode.bg-light,
 .dark-mode .bg-brand-glaucous,
 .dark-mode.bg-brand-glaucous {
@@ -272,8 +271,6 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     position: fixed;
     bottom: 30px;
     right: 20px;
-    display: none;
-    /* Hidden by default */
     z-index: 1000;
     border: none;
     outline: none;
@@ -760,14 +757,6 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
 /* Brand Hover Utilities */
 .hover-brand-saffron:hover {
     color: var(--brand-saffron) !important;
-}
-
-.hover-scale {
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.hover-scale:hover {
-    transform: scale(1.05);
 }
 
 .transition-200 {
