@@ -92,7 +92,7 @@
                         { id: 'sponsors', label: 'Sponsors' }
                     ]">
                         <a class="nav-link mb-1 rounded-3 transition-300" 
-                           :class="activeSection === link.id ? 'active bg-primary shadow-sm' : 'text-secondary hover-bg-light'"
+                           :class="activeSection === link.id ? 'active bg-primary text-white shadow-sm' : 'text-secondary hover-bg-light'"
                            :href="'#' + link.id" 
                            x-text="link.label"></a>
                     </template>
@@ -115,10 +115,15 @@
                 <img src="images/girton-feast-logo-text.svg" alt="Girton Feast Logo" class="img-fluid hero-logo" 
                     style="max-height: clamp(250px, 50vh, 650px)">
             </h1>
-            <h2 class="display-4 fw-bold"
-                style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue); position: relative; z-index: 10; margin-top: -0.7em; transform: translateX(12%);">
-                2026
-            </h2>
+            <div x-data="{ 
+                year: new Date().getFullYear().toString(),
+                get digits() { return this.year.split(''); }
+            }">
+                <template x-for="(digit, index) in digits" :key="index">
+                    <img :src="`images/digits/${digit}.svg`" :alt="digit" class="img-fluid" 
+                        style="max-height: clamp(50px, 10vh, 50px)">
+                </template>
+            </div>
         </div>
         <div class="p-4">
             <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center text-center gap-3 d-none d-md-block">
@@ -174,11 +179,7 @@
 
     <!-- Day 1 Content: Evening Concert -->
     <div id="concert-details">
-        <section id="headliners" class="container-fluid py-5 bg-brand-light-blue section-spacing">
-            <h2 class="text-center display-5"
-                style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
-                Evening Concert
-            </h2>
+        <section id="headliners" class="container py-5 bg-brand-light-blue section-spacing">
             <div class="row">
                 <!-- Booking Button and Info -->
                 <div class="text-center bg-white p-0 rounded-4 shadow">
@@ -230,16 +231,17 @@
                                     When
                                 </h5>
                                 <p class="mb-0">Friday, 10 July 2026</p>
-                                <div class="mt-2 small text-muted">
-                                    <span class="me-3">Doors: 5:45 PM</span><br>
-                                    <span>Show: 7:00 PM</span>
-                                </div>
-                                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Concert&dates=20260710T174500Z/20260710T220000Z&details=Rule+The+World+-+The+Ultimate+Take+That+Tribute+Band&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="btn btn-sm btn-outline-primary mt-3 w-100">
-                                    <i class="fas fa-calendar-plus me-1"></i> Add to Calendar
-                                </a>
+                                <ul class="list-unstyled mb-0 small">
+                                    <li>Doors: 5:45 PM</li>
+                                    <li>Show: 7:00 PM</li>
+                                    <li>
+                                        <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Concert&dates=20260710T174500Z/20260710T220000Z&details=Rule+The+World+-+The+Ultimate+Take+That+Tribute+Band&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK" 
+                                        target="_blank" 
+                                        rel="noopener noreferrer">
+                                            Add to Calendar
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <!-- Where -->
@@ -248,8 +250,13 @@
                                 <h5 class="fw-bold text-brand-glaucous mb-2">
                                     Where
                                 </h5>
-                                <p class="mb-0 text-brand-marian-blue fw-bold">The Main Stage</p>
-                                <p class="small text-muted mb-0">Girton Recreation Ground</p>
+                                <ul class="list-unstyled mb-0 small">
+                                    <li>The Main Marquee</li>
+                                    <li>Girton Recreation Ground</li>
+                                    <li>
+                                        <a href="pages/getting-here.html">Getting Here</a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                         <!-- Perks -->
@@ -262,6 +269,9 @@
                                     <li>Local Food Trucks</li>
                                     <li>Beer Tent</li>
                                     <li>Kids' Rides & Ices</li>
+                                    <li>
+                                        <a href="pages/entertainment.html?day=Friday">Details</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -282,9 +292,9 @@
         <!-- What's On Bento Grid Section -->
         <section id="whatson" class="bento-container container-fluid py-5 bg-light section-spacing">
             <div class="text-center mb-5">
-                <h2 class="display-5 mb-3"
-                    style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">What's On?
-                </h2>
+                <img src="images/titles/whats-on-text.svg" alt="What's On"
+                     style="max-width: 100%; height: auto; max-width: 600px;"
+                     class="m-4 pt-6">
                 <p class="lead text-muted mb-3">Saturday, 11 July 2026 • 12:00 PM - 5:00 PM</p>
                 <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Village+Fete&dates=20260711T110000Z/20260711T160000Z&details=A+full+day+of+shows,+games,+stalls,+and+community+spirit+for+the+whole+family&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK" 
                    target="_blank" 
@@ -505,7 +515,7 @@
 
 
     <div id="get-involved">
-        <section id="get-involved" class="container-fluid py-5 bg-brand-light-blue section-spacing">
+        <section id="get-involved" class="container py-5 bg-brand-light-blue section-spacing">
             <div class="row">
                 <div class="text-center bg-white p-0 pt-4 rounded-4 shadow mt-4">
                     <img src="images/get-involved.svg" alt="Get Involved"
@@ -547,13 +557,17 @@
     </div>
 
     <!-- Sponsors section -->
-    <section id="sponsors" class="container bg-white rounded py-5 section-spacing"
-             x-data="{ sponsors: [], imagePrefix: window.location.pathname.includes('pages/') ? '../images/sponsors/' : 'images/sponsors/' }"
+    <section id="sponsors" class="container-fluid bg-white rounded py-5 section-spacing"
+             x-data="{ sponsors: [], showAll: false, imagePrefix: window.location.pathname.includes('pages/') ? '../images/sponsors/' : 'images/sponsors/' }"
              x-init="sponsors = await (await fetch('sponsors.json')).json()">
         <div class="text-center">
-            <h2 class="mb-4 display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
-                Thank you to our Sponsors</h2>
-            <p class="lead mb-4 fs-5">We are grateful for the support of our sponsors who make this event possible.</p>
+            <img src="images/titles/sponsors-text.png" alt="Sponsors" 
+                 style="max-width: 100%; height: auto; max-height: 200px;"
+                 class="m-4 pt-6">
+            <p class="lead mb-4 fs-5">
+                Girton Feast is a non-profit event, run by volunteers in the village.<br>
+                We wouldn't be able to do this without the generosity of our sponsors.
+            </p>
             <a href="pages/contact.html" class="btn btn-light">
                 <i class="fas fa-envelope me-2"></i>Contact us
             </a>
@@ -578,6 +592,52 @@
                                  class="mx-2 rounded border border-2 bg-white shadow-sm sponsor-logo" 
                                  alt="Logo of an official event sponsor." height="100">
                         </template>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- See All Sponsors Button -->
+        <div class="text-center mt-3">
+            <button @click="showAll = !showAll" 
+                    class="btn btn-sm btn-outline-secondary" 
+                    type="button">
+                <span x-text="showAll ? 'Hide All Sponsors' : 'See All Sponsors'"></span>
+                <i class="fas ms-1" :class="showAll ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+            </button>
+        </div>
+
+        <!-- All Sponsors Grid (Collapsible) -->
+        <div x-show="showAll" 
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 transform scale-95"
+             x-transition:enter-end="opacity-100 transform scale-100"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 transform scale-100"
+             x-transition:leave-end="opacity-0 transform scale-95"
+             class="mt-4"
+             style="display: none;">
+            <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+                <template x-for="sponsor in sponsors" :key="sponsor.image || sponsor">
+                    <div class="col">
+                        <div class="card h-100 hover-scale transition-300 border-0">
+                            <div class="card-body d-flex align-items-center justify-content-center p-3 border-0">
+                                <template x-if="typeof sponsor === 'object' && sponsor.url">
+                                    <a :href="sponsor.url" target="_blank" rel="noopener noreferrer" class="sponsor-link">
+                                        <img :src="imagePrefix + (typeof sponsor === 'string' ? sponsor : sponsor.image)" 
+                                             class="img-fluid border border-radius-4" 
+                                             alt="Logo of an official event sponsor." 
+                                             style="max-height: 100px; width: auto;">
+                                    </a>
+                                </template>
+                                <template x-if="typeof sponsor === 'string' || !sponsor.url">
+                                    <img :src="imagePrefix + (typeof sponsor === 'string' ? sponsor : sponsor.image)" 
+                                         class="img-fluid border border-radius-4" 
+                                         alt="Logo of an official event sponsor." 
+                                         style="max-height: 100px; width: auto;">
+                                </template>
+                            </div>
+                        </div>
                     </div>
                 </template>
             </div>
@@ -635,12 +695,8 @@
         }
 
         // Load the navbar
-        loadComponent('#navbar-placeholder', 'components/navbar.html').then(() => {
-            // Once the navbar is loaded, start the countdown
-            initializeCountdown();
-        });
-        loadComponent('#footer-placeholder', 'components/footer.html')
-            .then(() => setCopyrightYear());
+        loadComponent('#navbar-placeholder', 'components/navbar.html');
+        loadComponent('#footer-placeholder', 'components/footer.html');
     </script>
     <script>
         // This script will un-hide the hero section once the component is loaded by script.js
