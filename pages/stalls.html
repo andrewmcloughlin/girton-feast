@@ -28,179 +28,16 @@
     <link rel="stylesheet" href="../css/style.css">
     <!-- Favicon Placeholder -->
 </head>
-<body class="bg-brand-light-blue" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
+<body class="bg-brand-glaucous" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
 
     <!-- Placeholder for the navigation bar -->
     <div id="navbar-placeholder"></div>
 
-    <main class="container-xxl my-5"
-          x-data="{
-            stalls: [],
-            selectedTag: 'all',
-            async init() {
-                this.stalls = await (await fetch('../stalls.json')).json();
-            },
-            get filteredStalls() {
-                if (this.selectedTag === 'all') return this.stalls;
-                return this.stalls.filter(s => s.tags.includes(this.selectedTag));
-            },
-            get uniqueTags() {
-                return [...new Set(this.stalls.flatMap(s => s.tags))].sort();
-            }
-          }">
-
-        <div class="row pt-2">
-            <!-- Sidebar for Desktop Filters -->
-            <aside class="col-lg-3 d-none d-lg-block">
-                <div class="p-4 rounded-4 shadow-sm sticky-top bg-light" style="top: 100px;">
-                    <h5 class="fw-bold mb-4" style="color: var(--brand-marian-blue);">
-                        <i class="fas fa-filter me-2 small"></i>Filters
-                    </h5>
-
-                    <div id="stall-filters-sidebar" class="d-flex flex-column gap-2">
-                        <!-- All Categories Toggle -->
-                        <div class="filter-item d-flex align-items-center justify-content-between p-3 rounded-4 transition-300 cursor-pointer"
-                             :class="selectedTag === 'all' ? 'bg-brand-marian-blue text-white shadow' : 'bg-white hover-light'"
-                             @click="selectedTag = 'all'">
-                            <div class="d-flex align-items-center">
-                                <div class="filter-checkbox-custom me-3 rounded-circle border border-2 d-flex align-items-center justify-content-center"
-                                     :class="selectedTag === 'all' ? 'border-white bg-white-opacity-20' : 'border-secondary'">
-                                    <i class="fas fa-check small" x-show="selectedTag === 'all'"></i>
-                                </div>
-                                <span class="filter-label fw-bold">All Stalls</span>
-                            </div>
-                            <span class="badge rounded-pill bg-white text-dark small" x-text="stalls.length"></span>
-                        </div>
-
-                        <!-- Dynamic Tag Filters -->
-                        <template x-for="tag in uniqueTags">
-                            <div class="filter-item d-flex align-items-center justify-content-between p-3 rounded-4 transition-300 text-capitalize cursor-pointer"
-                                 :class="selectedTag === tag ? 'bg-brand-marian-blue text-white shadow' : 'bg-white hover-light'"
-                                 @click="selectedTag = tag">
-                                <div class="d-flex align-items-center">
-                                    <div class="filter-checkbox-custom me-3 rounded-circle border border-2 d-flex align-items-center justify-content-center"
-                                         :class="selectedTag === tag ? 'border-white bg-white-opacity-20' : 'border-secondary'">
-                                        <i class="fas fa-check small" x-show="selectedTag === tag"></i>
-                                    </div>
-                                    <span class="filter-label fw-bold" x-text="tag.replace(/-/g, ' ')"></span>
-                                </div>
-                                <span class="badge rounded-pill bg-white text-dark small"
-                                      x-text="stalls.filter(s => s.tags.includes(tag)).length"></span>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-            </aside>
-
-            <!-- Main Content Area -->
-            <div class="col-lg-9">
-                <!-- Header -->
-                <div class="text-center pt-5 mb-5">
-                    <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Stalls at the Feast</h1>
-                    <p class="lead text-muted">Discover the amazing local businesses, crafters, and charities at the Feast.</p>
-                </div>
-
-                <!-- Call to Action to Book a Stall -->
-                <div class="bg-brand-glaucous text-white p-5 rounded-4 text-center mb-5 shadow">
-                    <h2 class="fw-bold mb-3">Want to run a stall?</h2>
-                    <p class="fs-5 mb-4">We'd love to have you! We welcome local businesses, crafters, and community groups.</p>
-                    <div class="d-flex flex-column flex-sm-row justify-content-center gap-3">
-                        <a href="https://forms.gle/f5uMHX5UwsAjjEn29" class="btn btn-warning btn-lg fw-bold px-4" target="_blank">
-                            <i class="fas fa-edit me-2"></i> Book a Stall Now
-                        </a>
-                        <a href="../info/stall-holders.html" class="btn btn-outline-light btn-lg fw-bold px-4">
-                            <i class="fas fa-info-circle me-2"></i> Stall Holder Info
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Stalls List Grid -->
-                <div id="stalls-container" class="row g-4">
-                    <template x-for="stall in filteredStalls" :key="stall.name">
-                        <div class="col-md-6 col-lg-4">
-                            <div class="card border-0 shadow-sm h-100 overflow-hidden text-decoration-none hover-scale rounded-4">
-                                <a :href="stall.url !== '#' ? stall.url : 'javascript:void(0)'"
-                                   :target="stall.url.startsWith('http') ? '_blank' : '_self'"
-                                   class="text-decoration-none h-100 d-flex flex-column">
-                                    <div class="ratio ratio-4x3 bg-light d-flex align-items-center justify-content-center">
-                                        <template x-if="stall.image">
-                                            <img :src="'../' + stall.image" class="card-img object-fit-cover" :alt="stall.name">
-                                        </template>
-                                        <template x-if="!stall.image">
-                                            <div class="text-muted text-center p-4">
-                                                <i class="fas fa-store fa-3x mb-2 opacity-25"></i>
-                                                <div class="small fw-bold" x-text="stall.name"></div>
-                                            </div>
-                                        </template>
-                                    </div>
-                                    <div class="card-body d-flex flex-column">
-                                        <h5 class="card-title fw-bold mb-2" style="color: var(--brand-marian-blue);" x-text="stall.name"></h5>
-                                        <p class="card-text small text-muted flex-grow-1" x-text="stall.description"></p>
-                                        <div class="d-flex flex-wrap gap-1 mt-3">
-                                            <template x-for="tag in stall.tags">
-                                                <span class="badge rounded-pill shadow-sm text-capitalize"
-                                                      :class="'bg-brand-' + tag"
-                                                      style="font-size: 0.65rem;"
-                                                      x-text="tag.replace(/-/g, ' ')">
-                                                </span>
-                                            </template>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </template>
-                    <!-- No Results State -->
-                    <template x-if="filteredStalls.length === 0">
-                        <div class="text-center py-5">
-                            <i class="fas fa-search fa-3x mb-3 text-muted opacity-50"></i>
-                            <h4 class="fw-bold text-muted">No stalls found</h4>
-                            <p class="text-muted">Try adjusting your filters.</p>
-                        </div>
-                    </template>
-                </div>
-            </div>
-        </div>
-
-        <!-- Floating Action Button for Mobile Filters -->
-        <button class="fab-filter d-lg-none" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasFilters" aria-controls="offcanvasFilters">
-            <i class="fas fa-filter"></i>
-        </button>
-
-        <!-- Offcanvas Mobile Filters -->
-        <div class="offcanvas offcanvas-bottom rounded-top-4" tabindex="-1" id="offcanvasFilters"
-        aria-labelledby="offcanvasFiltersLabel" style="height: auto; max-height: 85vh;">
-            <div class="offcanvas-header border-bottom py-3">
-                <h5 class="offcanvas-title fw-bold" id="offcanvasFiltersLabel" style="color: var(--brand-marian-blue);">
-                    <i class="fas fa-sliders-h me-2"></i>Filter Stalls
-                </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body p-4">
-                <h6 class="fw-bold mb-3 text-muted small text-uppercase letter-spacing-1">Categories</h6>
-                <div class="mobile-filter-grid overflow-auto pb-2" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
-                    <!-- All Categories Toggle -->
-                    <div class="filter-item text-center p-2 rounded-3 border transition-200 cursor-pointer"
-                         :class="selectedTag === 'all' ? 'bg-brand-marian-blue text-white border-brand-marian-blue shadow-sm' : 'bg-light border-light-subtle'"
-                         @click="selectedTag = 'all'">
-                        <span class="small fw-bold">All</span>
-                    </div>
-                    <!-- Dynamic Tag Filters -->
-                    <template x-for="tag in uniqueTags">
-                        <div class="filter-item text-center p-2 rounded-3 border transition-200 text-capitalize cursor-pointer"
-                             :class="selectedTag === tag ? 'bg-brand-marian-blue text-white border-brand-marian-blue shadow-sm' : 'bg-light border-light-subtle'"
-                             @click="selectedTag = tag">
-                            <span class="small fw-bold" x-text="tag.replace(/-/g, ' ')"></span>
-                        </div>
-                    </template>
-                </div>
-
-                <div class="mt-4 pt-2">
-                    <button type="button" class="btn btn-brand-marian-blue w-100 rounded-pill py-3 fw-bold shadow-sm" data-bs-dismiss="offcanvas">
-                        Show Results
-                    </button>
-                </div>
+    <main id="gallery-placeholder" class="container-xxl my-5" x-data="galleryBrowser('stalls')">
+        <!-- Unified gallery content loaded via script -->
+        <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
         </div>
     </main>
@@ -208,14 +45,17 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
-    <!-- Bootstrap JS Bundle from CDN -->
+    <!-- Mobile Nav Placeholder -->
+    <div id="mobile-nav-placeholder"></div>
+
+
+    <!-- JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/script.js"></script>
     <script>
-        // Load the navbar
         loadComponent("#navbar-placeholder", "../components/navbar.html");
-        loadComponent("#footer-placeholder", "../components/footer.html")
-            .then(() => setCopyrightYear());
+        loadComponent("#footer-placeholder", "../components/footer.html").then(() => setCopyrightYear());
+        loadComponent("#gallery-placeholder", "../components/gallery-content.html");
     </script>
 </body>
 </html>

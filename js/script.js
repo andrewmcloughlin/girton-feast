@@ -207,4 +207,97 @@ document.addEventListener('alpine:init', () => {
     document.body.classList.toggle('dark-mode', app.theme === 'dark')
     document.body.classList.toggle('goose-cursor-enabled', app.gooseEnabled)
   })
+
+  // Gallery Browser component for shared fetching and filtering logic
+  Alpine.data('galleryBrowser', (configKey) => ({
+    configs: {
+      stalls: {
+        jsonUrl: '../stalls.json',
+        titleImage: '../images/titles/stalls-text.svg',
+        sidebarGoose: '',
+        cta: {
+          show: true,
+          title: 'Want to run a stall?',
+          text: "We'd love to have you! We welcome local businesses, crafters, and community groups.",
+          primaryBtn: { text: 'Book a Stall Now', url: 'https://forms.gle/f5uMHX5UwsAjjEn29', icon: 'fas fa-edit' },
+          secondaryBtn: { text: 'Stall Holder Info', url: '../info/stall-holders.html', icon: 'fas fa-info-circle' }
+        },
+        showDayFilter: false,
+        noResultsText: 'No stalls found'
+      },
+      food: {
+        jsonUrl: '../vendors.json',
+        titleImage: '../images/titles/food-and-drink-text.svg',
+        sidebarGoose: '',
+        cta: { show: false },
+        showDayFilter: false,
+        noResultsText: 'No food or drink vendors found'
+      },
+      entertainment: {
+        jsonUrl: '../entertainment.json',
+        titleImage: '../images/titles/whats-on-text.svg',
+        sidebarGoose: '../images/goose_golf.svg',
+        cta: { show: false },
+        showDayFilter: true,
+        noResultsText: 'No activities found'
+      }
+    },
+    config: {},
+    currentKey: configKey,
+    items: [],
+    selectedTag: 'all',
+    selectedDay: 'all',
+    async init () {
+      this.config = this.configs[configKey]
+      const response = await fetch(this.config.jsonUrl)
+      this.items = await response.json()
+
+      // Handle initial filters from URL
+      const params = new URLSearchParams(window.location.search)
+      if (params.has('tag')) this.selectedTag = params.get('tag')
+      if (params.has('day')) this.selectedDay = params.get('day')
+    },
+
+    getTagColorClass (tag) {
+      const tagLower = tag.toLowerCase()
+
+      // Explicit brand mappings
+      const brandMap = {
+        vegetarian: 'bg-brand-vegetarian',
+        vegan: 'bg-brand-vegetarian',
+        charity: 'bg-brand-charity',
+        sweets: 'bg-brand-sweets',
+        crafts: 'bg-brand-crafts',
+        music: 'bg-brand-music',
+        shows: 'bg-brand-shows',
+        kids: 'bg-brand-kids',
+        rides: 'bg-brand-rides',
+        games: 'bg-brand-games',
+        community: 'bg-brand-community'
+      }
+
+      if (brandMap[tagLower]) return brandMap[tagLower]
+
+      // Deterministic fallback for other tags
+      const colors = ['bg-brand-marian-blue', 'bg-brand-glaucous', 'bg-brand-thulian-pink', 'bg-brand-giants-orange', 'bg-brand-saffron']
+      let hash = 0
+      for (let i = 0; i < tagLower.length; i++) {
+        hash = tagLower.charCodeAt(i) + ((hash << 5) - hash)
+      }
+      return colors[Math.abs(hash) % colors.length]
+    },
+    get filteredItems () {
+      return this.items.filter(item => {
+        const tagMatch = this.selectedTag === 'all' || item.tags.includes(this.selectedTag)
+        const dayMatch = this.selectedDay === 'all' ||
+                         (item.days && (item.days.includes(this.selectedDay) || item.days.includes('Both')))
+        return tagMatch && dayMatch
+      })
+    },
+    get uniqueTags () {
+      const tags = new Set()
+      this.items.forEach(item => item.tags.forEach(tag => tags.add(tag)))
+      return Array.from(tags).sort()
+    }
+  }))
 })

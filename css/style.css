@@ -371,14 +371,14 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
 
 /* Custom class for a new green background */
 /* Brand Background Utilities */
-.bg-brand-marian-blue { background-color: var(--brand-marian-blue) !important; }
-.bg-brand-glaucous { background-color: var(--brand-glaucous) !important; }
-.bg-brand-thulian-pink { background-color: var(--brand-thulian-pink) !important; }
-.bg-brand-saffron { background-color: var(--brand-saffron) !important; }
-.bg-brand-giants-orange { background-color: var(--brand-giants-orange) !important; }
-.bg-brand-light-blue { background-color: var(--brand-light-blue) !important; }
-.bg-brand-light-pink { background-color: var(--brand-light-pink) !important; }
-.bg-brand-light-yellow { background-color: var(--brand-light-yellow) !important; }
+.bg-brand-marian-blue { background-color: var(--brand-marian-blue) !important; color: white !important; }
+.bg-brand-glaucous { background-color: var(--brand-glaucous) !important; color: white !important; }
+.bg-brand-thulian-pink { background-color: var(--brand-thulian-pink) !important; color: white !important; }
+.bg-brand-saffron { background-color: var(--brand-saffron) !important; color: var(--brand-marian-blue) !important; }
+.bg-brand-giants-orange { background-color: var(--brand-giants-orange) !important; color: white !important; }
+.bg-brand-light-blue { background-color: var(--brand-light-blue) !important; color: var(--brand-marian-blue) !important; }
+.bg-brand-light-pink { background-color: var(--brand-light-pink) !important; color: var(--brand-marian-blue) !important; }
+.bg-brand-light-yellow { background-color: var(--brand-light-yellow) !important; color: var(--brand-marian-blue) !important; }
 
 /* Tag Specific Brand Backgrounds */
 .bg-brand-vegetarian { background-color: #2e7d32 !important; color: white !important; }
@@ -771,6 +771,41 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
 
 .transition-300 {
     transition: all 0.3s ease-in-out;
+}
+
+.text-shadow {
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.text-shadow-subtle {
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.bg-gradient-dark-strong {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 60%, transparent 100%);
+}
+
+.group:hover .group-hover-darken {
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.6) 70%, transparent 100%);
+}
+
+.hover-lift {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-8px);
+}
+
+.btn-white {
+    background-color: #fff;
+    color: var(--brand-marian-blue);
+    border: none;
+}
+
+.btn-white:hover {
+    background-color: #f8f9fa;
+    transform: scale(1.1);
 }
 
 /* ========================================
