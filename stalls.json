@@ -1,0 +1,10 @@
+[
+    {
+        "name": "World Scout Jamboree Fundraiser",
+        "image": "images/stalls/jamboree.jpg",
+        "url": "#",
+        "description": "Fundraising for the World Scout Jamboree.",
+        "tags": ["charity","sweets","crafts"],
+        "days": ["Saturday"]
+    }
+]

@@ -404,6 +404,12 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
 /* Consolidated Food Tags */
 .bg-brand-mains { background-color: var(--brand-marian-blue) !important; color: white !important; }
 .bg-brand-desserts { background-color: var(--brand-thulian-pink) !important; color: white !important; }
+.bg-brand-charity { background-color: #e53935 !important; color: white !important; }
+.bg-brand-sweets { background-color: #f06292 !important; color: white !important; }
+.bg-brand-crafts { background-color: #fb8c00 !important; color: white !important; }
+.bg-brand-community { background-color: #3949ab !important; color: white !important; }
+.bg-brand-nature { background-color: #43a047 !important; color: white !important; }
+.bg-brand-local-business { background-color: var(--brand-marian-blue) !important; color: white !important; }
 
 
 
