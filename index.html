@@ -127,18 +127,20 @@
         </div>
         <div class="p-4">
             <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center text-center gap-3 d-none d-md-block">
-                <div class="btn-group rounded-pill overflow-hidden shadow-sm" role="group" aria-label="Event navigation">
-                    <a
-                        class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale border-end border-white-25"
-                        href="#concert-details">
-                        <b>Fri 10 July - Concert</b>
-                    </a>
-                    <a
-                        class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale border-start border-white-25"
-                        href="#whatson">
-                        <b>Sat 11 July - Village Fete</b>
-                    </a>
-                </div>
+                <template x-if="$store.app.eventInfo">
+                    <div class="btn-group rounded-pill overflow-hidden shadow-sm" role="group" aria-label="Event navigation">
+                        <a
+                            class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale border-end border-white-25"
+                            href="#concert-details">
+                            <b x-text="$store.app.eventInfo.main_event.date_short + ' - Concert'"></b>
+                        </a>
+                        <a
+                            class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale border-start border-white-25"
+                            href="#whatson">
+                            <b x-text="$store.app.eventInfo.village_fete.date_short + ' - Village Fete'"></b>
+                        </a>
+                    </div>
+                </template>
                 <div class="btn-group rounded-pill overflow-hidden shadow-sm" role="group" aria-label="Calendar events">
                     <a target="_blank"
                         class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale"
@@ -147,17 +149,19 @@
                     </a>
                 </div>
             </div>
-            <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2 d-block d-md-none">
-                <a class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale" href="#concert-details">
-                    Fri 10 July - Concert
-                </a>
-                <a class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale" href="#whatson">
-                    Sat 11 July - Village Fete
-                </a>
-                <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale">
-                    Girton Rec
-                </a>
-            </div>
+            <template x-if="$store.app.eventInfo">
+                <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2 d-block d-md-none">
+                    <a class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale" href="#concert-details"
+                       x-text="$store.app.eventInfo.main_event.date_short + ' - Concert'">
+                    </a>
+                    <a class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale" href="#whatson"
+                       x-text="$store.app.eventInfo.village_fete.date_short + ' - Village Fete'">
+                    </a>
+                    <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale">
+                        Girton Rec
+                    </a>
+                </div>
+            </template>
         </div>
         <div class="text-center pt-4 text-white">
             <p id="event-description" class="lead fs-4">
@@ -248,12 +252,12 @@
                                     <h5 class="fw-bold text-brand-marian-blue mb-2">
                                         When
                                     </h5>
-                                    <p class="mb-0">Friday, 10 July 2026</p>
+                                    <p class="mb-0" x-text="$store.app.eventInfo?.main_event.date_long"></p>
                                     <ul class="list-unstyled mb-0 small">
-                                        <li>Doors: 5:45 PM</li>
-                                        <li>Show: 7:00 PM</li>
+                                        <li x-text="$store.app.eventInfo ? 'Doors: ' + $store.app.eventInfo.main_event.doors_open : ''"></li>
+                                        <li x-text="$store.app.eventInfo ? 'Show: ' + $store.app.eventInfo.main_event.show_start : ''"></li>
                                         <li>
-                                            <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Concert&dates=20260710T174500Z/20260710T220000Z&details=Rule+The+World+-+The+Ultimate+Take+That+Tribute+Band&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK"
+                                            <a :href="$store.app.getCalendarLink('main_event')"
                                             target="_blank"
                                             rel="noopener noreferrer">
                                                 Add to Calendar
@@ -298,11 +302,12 @@
                 <img src="images/titles/whats-on-text.svg" alt="What's On"
                     style="max-width: 100%; height: auto; max-height: 100px;"
                     class="pb-6 my-4">
-                <p class="lead text-muted mb-3 mt-6 pt-6">Saturday, 11 July 2026 • 12:00 PM - 5:00 PM</p>
-                <a href="https://www.google.com/calendar/render?action=TEMPLATE&text=Girton+Feast+Village+Fete&dates=20260711T110000Z/20260711T160000Z&details=A+full+day+of+shows,+games,+stalls,+and+community+spirit+for+the+whole+family&location=Girton+Recreation+Ground,+Cambridge+CB3+0PG,+UK"
+                <p class="lead text-muted mb-3 mt-6 pt-6" x-show="$store.app.eventInfo" x-text="$store.app.eventInfo ? $store.app.eventInfo.village_fete.date_long + ' • ' + $store.app.eventInfo.village_fete.event_start + ' - ' + $store.app.eventInfo.village_fete.event_end : ''"></p>
+                <a :href="$store.app.getCalendarLink('village_fete')"
                    target="_blank"
                    rel="noopener noreferrer"
-                   class="btn btn-outline-primary">
+                   class="btn btn-outline-primary"
+                   x-show="$store.app.eventInfo">
                     <i class="fas fa-calendar-plus me-2"></i> Add Village Fête to Calendar
                 </a>
             </div>

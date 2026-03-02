@@ -1,0 +1,37 @@
+
+[
+    {
+        "id": "main_event",
+        "name": "Evening Concert",
+        "date_long": "Friday 10th July 2026",
+    "date_short": "Fri 10 July",
+    "doors_open": "5:45 PM",
+    "show_start": "7:00 PM",
+    "location": "The Main Marquee, Girton Recreation Ground",
+    "calendar": {
+        "text": "Girton Feast Concert",
+        "dates": "20260710T164500Z/20260710T220000Z",
+        "caveat": "the dates in the calendar section are in UTC, so remember to make them 1hr earlier than the times listed on the website",
+        "details": "Rule The World - The Ultimate Take That Tribute Band",
+        "location": "Girton Recreation Ground, Cambridge CB3 0PG, UK"
+    }
+},
+{
+    "id": "village_fete",
+    "name": "Village Fête",
+    "date_long": "Saturday 11th July 2026",
+    "date_short": "Sat 11 July",
+    "event_start": "11:00 AM",
+    "event_end": "5:30 PM",
+    "trading_start": "11:00 AM",
+    "trading_stop": "7:00 PM",
+    "location": "Girton Recreation Ground",
+    "calendar": {
+        "text": "Girton Feast Village Fete",
+        "dates": "20260711T110000Z/20260711T160000Z",
+        "caveat": "the dates in the calendar section are in UTC, so remember to make them 1hr earlier than the times listed on the website",
+        "details": "A full day of shows, games, stalls, and community spirit for the whole family",
+        "location": "Girton Recreation Ground, Cambridge CB3 0PG, UK"
+    }
+}
+]

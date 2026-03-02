@@ -158,8 +158,23 @@ document.addEventListener('alpine:init', () => {
     konamiIndex: 0,
     konamiCode: ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'],
     scrolled: false,
+    eventInfo: null,
 
-    init () {
+    async init () {
+      // Fetch event info
+      const isIndex = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/')
+      const infoPath = isIndex ? 'event-info.json' : '../event-info.json'
+      try {
+        const response = await fetch(infoPath)
+        const data = await response.json()
+        this.eventInfo = data.reduce((acc, item) => {
+          acc[item.id] = item
+          return acc
+        }, {})
+      } catch (e) {
+        console.error('Failed to load event info:', e)
+      }
+
       // Watch for system theme changes
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
         if (!localStorage.getItem('theme')) {
@@ -198,6 +213,12 @@ document.addEventListener('alpine:init', () => {
 
     scrollToTop () {
       window.scrollTo({ top: 0, behavior: 'smooth' })
+    },
+
+    getCalendarLink (eventKey) {
+      if (!this.eventInfo || !this.eventInfo[eventKey]) return '#'
+      const cal = this.eventInfo[eventKey].calendar
+      return `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(cal.text)}&dates=${cal.dates}&details=${encodeURIComponent(cal.details)}&location=${encodeURIComponent(cal.location)}`
     }
   })
 
