@@ -74,7 +74,8 @@
         "tags": [
             "games",
             "kids",
-            "rides"
+            "rides",
+            "sports"
         ],
         "days": ["Saturday"]
     },
@@ -167,6 +168,39 @@
             "free"
         ],
         "days": ["Saturday"]
+    },
+    {
+        "name": "Hogwarts Express Train Ride",
+        "image": "images/hogwarts.png",
+        "url": "",
+        "description": "",
+        "tags": [
+            "rides",
+            "kids"
+        ],
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Teacups",
+        "image": "images/teacups.png",
+        "url": "",
+        "description": "",
+        "tags": [
+            "rides",
+            "kids"
+        ],
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Soft Play",
+        "image": "images/softplay.png",
+        "url": "",
+        "description": "",
+        "tags": [
+            "rides",
+            "kids"
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Food Vans",
