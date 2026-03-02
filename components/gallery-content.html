@@ -112,13 +112,22 @@
 
                         <!-- Dark Gradient Overlay -->
                         <div class="card-img-overlay d-flex flex-column justify-content-end p-4 bg-gradient-dark-strong transition-300 group-hover-darken">
-                            <!-- Floating Day Tags (Top Left) -->
                             <template x-if="item.days">
-                                <div class="position-absolute top-0 start-0 m-3 d-flex gap-1">
+                                <div class="position-absolute top-0 start-0 m-3 d-flex gap-1" style="z-index: 10;">
                                     <template x-for="day in item.days">
-                                        <span class="badge rounded-pill bg-brand-orange shadow-sm px-3 py-1 fw-bold" style="font-size: 0.7rem;" x-text="day"></span>
+                                        <span class="badge rounded-pill shadow-sm px-3 py-1 fw-bold" style="font-size: 0.7rem;" x-text="day"></span>
                                     </template>
                                 </div>
+                            </template>
+
+                            <!-- Sponsor Badge (Top Right) -->
+                            <template x-if="item.sponsor">
+                                <a :href="item.sponsor.url" target="_blank" class="sponsor-badge text-decoration-none">
+                                    <span class="sponsor-label">Sponsored by</span>
+                                    <div class="sponsor-name-container">
+                                        <span class="sponsor-name" x-text="item.sponsor.name"></span>
+                                    </div>
+                                </a>
                             </template>
 
                             <!-- Card Content (Bottom) -->

@@ -113,7 +113,12 @@
             "free",
             "sports"
         ],
-        "days": ["Saturday"]
+        "days": ["Saturday"],
+        "sponsor": {
+            "name": "La Pizzica",
+            "image": "pizzica.png",
+            "url": "https://www.lapizzicacambridge.com/"
+        }
     },
     {
         "name": "Maypole Dancing",

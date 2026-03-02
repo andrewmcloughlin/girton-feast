@@ -808,6 +808,62 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     transform: scale(1.1);
 }
 
+/* Sponsor Badge Styles */
+.sponsor-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    pointer-events: auto;
+}
+
+.sponsor-label {
+    font-size: 0.6rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    margin-bottom: 4px;
+    opacity: 0.9;
+}
+
+.sponsor-name-container {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 4px 12px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sponsor-badge:hover .sponsor-name-container {
+    transform: translateY(-2px) scale(1.05);
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+}
+
+.sponsor-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--brand-marian-blue);
+    display: block;
+    white-space: nowrap;
+}
+
+.dark-mode .sponsor-name-container {
+    background: rgba(255, 255, 255, 0.85); /* Keep backgrounds light for contrast with dark brand blue */
+}
+
+.dark-mode .sponsor-logo-container {
+    background: rgba(255, 255, 255, 0.85); /* Keep logo backgrounds mostly light for visibility */
+}
+
 /* ========================================
    Floating Scrollspy Sidebar
    ======================================== */
