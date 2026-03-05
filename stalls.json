@@ -14,24 +14,36 @@
         ]
     },
     {
-        "name": "SherbertFrog: Handmade crochet soft toys ",
-        "image": "images/stalls/sherbert-frog.png",
-        "url": "http://sherbertfrog.carrd.co",
-        "description": "A collection of our beautifully handmade crochet items.",
-        "tags": [
-            "crafts"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
         "name": "Estelle's Sweet Treats",
         "image": "images/stalls/estelles.png",
         "url": "https://www.facebook.com/estelle.s.sweet.treats.n.hire?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
         "description": "A cart of sweet treats",
         "tags": [
             "sweets"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Girton Parish Council",
+        "image": "images/stalls/gpc.png",
+        "url": "https://www.girton-cambs.org.uk/",
+        "description": "",
+        "tags": [
+            "community"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "SherbertFrog: Handmade crochet soft toys ",
+        "image": "images/stalls/sherbert-frog.png",
+        "url": "http://sherbertfrog.carrd.co",
+        "description": "A collection of our beautifully handmade crochet items.",
+        "tags": [
+            "crafts"
         ],
         "days": [
             "Saturday"
