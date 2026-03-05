@@ -4,7 +4,25 @@
         "image": "images/stalls/scouts.png",
         "url": "#",
         "description": "Fundraising for the World Scout Jamboree.",
-        "tags": ["charity","sweets","crafts"],
-        "days": ["Saturday"]
+        "tags": [
+            "charity",
+            "sweets",
+            "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "SherbertFrog: Handmade crochet soft toys ",
+        "image": "images/stalls/sherbert-frog.png",
+        "url": "http://sherbertfrog.carrd.co",
+        "description": "A collection of our beautifully handmade crochet items.",
+        "tags": [
+            "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
     }
 ]
