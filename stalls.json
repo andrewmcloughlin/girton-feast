@@ -24,5 +24,17 @@
         "days": [
             "Saturday"
         ]
+    },
+    {
+        "name": "Estelle's Sweet Treats",
+        "image": "images/stalls/estelles.png",
+        "url": "https://www.facebook.com/estelle.s.sweet.treats.n.hire?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
+        "description": "A cart of sweet treats",
+        "tags": [
+            "sweets"
+        ],
+        "days": [
+            "Saturday"
+        ]
     }
 ]
