@@ -1,31 +1,5 @@
 [
     {
-        "name": "World Scout Jamboree Fundraiser",
-        "image": "images/stalls/scouts.png",
-        "url": "#",
-        "description": "Fundraising for the World Scout Jamboree.",
-        "tags": [
-            "charity",
-            "sweets",
-            "crafts"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Estelle's Sweet Treats",
-        "image": "images/stalls/estelles.png",
-        "url": "https://www.facebook.com/estelle.s.sweet.treats.n.hire?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
-        "description": "A cart of sweet treats",
-        "tags": [
-            "sweets"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
         "name": "Girton Parish Council",
         "image": "images/stalls/gpc.png",
         "url": "https://www.girton-cambs.org.uk/",
@@ -37,13 +11,25 @@
             "Saturday"
         ]
     },
-    {
-        "name": "SherbertFrog: Handmade crochet soft toys",
-        "image": "images/stalls/sherbert-frog.png",
-        "url": "http://sherbertfrog.carrd.co",
-        "description": "A collection of our beautifully handmade crochet items.",
+        {
+        "name": "Cambirdge City Council",
+        "image": "images/stalls/ccc.png",
+        "url": "https://www.cambridge.gov.uk/",
+        "description": "",
         "tags": [
-            "crafts"
+            "community"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "South Cambridgeshire District Council",
+        "image": "images/stalls/scdc.png",
+        "url": "https://www.scambs.gov.uk/",
+        "description": "",
+        "tags": [
+            "community"
         ],
         "days": [
             "Saturday"
@@ -73,43 +59,7 @@
             "Saturday"
         ]
     },
-    {
-        "name": "Utility Warehouse",
-        "image": "images/stalls/utility-warehouse.png",
-        "url": "https://www.uw.co.uk/",
-        "description": "",
-        "tags": [
-            ""
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Cambirdge City Council",
-        "image": "images/stalls/ccc.png",
-        "url": "https://www.cambridge.gov.uk/",
-        "description": "",
-        "tags": [
-            "community"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "South Cambridgeshire District Council",
-        "image": "images/stalls/scdc.png",
-        "url": "https://www.scambs.gov.uk/",
-        "description": "",
-        "tags": [
-            "community"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
+     {
         "name": "Girton Town Plan",
         "image": "images/stalls/town-plan.png",
         "url": "https://www.girton-cambs.org.uk/neighbourhood-plan/",
@@ -140,6 +90,56 @@
         "description": "",
         "tags": [
             "community"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "SherbertFrog: Handmade crochet soft toys",
+        "image": "images/stalls/sherbert-frog.png",
+        "url": "http://sherbertfrog.carrd.co",
+        "description": "A collection of our beautifully handmade crochet items.",
+        "tags": [
+            "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Utility Warehouse",
+        "image": "images/stalls/utility-warehouse.png",
+        "url": "https://www.uw.co.uk/",
+        "description": "",
+        "tags": [
+            ""
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "World Scout Jamboree Fundraiser",
+        "image": "images/stalls/scouts.png",
+        "url": "#",
+        "description": "Fundraising for the World Scout Jamboree.",
+        "tags": [
+            "charity",
+            "sweets",
+            "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Estelle's Sweet Treats",
+        "image": "images/stalls/estelles.png",
+        "url": "https://www.facebook.com/estelle.s.sweet.treats.n.hire?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
+        "description": "A cart of sweet treats",
+        "tags": [
+            "sweets"
         ],
         "days": [
             "Saturday"
