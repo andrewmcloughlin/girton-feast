@@ -72,5 +72,17 @@
         "days": [
             "Saturday"
         ]
+    },
+    {
+        "name": "Utility Warehouse",
+        "image": "images/stalls/utility-warehouse.png",
+        "url": "https://www.uw.co.uk/",
+        "description": "",
+        "tags": [
+            ""
+        ],
+        "days": [
+            "Saturday"
+        ]
     }
 ]
