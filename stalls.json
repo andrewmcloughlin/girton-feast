@@ -50,7 +50,7 @@
         ]
     },
     {
-        "name": "Girton Garden Society",
+        "name": "Girton Garden Society: Mini Show & Sale",
         "image": "images/stalls/girton-garden-society.png",
         "url": "https://girtongardensociety.co.uk/",
         "description": "A local society, affiliated to the Royal Horticultural Society, for people interested in all aspects of gardening.",
@@ -80,6 +80,66 @@
         "description": "",
         "tags": [
             ""
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Cambirdge City Council",
+        "image": "images/stalls/ccc.png",
+        "url": "https://www.cambridge.gov.uk/",
+        "description": "",
+        "tags": [
+            "community"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "South Cambridgeshire District Council",
+        "image": "images/stalls/scdc.png",
+        "url": "https://www.scambs.gov.uk/",
+        "description": "",
+        "tags": [
+            "community"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Girton Town Plan",
+        "image": "images/stalls/town-plan.png",
+        "url": "https://www.girton-cambs.org.uk/neighbourhood-plan/",
+        "description": "Help us decide the future of Girton.",
+        "tags": [
+            "community"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Local Nature Recovery",
+        "image": "images/stalls/wildlife.png",
+        "url": "https://www.girton-cambs.org.uk/girton-parish-council-2/local-nature-recovery-plan/",
+        "description": "The Girton Local Nature Recovery Plan is a 10-year plan for identifying  and improving priority sites, habitats, and species’ statuses  in our village.",
+        "tags": [
+            "community"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Girton Musical Theatre",
+        "image": "images/stalls/girton-musical-theatre.png",
+        "url": "https://www.girtonmusicaltheatre.org.uk/",
+        "description": "",
+        "tags": [
+            "community"
         ],
         "days": [
             "Saturday"
