@@ -38,12 +38,36 @@
         ]
     },
     {
-        "name": "SherbertFrog: Handmade crochet soft toys ",
+        "name": "SherbertFrog: Handmade crochet soft toys",
         "image": "images/stalls/sherbert-frog.png",
         "url": "http://sherbertfrog.carrd.co",
         "description": "A collection of our beautifully handmade crochet items.",
         "tags": [
             "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Girton Garden Society",
+        "image": "images/stalls/girton-garden-society.png",
+        "url": "https://girtongardensociety.co.uk/",
+        "description": "A local society, affiliated to the Royal Horticultural Society, for people interested in all aspects of gardening.",
+        "tags": [
+            "gardening"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Girton Allotment Society",
+        "image": "images/stalls/girton-allotment-society.png",
+        "url": "https://girtonallotments.org.uk/",
+        "description": "A local society, for people interested in growing their own food.",
+        "tags": [
+            "gardening"
         ],
         "days": [
             "Saturday"
