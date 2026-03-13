@@ -21,7 +21,7 @@
         "image": "images/food/turtledove.png",
         "url": "https://www.turtledovecambridge.com/",
         "tags": [
-            "desserts"
+            "sweet treats"
         ]
     },
     {
@@ -45,7 +45,7 @@
         "image": "images/food/churros-bgr.png",
         "url": "#",
         "tags": [
-            "desserts"
+            "sweet treats"
         ]
     },
     {
@@ -58,10 +58,10 @@
     },
     {
         "name": "Toni's Ices",
-        "image": "images/food/ices-bgr.png",
+        "image": "images/food/tonis-ices.png",
         "url": "https://www.tonis-ices.co.uk/",
         "tags": [
-            "desserts"
+            "sweet treats"
         ]
     },
     {
