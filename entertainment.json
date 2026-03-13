@@ -210,7 +210,7 @@
     {
         "name": "Food Vans",
         "image": "images/food/burger.png",
-        "url": "/pages/food.html",
+        "url": "/food.html",
         "description": "",
         "tags": [
             "food-and-drink"
@@ -220,7 +220,7 @@
     {
         "name": "Beer Tent",
         "image": "images/food/beer.png",
-        "url": "/pages/beer-tent.html",
+        "url": "/beer-tent.html",
         "description": "",
         "tags": [
             "food-and-drink"
