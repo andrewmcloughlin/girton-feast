@@ -1,7 +1,7 @@
 [
     {
         "name": "Wrapunzel's Yorkshire Pudding Wraps",
-        "image": "images/food/wrapunzels-bgr.png",
+        "image": "images/food/wrapunzels.png",
         "url": "https://www.facebook.com/p/Wrapunzel-100092729754323/",
         "tags": [
             "vegetarian",
@@ -10,7 +10,7 @@
     },
     {
         "name": "Tutle Dove Cafe",
-        "image": "images/food/turtle-dove-bgr.png",
+        "image": "images/food/turtle-dove.png",
         "url": "https://www.turtledovecambridge.com/",
         "tags": [
             "desserts"
@@ -26,7 +26,7 @@
     },
     {
         "name": "Smokehouse Burgers",
-        "image": "images/food/burger-bgr.png",
+        "image": "images/food/burger.png",
         "url": "#",
         "tags": [
             "mains"
