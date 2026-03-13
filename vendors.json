@@ -1,4 +1,12 @@
 [
+        {
+        "name": "Pimms Tent: By Girton Musical Theatre",
+        "image": "images/food/pimms.png",
+        "url": "#",
+        "tags": [
+            "drinks"
+        ]
+    },
     {
         "name": "Wrapunzel's Yorkshire Pudding Wraps",
         "image": "images/food/wrapunzels.png",
@@ -42,7 +50,7 @@
     },
     {
         "name": "The Purple Pepper",
-        "image": "images/food/purple-pepper-bgr.png",
+        "image": "images/food/purple-pepper.png",
         "url": "https://www.thepurplepepper.online/",
         "tags": [
             "mains"
@@ -60,14 +68,6 @@
         "name": "Beer Tent",
         "image": "images/food/beer.png",
         "url": "beer-tent.html",
-        "tags": [
-            "drinks"
-        ]
-    },
-    {
-        "name": "Pimms Tent: By Girton Musical Theatre",
-        "image": "images/food/pimms.png",
-        "url": "#",
         "tags": [
             "drinks"
         ]
