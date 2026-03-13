@@ -209,7 +209,7 @@
     },
     {
         "name": "Food Vans",
-        "image": "images/food/burger-bgr.png",
+        "image": "images/food/burger.png",
         "url": "/pages/food.html",
         "description": "",
         "tags": [
