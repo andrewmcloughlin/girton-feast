@@ -8,7 +8,7 @@ function loadComponent (selector, url) {
   const currentPagePath = window.location.pathname
   const currentFileName = currentPagePath.substring(currentPagePath.lastIndexOf('/') + 1)
   const currentHash = window.location.hash
-  const isIndexPage = (currentFileName === 'index.html' || currentFileName === '')
+  const isIndexPage = !currentPagePath.includes('/pages/') && !currentPagePath.includes('/info/')
 
   return fetch(url)
     .then(response => response.text())
@@ -162,7 +162,7 @@ document.addEventListener('alpine:init', () => {
 
     async init () {
       // Fetch event info
-      const isIndex = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/')
+      const isIndex = !window.location.pathname.includes('/pages/') && !window.location.pathname.includes('/info/')
       const infoPath = isIndex ? 'event-info.json' : '../event-info.json'
       try {
         const response = await fetch(infoPath)
