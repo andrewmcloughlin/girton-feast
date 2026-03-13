@@ -63,5 +63,13 @@
         "tags": [
             "drinks"
         ]
+    },
+    {
+        "name": "Pimms Tent: By Girton Musical Theatre",
+        "image": "images/food/pimms.png",
+        "url": "#",
+        "tags": [
+            "drinks"
+        ]
     }
 ]
