@@ -144,5 +144,18 @@
         "days": [
             "Saturday"
         ]
+    },
+    {
+        "name": "Things So Sweet",
+        "image": "images/stalls/things-so-sweet.png",
+        "url": "https://www.instagram.com/thingssosweetuk/",
+        "description": "",
+        "tags": [
+            "sweets",
+            "toys"
+        ],
+        "days": [
+            "Saturday"
+        ]
     }
 ]
