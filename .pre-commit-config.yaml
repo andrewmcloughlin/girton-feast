@@ -1,6 +1,8 @@
 # Pre-commit hooks configuration
 # See https://pre-commit.com for more information
 
+exclude: ^_site/
+
 repos:
   # General file checks
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -8,15 +10,17 @@ repos:
     hooks:
       - id: trailing-whitespace
         name: Remove trailing whitespace
+        files: \.(html|njk|css|js|json|yaml|md)$
       - id: end-of-file-fixer
         name: Fix end of files
+        files: \.(html|njk|css|js|json|yaml|md)$
       - id: check-json
         name: Validate JSON files
       - id: check-yaml
         name: Validate YAML files
       - id: check-added-large-files
         name: Check for large files
-        args: ['--maxkb=500']
+        args: ['--maxkb=2000']
       - id: mixed-line-ending
         name: Check line endings
         args: ['--fix=lf']

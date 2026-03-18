@@ -1,0 +1,176 @@
+---
+layout: layouts/base.njk
+title: Photo Gallery - Girton Feast
+bodyClass: bg-brand-light-yellow
+permalink: /pages/gallery.html
+---
+
+{% block extra_head %}
+<!-- Fancybox CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+{% endblock %}
+
+<main class="container my-5">
+    <div class="text-center pt-5 mb-5">
+        <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Relive the memories</h1>
+        <p class="lead text-muted">A look back at previous years of the Girton Feast.</p>
+    </div>
+
+    <div class="row">
+        <!-- Scrollspy Navigation Column -->
+        <div class="col-lg-3 d-none d-lg-block">
+            <nav id="gallery-nav" class="sticky-top p-3 rounded bg-brand-marian-blue">
+                <ul id="gallery-nav-ul" class="nav nav-pills flex-column">
+                    <!-- Year links will be dynamically inserted here -->
+                </ul>
+            </nav>
+        </div>
+
+        <!-- Gallery Content Column -->
+        <div id="gallery-container-wrapper" class="col-lg-9">
+            <!-- Mobile Dropdown Navigation -->
+            <div class="d-lg-none mb-4 sticky-top" style="top: 80px; z-index: 100;">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="galleryDropdown"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Select a Year
+                    </button>
+                    <ul id="gallery-dropdown-ul" class="dropdown-menu w-100" aria-labelledby="galleryDropdown">
+                        <!-- Mobile year links will be inserted here -->
+                    </ul>
+                </div>
+            </div>
+            <div id="gallery-container"></div>
+        </div>
+    </div>
+</main>
+
+{% block extra_scripts %}
+<!-- JSZip library for creating zip files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<!-- Fancybox JS -->
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+<script>
+    // --- START: Gallery Configuration ---
+    const photoConfig = [
+        { year: 2025, imageCount: 52 },
+        { year: 2018, imageCount: 36 },
+        { year: 2017, imageCount: 40 },
+        { year: 2016, imageCount: 45 },
+        { year: 2015, imageCount: 15 },
+        { year: 2014, imageCount: 14 },
+        { year: 2013, imageCount: 41 },
+        { year: 2012, imageCount: 50 },
+    ];
+    // --- END: Gallery Configuration ---
+
+    // Function to build the gallery from the configuration
+    function buildGallery() {
+        const galleryContainer = document.getElementById('gallery-container');
+        const galleryNavUl = document.getElementById('gallery-nav-ul');
+        const galleryDropdownUl = document.getElementById('gallery-dropdown-ul');
+        if (!galleryContainer || !galleryNavUl || !galleryDropdownUl) return;
+
+        // Sort years in descending order
+        photoConfig.sort((a, b) => b.year - a.year);
+
+        let allYearsHtml = '';
+        let navLinksHtml = '';
+        let dropdownLinksHtml = '';
+
+        photoConfig.forEach(config => {
+            const yearId = `year-${config.year}`;
+
+            navLinksHtml += `
+                <li class="nav-item">
+                    <a class="nav-link" href="#${yearId}">${config.year}</a>
+                </li>
+            `;
+
+            dropdownLinksHtml += `
+                <li><a class="dropdown-item" href="#${yearId}">${config.year}</a></li>
+            `;
+
+            allYearsHtml += `
+                <div id="${yearId}" class="year-gallery-group mb-5">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">${config.year}</h2>
+                        <button class="btn download-btn" onclick="downloadYearAsZip(${config.year}, this)">
+                            <i class="fas fa-download"></i><span class="d-none d-sm-inline ms-2">Download All</span>
+                        </button>
+                    </div>
+                    <div class="row g-4">
+            `;
+
+            for (let i = 1; i <= config.imageCount; i++) {
+                const imagePath = `/images/previous/${config.year}/${i}.jpg`;
+                const delay = (i - 1) * 50;
+                allYearsHtml += `
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <a href="${imagePath}"
+                           data-fancybox="gallery-${config.year}"
+                           data-caption="Girton Feast ${config.year} - Photo ${i}"
+                           class="gallery-img-container ratio ratio-4x3 d-block rounded shadow-sm overflow-hidden hover-scale fadeInUp"
+                           style="animation-delay: ${delay}ms;">
+                            <img src="${imagePath}" class="object-fit-cover w-100 h-100 gallery-img" alt="Girton Feast ${config.year} - Photo ${i}" loading="lazy" onload="this.classList.add('loaded')">
+                        </a>
+                    </div>
+                `;
+            }
+
+            allYearsHtml += `</div></div>`;
+        });
+
+        galleryContainer.innerHTML = allYearsHtml;
+        galleryNavUl.innerHTML = navLinksHtml;
+        galleryDropdownUl.innerHTML = dropdownLinksHtml;
+
+        Fancybox.bind("[data-fancybox]", {});
+    }
+
+    async function downloadYearAsZip(year, button) {
+        const config = photoConfig.find(c => c.year === year);
+        if (!config) return;
+
+        const originalText = button.innerHTML;
+        button.disabled = true;
+        button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Zipping...';
+
+        const zip = new JSZip();
+        const imagePromises = [];
+
+        for (let i = 1; i <= config.imageCount; i++) {
+            const imageUrl = `/images/previous/${year}/${i}.jpg`;
+            const promise = fetch(imageUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error(`Image ${i}.jpg not found`);
+                    return response.blob();
+                })
+                .then(blob => {
+                    zip.file(`${i}.jpg`, blob);
+                })
+                .catch(error => console.error(`Failed to fetch ${imageUrl}:`, error));
+            imagePromises.push(promise);
+        }
+
+        await Promise.all(imagePromises);
+
+        zip.generateAsync({ type: "blob" })
+            .then(function (content) {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(content);
+                link.download = `girton-feast-${year}-photos.zip`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                button.disabled = false;
+                button.innerHTML = originalText;
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        buildGallery();
+    });
+</script>
+{% endblock %}

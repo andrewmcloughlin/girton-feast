@@ -29,7 +29,7 @@ function fileExists (filePath) {
   }
 }
 
-// Helper function to resolve relative paths
+// Helper function to resolve paths
 function resolvePath (htmlFilePath, linkPath) {
   // Remove hash/query params
   const cleanPath = linkPath.split('#')[0].split('?')[0]
@@ -45,13 +45,21 @@ function resolvePath (htmlFilePath, linkPath) {
     return null
   }
 
-  // Get directory of the HTML file
+  // Handle root-relative paths (starting with /)
+  if (cleanPath.startsWith('/')) {
+    // Determine the web root based on the project structure
+    // If the HTML file is inside _site/, the web root is _site/
+    // Otherwise, assume it's the project root
+    let webRoot = projectRoot
+    if (htmlFilePath.includes(path.join(projectRoot, '_site'))) {
+      webRoot = path.join(projectRoot, '_site')
+    }
+    return path.join(webRoot, cleanPath)
+  }
+
+  // Resolve relative paths based on the HTML file position
   const htmlDir = path.dirname(htmlFilePath)
-
-  // Resolve the link relative to the HTML file
-  const resolvedPath = path.resolve(htmlDir, cleanPath)
-
-  return resolvedPath
+  return path.resolve(htmlDir, cleanPath)
 }
 
 // Process each HTML file

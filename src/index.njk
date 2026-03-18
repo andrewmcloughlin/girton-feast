@@ -1,0 +1,654 @@
+---
+layout: layouts/base.njk
+title: Girton Feast
+---
+
+<!-- Floating Scrollspy Sidebar (Wide Screens Only) -->
+<nav id="scrollspy-sidebar" class="d-none d-xxl-block position-fixed translate-middle-y"
+     style="top: 50%; right: 2rem; width: 250px; z-index: 1040;"
+     x-data="{
+        activeSection: '',
+        sections: [],
+        init() {
+            this.sections = Array.from(document.querySelectorAll('#sidebar-nav .nav-link')).map(link => {
+                const id = link.getAttribute('href').substring(1);
+                return { id, element: document.getElementById(id) };
+            }).filter(s => s.element);
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        this.activeSection = entry.target.id;
+                    }
+                });
+            }, { rootMargin: '-10% 0px -80% 0px', threshold: 0 });
+
+            this.sections.forEach(s => observer.observe(s.element));
+        }
+     }">
+    <div class="card border-0 shadow-lg rounded-4 overflow-hidden"
+         style="background: rgba(var(--bs-white-rgb), 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">
+        <div class="card-body p-4">
+            <h6 class="fw-bold mb-3 text-primary" style="font-family: 'Poller One', cursive;">Navigation</h6>
+            <div class="nav flex-column nav-pills" id="sidebar-nav">
+                <template x-for="link in [
+                    { id: 'hero-section', label: 'Home' },
+                    { id: 'concert-details', label: 'Evening Concert' },
+                    { id: 'whatson', label: 'What\'s On?' },
+                    { id: 'amenities', label: 'Amenities' },
+                    { id: 'get-involved', label: 'Get Involved' },
+                    { id: 'sponsors', label: 'Sponsors' }
+                ]">
+                    <a class="nav-link mb-1 rounded-3 transition-300"
+                       :class="activeSection === link.id ? 'active bg-primary text-white shadow-sm' : 'text-secondary hover-bg-light'"
+                       :href="'#' + link.id"
+                       x-text="link.label"></a>
+                </template>
+            </div>
+            <div class="mt-3 pt-3 border-top">
+                <a href="https://www.ticketsource.co.uk/girtonfeast" target="_blank" rel="noopener noreferrer"
+                   class="btn btn-warning w-100 fw-bold rounded-pill shadow-sm hover-scale transition-300">
+                    <i class="fas fa-ticket-alt me-2"></i>Book Tickets
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<section id="hero-section" class="container-fluid bg-brand-glaucous content-container pb-0 px-0"
+    style="display: none;">
+    <div class="text-center mb-4">
+        <h1 class="display-1 fw-bold mb-0">
+            <img src="/images/girton-feast-logo-text.svg" alt="Girton Feast Logo" class="img-fluid hero-logo"
+                style="max-height: clamp(250px, 50vh, 650px)">
+        </h1>
+        <div x-data="{
+            year: new Date().getFullYear().toString(),
+            get digits() { return this.year.split(''); }
+        }">
+            <template x-for="(digit, index) in digits" :key="index">
+                <img :src="`/images/digits/${digit}.svg`" :alt="digit" class="img-fluid"
+                    style="max-height: clamp(50px, 10vh, 50px)">
+            </template>
+        </div>
+    </div>
+    <div class="p-4">
+        <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center text-center gap-3 d-none d-md-block">
+            <template x-if="$store.app.eventInfo">
+                <div class="btn-group rounded-pill overflow-hidden shadow-sm" role="group" aria-label="Event navigation">
+                    <a
+                        class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale border-end border-white-25"
+                        href="#concert-details">
+                        <b x-text="$store.app.eventInfo.main_event.date_short + ' - Concert'"></b>
+                    </a>
+                    <a
+                        class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale border-start border-white-25"
+                        href="#whatson">
+                        <b x-text="$store.app.eventInfo.village_fete.date_short + ' - Village Fete'"></b>
+                    </a>
+                </div>
+            </template>
+            <div class="btn-group rounded-pill overflow-hidden shadow-sm" role="group" aria-label="Calendar events">
+                <a target="_blank"
+                    class="btn text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale"
+                    href="/pages/getting-here.html">
+                    <b>Girton Rec</b>
+                </a>
+            </div>
+        </div>
+        <template x-if="$store.app.eventInfo">
+            <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2 d-block d-md-none">
+                <a class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale" href="#concert-details"
+                   x-text="$store.app.eventInfo.main_event.date_short + ' - Concert'">
+                </a>
+                <a class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale" href="#whatson"
+                   x-text="$store.app.eventInfo.village_fete.date_short + ' - Village Fete'">
+                </a>
+                <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" class="badge rounded-pill text-white bg-brand-marian-blue p-3 px-4 fs-6 text-decoration-none hover-scale">
+                    Girton Rec
+                </a>
+            </div>
+        </template>
+    </div>
+    <div class="text-center pt-4 text-white">
+        <p id="event-description" class="lead fs-4">
+            Join us for a weekend of <strong class="text-brand-thulian-pink">live music</strong>, <strong
+                class="text-brand-glaucous">food</strong>, <strong class="text-brand-giants-orange">fun</strong>,
+            and <strong class="text-brand-marian-blue">festivities</strong>.
+        </p>
+    </div>
+    <img src="/images/hero.png"
+        alt="A wide, aerial view of the Girton Feast event grounds, showing tents, stalls, and a large grassy field."
+        class="img-fluid mx-auto d-block mb-0" style="max-width: 100%; height: auto; display: none;"
+        onload="this.style.display='block'">
+</section>
+
+<!-- Day 1 Content: Evening Concert -->
+<div id="concert-details" class="bg-brand-light-blue">
+    <section id="headliners" class="container py-5 section-spacing">
+        <div class="row">
+            <div class="col-12">
+                <!-- Booking Button and Info -->
+                <div class="text-center bg-white p-0 rounded-4 shadow">
+                    <!-- Image Carousel -->
+                    <div id="entertainmentCarousel" class="carousel slide shadow-lg rounded mb-4"
+                        data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner rounded">
+                            <div class="carousel-item active">
+                                <img src="/images/main_event/1.jpg" class="d-block w-100"
+                                    alt="A stage with a band performing under a spotlight.">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/images/main_event/2.jpg" class="d-block w-100" alt="">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="/images/main_event/3.jpg" class="d-block w-100" alt="">
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#entertainmentCarousel"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#entertainmentCarousel"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-1">
+
+                        <h2 class="display-6 fw-bold mb-4" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
+                            Rule The World:<br>The Ultimate Tribute
+                        </h2>
+
+                        <div class="row justify-content-center g-4 mb-5 text-start">
+                        <!-- What -->
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-1 h-100 border-start shadow-sm">
+                                <h5 class="fw-bold text-brand-thulian-pink mb-2">
+                                    What
+                                </h5>
+                                <ul class="list-unstyled mb-0 small">
+                                    <li>Live Music</li>
+                                    <li>Local Food Trucks</li>
+                                    <li>Beer Tent</li>
+                                    <li>Kids' Rides & Ices</li>
+                                    <li>
+                                        <a href="/pages/entertainment.html?day=Friday">Details</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- When -->
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-1 h-100 border-start shadow-sm">
+                                <h5 class="fw-bold text-brand-marian-blue mb-2">
+                                    When
+                                </h5>
+                                <p class="mb-0" x-text="$store.app.eventInfo?.main_event.date_long"></p>
+                                <ul class="list-unstyled mb-0 small">
+                                    <li x-text="$store.app.eventInfo ? 'Doors: ' + $store.app.eventInfo.main_event.doors_open : ''"></li>
+                                    <li x-text="$store.app.eventInfo ? 'Show: ' + $store.app.eventInfo.main_event.show_start : ''"></li>
+                                    <li>
+                                        <a :href="$store.app.getCalendarLink('main_event')"
+                                        target="_blank"
+                                        rel="noopener noreferrer">
+                                            Add to Calendar
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Where -->
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-1 h-100 border-start shadow-sm">
+                                <h5 class="fw-bold text-brand-glaucous mb-2">
+                                    Where
+                                </h5>
+                                <ul class="list-unstyled mb-0 small">
+                                    <li>The Main Marquee</li>
+                                    <li>Girton Recreation Ground</li>
+                                    <li>
+                                        <a href="/pages/getting-here.html">Getting Here</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.ticketsource.co.uk/girtonfeast" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-lg fw-bold px-5 py-3 shadow hover-scale transition-300 animate-pulse"
+                        style="background-color: #FFC107; color: #000; font-size: 1.4rem; border-radius: 50px; border: none;">
+                        Claim Your Tickets Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Day 2 Content: Village Fete -->
+<div id="day2-details">
+    <!-- What's On Bento Grid Section -->
+    <section id="whatson" class="bento-container container-fluid py-5 bg-light section-spacing">
+        <div class="text-center mb-5">
+            <img src="/images/titles/whats-on-text.svg" alt="What's On"
+                style="max-width: 100%; height: auto; max-height: 100px;"
+                class="pb-6 my-4">
+            <p class="lead text-muted mb-3 mt-6 pt-6" x-show="$store.app.eventInfo" x-text="$store.app.eventInfo ? $store.app.eventInfo.village_fete.date_long + ' • ' + $store.app.eventInfo.village_fete.event_start + ' - ' + $store.app.eventInfo.village_fete.event_end : ''"></p>
+            <a :href="$store.app.getCalendarLink('village_fete')"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="btn btn-outline-primary"
+               x-show="$store.app.eventInfo">
+                <i class="fas fa-calendar-plus me-2"></i> Add Village Fête to Calendar
+            </a>
+        </div>
+        <div class="bento-grid">
+            <!-- Displays & Shows (Wide) -->
+            <a href="/pages/entertainment.html?tag=shows"
+               class="bento-item bento-item-wide text-white text-decoration-none shadow-sm transition-300 hover-scale"
+               style="background-image: url('/images/maypole.png');">
+                <div class="mb-auto">
+                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
+                </div>
+                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Displays & Shows</h4>
+            </a>
+
+            <!-- Live Music  -->
+            <a href="/pages/entertainment.html?tag=music"
+               class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale bg-brand-thulian-pink"
+               style="background-image: url('/images/vendors/munroes.png'); background-size: cover; background-position: top;">
+                <div class="mb-auto">
+                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
+                </div>
+                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Live Music</h4>
+            </a>
+
+            <!-- Stalls -->
+            <a href="/pages/stalls.html"
+               class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
+               style="background-image: url('/images/stall-blue.svg'); background-color: var(--brand-glaucous); background-size: 60%; background-repeat: no-repeat;">
+                <div class="mb-auto">
+                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
+                </div>
+                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Local Stalls</h4>
+            </a>
+
+            <!-- Sports & Games (Tall) -->
+            <a href="/pages/entertainment.html?tag=sports"
+               class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
+               style="background-image: url('/images/football.png');">
+                <div class="mb-auto">
+                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
+                </div>
+                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Sports & Games</h4>
+            </a>
+
+
+            <!-- Fun Fair Ride (Tall) -->
+            <a href="/pages/entertainment.html?tag=rides"
+               class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale"
+               style="background-image: url('/images/helterskelter.png');">
+                <div class="mb-auto">
+                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
+                </div>
+                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Fun Fair Ride</h4>
+            </a>
+
+                            <!-- Food Trucks -->
+            <a href="/pages/food.html"
+               class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale"
+               style="background-image: url('/images/food/burger.png');">
+                <div class="mb-auto">
+                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
+                </div>
+                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Food & Drink</h4>
+            </a>
+
+
+            <!-- Kids & Family -->
+            <a href="/pages/entertainment.html?tag=kids"
+               class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
+               style="background-image: url('/images/pompom.png');">
+                <div class="mb-auto">
+                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
+                </div>
+                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Kids & Family</h4>
+            </a>
+
+            <!-- Beer Tent -->
+            <a href="/pages/beer-tent.html"
+               class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
+               style="background-image: url('/images/food/beer.png');">
+                <div class="mb-auto">
+                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
+                </div>
+                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Local Beers</h4>
+            </a>
+
+
+        </div>
+    </section>
+
+    <!-- Available All Weekend Section -->
+<section id="amenities" class="py-5 section-spacing border-top border-bottom bg-brand-light-blue">
+    <div class="container py-4">
+        <div class="row g-4 justify-content-center">
+
+            <!-- Facilities Grid -->
+            <div class="col-lg-10 mt-5">
+                <div class="bg-white p-4 rounded-4 shadow-sm border">
+                    <div class="row g-4 text-center">
+                        <div class="col-6 col-md-4">
+                            <div class="p-3">
+                                <i class="fas fa-info-circle fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                <h6 class="fw-bold mb-0">Information</h6>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="p-3">
+                                <i class="fas fa-restroom fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                <h6 class="fw-bold mb-0">Toilets / Disabled</h6>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="p-3">
+                                <i class="fas fa-baby fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                <h6 class="fw-bold mb-0">Baby Changing</h6>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="p-3">
+                                <i class="fas fa-car fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                <h6 class="fw-bold mb-0">Accessible Parking</h6>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="p-3">
+                                <i class="fas fa-search fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                <h6 class="fw-bold mb-0">Lost & Found</h6>
+                            </div>
+                        </div>
+                        <div class="col-6 col-md-4">
+                            <div class="p-3">
+                                <i class="fas fa-first-aid fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
+                                <h6 class="fw-bold mb-0">First Aid</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Vendor Information Section -->
+    <section class="container py-5 section-spacing">
+        <div class="text-center mb-5">
+            <h2 class="display-5" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
+                Vendor Information
+            </h2>
+            <p class="lead text-muted">Join us! Information for all our vendor partners.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            <!-- Stall Holders -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4 bg-white">
+                    <div class="card-body">
+                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-store fa-2x" style="color: var(--brand-marian-blue);"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3" style="color: var(--brand-marian-blue);">Stall Holders</h3>
+                        <p class="mb-4">Standard pitches for local businesses, crafters, charities, and community
+                            groups.</p>
+                        <a href="/info/stall-holders.html" class="btn btn-outline-primary fw-bold stretched-link"
+                            style="border-width: 2px;">
+                            Find Out More
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Food & Drink -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4 bg-white">
+                    <div class="card-body">
+                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-utensils fa-2x"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3">Food Vendors</h3>
+                        <p class="mb-4">Information for caterers, ice cream vans, and other food & drink providers.
+                        </p>
+                        <a href="/info/caterers-info.html" class="btn btn-outline-danger fw-bold stretched-link"
+                            style="border-width: 2px;">
+                            Find Out More
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rides & Games -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4 bg-white">
+                    <div class="card-body">
+                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
+                            style="width: 80px; height: 80px;">
+                            <i class="fas fa-ticket-alt fa-2x" style="color: var(--brand-saffron);"></i>
+                        </div>
+                        <h3 class="h4 fw-bold mb-3" style="color: var(--brand-marian-blue);">Rides & Games</h3>
+                        <p class="mb-4">Details for fairground rides, inflatables, and authorized game operators.
+                        </p>
+                        <a href="/info/ride-vendors-info.html" class="btn btn-outline-warning fw-bold stretched-link"
+                            style="border-width: 2px; background-color: transparent; border-color: var(--brand-saffron); color: var(--brand-marian-blue);">
+                            Find Out More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div> <!-- End Day 2 Content -->
+
+
+
+<div id="get-involved" class="bg-brand-light-blue">
+    <section class="container py-5 section-spacing">
+        <div class="row justify-content-center">
+            <div class="col-11 col-sm-10 col-md-8 text-center bg-white rounded-4 shadow mt-4 p-3">
+                <img src="/images/get-involved.svg" alt="Get Involved"
+                    style="max-width: 100%; height: auto; max-height: 200px;"
+                    class="img-fluid pt-4 px-2">
+                <div class="p-4">
+                     <p>Girton Feast is a community event run by local volunteers for the benefit of the village.</p>
+                 </div>
+                <div class="py-5 pt-1">
+                    <div class="row justify-content-center g-4 mb-5 text-start">
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-1 h-100 border-start shadow-sm">
+                                <h5 class="fw-bold text-brand-marian-blue mb-2">
+                                    Volunteer
+                                </h5>
+                                <p class="mb-0 small">From hanging up bunting to helping with the beer tent, there are lots of ways to get involved.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-1 h-100 border-start shadow-sm">
+                                <h5 class="fw-bold text-brand-thulian-pink mb-2">
+                                    Sponsor
+                                </h5>
+                                <p class="mb-2 small">We're looking for sponsors.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="/pages/contact.html" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-lg fw-bold px-5 py-3 shadow hover-scale transition-300 animate-pulse"
+                        style="background-color: #FFC107; color: #000; font-size: 1.4rem; border-radius: 50px; border: none;">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Sponsors section -->
+<section id="sponsors" class="container-fluid bg-white rounded py-5 section-spacing"
+         x-data="{ sponsors: [], showAll: false, imagePrefix: '/images/sponsors/' }"
+         x-init="sponsors = await (await fetch('/_data/sponsors.json')).json()">
+    <div class="text-center">
+        <img src="/images/titles/sponsors-text.png" alt="Sponsors"
+             style="max-width: 100%; height: auto; max-height: 200px;"
+             class="m-4 pt-6">
+        <p class="lead mb-4 fs-5">
+            Girton Feast is a non-profit event, run by volunteers in the village.<br>
+            We wouldn't be able to do this without the generosity of our sponsors.
+        </p>
+        <a href="/pages/contact.html" class="btn btn-light">
+            <i class="fas fa-envelope me-2"></i>Contact us
+        </a>
+    </div>
+    <!-- Dynamic sponsors container -->
+    <div id="marquee-container" class="overflow-hidden py-2 mt-4"
+         @mouseenter="$refs.track.style.animationPlayState = 'paused'"
+         @mouseleave="$refs.track.style.animationPlayState = 'running'">
+        <div x-ref="track" class="d-flex align-items-center gap-4"
+             :class="sponsors.length < 4 ? 'static-sponsors' : 'animate-marquee'">
+            <template x-for="sponsor in (sponsors.length < 4 ? sponsors : [...sponsors, ...sponsors])">
+                <div class="d-inline-block">
+                    <template x-if="typeof sponsor === 'object' && sponsor.url">
+                        <a :href="sponsor.url" target="_blank" rel="noopener noreferrer" class="sponsor-link">
+                            <img :src="imagePrefix + (typeof sponsor === 'string' ? sponsor : sponsor.image)"
+                                 class="mx-2 rounded border border-2 bg-white shadow-sm sponsor-logo"
+                                 alt="Logo of an official event sponsor." height="100">
+                        </a>
+                    </template>
+                    <template x-if="typeof sponsor === 'string' || !sponsor.url">
+                        <img :src="imagePrefix + (typeof sponsor === 'string' ? sponsor : sponsor.image)"
+                             class="mx-2 rounded border border-2 bg-white shadow-sm sponsor-logo"
+                             alt="Logo of an official event sponsor." height="100">
+                    </template>
+                </div>
+            </template>
+        </div>
+    </div>
+
+    <!-- See All Sponsors Button -->
+    <div class="text-center mt-3">
+        <button @click="showAll = !showAll"
+                class="btn btn-sm btn-outline-secondary"
+                type="button">
+            <span x-text="showAll ? 'Hide All Sponsors' : 'See All Sponsors'"></span>
+            <i class="fas ms-1" :class="showAll ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+        </button>
+    </div>
+
+    <!-- All Sponsors Grid (Collapsible) -->
+    <div x-show="showAll"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform scale-95"
+         x-transition:enter-end="opacity-100 transform scale-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100 transform scale-100"
+         x-transition:leave-end="opacity-0 transform scale-95"
+         class="mt-4"
+         style="display: none;">
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+            <template x-for="sponsor in sponsors" :key="sponsor.image || sponsor">
+                <div class="col">
+                    <div class="card h-100 hover-scale transition-300 border-0">
+                        <div class="card-body d-flex align-items-center justify-content-center p-3 border-0">
+                            <template x-if="typeof sponsor === 'object' && sponsor.url">
+                                <a :href="sponsor.url" target="_blank" rel="noopener noreferrer" class="sponsor-link">
+                                    <img :src="imagePrefix + (typeof sponsor === 'string' ? sponsor : sponsor.image)"
+                                         class="img-fluid border border-radius-4"
+                                         alt="Logo of an official event sponsor."
+                                         style="max-height: 100px; width: auto;">
+                                </a>
+                            </template>
+                            <template x-if="typeof sponsor === 'string' || !sponsor.url">
+                                <img :src="imagePrefix + (typeof sponsor === 'string' ? sponsor : sponsor.image)"
+                                     class="img-fluid border border-radius-4"
+                                     alt="Logo of an official event sponsor."
+                                     style="max-height: 100px; width: auto;">
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </div>
+</section>
+
+    <!-- Site Rules -->
+<div class="container text-center my-4">
+    <div class="site-rules-container shadow-sm border border-brand-glaucous border-opacity-25">
+        <div class="rule-item">
+            <i class="fas fa-smoking-ban"></i>
+            <span>No Smoking</span>
+        </div>
+        <div class="rule-item">
+            <i class="fas fa-dog"></i>
+            <span>No Dogs <small class="opacity-75 fw-normal">(Except assistance dogs)</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- Scroll to top button -->
+<button x-data x-show="$store.app.scrolled" @click="$store.app.scrollToTop()" id="scrollToTopBtn" title="Go to top" x-cloak>
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+
+<script>
+    let mybutton = document.getElementById("scrollToTopBtn");
+    window.onscroll = function () { scrollFunction() };
+    function scrollFunction() {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            mybutton.style.display = "flex";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+    function topFunction() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // This script will un-hide the hero section once the component is loaded by script.js
+    document.addEventListener('DOMContentLoaded', function () {
+        const heroSection = document.getElementById('hero-section');
+        if (heroSection) heroSection.style.display = 'block';
+    });
+</script>
+
+<!-- Service Worker Registration for PWA -->
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/js/sw.js')
+                .then((registration) => {
+                    console.log('ServiceWorker registration successful:', registration.scope);
+                })
+                .catch((error) => {
+                    console.log('ServiceWorker registration failed:', error);
+                });
+        });
+    }
+</script>

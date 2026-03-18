@@ -9,11 +9,11 @@
 
         <div class="mb-4">
             <div class="segmented-control d-flex gap-1 p-1 bg-dark bg-opacity-10 rounded-pill">
-                <a href="../pages/stalls.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
+                <a href="/pages/stalls.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
                    :class="currentKey === 'stalls' ? 'bg-white shadow text-primary' : 'text-light hover-dark-tiny'">Stalls</a>
-                <a href="../pages/food.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
+                <a href="/pages/food.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
                    :class="currentKey === 'food' ? 'bg-white shadow text-primary' : 'text-light hover-dark-tiny'">Food</a>
-                <a href="../pages/entertainment.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
+                <a href="/pages/entertainment.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
                    :class="currentKey === 'entertainment' ? 'bg-white shadow text-primary' : 'text-light hover-dark-tiny'">Events</a>
             </div>
         </div>
@@ -108,7 +108,7 @@
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative group transition-300 hover-lift">
                         <!-- Card Image -->
-                        <img :src="'../' + item.image" class="card-img object-fit-cover" :alt="item.name" style="height: 380px;">
+                        <img :src="'/' + item.image" class="card-img object-fit-cover" :alt="item.name" style="height: 380px;">
 
                         <!-- Dark Gradient Overlay -->
                         <div class="card-img-overlay d-flex flex-column justify-content-end p-4 bg-gradient-dark-strong transition-300 group-hover-darken">
@@ -193,11 +193,11 @@ aria-labelledby="offcanvasFiltersLabel" style="height: auto; max-height: 85vh;">
         <div class="mb-4">
             <h6 class="fw-bold mb-3 text-muted small text-uppercase letter-spacing-1">Page</h6>
             <div class="segmented-control d-flex gap-1 p-1 bg-dark bg-opacity-10 rounded-pill">
-                <a href="../pages/stalls.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
+                <a href="/pages/stalls.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
                    :class="currentKey === 'stalls' ? 'bg-white shadow text-primary' : 'text-muted hover-dark-tiny'">Stalls</a>
-                <a href="../pages/food.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
+                <a href="/pages/food.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
                    :class="currentKey === 'food' ? 'bg-white shadow text-primary' : 'text-muted hover-dark-tiny'">Food</a>
-                <a href="../pages/entertainment.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
+                <a href="/pages/entertainment.html" class="btn btn-sm border-0 rounded-pill flex-fill py-2 fw-bold transition-200"
                    :class="currentKey === 'entertainment' ? 'bg-white shadow text-primary' : 'text-muted hover-dark-tiny'">Events</a>
             </div>
         </div>

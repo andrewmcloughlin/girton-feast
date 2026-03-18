@@ -157,5 +157,17 @@
         "days": [
             "Saturday"
         ]
+    },
+    {
+        "name": "Tombolas",
+        "image": "images/stalls/tombola.png",
+        "url": "#",
+        "description": "Girton Cottontails Nursery and Girton Bowls Club are running child and adult tombolas.",
+        "tags": [
+            "games"
+        ],
+        "days": [
+            "Saturday"
+        ]
     }
 ]

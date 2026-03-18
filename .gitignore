@@ -16,6 +16,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Eleventy
+_site/
+.11ty-cache/
+
 # Linter caches
 .eslintcache
 .stylelintcache

@@ -1,0 +1,176 @@
+---
+layout: layouts/base.njk
+title: Contact Us - Girton Feast
+bodyClass: bg-brand-light-blue
+permalink: /pages/contact.html
+---
+
+<main class="container my-5">
+    <!-- Header -->
+    <div class="text-center pt-5 mb-5">
+        <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Get In Touch</h1>
+        <p class="lead text-muted">We'd love to hear from you! Whether you have questions, want to get involved, or need information about the event.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Carol Noble - Stalls & Sponsorship -->
+        <div class="col-lg-5 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="bg-brand-glaucous rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="fas fa-store fa-2x text-white"></i>
+                        </div>
+                        <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Carol</h3>
+                        <p class="text-muted mb-0">Advertising & stall-spacing</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="fw-bold mb-2" style="color: var(--brand-glaucous);">Contact For:</h6>
+                        <ul class="list-unstyled ms-3">
+                            <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Booking a stall</li>
+                            <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Advertising</li>
+                        </ul>
+                    </div>
+
+                    <hr class="my-3">
+
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-envelope fa-lg me-3" style="color: var(--brand-glaucous);"></i>
+                        <div>
+                            <small class="text-muted d-block">Email</small>
+                            <span data-email-user="carol" data-email-domain="girtonfeast.org.uk" class="fw-bold"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center">
+                        <i class="fas fa-phone fa-lg me-3" style="color: var(--brand-glaucous);"></i>
+                        <div>
+                            <small class="text-muted d-block">Phone</small>
+                            <a href="tel:01223276103" class="fw-bold text-decoration-none" style="color: var(--brand-marian-blue);">01223 276103</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rowena Barnes - General Inquiries -->
+        <div class="col-lg-5 col-md-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="text-center mb-4">
+                        <div class="bg-brand-thulian-pink rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                            <i class="fas fa-hands-helping fa-2x text-white"></i>
+                        </div>
+                        <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Rowena</h3>
+                        <p class="text-muted mb-0">Sponsorship, Event Management & General Inquiries</p>
+                    </div>
+
+                    <div class="mb-3">
+                        <h6 class="fw-bold mb-2" style="color: var(--brand-thulian-pink);">Contact For:</h6>
+                        <ul class="list-unstyled ms-3">
+                            <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Sponsorship</li>
+                            <li class="mb-1"><i class="fas fa-check text-success me-2"></i>Event Management</li>
+                            <li class="mb-1"><i class="fas fa-check text-success me-2"></i>General inquiries</li>
+                        </ul>
+                    </div>
+
+                    <hr class="my-3">
+
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-envelope fa-lg me-3" style="color: var(--brand-thulian-pink);"></i>
+                        <div>
+                            <small class="text-muted d-block">Email</small>
+                            <span data-email-user="rowena" data-email-domain="girtonfeast.org.uk" class="fw-bold"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Website Feedback Section -->
+    <div class="row mt-5 justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <div class="bg-brand-saffron rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 70px; height: 70px;">
+                            <i class="fas fa-bug fa-2x text-white"></i>
+                        </div>
+                        <h3 class="fw-bold" style="color: var(--brand-marian-blue);">Website Issues</h3>
+                        <p class="text-muted">Spot a bug or have a suggestion for the website? Let us know!</p>
+                    </div>
+
+                    <form id="website-feedback-form" onsubmit="event.preventDefault(); sendFeedbackEmail();">
+                        <div class="mb-3">
+                            <label for="issueType" class="form-label fw-bold" style="color: var(--brand-marian-blue);">Issue Type</label>
+                            <select class="form-select" id="issueType" required>
+                                <option value="" selected disabled>Select an issue type...</option>
+                                <option value="Broken Link">Broken Link</option>
+                                <option value="Typo/Content Error">Typo or Content Error</option>
+                                <option value="Display Issue">Display Issue (Layout/Images)</option>
+                                <option value="Suggestion">Feature Suggestion</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="issueDescription" class="form-label fw-bold" style="color: var(--brand-marian-blue);">Description</label>
+                            <textarea class="form-control" id="issueDescription" rows="4" placeholder="Please describe the issue or suggestion..." required></textarea>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg px-5 fw-bold" style="background-color: var(--brand-marian-blue); border: none;">
+                                <i class="fas fa-paper-plane me-2"></i>Send Feedback
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Info Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm bg-brand-light-yellow">
+                <div class="card-body p-4 text-center">
+                    <h4 class="fw-bold mb-3" style="color: var(--brand-marian-blue);">
+                        <i class="fas fa-users me-2"></i>Follow Us on Social Media
+                    </h4>
+                    <p class="mb-3">Stay updated with the latest news and announcements!</p>
+                    <div class="d-flex gap-3 justify-content-center">
+                        <a href="https://www.facebook.com/GirtonFeastWeek" class="btn btn-outline-primary rounded-circle" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook-f fa-lg"></i>
+                        </a>
+                        <a href="https://youtu.be/0FqhvdgCn3E?si=2SnO4hMgtZKrgjjJ" class="btn btn-outline-danger rounded-circle" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube fa-lg"></i>
+                        </a>
+                        <a href="https://nextdoor.co.uk/search/?view=detail&init_source=search&query=%23girtonfeast&ccid=93bf984a-9a4c-401f-a5f8-c9bdcf0ba673&navigationScreen=POST&ssid=9fddbc32-dc0e-4d66-b684-c5e393c3f17a" class="btn btn-outline-success rounded-circle" style="width: 50px; height: 50px; display: flex; align-items: center; justify-content: center;" target="_blank" aria-label="Nextdoor">
+                            <img src="/images/nextdoor-icon.svg" alt="Nextdoor" style="width: 1.5em; height: 1.5em;">
+                        </a>
+                    </div>
+                    <p class="mt-3 mb-0" style="font-family: 'Sigmar One', cursive; color: var(--brand-thulian-pink); font-size: 1.2rem;">#GirtonFeast</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% block extra_scripts %}
+<script>
+    function sendFeedbackEmail() {
+        // Obfuscated email parts
+        const user = 'andrew.michael.mcloughlin+girtonfeast';
+        const domain = 'gmail.com';
+        const email = user + '@' + domain;
+
+        const issueType = document.getElementById('issueType').value;
+        const description = document.getElementById('issueDescription').value;
+
+        const subject = encodeURIComponent(`Website Feedback: ${issueType}`);
+        const body = encodeURIComponent(`Issue Type: ${issueType}\n\nDescription:\n${description}\n\nSent from: ${window.location.href}`);
+
+        window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    }
+</script>
+{% endblock %}
