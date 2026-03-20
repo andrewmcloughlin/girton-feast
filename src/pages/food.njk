@@ -3,6 +3,10 @@ layout: layouts/base.njk
 title: Food & Drink - Girton Feast
 permalink: /pages/food.html
 bodyClass: bg-brand-glaucous
+eleventyNavigation:
+  key: Food & Drink
+  parent: What's On
+  order: 2
 ---
 
 <main id="gallery-placeholder" class="container-xxl my-5" x-data="galleryBrowser('food', {{ vendors | dump }})">

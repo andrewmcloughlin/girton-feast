@@ -1,0 +1,11 @@
+[
+  { "key": "What's On", "order": 2 },
+  { "key": "Plan Your Visit", "order": 3 },
+  { "key": "For Vendors", "order": 4 },
+  { "key": "Community", "order": 5 },
+  { "key": "Facilities", "parent": "Plan Your Visit", "order": 2, "url": "/#amenities", "icon": "fas fa-restroom" },
+  { "key": "Vendor Information", "parent": "For Vendors", "order": 0, "isHeader": true, "icon": "fas fa-info-circle" },
+  { "key": "Get Involved", "parent": "Community", "order": 2, "url": "/#get-involved", "icon": "fas fa-hands-helping" },
+  { "key": "Sponsors", "parent": "Community", "order": 3, "url": "/#sponsors", "icon": "fas fa-handshake" },
+  { "key": "Community Divider", "parent": "Community", "order": 1.5, "isDivider": true }
+]

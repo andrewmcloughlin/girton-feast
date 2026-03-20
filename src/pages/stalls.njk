@@ -3,6 +3,10 @@ layout: layouts/base.njk
 title: Stalls - Girton Feast
 permalink: /pages/stalls.html
 bodyClass: bg-brand-glaucous
+eleventyNavigation:
+  key: Stalls
+  parent: What's On
+  order: 3
 ---
 
 <main id="gallery-placeholder" class="container-xxl my-5" x-data="galleryBrowser('stalls', {{ stalls | dump }})">

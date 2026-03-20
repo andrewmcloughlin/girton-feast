@@ -3,6 +3,11 @@ layout: layouts/base.njk
 title: Entertainment - Girton Feast
 permalink: /pages/entertainment.html
 bodyClass: bg-brand-glaucous
+eleventyNavigation:
+  key: Entertainment
+  parent: What's On
+  order: 1
+  icon: fas fa-music
 ---
 
 <main id="gallery-placeholder" class="container-xxl my-5" x-data="galleryBrowser('entertainment', {{ entertainment | dump }})">
