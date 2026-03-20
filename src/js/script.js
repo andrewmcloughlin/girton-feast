@@ -122,7 +122,7 @@ document.addEventListener('alpine:init', () => {
           title: 'Want to run a stall?',
           text: "We'd love to have you! We welcome local businesses, crafters, and community groups.",
           primaryBtn: { text: 'Book a Stall Now', url: 'https://forms.gle/f5uMHX5UwsAjjEn29', icon: 'fas fa-edit' },
-          secondaryBtn: { text: 'Stall Holder Info', url: '/info/stall-holders.html', icon: 'fas fa-info-circle' }
+          secondaryBtn: { text: 'Stall Holder Info', url: (window.siteConfig?.pathPrefix || '/') + 'info/stall-holders.html', icon: 'fas fa-info-circle' }
         },
         showDayFilter: false,
         noResultsText: 'No stalls found'

@@ -23,7 +23,7 @@ permalink: /pages/map.html
     var mapHeight = 842;
     var map = L.map('map', { crs: L.CRS.Simple });
     var bounds = [[0, 0], [mapHeight, mapWidth]];
-    L.imageOverlay('/images/map.png', bounds).addTo(map);
+    L.imageOverlay('{{ "/images/map.png" | url }}', bounds).addTo(map);
 
     var zoom = map.getBoundsZoom(bounds, true);
 
