@@ -9,6 +9,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
 
   return {
+    pathPrefix: "/girton-feast/",
     dir: {
       input: "src",
       output: "_site",
