@@ -95,6 +95,15 @@
             "Saturday"
         ]
     },
+        {
+        "name": "Muriel Artist",
+        "image": "images/stalls/muriel-art.png",
+        "url": "https://murielartist.co.uk/",
+        "description": "A stall showcasing the vibrant abstract art of Muriel Dahan.",
+        "tags": [
+            "art"
+        ]
+    },
     {
         "name": "SherbertFrog: Handmade crochet soft toys",
         "image": "images/stalls/sherbert-frog.png",
