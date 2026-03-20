@@ -5,6 +5,6 @@ permalink: /pages/food.html
 bodyClass: bg-brand-glaucous
 ---
 
-<main id="gallery-placeholder" class="container-xxl my-5" x-data="galleryBrowser('food')">
+<main id="gallery-placeholder" class="container-xxl my-5" x-data="galleryBrowser('food', {{ vendors | dump }})">
     {% include "components/gallery-content.njk" %}
 </main>

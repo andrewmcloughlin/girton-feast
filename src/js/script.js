@@ -40,11 +40,18 @@ document.addEventListener('alpine:init', () => {
     eventInfo: null,
 
     async init () {
-      // Fetch event info from the public location
+      // Use event info from siteConfig if available (injected at build time)
+      // Otherwise fetch it (fallback for legacy or development)
       try {
-        const prefix = window.siteConfig?.pathPrefix || '/'
-        const response = await fetch(prefix + '_data/event-info.json')
-        const data = await response.json()
+        let data
+        if (window.siteConfig?.eventInfo) {
+          data = window.siteConfig.eventInfo
+        } else {
+          const prefix = window.siteConfig?.pathPrefix || '/'
+          const response = await fetch(prefix + '_data/event_info.json')
+          data = await response.json()
+        }
+
         this.eventInfo = data.reduce((acc, item) => {
           acc[item.id] = item
           return acc
@@ -111,7 +118,7 @@ document.addEventListener('alpine:init', () => {
   })
 
   // Gallery Browser component
-  Alpine.data('galleryBrowser', (configKey) => ({
+  Alpine.data('galleryBrowser', (configKey, initialItems = null) => ({
     configs: {
       stalls: {
         jsonUrl: (window.siteConfig?.pathPrefix || '/') + '_data/stalls.json',
@@ -146,13 +153,17 @@ document.addEventListener('alpine:init', () => {
     },
     config: {},
     currentKey: configKey,
-    items: [],
+    items: initialItems || [],
     selectedTag: 'all',
     selectedDay: 'all',
     async init () {
       this.config = this.configs[configKey]
-      const response = await fetch(this.config.jsonUrl)
-      this.items = await response.json()
+
+      // Only fetch if data wasn't passed at build time
+      if (this.items.length === 0) {
+        const response = await fetch(this.config.jsonUrl)
+        this.items = await response.json()
+      }
 
       // Handle initial filters from URL
       const params = new URLSearchParams(window.location.search)

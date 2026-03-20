@@ -45,7 +45,8 @@
         gtag('config', 'G-P2D103WGWN');
 
         window.siteConfig = {
-            pathPrefix: "{{ '/' | url }}"
+            pathPrefix: "{{ '/' | url }}",
+            eventInfo: {{ event_info | dump | safe }}
         };
     </script>
 </head>

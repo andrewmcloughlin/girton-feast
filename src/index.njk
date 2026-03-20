@@ -508,8 +508,7 @@ title: Girton Feast
 
 <!-- Sponsors section -->
 <section id="sponsors" class="container-fluid bg-white rounded py-5 section-spacing"
-         x-data="{ sponsors: [], showAll: false, imagePrefix: '{{ "/images/sponsors/" | url }}' }"
-         x-init="sponsors = await (await fetch('{{ "/_data/sponsors.json" | url }}')).json()">
+         x-data="{ sponsors: {{ sponsors | dump }}, showAll: false, imagePrefix: '{{ "/images/sponsors/" | url }}' }">
     <div class="text-center">
         <img src="{{ "/images/titles/sponsors-text.png" | url }}" alt="Sponsors"
              style="max-width: 100%; height: auto; max-height: 200px;"
