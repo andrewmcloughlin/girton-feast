@@ -256,88 +256,28 @@ title: Girton Feast
         </div>
         <div class="bento-grid">
             <!-- Displays & Shows (Wide) -->
-            <a href="{{ "/pages/entertainment.html?tag=shows" | url }}"
-               class="bento-item bento-item-wide text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('{{ "/images/maypole.png" | url }}');">
-                <div class="mb-auto">
-                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
-                </div>
-                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Displays & Shows</h4>
-            </a>
+            {% bentoItem "/pages/entertainment.html?tag=shows", "Displays & Shows", "/images/maypole.png", "SAT", true %}
 
             <!-- Live Music  -->
-            <a href="{{ "/pages/entertainment.html?tag=music" | url }}"
-               class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale bg-brand-thulian-pink"
-               style="background-image: url('{{ "/images/vendors/munroes.png" | url }}'); background-size: cover; background-position: top;">
-                <div class="mb-auto">
-                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
-                </div>
-                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Live Music</h4>
-            </a>
+            {% bentoItem "/pages/entertainment.html?tag=music", "Live Music", "/images/vendors/munroes.png", "FRI & SAT", false, true, "bg-brand-thulian-pink", "background-size: cover; background-position: top;" %}
 
             <!-- Stalls -->
-            <a href="{{ "/pages/stalls.html" | url }}"
-               class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('{{ "/images/stall-blue.svg" | url }}'); background-color: var(--brand-glaucous); background-size: 60%; background-repeat: no-repeat;">
-                <div class="mb-auto">
-                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
-                </div>
-                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Local Stalls</h4>
-            </a>
+            {% bentoItem "/pages/stalls.html", "Local Stalls", "/images/stall-blue.svg", "SAT", false, false, "", "background-color: var(--brand-glaucous); background-size: 60%; background-repeat: no-repeat;" %}
 
             <!-- Sports & Games (Tall) -->
-            <a href="{{ "/pages/entertainment.html?tag=sports" | url }}"
-               class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('{{ "/images/football.png" | url }}');">
-                <div class="mb-auto">
-                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
-                </div>
-                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Sports & Games</h4>
-            </a>
-
+            {% bentoItem "/pages/entertainment.html?tag=sports", "Sports & Games", "/images/football.png", "SAT" %}
 
             <!-- Fun Fair Ride (Tall) -->
-            <a href="{{ "/pages/entertainment.html?tag=rides" | url }}"
-               class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('{{ "/images/helterskelter.png" | url }}');">
-                <div class="mb-auto">
-                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
-                </div>
-                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Fun Fair Ride</h4>
-            </a>
+            {% bentoItem "/pages/entertainment.html?tag=rides", "Fun Fair Ride", "/images/helterskelter.png", "FRI & SAT", false, true %}
 
-                            <!-- Food Trucks -->
-            <a href="{{ "/pages/food.html" | url }}"
-               class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('{{ "/images/food/burger.png" | url }}');">
-                <div class="mb-auto">
-                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
-                </div>
-                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Food & Drink</h4>
-            </a>
-
+            <!-- Food Trucks -->
+            {% bentoItem "/pages/food.html", "Food & Drink", "/images/food/burger.png", "FRI & SAT", false, true %}
 
             <!-- Kids & Family -->
-            <a href="{{ "/pages/entertainment.html?tag=kids" | url }}"
-               class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('{{ "/images/pompom.png" | url }}');">
-                <div class="mb-auto">
-                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
-                </div>
-                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Kids & Family</h4>
-            </a>
+            {% bentoItem "/pages/entertainment.html?tag=kids", "Kids & Family", "/images/pompom.png", "SAT" %}
 
             <!-- Beer Tent -->
-            <a href="{{ "/pages/beer-tent.html" | url }}"
-               class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('{{ "/images/food/beer.png" | url }}');">
-                <div class="mb-auto">
-                    <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
-                </div>
-                <h4 class="fw-bold mb-0" style="font-family: 'Poller One', cursive;">Local Beers</h4>
-            </a>
-
-
+            {% bentoItem "/pages/beer-tent.html", "Local Beers", "/images/food/beer.png", "FRI & SAT" %}
         </div>
     </section>
 
@@ -350,42 +290,12 @@ title: Girton Feast
             <div class="col-lg-10 mt-5">
                 <div class="bg-white p-4 rounded-4 shadow-sm border">
                     <div class="row g-4 text-center">
-                        <div class="col-6 col-md-4">
-                            <div class="p-3">
-                                <i class="fas fa-info-circle fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
-                                <h6 class="fw-bold mb-0">Information</h6>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <div class="p-3">
-                                <i class="fas fa-restroom fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
-                                <h6 class="fw-bold mb-0">Toilets / Disabled</h6>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <div class="p-3">
-                                <i class="fas fa-baby fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
-                                <h6 class="fw-bold mb-0">Baby Changing</h6>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <div class="p-3">
-                                <i class="fas fa-car fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
-                                <h6 class="fw-bold mb-0">Accessible Parking</h6>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <div class="p-3">
-                                <i class="fas fa-search fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
-                                <h6 class="fw-bold mb-0">Lost & Found</h6>
-                            </div>
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <div class="p-3">
-                                <i class="fas fa-first-aid fa-2x mb-3" style="color: var(--brand-glaucous);"></i>
-                                <h6 class="fw-bold mb-0">First Aid</h6>
-                            </div>
-                        </div>
+                        {% facilityItem "fa-info-circle", "Information" %}
+                        {% facilityItem "fa-restroom", "Toilets / Disabled" %}
+                        {% facilityItem "fa-baby", "Baby Changing" %}
+                        {% facilityItem "fa-car", "Accessible Parking" %}
+                        {% facilityItem "fa-search", "Lost & Found" %}
+                        {% facilityItem "fa-first-aid", "First Aid" %}
                     </div>
                 </div>
             </div>
@@ -403,61 +313,13 @@ title: Girton Feast
 
         <div class="row g-4 justify-content-center">
             <!-- Stall Holders -->
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4 bg-white">
-                    <div class="card-body">
-                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
-                            style="width: 80px; height: 80px;">
-                            <i class="fas fa-store fa-2x" style="color: var(--brand-marian-blue);"></i>
-                        </div>
-                        <h3 class="h4 fw-bold mb-3" style="color: var(--brand-marian-blue);">Stall Holders</h3>
-                        <p class="mb-4">Standard pitches for local businesses, crafters, charities, and community
-                            groups.</p>
-                        <a href="{{ "/info/stall-holders.html" | url }}" class="btn btn-outline-primary fw-bold stretched-link"
-                            style="border-width: 2px;">
-                            Find Out More
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% infoCard "Stall Holders", "Standard pitches for local businesses, crafters, charities, and community groups.", "/info/stall-holders.html", "fa-store", "btn-outline-primary", "var(--brand-marian-blue)", "var(--brand-marian-blue)" %}
 
             <!-- Food & Drink -->
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4 bg-white">
-                    <div class="card-body">
-                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
-                            style="width: 80px; height: 80px;">
-                            <i class="fas fa-utensils fa-2x"></i>
-                        </div>
-                        <h3 class="h4 fw-bold mb-3">Food Vendors</h3>
-                        <p class="mb-4">Information for caterers, ice cream vans, and other food & drink providers.
-                        </p>
-                        <a href="{{ "/info/caterers-info.html" | url }}" class="btn btn-outline-danger fw-bold stretched-link"
-                            style="border-width: 2px;">
-                            Find Out More
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% infoCard "Food Vendors", "Information for caterers, ice cream vans, and other food & drink providers.", "/info/caterers-info.html", "fa-utensils", "btn-outline-danger" %}
 
             <!-- Rides & Games -->
-            <div class="col-md-4">
-                <div class="card h-100 border-0 shadow-sm hover-scale text-center p-4 bg-white">
-                    <div class="card-body">
-                        <div class="bg-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3 shadow-sm"
-                            style="width: 80px; height: 80px;">
-                            <i class="fas fa-ticket-alt fa-2x" style="color: var(--brand-saffron);"></i>
-                        </div>
-                        <h3 class="h4 fw-bold mb-3" style="color: var(--brand-marian-blue);">Rides & Games</h3>
-                        <p class="mb-4">Details for fairground rides, inflatables, and authorized game operators.
-                        </p>
-                        <a href="{{ "/info/ride-vendors-info.html" | url }}" class="btn btn-outline-warning fw-bold stretched-link"
-                            style="border-width: 2px; background-color: transparent; border-color: var(--brand-saffron); color: var(--brand-marian-blue);">
-                            Find Out More
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% infoCard "Rides & Games", "Details for fairground rides, inflatables, and authorized game operators.", "/info/ride-vendors-info.html", "fa-ticket-alt", "btn-outline-warning", "var(--brand-saffron)", "var(--brand-marian-blue)" %}
         </div>
     </section>
 </div> <!-- End Day 2 Content -->
