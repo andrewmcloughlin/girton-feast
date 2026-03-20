@@ -108,7 +108,7 @@
                 <div class="col">
                     <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative group transition-300 hover-lift">
                         <!-- Card Image -->
-                        <img :src="'/' + item.image" class="card-img object-fit-cover" :alt="item.name" style="height: 380px;">
+                        <img :src="(window.siteConfig?.pathPrefix || '/') + item.image" class="card-img object-fit-cover" :alt="item.name" style="height: 380px;">
 
                         <!-- Dark Gradient Overlay -->
                         <div class="card-img-overlay d-flex flex-column justify-content-end p-4 bg-gradient-dark-strong transition-300 group-hover-darken">

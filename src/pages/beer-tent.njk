@@ -230,7 +230,7 @@ permalink: /pages/beer-tent.html
             },
 
             init() {
-                fetch('/_data/beer-tent.json')
+                fetch('{{ "/_data/beer-tent.json" | url }}')
                     .then(response => response.json())
                     .then(data => {
                         this.breweries = data;

@@ -258,7 +258,7 @@ title: Girton Feast
             <!-- Displays & Shows (Wide) -->
             <a href="{{ "/pages/entertainment.html?tag=shows" | url }}"
                class="bento-item bento-item-wide text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('/images/maypole.png');">
+               style="background-image: url('{{ "/images/maypole.png" | url }}');">
                 <div class="mb-auto">
                     <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
                 </div>
@@ -268,7 +268,7 @@ title: Girton Feast
             <!-- Live Music  -->
             <a href="{{ "/pages/entertainment.html?tag=music" | url }}"
                class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale bg-brand-thulian-pink"
-               style="background-image: url('/images/vendors/munroes.png'); background-size: cover; background-position: top;">
+               style="background-image: url('{{ "/images/vendors/munroes.png" | url }}'); background-size: cover; background-position: top;">
                 <div class="mb-auto">
                     <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
                 </div>
@@ -278,7 +278,7 @@ title: Girton Feast
             <!-- Stalls -->
             <a href="{{ "/pages/stalls.html" | url }}"
                class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('/images/stall-blue.svg'); background-color: var(--brand-glaucous); background-size: 60%; background-repeat: no-repeat;">
+               style="background-image: url('{{ "/images/stall-blue.svg" | url }}'); background-color: var(--brand-glaucous); background-size: 60%; background-repeat: no-repeat;">
                 <div class="mb-auto">
                     <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
                 </div>
@@ -288,7 +288,7 @@ title: Girton Feast
             <!-- Sports & Games (Tall) -->
             <a href="{{ "/pages/entertainment.html?tag=sports" | url }}"
                class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('/images/football.png');">
+               style="background-image: url('{{ "/images/football.png" | url }}');">
                 <div class="mb-auto">
                     <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
                 </div>
@@ -299,7 +299,7 @@ title: Girton Feast
             <!-- Fun Fair Ride (Tall) -->
             <a href="{{ "/pages/entertainment.html?tag=rides" | url }}"
                class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('/images/helterskelter.png');">
+               style="background-image: url('{{ "/images/helterskelter.png" | url }}');">
                 <div class="mb-auto">
                     <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
                 </div>
@@ -309,7 +309,7 @@ title: Girton Feast
                             <!-- Food Trucks -->
             <a href="{{ "/pages/food.html" | url }}"
                class="bento-item bento-item-tall text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('/images/food/burger.png');">
+               style="background-image: url('{{ "/images/food/burger.png" | url }}');">
                 <div class="mb-auto">
                     <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
                 </div>
@@ -320,7 +320,7 @@ title: Girton Feast
             <!-- Kids & Family -->
             <a href="{{ "/pages/entertainment.html?tag=kids" | url }}"
                class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('/images/pompom.png');">
+               style="background-image: url('{{ "/images/pompom.png" | url }}');">
                 <div class="mb-auto">
                     <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">SAT</span>
                 </div>
@@ -330,7 +330,7 @@ title: Girton Feast
             <!-- Beer Tent -->
             <a href="{{ "/pages/beer-tent.html" | url }}"
                class="bento-item text-white text-decoration-none shadow-sm transition-300 hover-scale"
-               style="background-image: url('/images/food/beer.png');">
+               style="background-image: url('{{ "/images/food/beer.png" | url }}');">
                 <div class="mb-auto">
                     <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">FRI & SAT</span>
                 </div>
@@ -508,8 +508,8 @@ title: Girton Feast
 
 <!-- Sponsors section -->
 <section id="sponsors" class="container-fluid bg-white rounded py-5 section-spacing"
-         x-data="{ sponsors: [], showAll: false, imagePrefix: '/images/sponsors/' }"
-         x-init="sponsors = await (await fetch('/_data/sponsors.json')).json()">
+         x-data="{ sponsors: [], showAll: false, imagePrefix: '{{ "/images/sponsors/" | url }}' }"
+         x-init="sponsors = await (await fetch('{{ "/_data/sponsors.json" | url }}')).json()">
     <div class="text-center">
         <img src="{{ "/images/titles/sponsors-text.png" | url }}" alt="Sponsors"
              style="max-width: 100%; height: auto; max-height: 200px;"

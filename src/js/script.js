@@ -42,7 +42,8 @@ document.addEventListener('alpine:init', () => {
     async init () {
       // Fetch event info from the public location
       try {
-        const response = await fetch('/_data/event-info.json')
+        const prefix = window.siteConfig?.pathPrefix || '/'
+        const response = await fetch(prefix + '_data/event-info.json')
         const data = await response.json()
         this.eventInfo = data.reduce((acc, item) => {
           acc[item.id] = item
@@ -113,8 +114,8 @@ document.addEventListener('alpine:init', () => {
   Alpine.data('galleryBrowser', (configKey) => ({
     configs: {
       stalls: {
-        jsonUrl: '/_data/stalls.json',
-        titleImage: '/images/titles/stalls-text.svg',
+        jsonUrl: (window.siteConfig?.pathPrefix || '/') + '_data/stalls.json',
+        titleImage: (window.siteConfig?.pathPrefix || '/') + 'images/titles/stalls-text.svg',
         sidebarGoose: '',
         cta: {
           show: true,
@@ -127,17 +128,17 @@ document.addEventListener('alpine:init', () => {
         noResultsText: 'No stalls found'
       },
       food: {
-        jsonUrl: '/_data/vendors.json',
-        titleImage: '/images/titles/food-and-drink-text.svg',
+        jsonUrl: (window.siteConfig?.pathPrefix || '/') + '_data/vendors.json',
+        titleImage: (window.siteConfig?.pathPrefix || '/') + 'images/titles/food-and-drink-text.svg',
         sidebarGoose: '',
         cta: { show: false },
         showDayFilter: false,
         noResultsText: 'No food or drink vendors found'
       },
       entertainment: {
-        jsonUrl: '/_data/entertainment.json',
-        titleImage: '/images/titles/whats-on-text.svg',
-        sidebarGoose: '/images/goose_golf.svg',
+        jsonUrl: (window.siteConfig?.pathPrefix || '/') + '_data/entertainment.json',
+        titleImage: (window.siteConfig?.pathPrefix || '/') + 'images/titles/whats-on-text.svg',
+        sidebarGoose: (window.siteConfig?.pathPrefix || '/') + 'images/goose_golf.svg',
         cta: { show: false },
         showDayFilter: true,
         noResultsText: 'No activities found'
