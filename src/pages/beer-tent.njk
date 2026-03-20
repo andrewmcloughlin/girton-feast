@@ -236,7 +236,8 @@ permalink: /pages/beer-tent.html
                         this.breweries = data;
                         this.allBeers = [];
                         this.breweries.forEach(brewery => {
-                            brewery.imagePath = '/' + brewery.logo;
+                            const prefix = window.siteConfig?.pathPrefix || '/';
+                            brewery.imagePath = prefix + brewery.logo;
                             brewery.beers.forEach(beer => {
                                 this.allBeers.push({
                                     ...beer,

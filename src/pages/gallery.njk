@@ -103,7 +103,8 @@ permalink: /pages/gallery.html
             `;
 
             for (let i = 1; i <= config.imageCount; i++) {
-                const imagePath = `/images/previous/${config.year}/${i}.jpg`;
+                const prefix = window.siteConfig?.pathPrefix || '/';
+                const imagePath = `${prefix}images/previous/${config.year}/${i}.jpg`;
                 const delay = (i - 1) * 50;
                 allYearsHtml += `
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3">
@@ -140,7 +141,8 @@ permalink: /pages/gallery.html
         const imagePromises = [];
 
         for (let i = 1; i <= config.imageCount; i++) {
-            const imageUrl = `/images/previous/${year}/${i}.jpg`;
+            const prefix = window.siteConfig?.pathPrefix || '/';
+            const imageUrl = `${prefix}images/previous/${year}/${i}.jpg`;
             const promise = fetch(imageUrl)
                 .then(response => {
                     if (!response.ok) throw new Error(`Image ${i}.jpg not found`);
