@@ -68,7 +68,7 @@ title: Girton Feast
             get digits() { return this.year.split(''); }
         }">
             <template x-for="(digit, index) in digits" :key="index">
-                <img :src="`/images/digits/${digit}.svg`" :alt="digit" class="img-fluid"
+                <img :src="`${window.siteConfig?.pathPrefix || '/'}images/digits/${digit}.svg`" :alt="digit" class="img-fluid"
                     style="max-height: clamp(50px, 10vh, 50px)">
             </template>
         </div>
