@@ -531,6 +531,17 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     min-height: 180px; /* Ensure minimum height for titles */
 }
 
+.bento-item picture,
+.bento-item-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+}
+
 .day-tag {
     background: rgba(255, 255, 255, 0.95);
     color: var(--brand-marian-blue);

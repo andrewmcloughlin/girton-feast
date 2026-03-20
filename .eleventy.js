@@ -1,3 +1,6 @@
+const Image = require("@11ty/eleventy-img");
+const path = require("path");
+
 module.exports = function(eleventyConfig) {
   // Passthrough copy for static assets
   eleventyConfig.addPassthroughCopy("src/css");
@@ -5,15 +8,55 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/images");
   eleventyConfig.addPassthroughCopy("src/_data/*.json");
 
+  // Helper for image optimization
+  async function imageShortcode(src, alt, sizes = "100vw", classes = "", loading = "lazy", extraStyles = "") {
+    if (!src) return "";
+    const fullSrc = src.startsWith("/") ? path.join(__dirname, "src", src) : src;
+
+    // Skip optimization for SVGs
+    if (src.endsWith(".svg")) {
+      const urlFilter = eleventyConfig.getFilter("url");
+      return `<img src="${urlFilter(src)}" alt="${alt}" class="${classes}" loading="${loading}" decoding="async" style="${extraStyles}">`;
+    }
+
+    let metadata = await Image(fullSrc, {
+      widths: [300, 600, 1200],
+      formats: ["avif", "webp", "jpeg"],
+      outputDir: "./_site/img/",
+      urlPath: "/girton-feast/img/",
+    });
+
+    return Image.generateHTML(metadata, {
+      alt,
+      sizes,
+      loading,
+      decoding: "async",
+      class: classes,
+      style: extraStyles,
+    });
+  }
+
   // Shortcodes
-  eleventyConfig.addShortcode("bentoItem", function(url, title, image, badge, isWide = false, isTall = false, extraClasses = "", extraStyles = "") {
+  eleventyConfig.addAsyncShortcode("image", imageShortcode);
+
+  eleventyConfig.addAsyncShortcode("bentoItem", async function(url, title, image, badge, isWide = false, isTall = false, extraClasses = "", extraStyles = "") {
     const urlFilter = eleventyConfig.getFilter("url");
     const wideClass = isWide ? "bento-item-wide" : "";
     const tallClass = isTall ? "bento-item-tall" : "";
 
+    let imageHtml = "";
+    let itemStyles = extraStyles;
+
+    if (image.endsWith(".svg")) {
+      itemStyles += ` background-image: url('${urlFilter(image)}');`;
+    } else {
+      imageHtml = await imageShortcode(image, title, "(min-width: 992px) 25vw, (min-width: 768px) 50vw, 100vw", "bento-item-img");
+    }
+
     return `<a href="${urlFilter(url)}"
        class="bento-item ${wideClass} ${tallClass} ${extraClasses} text-white text-decoration-none shadow-sm transition-300 hover-scale"
-       style="background-image: url('${urlFilter(image)}'); ${extraStyles}">
+       style="${itemStyles}">
+        ${imageHtml}
         <div class="mb-auto">
             <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 opacity-75">${badge}</span>
         </div>
@@ -21,7 +64,7 @@ module.exports = function(eleventyConfig) {
     </a>`;
   });
 
-  eleventyConfig.addShortcode("infoCard", function(title, text, link, icon, btnClass = "btn-outline-primary", iconColor = "", titleColor = "") {
+  eleventyConfig.addAsyncShortcode("infoCard", async function(title, text, link, icon, btnClass = "btn-outline-primary", iconColor = "", titleColor = "") {
     const urlFilter = eleventyConfig.getFilter("url");
     const iconStyle = iconColor ? `style="color: ${iconColor};"` : "";
     const titleStyle = titleColor ? `style="color: ${titleColor};"` : "";
