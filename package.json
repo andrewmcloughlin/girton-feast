@@ -4,6 +4,8 @@
   "description": "Girton Feast static website",
   "private": true,
   "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy",
     "lint": "npm run lint:html && npm run lint:css && npm run lint:js",
     "lint:html": "htmlhint '**/*.html'",
     "lint:css": "stylelint '**/*.css'",
