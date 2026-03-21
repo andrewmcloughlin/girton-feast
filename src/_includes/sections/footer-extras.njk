@@ -1,0 +1,51 @@
+<!-- Site Rules -->
+<div class="container text-center my-4">
+    <div class="site-rules-container shadow-sm border border-brand-glaucous border-opacity-25">
+        <div class="rule-item">
+            <i class="fas fa-smoking-ban"></i>
+            <span>No Smoking</span>
+        </div>
+        <div class="rule-item">
+            <i class="fas fa-dog"></i>
+            <span>No Dogs <small class="opacity-75 fw-normal">(Except assistance dogs)</small></span>
+        </div>
+    </div>
+</div>
+
+<!-- Scroll to top button -->
+<button x-data x-show="$store.app.scrolled" @click="$store.app.scrollToTop()" id="scrollToTopBtn" title="Go to top" x-cloak>
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+    let mybutton = document.getElementById('scrollToTopBtn');
+    window.onscroll = function () { scrollFunction(); };
+    function scrollFunction() {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            mybutton.style.display = 'flex';
+        } else {
+            mybutton.style.display = 'none';
+        }
+    }
+    function topFunction() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+</script>
+
+<!-- Service Worker Registration for PWA -->
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/js/sw.js')
+                .then((registration) => {
+                    console.log('ServiceWorker registration successful:', registration.scope);
+                })
+                .catch((error) => {
+                    console.log('ServiceWorker registration failed:', error);
+                });
+        });
+    }
+</script>

@@ -1,0 +1,112 @@
+<!-- Day 1 Content: Evening Concert -->
+<div id="concert-details" class="bg-brand-light-blue">
+    <section id="headliners" class="container py-5 section-spacing">
+        <div class="row">
+            <div class="col-12">
+                <!-- Booking Button and Info -->
+                <div class="text-center bg-white p-0 rounded-4 shadow">
+                    <!-- Image Carousel -->
+                    <div id="entertainmentCarousel" class="carousel slide shadow-lg rounded mb-4"
+                        data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="1"
+                                aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#entertainmentCarousel" data-bs-slide-to="2"
+                                aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner rounded">
+                            <div class="carousel-item active">
+                                {% image "/images/main_event/1.jpg", "A stage with a band performing under a spotlight.", "100vw", "d-block w-100" %}
+                            </div>
+                            <div class="carousel-item">
+                                {% image "/images/main_event/2.jpg", "", "100vw", "d-block w-100" %}
+                            </div>
+                            <div class="carousel-item">
+                                {% image "/images/main_event/3.jpg", "", "100vw", "d-block w-100" %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#entertainmentCarousel"
+                                data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#entertainmentCarousel"
+                                data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-1">
+
+                        <h2 class="display-6 fw-bold mb-4" style="font-family: 'Poller One', cursive; color: var(--brand-marian-blue);">
+                            Rule The World:<br>The Ultimate Tribute
+                        </h2>
+
+                        <div class="row justify-content-center g-4 mb-5 text-start">
+                        <!-- What -->
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-1 h-100 border-start shadow-sm">
+                                <h5 class="fw-bold text-brand-thulian-pink mb-2">
+                                    What
+                                </h5>
+                                <ul class="list-unstyled mb-0 small">
+                                    <li>Live Music</li>
+                                    <li>Local Food Trucks</li>
+                                    <li>Beer Tent</li>
+                                    <li>Kids' Rides & Ices</li>
+                                    <li>
+                                        <a href="{{ "/pages/entertainment.html?day=Friday" | url }}">Details</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- When -->
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-1 h-100 border-start shadow-sm">
+                                <h5 class="fw-bold text-brand-marian-blue mb-2">
+                                    When
+                                </h5>
+                                <p class="mb-0" x-text="$store.app.eventInfo?.main_event.date_long"></p>
+                                <ul class="list-unstyled mb-0 small">
+                                    <li x-text="$store.app.eventInfo ? 'Doors: ' + $store.app.eventInfo.main_event.doors_open : ''"></li>
+                                    <li x-text="$store.app.eventInfo ? 'Show: ' + $store.app.eventInfo.main_event.show_start : ''"></li>
+                                    <li>
+                                        <a :href="$store.app.getCalendarLink('main_event')"
+                                        target="_blank"
+                                        rel="noopener noreferrer">
+                                            Add to Calendar
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- Where -->
+                        <div class="col-md-4">
+                            <div class="p-3 bg-light rounded-1 h-100 border-start shadow-sm">
+                                <h5 class="fw-bold text-brand-glaucous mb-2">
+                                    Where
+                                </h5>
+                                <ul class="list-unstyled mb-0 small">
+                                    <li>The Main Marquee</li>
+                                    <li>Girton Recreation Ground</li>
+                                    <li>
+                                        <a href="{{ "/pages/getting-here.html" | url }}">Getting Here</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="https://www.ticketsource.co.uk/girtonfeast" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-lg fw-bold px-5 py-3 shadow hover-scale transition-300 animate-pulse"
+                        style="background-color: #FFC107; color: #000; font-size: 1.4rem; border-radius: 50px; border: none;">
+                        Claim Your Tickets Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+</div>
