@@ -1,7 +1,6 @@
-<!-- The navbar-expand-md class makes the menu collapse on screens smaller than 'medium' -->
+<!-- navbar.njk: Dynamic menu driven by src/_data/navigation.js -->
 <nav id="main-navbar" class="navbar navbar-expand-md navbar-dark bg-brand-marian-blue py-3 sticky-top">
     <div class="container-fluid">
-        <!-- The hamburger menu button -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -9,53 +8,50 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
 
-                <!-- Home link (top-level, no children) -->
-                {%- set homeEntry = collections.all | eleventyNavigationFind("Home") %}
+                <!-- Home link -->
                 <li class="nav-item">
-                    <a class="nav-link {% if page.url == homeEntry.url %}active{% endif %}" href="{{ '/' | url }}">Home</a>
+                    <a class="nav-link {% if page.url == ('/' | url) %}active{% endif %}" href="{{ '/' | url }}">Home</a>
                 </li>
 
-                <!-- Dynamic dropdown groups -->
-                {%- set topLevel = collections.all | eleventyNavigation %}
-                {%- for entry in topLevel %}
-                    {%- if entry.key != "Home" %}
-                    {%- set children = collections.all | eleventyNavigation(entry.key) %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ entry.key }}
-                        </a>
-                        <ul class="dropdown-menu bg-brand-marian-blue border-0 shadow" aria-label="{{ entry.key }}">
-                            {%- for child in children | sort(false, false, 'order') %}
-                                {%- if child.data and child.data.eleventyNavigation.isDivider %}
-                                <li><hr class="dropdown-divider border-white-50"></li>
-                                {%- elif child.data and child.data.eleventyNavigation.isHeader %}
-                                <li><h6 class="dropdown-header text-white-50">
-                                    {%- if child.data.eleventyNavigation.icon %}<i class="{{ child.data.eleventyNavigation.icon }} me-2"></i>{% endif %}
-                                    {{ child.key }}
-                                </h6></li>
-                                {%- else %}
-                                {%- set childIcon = child.data.eleventyNavigation.icon if child.data else "" %}
-                                {%- set childUrl = child.data.eleventyNavigation.url if (child.data and child.data.eleventyNavigation.url) else child.url %}
-                                <li>
-                                    <a class="dropdown-item text-white {% if page.url == child.url %}active{% endif %}"
-                                        href="{{ childUrl | url }}">
-                                        {%- if childIcon %}<i class="{{ childIcon }} me-2"></i>{% endif %}
-                                        {{ child.key }}
-                                    </a>
-                                </li>
-                                {%- endif %}
-                            {%- endfor %}
-                        </ul>
-                    </li>
-                    {%- endif %}
+                <!-- Dynamic dropdowns from _data/navigation.js -->
+                {%- for group in navigation %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        {{ group.key }}
+                    </a>
+                    <ul class="dropdown-menu bg-brand-marian-blue border-0 shadow">
+                        {%- for item in group.children %}
+                            {%- if item.divider %}
+                            <li><hr class="dropdown-divider border-white-50"></li>
+                            {%- elif item.header %}
+                            <li>
+                                <h6 class="dropdown-header text-white-50">
+                                    {%- if item.icon %}<i class="{{ item.icon }} me-2"></i>{% endif %}
+                                    {{ item.header }}
+                                </h6>
+                            </li>
+                            {%- else %}
+                            <li>
+                                <a class="dropdown-item text-white {% if item.url and (item.url | url) == page.url %}active{% endif %}"
+                                    href="{{ item.url | url }}">
+                                    {%- if item.icon %}<i class="{{ item.icon }} me-2"></i>{% endif %}
+                                    {{ item.label }}
+                                </a>
+                            </li>
+                            {%- endif %}
+                        {%- endfor %}
+                    </ul>
+                </li>
                 {%- endfor %}
 
             </ul>
-            <!-- Controls Area: Countdown and Theme Toggle -->
+            <!-- Controls: Countdown and Theme Toggle -->
             <div class="d-flex align-items-center ms-auto" x-data>
-                <span id="countdown-timer" x-data="countdown" x-text="timeLeft" class="navbar-text text-white d-none d-md-inline" style="font-size: 0.9rem;"></span>
-                <button id="theme-toggle" class="theme-toggle-btn ms-3" title="Toggle dark mode" @click="$store.app.toggleTheme()">
+                <span id="countdown-timer" x-data="countdown" x-text="timeLeft"
+                    class="navbar-text text-white d-none d-md-inline" style="font-size: 0.9rem;"></span>
+                <button id="theme-toggle" class="theme-toggle-btn ms-3" title="Toggle dark mode"
+                    @click="$store.app.toggleTheme()">
                     <i class="fas" :class="$store.app.theme === 'dark' ? 'fa-sun' : 'fa-moon'"></i>
                 </button>
             </div>
