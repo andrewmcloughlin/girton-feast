@@ -5,7 +5,7 @@
             <div class="col-lg-5 mb-5 mb-lg-0">
                 <div class="hero-v2-header">
                     <h1 class="hero-v2-title">
-                        Girton<br>Feast<span class="hero-v2-year ps-1 pb-2 fs-1">{% year %}</span>
+                        Girton<br>Feast<span class="hero-v2-year ps-1 pb-2">{% year %}</span>
                     </h1>
                 </div>
 
@@ -26,12 +26,12 @@
             <!-- Right Column: Visuals -->
             <div class="col-lg-7">
                 <div class="hero-v2-visual">
-                    <svg viewBox="-50 -100 950 650" xmlns="http://www.w3.org/2000/svg" class="blob-svg" style="overflow: visible;">
+                    <svg viewBox="100 50 730 520" xmlns="http://www.w3.org/2000/svg" class="blob-svg" style="overflow: visible;">
                         <defs>
-                            <!-- Single Source of Truth for Paths -->
-                            <path id="morph-pink" d="M280.6,416.9C405.1,444.5,536.4,541.2,676.7,486.8C827.2,437.1,802.3,323,810.2,213.4C818.2,103.9,743.5,15.5,381.4,0.8C19.3,-14,-33.9,187.6,15.9,268.7C65.7,349.7,156.2,389.3,280.6,416.9Z" />
-                            <!-- Shipped Green Path (Baked +60X, -40Y) -->
-                            <path id="morph-green" d="M385,440.9C259.3,427.4,126.7,492.7,77.4,395.5C28.1,298.4,62.9,38.8,171.4,-18.2C279.9,-75.3,462.1,70.2,564.6,143.1C667,215.9,689.6,216.1,684.5,308.6C679.3,401.1,646.4,469.3,570.8,478.2C495.1,487.1,510.7,454.5,385,440.9Z" />
+                            <!-- Pink Oval Base -->
+                            <path id="morph-pink" d="M450,530C280,530,100,480,100,300C100,120,280,70,450,70C620,70,800,120,800,300C800,480,620,530,450,530Z" />
+                             <!-- Green Oval Base (Slight Offset for ~90% Overlap) -->
+                            <path id="morph-green" d="M460,540C290,540,110,490,110,310C110,130,290,80,460,80C630,80,810,130,810,310C810,490,630,540,460,540Z" />
 
                             <clipPath id="clip-pink">
                                 <use href="#morph-pink" />
@@ -46,10 +46,9 @@
                         <use href="#morph-green" class="blob-bg-green" />
 
                         <!-- Masked Image: Intersection of A and B via nested clipping -->
-                        <!-- This is the most robust way to ensure 100% opacity and zero offset -->
                         <g clip-path="url(#clip-pink)">
                             <g clip-path="url(#clip-green)">
-                                <foreignObject x="-100" y="-120" width="1100" height="850">
+                                <foreignObject x="100" y="50" width="700" height="500">
                                     <img src="{{ "/images/map-thumbnail.png" | url }}"
                                          alt="Girton Feast Map"
                                          class="map-image-redesign" />
