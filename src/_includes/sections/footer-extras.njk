@@ -39,7 +39,9 @@
 <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/js/sw.js')
+            const prefix = (window.siteConfig && window.siteConfig.pathPrefix) || '/';
+            const swPath = prefix.replace(/\/$/, '') + '/sw.js';
+            navigator.serviceWorker.register(swPath, { scope: prefix })
                 .then((registration) => {
                     console.log('ServiceWorker registration successful:', registration.scope);
                 })

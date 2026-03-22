@@ -14,6 +14,11 @@ Global Styles & Variables
     --brand-light-pink: #f7e9ed;
     --brand-light-yellow: #fff8e1;
 
+    /* Redesign Colors */
+    --brand-v2-green: #98ffc0;
+    --brand-v2-pink: #ff9bed;
+    --brand-v2-purple: #9D36E7; /* Complementary purple for buttons/accents */
+
     /* Default Badge Style */
     --badge-bg: var(--brand-glaucous);
     --badge-text: #fff;
@@ -1128,6 +1133,7 @@ html {
 .dark-mode .site-rules-container {
     background-color: var(--card-bg);
 }
+
 /* Pulse animation for the ticket scarcity badge */
 @keyframes pulse {
     0% { transform: scale(1); }
@@ -1137,4 +1143,137 @@ html {
 
 .animate-pulse {
     animation: pulse 2s infinite ease-in-out;
+}
+
+/* ========================================
+   Hero V2 (Redesign)
+   ======================================== */
+.hero-v2 {
+    font-family: Comfortaa, sans-serif;
+    font-weight: 300;
+    background-color: white;
+    padding: 2rem 0;
+    display: block;
+    overflow-x: hidden;
+}
+
+.hero-v2-title {
+    font-family: 'Glass Antiqua', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 0.9;
+    margin-bottom: 0.5rem;
+    color: #000;
+    position: relative;
+    display: inline-block;
+}
+
+.hero-v2-year {
+    display: inline-block;
+    font-family: Poppins, sans-serif;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-weight: 700;
+    vertical-align: middle;
+    color: var(--brand-v2-purple);
+    line-height: 1;
+}
+
+.hero-v2-detail {
+    font-size: 1.25rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.hero-v2-buttons .btn {
+    border-radius: 50px;
+    padding: 0.75rem 1.5rem;
+    font-weight: 700;
+    margin-right: 1rem;
+    margin-bottom: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.hero-v2-buttons .btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-v2-primary {
+    background-color: var(--brand-v2-purple);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(157, 54, 231, 0.3);
+}
+
+.btn-v2-outline {
+    background-color: white;
+    color: var(--brand-v2-purple);
+    border: 2px solid var(--brand-v2-purple);
+}
+
+/* Morphing Blobs SVG Container */
+.hero-v2-visual {
+    position: relative;
+    width: 140%; /* Even larger bleed */
+    max-width: 1000px;
+    margin-left: -10%;
+    z-index: 1;
+}
+
+@media (min-width: 992px) {
+    .hero-v2-visual {
+        margin-right: -30vw; /* Bleed further off the right edge */
+        margin-top: -3rem; /* Pull it up closer to header level */
+        max-width: none;
+    }
+}
+
+.blob-svg {
+    width: 100%;
+    height: auto;
+    max-height: 450px; /* Cap vertical height */
+    display: block;
+    filter: drop-shadow(0 10px 40px rgba(0,0,0,0.08));
+    transform: scale(1.1); /* Slightly enlarge the blobs within the space */
+    transform-origin: left center;
+}
+
+/* Animations for morphing paths */
+/* Morphing Animations: Applied to base paths in <defs> */
+#morph-pink {
+    animation: blobMorph1 12s ease-in-out infinite alternate;
+}
+
+#morph-green {
+    animation: blobMorph2 10s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes blobMorph1 {
+    0%, 100% { d: path("M280.6,416.9C405.1,444.5,536.4,541.2,676.7,486.8C827.2,437.1,802.3,323,810.2,213.4C818.2,103.9,743.5,15.5,381.4,0.8C19.3,-14,-33.9,187.6,15.9,268.7C65.7,349.7,156.2,389.3,280.6,416.9Z"); }
+    50% { d: path("M200.6,336.9C365.1,384.5,456.4,601.2,616.7,546.8C777.2,497.1,882.3,393,890.2,283.4C898.2,173.9,633.5,-19.5,301.4,-40.8C-60.7,-60,-113.9,257.6,-64.1,338.7C-14.3,419.7,76.2,309.3,200.6,336.9Z"); }
+}
+
+/* Shifting blobMorph2 by +60X, -40Y to create more intersection naturally */
+@keyframes blobMorph2 {
+    0%, 100% { d: path("M385,440.9C259.3,427.4,126.7,492.7,77.4,395.5C28.1,298.4,62.9,38.8,171.4,-18.2C279.9,-75.3,462.1,70.2,564.6,143.1C667,215.9,689.6,216.1,684.5,308.6C679.3,401.1,646.4,469.3,570.8,478.2C495.1,487.1,510.7,454.5,385,440.9Z"); }
+    50% { d: path("M465,360.9C339.3,347.4,166.7,412.7,117.4,315.5C68.1,218.4,102.9,-41.2,211.4,-98.2C319.9,-155.3,502.1,-10.2,604.6,63.1C707,135.9,769.6,136.1,764.5,228.6C759.3,321.1,726.4,389.3,650.8,398.2C575.1,407.1,590.7,374.5,465,360.9Z"); }
+}
+
+/* Appearance */
+.blob-bg-pink {
+    fill: var(--brand-v2-pink);
+    opacity: 0.45;
+    mix-blend-mode: multiply;
+}
+.blob-bg-green {
+    fill: var(--brand-v2-green);
+    opacity: 0.45;
+    mix-blend-mode: multiply;
+}
+
+/* Image Styling */
+.map-image-redesign {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1 !important;
 }

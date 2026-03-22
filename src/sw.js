@@ -6,7 +6,7 @@ const PRE_CACHE_RESOURCES = [
   './css/style.css',
   './js/script.js',
   './js/email-protection.js',
-  './js/sw.js',
+  './sw.js',
   // JSON Data
   './vendors.json',
   './entertainment.json',
