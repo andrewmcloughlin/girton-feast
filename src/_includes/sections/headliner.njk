@@ -1,0 +1,50 @@
+{% from "components/sticker-button.njk" import stickerButton %}
+{% set event = event_info[0] %}
+
+<section class="headliner-section">
+    <!-- Rotated Background Layers -->
+    <div class="headliner-bg-green"></div>
+    <div class="headliner-bg-pink"></div>
+    <div class="headliner-bg-purple"></div>
+
+    <div class="container py-5" style="position: relative; z-index: 1;">
+        <div class="row align-items-center">
+            <!-- Left Side: Content -->
+            <div class="col-lg-6 headliner-content" style="z-index: 2;">
+                <h2 class="headliner-title">Rule the World!</h2>
+                <div class="headliner-details mb-4">
+                    <p class="headliner-microcopy mb-2">{{ event.calendar.details }}</p>
+                    <p class="mb-0">{{ event.date_long }}</p>
+                    <p class="mb-0">Doors {{ event.doors_open }} | Show starts {{ event.show_start }}</p>
+                    <p class="mb-0">{{ event.location }}</p>
+                </div>
+                {{ stickerButton("claim your ticket now!", "#tickets", "btn-headliner-tickets sticker-outline sticker-alt") }}
+            </div>
+
+            <!-- Right Side: Visuals -->
+            <div class="col-lg-6 position-relative headliner-visual-container">
+                <div class="headliner-visual">
+                    <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" class="headliner-blob-svg">
+                        <defs>
+                            <path id="headliner-blob-pink" d="M451.986 718.528C340.528 718.528 200.741 680.17 63.819 559.742C1.65799 505.086 -14.4539 397.689 12.8797 274.004C40.2132 150.318 108.761 17.658 290.499 5.86877C472.237 -5.92043 687.528 5.86877 687.528 243.666C687.528 481.464 563.444 718.528 451.986 718.528Z" />
+                            <path id="headliner-blob-green" d="M116.51 491.547C34.8258 436.87 -14.2405 329.418 1.95679 205.68C18.1541 81.9427 101.996 -11.6664 210.024 -0.0763784C318.051 11.5136 492.213 13.1118 491.503 250.91C490.792 488.708 198.194 546.223 116.51 491.547Z" />
+
+                            <clipPath id="clip-headliner-pink"><use href="#headliner-blob-pink" /></clipPath>
+                            <clipPath id="clip-headliner-green"><use href="#headliner-blob-green" /></clipPath>
+                        </defs>
+
+                        <!-- Blobs -->
+                        <use href="#headliner-blob-pink" class="headliner-pink" />
+                        <use href="#headliner-blob-green" class="headliner-green" />
+
+                        <!-- Intersection -->
+                        <g clip-path="url(#clip-headliner-pink)">
+                            <use href="#headliner-blob-green" class="headliner-intersection" />
+                        </g>
+                    </svg>
+                    <img src="{{ "/images/jumping-drummer.png" | url }}" alt="Jumping Drummer" class="headliner-drummer">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

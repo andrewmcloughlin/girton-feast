@@ -1661,3 +1661,138 @@ html {
 .hero-v2-visual:hover .map-image-redesign {
     transform: scale(0.9) translateX(-10%);
 }
+
+/* Headliner Section */
+.headliner-section {
+    color: white;
+    position: relative;
+    /* Removed hidden to show rotated edges */
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    padding: 10rem 0;
+    margin: 4rem 0;
+    /* Add space for the overhang */
+}
+
+.headliner-bg-purple,
+.headliner-bg-pink,
+.headliner-bg-green {
+    position: absolute;
+    top: 0;
+    left: -5%;
+    width: 110%;
+    height: 100%;
+}
+
+.headliner-bg-purple {
+    background-color: #7801AF;
+    transform: rotate(2.24deg);
+    z-index: 0;
+}
+
+.headliner-bg-pink {
+    background-color: #FFBEF7;
+    z-index: -1;
+    /* No rotation as requested */
+}
+
+.headliner-bg-green {
+    background-color: #C8FFE0;
+    transform: rotate(-2.57deg);
+    z-index: -2;
+}
+
+.headliner-title {
+    font-family: 'Glass Antiqua', cursive;
+    font-size: 5rem;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.headliner-details {
+    font-family: Comfortaa, cursive;
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+.headliner-microcopy {
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    font-weight: 700;
+    opacity: 0.7;
+    color: #EABEFF;
+    /* Use intersection color for brand consistency */
+}
+
+.btn-headliner-tickets {
+    width: auto;
+    display: inline-block;
+    padding: 0.5rem 2rem;
+}
+
+.headliner-visual-container {
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.headliner-visual {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.headliner-blob-svg {
+    width: 130%;
+    /* Increase size to overflow and look more organic */
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}
+
+.headliner-pink {
+    fill: #FFBEF7;
+    opacity: 1;
+}
+
+.headliner-green {
+    fill: #C8FFE0;
+    opacity: 1;
+}
+
+.headliner-intersection {
+    fill: #EABEFF;
+    opacity: 1;
+}
+
+.headliner-drummer {
+    position: absolute;
+    width: 110%;
+    /* Slightly larger than the visual box */
+    height: auto;
+    top: 45%;
+    /* Slightly higher to give room for legs/shadow */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    pointer-events: none;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+}
+
+@media (max-width: 991px) {
+    .headliner-title {
+        font-size: 3.5rem;
+    }
+
+    .headliner-visual-container {
+        height: 400px;
+        margin-top: 3rem;
+    }
+}
