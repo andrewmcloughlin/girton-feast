@@ -10,6 +10,6 @@ eleventyNavigation:
   icon: fas fa-utensils
 ---
 
-<main id="gallery-placeholder" class="container-xxl my-5" x-data="galleryBrowser('food', {{ vendors | dump }})">
+<main id="gallery-placeholder" class="container-xxl my-5" x-data="galleryBrowser('food', {{ food_and_drink | dump }})">
     {% include "components/gallery-content.njk" %}
 </main>

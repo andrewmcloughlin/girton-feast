@@ -1892,28 +1892,28 @@ html {
 }
 
 .event-card:hover .event-card-image {
-    transform: scale(1.15) rotate(3deg);
+    transform: scale(1.15) rotate(2deg);
 }
 
 /* Rotation Utilities */
 .rotate-left-sm {
-    --card-rotation: -4.5deg;
+    --card-rotation: -3.5deg;
 }
 
 .rotate-right-sm {
-    --card-rotation: 5.2deg;
+    --card-rotation: 2.2deg;
 }
 
 .rotate-left-xs {
-    --card-rotation: -3.1deg;
+    --card-rotation: -2.1deg;
 }
 
 .rotate-right-xs {
-    --card-rotation: 4.8deg;
+    --card-rotation: 2.8deg;
 }
 
 .rotate-extreme {
-    --card-rotation: -9.3deg;
+    --card-rotation: -3.3deg;
 }
 
 /* Entrance Animation combined with rotation and fan-out spread */
@@ -1956,6 +1956,137 @@ html {
     --spread-x: 80px;
 }
 
+/* Food & Drink Section */
+.food-drink-section {
+    position: relative;
+    z-index: 5;
+}
+
+.food-drink-title {
+    font-family: 'Glass Antiqua', cursive;
+    font-size: 4.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.food-drink-subtitle {
+    font-family: Comfortaa, cursive;
+    font-size: 1.2rem;
+    opacity: 0.8;
+}
+
+/* Marquee Animation */
+.marquee-wrapper {
+    width: 100%;
+    position: relative;
+    padding: 2rem 0;
+}
+
+.marquee-content {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+    animation: marquee-scroll 60s linear infinite;
+}
+
+.marquee-wrapper:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* Vendor Cards */
+.vendor-card-wrapper {
+    flex: 0 0 auto;
+    width: 450px;
+    padding: 1.5rem 1rem;
+    transform: rotate(var(--card-rotation, 0deg));
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.vendor-card-wrapper:hover {
+    transform: rotate(0deg) scale(1.02);
+    z-index: 10;
+}
+
+.vendor-card {
+    display: flex;
+    align-items: center;
+    border-radius: 2rem;
+    padding: 1.5rem;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    height: 180px;
+    transition: transform 0.3s ease;
+}
+
+.vendor-card:hover {
+    transform: scale(1.05);
+}
+
+.vendor-card-image-container {
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.5rem;
+}
+
+.vendor-card-image {
+    max-width: 160%;
+    /* Allow slightly larger than container for specific van images */
+    max-height: 160%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+}
+
+.vendor-card-content {
+    flex-grow: 1;
+}
+
+.vendor-card-name {
+    font-family: DynaPuff, cursive;
+    font-size: 1.8rem;
+    margin-bottom: 0;
+    line-height: 1.2;
+}
+
+.vendor-card-subtitle {
+    font-family: Comfortaa, cursive;
+    font-size: 1rem;
+    opacity: 0.7;
+    line-height: 1.2;
+}
+
+.vendor-card-tags {
+    position: absolute;
+    bottom: 1rem;
+    right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: flex-end;
+}
+
+.vendor-tag {
+    font-family: Comfortaa, cursive;
+    background-color: rgba(255, 255, 255, 0.4);
+    color: black !important;
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+    border-radius: 2rem;
+    font-size: 0.75rem;
+    text-transform: capitalize;
+}
+
 @media (max-width: 767px) {
     .whats-on-title {
         font-size: 2.5rem;
@@ -1968,5 +2099,21 @@ html {
 
     .event-card-title {
         font-size: 1.8rem;
+    }
+
+    .food-drink-title {
+        font-size: 3rem;
+    }
+
+    .vendor-card-wrapper {
+        width: 350px;
+    }
+
+    .vendor-card-name {
+        font-size: 1.4rem;
+    }
+
+    .vendor-card-subtitle {
+        font-size: 0.85rem;
     }
 }

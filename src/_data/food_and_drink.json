@@ -1,6 +1,7 @@
 [
-        {
-        "name": "Pimms Tent: By Girton Musical Theatre",
+    {
+        "name": "Pimms Tent",
+        "subtitle": "By Girton Musical Theatre",
         "image": "images/food/pimms.png",
         "url": "#",
         "tags": [
@@ -8,7 +9,8 @@
         ]
     },
     {
-        "name": "Wrapunzel's Yorkshire Pudding Wraps",
+        "name": "Wrapunzel's",
+        "subtitle": "Yorkshire Pudding Wraps",
         "image": "images/food/wrapunzels.png",
         "url": "https://www.facebook.com/p/Wrapunzel-100092729754323/",
         "tags": [
@@ -26,7 +28,7 @@
     },
     {
         "name": "Pizza Passione",
-        "image": "images/food/pizza-bgr.png",
+        "image": "images/food/pizza-passione-van.png",
         "url": "https://pizzapassione.co.uk/",
         "tags": [
             "mains"
@@ -42,7 +44,7 @@
     },
     {
         "name": "Churros Bar",
-        "image": "images/food/churros-bgr.png",
+        "image": "images/food/churros-van.png",
         "url": "#",
         "tags": [
             "sweet treats"
@@ -50,7 +52,7 @@
     },
     {
         "name": "The Purple Pepper",
-        "image": "images/food/purple-pepper.png",
+        "image": "images/food/the-purple-pepper-van.png",
         "url": "https://www.thepurplepepper.online/",
         "tags": [
             "mains"
@@ -58,7 +60,7 @@
     },
     {
         "name": "Toni's Ices",
-        "image": "images/food/tonis-ices.png",
+        "image": "images/food/tonis-ices-van.png",
         "url": "https://www.tonis-ices.co.uk/",
         "tags": [
             "sweet treats"
