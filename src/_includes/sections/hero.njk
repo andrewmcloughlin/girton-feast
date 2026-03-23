@@ -15,12 +15,18 @@
                     <p>Girton Recreation Ground</p>
                 </div>
 
-                <div class="hero-v2-buttons">
-                    <a href="#concert-details" class="btn btn-v2-primary shadow-sm">Get Concert tickets &rarr;</a>
-                    <a href="#whatson" class="btn btn-v2-outline shadow-sm">See fete activities &rarr;</a>
-                </div>
+                <div class="hero-v2-buttons mt-4 d-flex flex-wrap gap-5 align-items-start">
+                    {% from "components/sticker-button.njk" import stickerButton %}
 
-                <p class="text-muted small">* free entry</p>
+                    <div class="d-flex flex-column">
+                        {{ stickerButton("Get Concert tickets →", "#concert-details") }}
+                    </div>
+
+                    <div class="d-flex flex-column align-items-end">
+                        {{ stickerButton("See fete activities →", "#whatson", "sticker-outline sticker-alt") }}
+                        <p class="text-muted small mt-2 mb-0 text-end">* free entry</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Right Column: Visuals -->

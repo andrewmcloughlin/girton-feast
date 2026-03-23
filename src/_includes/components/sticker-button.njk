@@ -1,0 +1,13 @@
+{% macro stickerButton(text, url, class="") %}
+<a href="{{ url | url }}" class="button-v2-sticker-wrapper {{ class }}" aria-label="{{ text }}">
+    <svg viewBox="0 0 179 44" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true" focusable="false">
+        <defs>
+            <path id="sticker-shape" d="M8.93633 33.7459C20.1997 39.7798 156.566 44.2047 169.841 39.7798C181.581 38.4413 180.702 16.4486 169.841 6.39212C158.98 -3.66442 15.7748 -0.446341 6.52275 6.3921C-2.72927 13.2305 -2.327 27.712 8.93633 33.7459Z" />
+        </defs>
+        <use href="#sticker-shape" class="sticker-pink" />
+        <use href="#sticker-shape" class="sticker-green" />
+        <use href="#sticker-shape" class="sticker-main" />
+        <text x="89.5" y="26" class="sticker-text">{{ text }}</text>
+    </svg>
+</a>
+{% endmacro %}
