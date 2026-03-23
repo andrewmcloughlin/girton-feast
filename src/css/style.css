@@ -1470,10 +1470,10 @@ html {
 
 .hero-v2-year {
     display: inline-block;
-    font-family: Poppins, sans-serif;
+    font-family: DynaPuff, sans-serif;
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    font-weight: 700;
+    font-weight: 100;
     font-size: clamp(2rem, 6vw, 4rem);
     vertical-align: middle;
     color: var(--brand-v2-purple);
@@ -1513,6 +1513,30 @@ html {
     border: 2px solid var(--brand-v2-purple);
 }
 
+/* Explore the Feast Button (Sticker Variant) */
+.btn-explore-feast {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%) scale(0.6);
+    opacity: 0;
+    z-index: 10;
+    pointer-events: auto;
+    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 280px;
+}
+
+.hero-v2-visual:hover .btn-explore-feast,
+.hero-v2-visual:has(.btn-explore-feast:focus-visible) .btn-explore-feast {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+}
+
+.btn-explore-feast:focus-visible {
+    outline: 3px solid var(--brand-v2-purple);
+    outline-offset: 15px;
+}
+
 /* Morphing Blobs SVG Container */
 .hero-v2-visual {
     position: relative;
@@ -1521,6 +1545,9 @@ html {
     max-width: 1000px;
     margin-left: -10%;
     z-index: 1;
+    isolation: isolate;
+    pointer-events: none;
+    /* Hitbox refinement */
 }
 
 @media (min-width: 992px) {
@@ -1539,10 +1566,12 @@ html {
     max-height: 450px;
     /* Cap vertical height */
     display: block;
-    filter: drop-shadow(0 10px 40px rgba(0, 0, 0, 0.08));
     transform: scale(1.1);
     /* Slightly enlarge the blobs within the space */
-    transform-origin: left center;
+    transform-origin: center center;
+    transition: filter 0.5s ease;
+    pointer-events: none;
+    /* Ensure only filled paths trigger hover */
 }
 
 /* Animations for morphing paths */
@@ -1581,16 +1610,41 @@ html {
 }
 
 /* Appearance */
-.blob-bg-pink {
+.blob-bg-pink,
+.blob-mask-pink {
     fill: var(--brand-v2-pink);
     opacity: 0.45;
     mix-blend-mode: multiply;
+    transform-origin: 450px 300px;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: auto;
+    /* Active hitbox element */
+    cursor: pointer;
+    will-change: transform;
 }
 
-.blob-bg-green {
+.blob-bg-green,
+.blob-mask-green {
     fill: var(--brand-v2-green);
     opacity: 0.45;
     mix-blend-mode: multiply;
+    transform-origin: 460px 310px;
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: auto;
+    /* Active hitbox element */
+    cursor: pointer;
+    will-change: transform;
+}
+
+.hero-v2-visual:hover .blob-bg-pink,
+.hero-v2-visual:hover .blob-mask-pink,
+.hero-v2-visual:hover .blob-bg-green,
+.hero-v2-visual:hover .blob-mask-green {
+    transform: scale(1.8);
+}
+
+.hero-v2-visual:hover .blob-svg {
+    filter: drop-shadow(0 15px 50px rgba(0, 0, 0, 0.2));
 }
 
 /* Image Styling */
@@ -1599,4 +1653,11 @@ html {
     height: 100%;
     object-fit: cover;
     opacity: 1 !important;
+    transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-origin: center center;
+    will-change: transform;
+}
+
+.hero-v2-visual:hover .map-image-redesign {
+    transform: scale(0.9) translateX(-10%);
 }

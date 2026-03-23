@@ -32,18 +32,19 @@
             <!-- Right Column: Visuals -->
             <div class="col-lg-7">
                 <div class="hero-v2-visual">
+                    {{ stickerButton("Explore the Feast", "/map.html", "btn-explore-feast sticker-outline sticker-alt") }}
                     <svg viewBox="100 50 730 520" xmlns="http://www.w3.org/2000/svg" class="blob-svg" style="overflow: visible;">
                         <defs>
                             <!-- Pink Oval Base -->
                             <path id="morph-pink" d="M450,530C280,530,100,480,100,300C100,120,280,70,450,70C620,70,800,120,800,300C800,480,620,530,450,530Z" />
-                             <!-- Green Oval Base (Slight Offset for ~90% Overlap) -->
+                            <!-- Green Oval Base (Slight Offset for ~90% Overlap) -->
                             <path id="morph-green" d="M460,540C290,540,110,490,110,310C110,130,290,80,460,80C630,80,810,130,810,310C810,490,630,540,460,540Z" />
 
                             <clipPath id="clip-pink">
-                                <use href="#morph-pink" />
+                                <use href="#morph-pink" class="blob-mask-pink" />
                             </clipPath>
                             <clipPath id="clip-green">
-                                <use href="#morph-green" />
+                                <use href="#morph-green" class="blob-mask-green" />
                             </clipPath>
                         </defs>
 
@@ -54,8 +55,8 @@
                         <!-- Masked Image: Intersection of A and B via nested clipping -->
                         <g clip-path="url(#clip-pink)">
                             <g clip-path="url(#clip-green)">
-                                <foreignObject x="100" y="50" width="700" height="500">
-                                    <img src="{{ "/images/map-thumbnail.png" | url }}"
+                                <foreignObject x="-600" y="-600" width="2000" height="1800">
+                                    <img src="{{ "/images/map-lg.svg" | url }}"
                                          alt="Girton Feast Map"
                                          class="map-image-redesign" />
                                 </foreignObject>
