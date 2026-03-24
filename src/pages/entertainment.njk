@@ -12,12 +12,35 @@ eleventyNavigation:
 
 {% from "components/activity-card.njk" import activityCard %}
 
-<main class="container py-5 mt-5" x-data="galleryBrowser('entertainment', {{ entertainment | dump }})">
+{% set activityData = {
+    entertainment: entertainment,
+    food: food_and_drink,
+    beers: beers
+} %}
+
+<script>
+    window.activityData = {{ activityData | dump | safe }};
+</script>
+
+<main class="container py-5 mt-5" x-data="galleryBrowser('entertainment', window.activityData)">
     <!-- Centered Title -->
     <div class="text-center mb-5 mt-4">
         <h1 class="activities-title">All the Fun of the Fete</h1>
 
-        <!-- Badge Shaped Filters -->
+        <!-- Top Level Category Switcher -->
+        <div class="d-flex flex-wrap justify-content-center gap-4 mt-4 category-switcher">
+            <button class="switcher-btn switcher-btn-pink rotate-neg-2" :class="activeCategory === 'entertainment' ? 'active' : ''" @click="setCategory('entertainment')">
+                <i class="fas fa-magic me-2"></i>What's On
+            </button>
+            <button class="switcher-btn switcher-btn-green rotate-pos-2" :class="activeCategory === 'food' ? 'active' : ''" @click="setCategory('food')">
+                <i class="fas fa-utensils me-2"></i>Food & Drink
+            </button>
+            <button class="switcher-btn switcher-btn-mint rotate-neg-1" :class="activeCategory === 'beers' ? 'active' : ''" @click="setCategory('beers')">
+                <i class="fas fa-beer me-2"></i>Beer Tent
+            </button>
+        </div>
+
+        <!-- Badge Shaped Filters (Sub-categories/Tags) -->
         <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
             <button class="badge-filter"
                     :class="selectedTag === 'all' ? 'active shadow-sm' : 'bg-brand-light-blue text-primary'"
@@ -45,18 +68,16 @@ eleventyNavigation:
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 px-md-2">
         <template x-for="(item, index) in filteredItems" :key="item.name">
             <div class="col">
-                <!-- We pass the index to handle rotation/color cycling in JS if needed,
-                     but here we just use the template.
-                     Wait, Nunjucks macros don't work inside x-for because they are server-side.
-                     I need to implement the card HTML directly in the template or use a JS function.
-                -->
                 <div class="activity-card d-flex shadow-sm mb-4 h-100"
                      :class="[
                         'activity-card-' + (['pink', 'green', 'purple', 'mint'][index % 4]),
                         ['rotate-1', 'rotate-2', 'rotate-neg-1', 'rotate-pos-1', 'rotate-3', 'rotate-4'][index % 6]
                      ]">
                     <template x-if="item.image">
-                        <img :src="(window.siteConfig?.pathPrefix || '/') + item.image" :alt="item.name" class="card-img-left d-none d-sm-block">
+                        <img :src="(window.siteConfig?.pathPrefix || '/') + item.image"
+                             :alt="item.name"
+                             class="card-img-left d-none d-sm-block"
+                             :class="item.isLogo ? 'card-img-contain' : 'card-img-cover'">
                     </template>
                     <div class="card-body d-flex flex-column justify-content-center p-4 p-md-5">
                         <h3 class="mb-2" x-text="item.name"></h3>
@@ -64,11 +85,35 @@ eleventyNavigation:
                             <p class="mb-3" x-text="item.description"></p>
                         </template>
 
+                        <!-- Beer List (Category Specific) -->
+                        <template x-if="activeCategory === 'beers' && item.beers && item.beers.length > 0">
+                            <div class="mt-2 mb-3">
+                                <h6 class="fw-bold small text-uppercase opacity-75 mb-2">Available Beers:</h6>
+                                <ul class="list-unstyled small mb-0">
+                                    <template x-for="beer in item.beers" :key="beer.name">
+                                        <li class="mb-1 d-flex justify-content-between">
+                                            <span x-text="beer.name"></span>
+                                            <span class="text-muted" x-text="beer.abv + '%'"></span>
+                                        </li>
+                                    </template>
+                                </ul>
+                            </div>
+                        </template>
+
                         <div class="d-flex flex-wrap gap-2 mt-auto">
                             <template x-for="tag in item.tags">
                                 <span class="activity-tag" @click="selectedTag = tag">#<span x-text="tag"></span></span>
                             </template>
                         </div>
+
+                        <!-- External Link -->
+                        <template x-if="item.url">
+                            <a :href="item.url" target="_blank" rel="noopener noreferrer"
+                               class="btn btn-sm btn-outline-dark mt-3 d-inline-flex align-items-center justify-content-center gap-2"
+                               style="border-radius: 50px; font-family: 'Comfortaa', cursive; border-width: 2px;">
+                                Visit Website <i class="fas fa-external-link-alt small"></i>
+                            </a>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -79,7 +124,7 @@ eleventyNavigation:
     <template x-if="filteredItems.length === 0">
         <div class="text-center py-5">
             <i class="fas fa-search fa-3x mb-3 text-muted opacity-50"></i>
-            <h4 class="fw-bold text-muted">No activities found</h4>
+            <h4 class="fw-bold text-muted">No results found</h4>
             <p class="text-muted">Try adjusting your filters.</p>
         </div>
     </template>

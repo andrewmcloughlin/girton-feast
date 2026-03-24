@@ -64,6 +64,18 @@
     {% if not hideFooter %}
     {% include "components/footer.njk" %}
     {% endif %}
+
+    <!-- Scroll to top button -->
+    <button x-data x-show="$store.app.scrolled"
+            @click="$store.app.scrollToTop()"
+            id="scrollToTopBtn"
+            title="Go to top"
+            x-cloak
+            style="display: none;"
+            :style="$store.app.scrolled ? 'display: flex' : 'display: none'">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     {% include "components/mobile-nav.njk" %}
 
     <!-- Bootstrap JS Bundle from CDN -->

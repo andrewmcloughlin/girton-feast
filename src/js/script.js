@@ -95,7 +95,7 @@ document.addEventListener('alpine:init', () => {
       localStorage.setItem('gooseCursorEnabled', this.gooseEnabled)
       // Note: showToast should be defined or replaced if needed
       if (typeof showToast === 'function') {
-        showToast(this.gooseEnabled ? 'Silly Goose Mode: ON 🦢' : 'Silly Goose Mode: OFF', this.gooseEnabled ? '#3d3b8e' : '#6c757d')
+        showToast(this.gooseEnabled ? 'Silly Goose Mode: ON 🦢' : 'Silly Goose Mode: OFF', this.gooseEnabled ? '#9D36E7' : '#6c757d')
       }
     },
 
@@ -118,68 +118,111 @@ document.addEventListener('alpine:init', () => {
   })
 
   // Gallery Browser component
-  Alpine.data('galleryBrowser', (configKey, initialItems = null) => ({
-    configs: {
-      stalls: {
-        jsonUrl: (window.siteConfig?.pathPrefix || '/') + '_data/stalls.json',
-        titleImage: (window.siteConfig?.pathPrefix || '/') + 'images/titles/stalls-text.svg',
-        sidebarGoose: '',
-        cta: {
-          show: true,
-          title: 'Want to run a stall?',
-          text: "We'd love to have you! We welcome local businesses, crafters, and community groups.",
-          primaryBtn: { text: 'Book a Stall Now', url: 'https://forms.gle/f5uMHX5UwsAjjEn29', icon: 'fas fa-edit' },
-          secondaryBtn: { text: 'Stall Holder Info', url: (window.siteConfig?.pathPrefix || '/') + 'info/stall-holders.html', icon: 'fas fa-info-circle' }
-        },
-        showDayFilter: false,
-        noResultsText: 'No stalls found'
-      },
-      food: {
-        jsonUrl: (window.siteConfig?.pathPrefix || '/') + '_data/vendors.json',
-        titleImage: (window.siteConfig?.pathPrefix || '/') + 'images/titles/food-and-drink-text.svg',
-        sidebarGoose: '',
-        cta: { show: false },
-        showDayFilter: false,
-        noResultsText: 'No food or drink vendors found'
-      },
-      entertainment: {
-        jsonUrl: (window.siteConfig?.pathPrefix || '/') + '_data/entertainment.json',
-        titleImage: (window.siteConfig?.pathPrefix || '/') + 'images/titles/whats-on-text.svg',
-        sidebarGoose: (window.siteConfig?.pathPrefix || '/') + 'images/goose_golf.svg',
-        cta: { show: false },
-        showDayFilter: true,
-        noResultsText: 'No activities found'
-      }
-    },
-    config: {},
-    currentKey: configKey,
-    items: initialItems || [],
+  Alpine.data('galleryBrowser', (initialCategory, datasets) => ({
+    activeCategory: initialCategory,
+    datasets, // Store datasets for easier debugging
     selectedTag: 'all',
     selectedDay: 'all',
-    async init () {
-      this.config = this.configs[configKey]
+    searchQuery: '',
 
-      // Only fetch if data wasn't passed at build time
-      if (this.items.length === 0) {
-        const response = await fetch(this.config.jsonUrl)
-        this.items = await response.json()
-      }
+    // Normalize and merge datasets
+    get allItems () {
+      const rawItems = this.datasets[this.activeCategory] || []
+      return rawItems.map(item => {
+        // Normalize different data shapes
+        const normalized = { ...item }
 
+        // Handle Beer Tent specific fields
+        if (this.activeCategory === 'beers') {
+          normalized.image = item.logo
+          normalized.url = item.website || item.url
+          // Map beer styles to tags
+          normalized.tags = Array.from(new Set((item.beers || []).map(b => b.style)))
+        }
+
+        // Determine if it's a logo/van (for display purposes)
+        // prioritize explicit setting in data if present
+        if (item.imageType) {
+          normalized.isLogo = item.imageType === 'logo'
+        } else if (item.isLogo !== undefined) {
+          normalized.isLogo = item.isLogo
+        } else {
+          // fallback to smart defaults
+          normalized.isLogo = (this.activeCategory === 'food' || this.activeCategory === 'beers') ||
+                                (item.tags && item.tags.includes('rides'))
+        }
+
+        // Handle Food & Drink specific fields
+        if (this.activeCategory === 'food') {
+          normalized.description = item.subtitle
+        }
+
+        // Ensure description is a string
+        normalized.description = normalized.description || ''
+
+        return normalized
+      })
+    },
+
+    get filteredItems () {
+      return this.allItems.filter(item => {
+        const matchesSearch = !this.searchQuery ||
+          item.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          (item.description && item.description.toLowerCase().includes(this.searchQuery.toLowerCase()))
+
+        const matchesTag = this.selectedTag === 'all' ||
+          (item.tags && item.tags.some(t => t.toLowerCase() === this.selectedTag.toLowerCase()))
+
+        const matchesDay = this.selectedDay === 'all' ||
+          (item.days && (item.days.includes(this.selectedDay) || item.days.includes('Both')))
+
+        return matchesSearch && matchesTag && matchesDay
+      })
+    },
+
+    get uniqueTags () {
+      const tags = new Set()
+      this.allItems.forEach(item => {
+        if (item.tags) {
+          item.tags.forEach(tag => tags.add(tag))
+        }
+      })
+      return Array.from(tags).sort()
+    },
+
+    init () {
       // Handle initial filters from URL
       const params = new URLSearchParams(window.location.search)
       if (params.has('tag')) this.selectedTag = params.get('tag')
       if (params.has('day')) this.selectedDay = params.get('day')
+      if (params.has('category')) {
+        const cat = params.get('category')
+        if (datasets[cat]) this.activeCategory = cat
+      }
 
       // Show toast on filter changes
       this.$watch('selectedTag', value => {
         const label = value === 'all' ? 'all categories' : value.replace(/-/g, ' ')
-        showToast(`Showing ${label}`, '#3d3b8e')
+        showToast(`Showing ${label}`, '#9D36E7')
       })
 
       this.$watch('selectedDay', value => {
         const label = value === 'all' ? 'all days' : value
-        showToast(`Showing ${label}`, '#3d3b8e')
+        showToast(`Showing ${label}`, '#9D36E7')
       })
+
+      this.$watch('activeCategory', value => {
+        this.selectedTag = 'all'
+        this.selectedDay = 'all'
+        const label = value === 'beers' ? 'Beer Tent' : value === 'food' ? 'Food & Drink' : 'Entertainment'
+        showToast(`Switched to ${label}`, '#9D36E7')
+      })
+    },
+
+    setCategory (category) {
+      if (datasets[category]) {
+        this.activeCategory = category
+      }
     },
 
     getTagColorClass (tag) {
@@ -207,19 +250,6 @@ document.addEventListener('alpine:init', () => {
         hash = tagLower.charCodeAt(i) + ((hash << 5) - hash)
       }
       return colors[Math.abs(hash) % colors.length]
-    },
-    get filteredItems () {
-      return this.items.filter(item => {
-        const tagMatch = this.selectedTag === 'all' || item.tags.includes(this.selectedTag)
-        const dayMatch = this.selectedDay === 'all' ||
-                         (item.days && (item.days.includes(this.selectedDay) || item.days.includes('Both')))
-        return tagMatch && dayMatch
-      })
-    },
-    get uniqueTags () {
-      const tags = new Set()
-      this.items.forEach(item => item.tags.forEach(tag => tags.add(tag)))
-      return Array.from(tags).sort()
     }
   }))
 })
