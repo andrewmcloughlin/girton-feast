@@ -2117,3 +2117,111 @@ html {
         font-size: 0.85rem;
     }
 }
+
+/* Nitty Gritty Section */
+.nitty-gritty-section {
+    position: relative;
+    padding: 10rem 0;
+    margin: 4rem 0;
+    overflow: hidden;
+    min-height: 800px;
+}
+
+.nitty-gritty-bg-pink,
+.nitty-gritty-bg-yellow,
+.nitty-gritty-bg-green {
+    position: absolute;
+    top: 0;
+    left: -5%;
+    width: 110%;
+    height: 100%;
+}
+
+.nitty-gritty-bg-pink {
+    background-color: var(--brand-v2-pink);
+    transform: rotate(-1.5deg);
+    z-index: 1;
+}
+
+.nitty-gritty-bg-yellow {
+    background-color: var(--brand-light-yellow); /* Mockup yellow/green */
+    transform: rotate(2deg);
+    z-index: 2;
+}
+
+.nitty-gritty-bg-green {
+    background-color: var(--brand-v2-green);
+    transform: rotate(-0.5deg);
+    z-index: 3;
+}
+
+.nitty-gritty-title {
+    font-family: 'Glass Antiqua', cursive;
+    font-size: 5rem;
+    color: var(--brand-marian-blue);
+    position: relative;
+    z-index: 4;
+}
+
+.nitty-gritty-card-wrapper {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    z-index: 4;
+}
+
+.nitty-gritty-card {
+    background: white;
+    border-radius: 2rem;
+    position: relative;
+    z-index: 5;
+}
+
+.nitty-gritty-card-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+}
+
+.nitty-gritty-card-bg-pink {
+    background-color: var(--brand-v2-pink);
+    transform: rotate(-2.5deg);
+    z-index: 3;
+}
+
+.nitty-gritty-card-bg-yellow {
+    background-color: var(--brand-light-yellow);
+    transform: rotate(1.5deg);
+    z-index: 4;
+}
+
+.nitty-gritty-list li {
+    font-family: Comfortaa, sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.nitty-gritty-list li .label {
+    opacity: 0.8;
+}
+
+@media (max-width: 991px) {
+    .nitty-gritty-title {
+        font-size: 3.5rem;
+    }
+    .nitty-gritty-section {
+        padding: 6rem 0;
+    }
+}
+
+.highlight-event {
+    background-color: rgba(152, 255, 192, 0.15); /* Brand green tint */
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin-left: -0.5rem;
+    margin-right: -0.5rem;
+}
