@@ -1,15 +1,86 @@
 ---
 layout: layouts/base.njk
 title: Entertainment - Girton Feast
-permalink: /pages/entertainment.html
-bodyClass: bg-brand-glaucous
+permalink: /entertainment.html
+bodyClass: bg-white
 eleventyNavigation:
   key: Entertainment
-  parent: What's On
+  parent: Home
   order: 1
   icon: fas fa-music
 ---
 
-<main id="gallery-placeholder" class="container-xxl my-5" x-data="galleryBrowser('entertainment', {{ entertainment | dump }})">
-    {% include "components/gallery-content.njk" %}
+{% from "components/activity-card.njk" import activityCard %}
+
+<main class="container py-5 mt-5" x-data="galleryBrowser('entertainment', {{ entertainment | dump }})">
+    <!-- Centered Title -->
+    <div class="text-center mb-5 mt-4">
+        <h1 class="activities-title">All the Fun of the Fete</h1>
+
+        <!-- Badge Shaped Filters -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+            <button class="badge-filter"
+                    :class="selectedTag === 'all' ? 'active shadow-sm' : 'bg-brand-light-blue text-primary'"
+                    @click="selectedTag = 'all'">
+                All
+            </button>
+            <template x-for="(tag, index) in uniqueTags" :key="tag">
+                <button class="badge-filter text-capitalize"
+                        :class="[
+                            selectedTag === tag ? 'active shadow-sm' : '',
+                            index % 4 === 0 ? 'badge-pink' : '',
+                            index % 4 === 1 ? 'badge-purple' : '',
+                            index % 4 === 2 ? 'badge-green' : '',
+                            index % 4 === 3 ? 'badge-mint' : ''
+                        ]"
+                        @click="selectedTag = (selectedTag === tag ? 'all' : tag)">
+                    <span x-text="tag.replace(/-/g, ' ')"></span>
+                    <span x-show="selectedTag === tag" class="ms-1">✕</span>
+                </button>
+            </template>
+        </div>
+    </div>
+
+    <!-- Grid of Cards -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 px-md-2">
+        <template x-for="(item, index) in filteredItems" :key="item.name">
+            <div class="col">
+                <!-- We pass the index to handle rotation/color cycling in JS if needed,
+                     but here we just use the template.
+                     Wait, Nunjucks macros don't work inside x-for because they are server-side.
+                     I need to implement the card HTML directly in the template or use a JS function.
+                -->
+                <div class="activity-card d-flex shadow-sm mb-4 h-100"
+                     :class="[
+                        'activity-card-' + (['pink', 'green', 'purple', 'mint'][index % 4]),
+                        ['rotate-1', 'rotate-2', 'rotate-neg-1', 'rotate-pos-1', 'rotate-3', 'rotate-4'][index % 6]
+                     ]">
+                    <template x-if="item.image">
+                        <img :src="(window.siteConfig?.pathPrefix || '/') + item.image" :alt="item.name" class="card-img-left d-none d-sm-block">
+                    </template>
+                    <div class="card-body d-flex flex-column justify-content-center p-4 p-md-5">
+                        <h3 class="mb-2" x-text="item.name"></h3>
+                        <template x-if="item.description">
+                            <p class="mb-3" x-text="item.description"></p>
+                        </template>
+
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <template x-for="tag in item.tags">
+                                <span class="activity-tag" @click="selectedTag = tag">#<span x-text="tag"></span></span>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <!-- No Results State -->
+    <template x-if="filteredItems.length === 0">
+        <div class="text-center py-5">
+            <i class="fas fa-search fa-3x mb-3 text-muted opacity-50"></i>
+            <h4 class="fw-bold text-muted">No activities found</h4>
+            <p class="text-muted">Try adjusting your filters.</p>
+        </div>
+    </template>
 </main>

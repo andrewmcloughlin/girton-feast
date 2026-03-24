@@ -169,6 +169,17 @@ document.addEventListener('alpine:init', () => {
       const params = new URLSearchParams(window.location.search)
       if (params.has('tag')) this.selectedTag = params.get('tag')
       if (params.has('day')) this.selectedDay = params.get('day')
+
+      // Show toast on filter changes
+      this.$watch('selectedTag', value => {
+        const label = value === 'all' ? 'all categories' : value.replace(/-/g, ' ')
+        showToast(`Showing ${label}`, '#3d3b8e')
+      })
+
+      this.$watch('selectedDay', value => {
+        const label = value === 'all' ? 'all days' : value
+        showToast(`Showing ${label}`, '#3d3b8e')
+      })
     },
 
     getTagColorClass (tag) {

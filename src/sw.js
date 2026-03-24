@@ -14,7 +14,7 @@ const PRE_CACHE_RESOURCES = [
   './beer-tent.json',
   // Pages
   './pages/contact.html',
-  './pages/entertainment.html',
+  '/entertainment.html',
   './pages/food.html',
   './pages/gallery.html',
   './pages/getting-here.html',

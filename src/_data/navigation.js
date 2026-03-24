@@ -2,7 +2,7 @@ module.exports = [
   {
     key: "What's On",
     children: [
-      { label: 'Entertainment', url: '/pages/entertainment.html', icon: 'fas fa-music' },
+      { label: 'Entertainment', url: '/entertainment.html', icon: 'fas fa-music' },
       { label: 'Food & Drink', url: '/pages/food.html', icon: 'fas fa-utensils' },
       { label: 'Stalls', url: '/pages/stalls.html', icon: 'fas fa-store' },
       { label: 'Beer Tent', url: '/pages/beer-tent.html', icon: 'fas fa-beer' },
