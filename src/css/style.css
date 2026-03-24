@@ -2144,7 +2144,8 @@ html {
 }
 
 .nitty-gritty-bg-yellow {
-    background-color: var(--brand-light-yellow); /* Mockup yellow/green */
+    background-color: var(--brand-light-yellow);
+    /* Mockup yellow/green */
     transform: rotate(2deg);
     z-index: 2;
 }
@@ -2213,15 +2214,105 @@ html {
     .nitty-gritty-title {
         font-size: 3.5rem;
     }
+
     .nitty-gritty-section {
         padding: 6rem 0;
     }
 }
 
-.highlight-event {
-    background-color: rgba(152, 255, 192, 0.15); /* Brand green tint */
-    border-radius: 0.5rem;
-    padding: 0.5rem;
-    margin-left: -0.5rem;
-    margin-right: -0.5rem;
+/* Sponsors Section */
+.sponsors-section {
+    position: relative;
+    z-index: 5;
+}
+
+.sponsors-title {
+    font-family: 'Glass Antiqua', cursive;
+    font-size: 4.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.sponsors-subtitle {
+    font-family: Comfortaa, cursive;
+    font-size: 1.2rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+}
+
+/* Sponsor Logo Wrappers */
+.sponsor-logo-wrapper {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    position: relative;
+    isolation: isolate;
+    transform: rotate(var(--card-rotation, 0deg));
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Two stacked rotated pastel rectangles behind the logo */
+.sponsor-logo-wrapper::before,
+.sponsor-logo-wrapper::after {
+    content: '';
+    position: absolute;
+    inset: 1.2rem 1rem;
+    border-radius: 1rem;
+    z-index: -1;
+}
+
+.sponsor-logo-wrapper::before {
+    background-color: #FFBEF7;
+    /* pink */
+    transform: rotate(-6deg);
+}
+
+.sponsor-logo-wrapper::after {
+    background-color: #C8FFE0;
+    /* green */
+    transform: rotate(-2deg);
+}
+
+.sponsor-logo-wrapper:hover {
+    transform: rotate(0deg) scale(1.08);
+    z-index: 10;
+}
+
+.sponsor-logo-wrapper:hover::before {
+    transform: rotate(-6deg);
+}
+
+.sponsor-logo-wrapper:hover::after {
+    transform: rotate(-2deg);
+}
+
+.sponsor-logo-wrapper a {
+    display: flex;
+    align-items: center;
+}
+
+.sponsor-logo-img {
+    height: 120px;
+    width: auto;
+    max-width: 240px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.1));
+    transition: filter 0.3s ease;
+}
+
+.sponsor-logo-wrapper:hover .sponsor-logo-img {
+    filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.18));
+}
+
+
+@media (max-width: 767px) {
+    .sponsors-title {
+        font-size: 3rem;
+    }
+
+    .sponsor-logo-img {
+        height: 80px;
+        max-width: 160px;
+    }
 }
