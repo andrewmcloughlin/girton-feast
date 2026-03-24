@@ -36,7 +36,7 @@
     },
     {
         "name": "Smokehouse Burgers",
-        "image": "images/food/burger.png",
+        "image": "images/food/smokehouse-burger-tent.png",
         "url": "#",
         "tags": [
             "mains"
@@ -68,7 +68,7 @@
     },
     {
         "name": "Beer Tent",
-        "image": "images/food/beer.png",
+        "image": "images/food/beer-tent.png",
         "url": "beer-tent.html",
         "tags": [
             "drinks"

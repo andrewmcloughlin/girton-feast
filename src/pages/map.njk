@@ -2,14 +2,15 @@
 layout: layouts/base.njk
 title: Interactive Map - Girton Feast
 bodyClass: map-fullscreen-page
-permalink: /pages/map.html
+permalink: /map.html
+hideFooter: true
 ---
 
 {% block extra_head %}
-<!-- Leaflet -->
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<!-- Leaflet already included in base.njk -->
 <style>
-    #map { height: calc(100vh - 80px); width: 100%; }
+    #map { height: calc(100vh - 80px); width: 100%; background: #f8f9fa; }
+    .map-fullscreen-page main { padding: 0 !important; }
 </style>
 {% endblock %}
 
@@ -19,23 +20,36 @@ permalink: /pages/map.html
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     // Initialize Leaflet Map
-    var mapWidth = 1190;
-    var mapHeight = 842;
-    var map = L.map('map', { crs: L.CRS.Simple });
+    // SVG Dimensions: 2415 x 1759
+    var mapWidth = 2415;
+    var mapHeight = 1759;
+    var map = L.map('map', {
+        crs: L.CRS.Simple,
+        minZoom: 0,
+        maxZoom: 4
+    });
+
     var bounds = [[0, 0], [mapHeight, mapWidth]];
-    L.imageOverlay('{{ "/images/map.png" | url }}', bounds).addTo(map);
+    var image = L.imageOverlay('{{ "/images/map/isometric-map.svg" | url }}', bounds).addTo(map);
 
-    var zoom = map.getBoundsZoom(bounds, true);
+    // Initial view: zoom in more by default
+    map.setView([mapHeight / 2, mapWidth / 2], 1);
 
-    map.setView([mapHeight / 2, mapWidth / 2], zoom);
-    map.setMinZoom(zoom / 10);
-    map.setMaxBounds(bounds);
+
+    // Set max bounds to prevent panning too far out
+    map.setMaxBounds(bounds.pad(0.1));
+
+    // Example markers (adjusted for new scale if needed, but keeping them for now)
+    // Coords in CRS.Simple are [y, x] where 0,0 is bottom-left (wait, Leaflet 0,0 is top-left by default for ImageOverlay?)
+    // Actually Leaflet's CRS.Simple: [0, 0] is bottom-left if you set bounds that way,
+    // but the imageOverlay uses the bounds provided.
 
     var points = [
-        { name: "Main Stage", coords: [100, 1000], info: "Live music and performances all weekend!" },
-        { name: "Food Court", coords: [300, 800], info: "A variety of food stalls and drinks." },
-        { name: "Play Ground", coords: [700, 10], info: "Games and activities for children." }
+        { name: "Main Stage", coords: [1500, 400], info: "Live music and performances all weekend!" },
+        { name: "Food Court", coords: [1000, 1200], info: "A variety of food stalls and drinks." },
+        { name: "Play Ground", coords: [500, 800], info: "Games and activities for children." }
     ];
+
     points.forEach(function (point) {
         L.marker([point.coords[0], point.coords[1]])
             .addTo(map)

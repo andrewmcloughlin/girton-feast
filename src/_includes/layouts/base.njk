@@ -60,7 +60,9 @@
         {{ content | safe }}
     </main>
 
+    {% if not hideFooter %}
     {% include "components/footer.njk" %}
+    {% endif %}
     {% include "components/mobile-nav.njk" %}
 
     <!-- Bootstrap JS Bundle from CDN -->
