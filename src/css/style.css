@@ -2316,3 +2316,78 @@ html {
         max-width: 160px;
     }
 }
+
+/* Involvement Cards */
+.get-involved-section {
+    position: relative;
+    z-index: 10;
+}
+
+.get-involved-title {
+    font-family: 'Glass Antiqua', cursive;
+    font-size: 4rem;
+    margin-bottom: 3rem;
+    color: var(--brand-marian-blue);
+}
+
+.involvement-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 280px;
+    border-radius: 2rem;
+    padding: 2.5rem 2rem;
+    text-decoration: none !important;
+    color: black !important;
+    position: relative;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.involvement-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+}
+
+.involvement-card-title {
+    font-family: DynaPuff, cursive;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.involvement-card-text {
+    font-family: Comfortaa, cursive;
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+    flex-grow: 1;
+}
+
+.involvement-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.involvement-hashtag {
+    font-family: DynaPuff, cursive;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--brand-v2-purple, #9D36E7);
+}
+
+@media (max-width: 767px) {
+    .get-involved-title {
+        font-size: 2.5rem;
+    }
+
+    .involvement-card {
+        padding: 2rem 1.5rem;
+        min-height: auto;
+    }
+
+    .involvement-card-title {
+        font-size: 1.6rem;
+    }
+}
