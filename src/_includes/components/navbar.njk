@@ -1,7 +1,7 @@
 <!-- navbar.njk: Dynamic menu driven by src/_data/navigation.js -->
-<nav id="main-navbar" class="navbar navbar-expand-md navbar-light bg-white py-3">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+<nav id="main-navbar" class="navbar navbar-expand-md py-3">
+    <div class="container-fluid px-4">
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,7 +20,7 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         {{ group.key }}
                     </a>
-                    <ul class="dropdown-menu bg-white border-0 shadow-sm">
+                    <ul class="dropdown-menu border-0 shadow-lg">
                         {%- for item in group.children %}
                             {%- if item.divider %}
                             <li><hr class="dropdown-divider"></li>

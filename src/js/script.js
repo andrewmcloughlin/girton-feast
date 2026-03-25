@@ -214,7 +214,7 @@ document.addEventListener('alpine:init', () => {
       this.$watch('activeCategory', value => {
         this.selectedTag = 'all'
         this.selectedDay = 'all'
-        const label = value === 'beers' ? 'Beer Tent' : value === 'food' ? 'Food & Drink' : 'Entertainment'
+        const label = value === 'beers' ? 'Beer Tent' : value === 'food' ? 'Food & Drink' : value === 'stalls' ? 'Stalls' : 'Entertainment'
         showToast(`Switched to ${label}`, '#9D36E7')
       })
     },

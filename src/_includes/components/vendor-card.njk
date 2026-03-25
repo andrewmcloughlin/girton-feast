@@ -1,9 +1,11 @@
 {% macro vendorCard(vendor, color, rotationClass="") %}
 <div class="vendor-card-wrapper {{ rotationClass }}">
     <div class="vendor-card" style="background-color: {{ color }};">
-        <div class="vendor-card-image-container">
-            <img src="{{ vendor.image | url }}" alt="{{ vendor.name }}" class="vendor-card-image">
-        </div>
+        {% if vendor.image %}
+            <div class="vendor-card-image-container">
+                <img src="{{ vendor.image | url }}" alt="{{ vendor.name }}" class="vendor-card-image">
+            </div>
+        {% endif %}
         <div class="vendor-card-content">
             <h3 class="vendor-card-name">{{ vendor.name }}</h3>
             {% if vendor.subtitle %}

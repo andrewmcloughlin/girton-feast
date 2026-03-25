@@ -15,7 +15,8 @@ eleventyNavigation:
 {% set activityData = {
     entertainment: entertainment,
     food: food_and_drink,
-    beers: beers
+    beers: beers,
+    stalls: stalls
 } %}
 
 <script>
@@ -37,6 +38,9 @@ eleventyNavigation:
             </button>
             <button class="switcher-btn switcher-btn-mint rotate-neg-1" :class="activeCategory === 'beers' ? 'active' : ''" @click="setCategory('beers')">
                 <i class="fas fa-beer me-2"></i>Beer Tent
+            </button>
+            <button class="switcher-btn switcher-btn-purple rotate-pos-1" :class="activeCategory === 'stalls' ? 'active' : ''" @click="setCategory('stalls')">
+                <i class="fas fa-store me-2"></i>Stalls
             </button>
         </div>
 

@@ -11,7 +11,6 @@
     {
         "name": "Wrapunzel's",
         "subtitle": "Yorkshire Pudding Wraps",
-        "image": "images/food/wrapunzels.png",
         "url": "https://www.facebook.com/p/Wrapunzel-100092729754323/",
         "tags": [
             "vegetarian",
@@ -20,7 +19,6 @@
     },
     {
         "name": "Tutle Dove Cafe",
-        "image": "images/food/turtledove.png",
         "url": "https://www.turtledovecambridge.com/",
         "tags": [
             "sweet treats"
