@@ -41,6 +41,7 @@
         "url": "https://girtongardensociety.co.uk/",
         "description": "A local society, affiliated to the Royal Horticultural Society, for people interested in all aspects of gardening.",
         "tags": [
+            "community",
             "gardening"
         ],
         "days": [
@@ -53,6 +54,7 @@
         "url": "https://girtonallotments.org.uk/",
         "description": "A local society, for people interested in growing their own food.",
         "tags": [
+            "community",
             "gardening"
         ],
         "days": [
@@ -89,13 +91,22 @@
         "url": "https://www.girtonmusicaltheatre.org.uk/",
         "description": "",
         "tags": [
-            "community"
+            "community",
+            "art"
         ],
         "days": [
             "Saturday"
         ]
     },
-        {
+    {
+        "name": "Karen's Kitchen",
+        "image": "",
+        "url": "https://www.karenskitchenhaverhill.co.uk/",
+        "tags": [
+            "sweet things"
+        ]
+    },
+    {
         "name": "Muriel Artist",
         "image": "images/stalls/muriel-art.png",
         "url": "https://murielartist.co.uk/",
@@ -122,7 +133,7 @@
         "url": "https://www.uw.co.uk/",
         "description": "",
         "tags": [
-            ""
+            "commercial"
         ],
         "days": [
             "Saturday"
@@ -135,7 +146,7 @@
         "description": "Fundraising for the World Scout Jamboree.",
         "tags": [
             "charity",
-            "sweets",
+            "sweet things",
             "crafts"
         ],
         "days": [
@@ -148,7 +159,8 @@
         "url": "https://www.facebook.com/estelle.s.sweet.treats.n.hire?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
         "description": "A cart of sweet treats",
         "tags": [
-            "sweets"
+            "commercial",
+            "sweet things"
         ],
         "days": [
             "Saturday"
@@ -160,8 +172,22 @@
         "url": "https://www.instagram.com/thingssosweetuk/",
         "description": "",
         "tags": [
-            "sweets",
+            "commercial",
+            "sweet things",
             "toys"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Nora's Aromas",
+        "image": "",
+        "url": "https://c9a768-3.myshopify.com/",
+        "description": "",
+        "tags": [
+            "commercial",
+            "aromatherapy"
         ],
         "days": [
             "Saturday"
@@ -173,6 +199,7 @@
         "url": "#",
         "description": "Girton Cottontails Nursery and Girton Bowls Club are running child and adult tombolas.",
         "tags": [
+            "community",
             "games"
         ],
         "days": [
