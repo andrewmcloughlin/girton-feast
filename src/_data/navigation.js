@@ -14,17 +14,15 @@ module.exports = [
     key: 'Plan Your Visit',
     children: [
       { label: 'Getting Here', url: '/map.html?mode=transport', icon: 'fas fa-map-marked-alt' },
-      { label: 'Event Map', url: '/map.html?mode=event', icon: 'fas fa-map' },
-      { label: 'Facilities', url: '/#amenities', icon: 'fas fa-restroom' }
+      { label: 'Event Map', url: '/map.html?mode=event', icon: 'fas fa-map' }
     ]
   },
   {
     key: 'For Vendors',
     children: [
-      { header: 'Vendor Information', icon: 'fas fa-info-circle' },
-      { label: 'Stall Holders', url: '/info/stall-holders.html', icon: 'fas fa-store' },
-      { label: 'Food & Drink Vendors', url: '/info/caterers-info.html', icon: 'fas fa-utensils' },
-      { label: 'Rides & Games', url: '/info/ride-vendors-info.html', icon: 'fas fa-ticket-alt' }
+      { label: 'Stall Holders', url: '/info/vendors.html?category=stalls', icon: 'fas fa-store' },
+      { label: 'Food & Drink Vendors', url: '/info/vendors.html?category=food', icon: 'fas fa-utensils' },
+      { label: 'Rides & Games', url: '/info/vendors.html?category=rides', icon: 'fas fa-ticket-alt' }
     ]
   },
   {

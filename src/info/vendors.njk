@@ -1,0 +1,230 @@
+---
+layout: layouts/base.njk
+title: Vendor Information - Girton Feast
+bodyClass: bg-white
+permalink: /info/vendors.html
+---
+
+<main class="container my-5 pb-5" x-cloak x-data="{
+    activeCategory: 'stalls',
+    // SETTINGS: Toggle 'All pitches booked' for each category
+    booked: {
+        stalls: false,
+        food: true,
+        rides: false
+    },
+    init() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.has('category')) {
+            this.activeCategory = params.get('category');
+        }
+    }
+}">
+    <!-- Header & Switcher -->
+    <div class="text-center pt-5 mb-5 pb-4">
+        <h1 class="display-3 mb-4 font-glass-antigua text-dark">Vendor Info</h1>
+
+        <div class="d-inline-flex flex-wrap justify-content-center gap-2 p-2 bg-white rounded-pill shadow-sm border" style="border-width: 2px !important;">
+            <button @click="activeCategory = 'stalls'; window.history.replaceState({}, '', '?category=stalls')"
+                    :class="activeCategory === 'stalls' ? 'bg-sticker-green text-dark shadow' : 'bg-transparent text-dark'"
+                    class="btn rounded-pill border-0 px-4 py-2 fw-bold transition-300">
+                Stalls
+            </button>
+            <button @click="activeCategory = 'food'; window.history.replaceState({}, '', '?category=food')"
+                    :class="activeCategory === 'food' ? 'bg-sticker-pink text-dark shadow' : 'bg-transparent text-dark'"
+                    class="btn rounded-pill border-0 px-4 py-2 fw-bold transition-300">
+                Food & Drink
+            </button>
+            <button @click="activeCategory = 'rides'; window.history.replaceState({}, '', '?category=rides')"
+                    :class="activeCategory === 'rides' ? 'bg-sticker-mint text-dark shadow' : 'bg-transparent text-dark'"
+                    class="btn rounded-pill border-0 px-4 py-2 fw-bold transition-300">
+                Rides & Games
+            </button>
+        </div>
+    </div>
+
+    <div class="row g-5">
+        <!-- Main Content Area -->
+        <div class="col-lg-8">
+            <div class="d-flex flex-column gap-5">
+
+                <!-- [SHARED] Location & Time -->
+                <div class="info-sticker-card rotate-neg-1 border-brand-v2-purple">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <h2 class="info-sticker-title h2 mb-1">When & Where</h2>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <h5 class="fw-bold mb-2">Location</h5>
+                            <address class="mb-0" style="line-height: 1.6;">Girton Recreation Ground<br>Girton, Cambridge CB3 0FH</address>
+                            <a href="{{ "/map.html" | url }}" class="btn btn-sm btn-outline-dark mt-2" style="border-radius: 50px;">View Map →</a>
+                        </div>
+                        <div class="col-md-6">
+                            <h5 class="fw-bold mb-2">Date & Time</h5>
+                            <p class="mb-0">
+                                <strong>Sat 11th July 2026</strong><br>
+                                <span x-show="activeCategory === 'stalls'">Stall Trading: <span x-text="$store.app.eventInfo ? $store.app.eventInfo.village_fete.trading_start + ' - ' + $store.app.eventInfo.village_fete.trading_stop : '12pm - 5pm'"></span></span>
+                                <span x-show="activeCategory !== 'stalls'">Trading: <span x-text="$store.app.eventInfo ? $store.app.eventInfo.village_fete.trading_start + ' - ' + $store.app.eventInfo.village_fete.trading_stop : '12pm - 5pm'"></span></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- [STALLS ONLY] Pitch Info -->
+                <template x-if="activeCategory === 'stalls'">
+                    <div class="info-sticker-card rotate-pos-1" x-transition>
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <h2 class="info-sticker-title h2 mb-1">Your Pitch</h2>
+                        </div>
+
+                        <p class="lead">Pitches are <strong>3m x 3m</strong> with 3m spacing for safety and comfort.</p>
+
+                        <div class="p-4 bg-light rounded-4 mb-4" style="border: 2px dashed #ccc;">
+                            <h5 class="fw-bold mb-3">Setup Instructions</h5>
+                            <ul class="mb-0" style="font-family: 'Comfortaa', cursive;">
+                                <li><strong>Setup:</strong> 8:00 AM - 10:30 AM</li>
+                                <li>Unload on grass, then move vehicles to car park by 10:30 AM.</li>
+                                <li><strong>No vehicle movements after 10:30 AM.</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </template>
+
+                 <!-- [STALLS ONLY] Costs & Payment -->
+                <template x-if="activeCategory === 'stalls'">
+                    <div class="info-sticker-card rotate-neg-1" x-transition>
+                        <div class="d-flex align-items-center gap-3 mb-4">
+                            <h2 class="info-sticker-title h2 mb-1">Costs</h2>
+                        </div>
+
+                        <div class="row g-4 mb-4">
+                            <div class="col-md-6">
+                                <div class="p-4 bg-sticker-purple text-white rounded-4 shadow-sm h-100">
+                                    <div class="display-3 fw-bold mb-1">£5</div>
+                                    <h5 class="mb-0">Charity & Non-profit</h5>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-4 bg-sticker-pink rounded-4 shadow-sm h-100">
+                                    <div class="display-3 fw-bold mb-1">£20</div>
+                                    <h5 class="mb-0">Commercial Business</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-4 bg-light rounded-4 mb-4" style="border: 2px dashed #ccc;">
+                            <h5 class="fw-bold mb-2">Need a Table?</h5>
+                            <p class="mb-0 text-muted">Please supply your own tables and gazebo. Tables are available for hire at <strong>£5 each</strong> if booked in advance.</p>
+                        </div>
+
+                        <h4 class="fw-bold mb-3">How to Pay</h4>
+                        <div class="card border-0 bg-white shadow-sm p-3 rounded-4">
+                            <p class="mb-1"><strong>Bank Transfer:</strong> Girton Village Celebrations</p>
+                            <p class="mb-1">Sort code: <code>30-80-45</code> | Acc: <code>29094760</code></p>
+                            <hr class="my-3">
+                            <p class="small text-muted mb-0">Cheques payable to: <em>Girton Village Celebrations</em>. Send to Carol Noble, 19 Weavers Field, Girton.</p>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- [SHARED] Ground Rules -->
+                <div class="info-sticker-card rotate-pos-1">
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <h2 class="info-sticker-title h2 mb-1">Ground Rules</h2>
+                    </div>
+
+                    <ul class="list-unstyled d-flex flex-column gap-3 fs-5">
+                        <li class="d-flex align-items-center gap-3">
+                            <span>Please offer <strong>cashless payments</strong> if possible.</span>
+                        </li>
+                        <li class="d-flex align-items-center gap-3">
+                            <span>All rubbish must be taken away with you.</span>
+                        </li>
+                        <li class="d-flex align-items-center gap-3">
+                            <span><strong>No dogs are allowed</strong> on the Recreation Ground.</span>
+                        </li>
+                    </ul>
+
+                    <template x-if="activeCategory !== 'stalls'">
+                        <div class="p-4 bg-light rounded-4 mt-4" style="border: 2px dashed #ccc;">
+                            <p class="mb-0 text-muted small text-center">Further technical information and event protocols will be shared with confirmed vendors nearer the time.</p>
+                        </div>
+                    </template>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Sidebar Actions -->
+        <div class="col-lg-4">
+            <div class="sticky-lg-top" style="top: 100px; z-index: 10;">
+
+                <div class="info-sticker-card bg-sticker-purple text-white border-dark">
+                    <!-- Dynamic Headers -->
+                    <h2 class="info-sticker-title text-white mb-4" x-text="booked[activeCategory] ? 'Pitches Booked' : 'Ready to Book?'"></h2>
+
+                    <!-- [STALLS] CTA -->
+                    <template x-if="activeCategory === 'stalls'">
+                        <div class="d-grid gap-3" x-transition>
+                            <template x-if="!booked.stalls">
+                                <a href="https://forms.gle/f5uMHX5UwsAjjEn29" class="btn btn-light btn-lg fw-bold p-3 rounded-4 shadow" target="_blank">
+                                    Book Online
+                                </a>
+                            </template>
+                            <template x-if="booked.stalls">
+                                <div class="alert bg-white bg-opacity-20 text-white border-0 p-4 mb-0" style="border-radius: 1.5rem;">
+                                    <p class="mb-0 fw-bold text-dark text-center">All stall pitches for the 2026 Feast are now fully booked.</p>
+                                </div>
+                            </template>
+                            <a href="{{ "/entertainment.html?category=stalls" | url }}" class="btn btn-outline-light rounded-pill border-2 mt-2">
+                                See confirmed stalls
+                            </a>
+                        </div>
+                    </template>
+
+                    <!-- [FOOD] CTA -->
+                    <template x-if="activeCategory === 'food'">
+                        <div x-transition>
+                            <template x-if="booked.food">
+                                <div class="alert bg-white bg-opacity-20 text-white border-0 p-4 mb-0" style="border-radius: 1.5rem;">
+                                    <p class="mb-0 fw-bold text-dark text-center">All catering pitches for the 2026 Feast are now fully booked.</p>
+                                </div>
+                            </template>
+                            <template x-if="!booked.food">
+                                <a href="#" class="btn btn-light btn-lg fw-bold p-3 rounded-4 shadow d-block text-center" target="_blank">
+                                    Book Online
+                                </a>
+                            </template>
+                        </div>
+                    </template>
+
+                    <!-- [RIDES] CTA -->
+                    <template x-if="activeCategory === 'rides'">
+                        <div class="d-grid gap-3" x-transition>
+                            <template x-if="!booked.rides">
+                                <a href="https://forms.gle/WRyH8jcSbkLXwYg49" target="_blank" class="btn btn-light btn-lg fw-bold p-3 rounded-4 shadow">
+                                    Book Online
+                                </a>
+                            </template>
+                            <template x-if="booked.rides">
+                                <div class="alert bg-white bg-opacity-20 text-white border-0 p-4 mb-0" style="border-radius: 1.5rem;">
+                                    <p class="mb-0 fw-bold text-dark text-center">All rides & games pitches for the 2026 Feast are now fully booked.</p>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+
+                    <!-- Shared Contact Info -->
+                    <div class="mt-5 p-4 bg-white bg-opacity-10 rounded-4">
+                        <h5 class="fw-bold mb-3">Questions?</h5>
+                        <p class="mb-1 fw-bold">Contact Carol Noble</p>
+                        <p class="mb-2"><span data-email-user="carol" data-email-domain="girtonfeast.org.uk" class="text-white text-decoration-none"></span></p>
+                        <p class="mb-0 opacity-75">01223 276103</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>

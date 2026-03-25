@@ -2499,6 +2499,54 @@ html {
     color: var(--brand-marian-blue) !important;
 }
 
+/* Info Page Redesign Utilities */
+.info-sticker-card {
+    background: white;
+    border: 3px solid #000;
+    border-radius: 2rem;
+    padding: 2.5rem;
+    position: relative;
+    box-shadow: 8px 8px 0 rgba(0,0,0,0.1);
+    height: 100%;
+    transition: transform 0.2s ease;
+}
+
+.info-sticker-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 12px 12px 0 rgba(0,0,0,0.1);
+}
+
+.info-sticker-title {
+    font-family: "Glass Antiqua", cursive;
+    color: #000;
+    margin-bottom: 1.5rem;
+}
+
+.info-sticker-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #000;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.bg-sticker-pink { background-color: var(--brand-v2-pink) !important; }
+.bg-sticker-green { background-color: var(--brand-v2-green) !important; }
+.bg-sticker-purple { background-color: var(--brand-v2-purple) !important; }
+.bg-sticker-mint { background-color: var(--brand-pastel-mint) !important; }
+
+.font-glass-antigua {
+    font-family: 'Glass Antiqua', cursive;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
 .hover-text-primary:hover {
     color: var(--brand-marian-blue) !important;
 }
@@ -2748,14 +2796,6 @@ html {
     background-color: var(--brand-v2-purple);
     border-color: var(--brand-v2-purple);
     color: white;
-}
-
-/* Hashtag */
-.footer-v2-hashtag {
-    font-family: 'Sigmar One', cursive;
-    font-size: 1.3rem;
-    color: var(--brand-thulian-pink);
-    margin: 0;
 }
 
 /* Bottom bar links */
