@@ -206,25 +206,5 @@
             "kids"
         ],
         "days": ["Friday", "Saturday"]
-    },
-    {
-        "name": "Food Vans",
-        "image": "images/food/burger.png",
-        "url": "food.html",
-        "description": "",
-        "tags": [
-            "food-and-drink"
-        ],
-        "days": ["Saturday","Friday"]
-    },
-    {
-        "name": "Beer Tent",
-        "image": "images/food/beer.png",
-        "url": "beer-tent.html",
-        "description": "",
-        "tags": [
-            "food-and-drink"
-        ],
-        "days": ["Saturday","Friday"]
     }
 ]

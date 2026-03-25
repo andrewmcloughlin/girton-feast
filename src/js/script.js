@@ -244,7 +244,7 @@ document.addEventListener('alpine:init', () => {
 
       if (brandMap[tagLower]) return brandMap[tagLower]
 
-      const colors = ['bg-brand-marian-blue', 'bg-brand-glaucous', 'bg-brand-thulian-pink', 'bg-brand-giants-orange', 'bg-brand-saffron']
+      const colors = ['bg-brand-marian-blue', 'bg-brand-glaucous', 'bg-brand-thulian-pink', 'bg-brand-giants-orange', 'bg-brand-v2-green']
       let hash = 0
       for (let i = 0; i < tagLower.length; i++) {
         hash = tagLower.charCodeAt(i) + ((hash << 5) - hash)

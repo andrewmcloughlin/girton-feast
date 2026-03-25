@@ -10,53 +10,154 @@ eleventyNavigation:
 ---
 
 {% block extra_head %}
-<!-- Leaflet already included in base.njk -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <style>
-    #map { height: calc(100vh - 80px); width: 100%; background: #f8f9fa; }
+    /* Ensure navbar is not duplicated or overlaps */
     .map-fullscreen-page main { padding: 0 !important; }
+    #map-event, #map-transport { width: 100%; height: 100%; background: #f0f4f8; }
 </style>
 {% endblock %}
 
-<div id="map"></div>
+<div class="map-fullscreen-wrapper" x-data="mapController()">
+    <!-- Mode Switcher Toggle -->
+    <div class="map-mode-switcher">
+        <button class="map-mode-btn" :class="{ 'active': mode === 'event' }" @click="setMode('event')">
+            Event Map
+        </button>
+        <button class="map-mode-btn" :class="{ 'active': mode === 'transport' }" @click="setMode('transport')">
+            Getting Here
+        </button>
+    </div>
+
+    <!-- Event Map Mode -->
+    <div id="map-event" class="map-instance" x-show="mode === 'event'" x-transition:enter="fadeIn" style="z-index: 10;"></div>
+
+    <!-- Getting Here Mode -->
+    <div id="map-transport" class="map-instance" x-show="mode === 'transport'" x-transition:enter="fadeIn" style="z-index: 5;"></div>
+
+    <!-- Transport Overlays (Only visible in transport mode) -->
+    <div class="transport-overlay" x-show="mode === 'transport'" x-transition:enter="fadeInUp">
+        <!-- By Car -->
+        <div class="transport-card-wrapper">
+            <div class="transport-card-bg" style="background-color: var(--brand-pastel-pink);"></div>
+            <div class="transport-card">
+                <span class="transport-card-icon">🚗</span>
+                <h5>By Car</h5>
+                <p>Limited parking at Rec car park (Accessible only). Other vehicles use the field behind the Rec.</p>
+                <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill font-dynapuff">Open Maps</a>
+            </div>
+        </div>
+
+        <!-- By Bus -->
+        <div class="transport-card-wrapper">
+            <div class="transport-card-bg" style="background-color: var(--brand-pastel-yellow);"></div>
+            <div class="transport-card">
+                <span class="transport-card-icon">🚌</span>
+                <h5>By Bus</h5>
+                <p>Citi 6 stops right outside. Easy access from Cambridge or Oakington.</p>
+                <a href="https://www.stagecoachbus.com/routes/east/6/cambridge-oakington/XEAO006.O" target="_blank" class="btn btn-sm btn-outline-warning rounded-pill font-dynapuff">Timetable</a>
+            </div>
+        </div>
+
+        <!-- By Bike -->
+        <div class="transport-card-wrapper">
+            <div class="transport-card-bg" style="background-color: var(--brand-pastel-green);"></div>
+            <div class="transport-card">
+                <span class="transport-card-icon">🚲</span>
+                <h5>By Bike</h5>
+                <p>Scenic & healthy! Plenty of cycle parking available at the main entrance.</p>
+            </div>
+        </div>
+
+        <!-- By Taxi -->
+        <div class="transport-card-wrapper">
+            <div class="transport-card-bg" style="background-color: var(--brand-pastel-purple);"></div>
+            <div class="transport-card">
+                <span class="transport-card-icon">🚕</span>
+                <h5>By Taxi</h5>
+                <p>Book a ride with our sponsors, <strong>Veezu</strong>, for a reliable trip home.</p>
+                <a href="https://www.veezu.co.uk/" target="_blank" class="text-brand-purple fw-bold text-decoration-none">Book with Veezu →</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% block extra_scripts %}
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-    // Initialize Leaflet Map
-    // SVG Dimensions: 2415 x 1759
-    var mapWidth = 2415;
-    var mapHeight = 1759;
-    var map = L.map('map', {
-        crs: L.CRS.Simple,
-        minZoom: 0,
-        maxZoom: 4
-    });
+    function mapController() {
+        return {
+            mode: 'event', // Default mode
+            eventMap: null,
+            transportMap: null,
 
-    var bounds = [[0, 0], [mapHeight, mapWidth]];
-    var image = L.imageOverlay('{{ "/images/map/isometric-map.svg" | url }}', bounds).addTo(map);
+            init() {
+                // Initialize both maps on load
+                this.initEventMap();
+                this.initTransportMap();
 
-    // Initial view: zoom in more by default
-    map.setView([mapHeight / 2, mapWidth / 2], 1);
+                // Handle initial mode from URL
+                const params = new URLSearchParams(window.location.search);
+                if (params.get('mode') === 'transport' || params.get('mode') === 'getting-here') {
+                    this.setMode('transport');
+                }
+            },
 
+            setMode(newMode) {
+                this.mode = newMode;
+                // Invalidate size to ensure markers/tiles render correctly after display change
+                // We use $nextTick or a short timeout to ensure Alpine has updated the display property
+                setTimeout(() => {
+                    if (this.mode === 'event' && this.eventMap) {
+                        this.eventMap.invalidateSize();
+                    }
+                    if (this.mode === 'transport' && this.transportMap) {
+                        this.transportMap.invalidateSize();
+                    }
+                }, 100);
+            },
 
-    // Set max bounds to prevent panning too far out
-    map.setMaxBounds(bounds.pad(0.1));
+            initEventMap() {
+                const mapWidth = 2415;
+                const mapHeight = 1759;
+                this.eventMap = L.map('map-event', {
+                    crs: L.CRS.Simple,
+                    minZoom: 0,
+                    maxZoom: 4
+                });
 
-    // Example markers (adjusted for new scale if needed, but keeping them for now)
-    // Coords in CRS.Simple are [y, x] where 0,0 is bottom-left (wait, Leaflet 0,0 is top-left by default for ImageOverlay?)
-    // Actually Leaflet's CRS.Simple: [0, 0] is bottom-left if you set bounds that way,
-    // but the imageOverlay uses the bounds provided.
+                const bounds = L.latLngBounds([[0, 0], [mapHeight, mapWidth]]);
+                L.imageOverlay('{{ "/images/map/isometric-map.svg" | url }}', bounds).addTo(this.eventMap);
+                this.eventMap.setView([mapHeight / 2, mapWidth / 2], 1);
+                this.eventMap.setMaxBounds(bounds.pad(0.1));
 
-    var points = [
-        { name: "Main Stage", coords: [1500, 400], info: "Live music and performances all weekend!" },
-        { name: "Food Court", coords: [1000, 1200], info: "A variety of food stalls and drinks." },
-        { name: "Play Ground", coords: [500, 800], info: "Games and activities for children." }
-    ];
+                // Add event markers
+                const points = [
+                    { name: "Main Stage", coords: [1500, 400], info: "Live music and performances all weekend!" },
+                    { name: "Food Court", coords: [1000, 1200], info: "A variety of food stalls and drinks." },
+                    { name: "Play Ground", coords: [500, 800], info: "Games and activities for children." }
+                ];
 
-    points.forEach(function (point) {
-        L.marker([point.coords[0], point.coords[1]])
-            .addTo(map)
-            .bindPopup("<b>" + point.name + "</b><br>" + point.info);
-    });
+                points.forEach(point => {
+                    L.marker(point.coords).addTo(this.eventMap)
+                        .bindPopup(`<b>${point.name}</b><br>${point.info}`);
+                });
+            },
+
+            initTransportMap() {
+                const mapCoords = [52.2405, 0.0855]; // Girton Recreation Ground
+                this.transportMap = L.map('map-transport').setView(mapCoords, 15);
+
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                    subdomains: 'abcd',
+                    maxZoom: 20
+                }).addTo(this.transportMap);
+
+                L.marker(mapCoords).addTo(this.transportMap)
+                    .bindPopup('<b>Girton Feast</b><br>Girton Recreation Ground').openPopup();
+            }
+        }
+    }
 </script>
 {% endblock %}

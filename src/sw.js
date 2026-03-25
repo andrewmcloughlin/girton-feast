@@ -1,5 +1,5 @@
 // Service Worker for Girton Feast PWA
-const CACHE_NAME = 'girton-feast-v3'
+const CACHE_NAME = 'girton-feast-v5'
 const PRE_CACHE_RESOURCES = [
   './',
   './index.html',
@@ -14,14 +14,11 @@ const PRE_CACHE_RESOURCES = [
   './beer-tent.json',
   // Pages
   './pages/contact.html',
-  '/entertainment.html',
-  './pages/food.html',
+  './entertainment.html',
   './pages/gallery.html',
-  './pages/getting-here.html',
-  './pages/map.html',
+  './map.html',
   './pages/stalls.html',
   './pages/beer-tent.html',
-  './pages/agenda-map.html',
   // Info Pages
   './info/stall-holders.html',
   './info/caterers-info.html',
@@ -38,74 +35,105 @@ const PRE_CACHE_RESOURCES = [
   './images/silly_goose.svg',
   './images/girton-feast-logo-text.svg',
   './images/goose_golf.svg',
-  // External Libraries (Pre-caching core versions)
+  // External Libraries
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
   'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css',
   'https://unpkg.com/leaflet/dist/leaflet.css',
   'https://unpkg.com/leaflet/dist/leaflet.js',
-  'https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poller+One&family=Poppins:wght@400;700&display=swap'
+  'https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poller+One&family=Poppins:wght@400;700&family=Glass+Antiqua&family=Comfortaa:wght@300..700&family=DynaPuff:wght@400..700&display=swap'
 ]
 
 // Install event - cache resources
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => {
-        console.log('Opened cache')
-        // We use addAll but catch individual failures to avoid the whole pre-cache failing
-        // if one tiny asset is missing during development.
-        return Promise.allSettled(
-          PRE_CACHE_RESOURCES.map(url => cache.add(url))
-        ).then(results => {
-          const failed = results.filter(r => r.status === 'rejected')
-          if (failed.length > 0) {
-            console.warn('Some resources failed to pre-cache:', failed.map(f => f.reason))
-          }
-          return cache
-        })
-      })
-  )
-})
-
-// Fetch event - serve from cache, fallback to network
-self.addEventListener('fetch', (event) => {
-  // Strategy: Stale-While-Revalidate
-  // We serve the cached version immediately, but also fetch the latest from the network
-  // and update the cache in the background.
-  event.respondWith(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.match(event.request).then((cachedResponse) => {
-        const fetchedResponse = fetch(event.request).then((networkResponse) => {
-          // Only cache successful GET requests
-          if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic' && event.request.method === 'GET') {
-            cache.put(event.request, networkResponse.clone())
-          }
-          return networkResponse
-        }).catch(() => {
-          // If network fails, return cached response if we have it
-          return cachedResponse
+      console.log('SW: Pre-caching resources')
+      return Promise.allSettled(
+        PRE_CACHE_RESOURCES.map(url => {
+          return cache.add(url).catch(err => {
+            console.warn(`SW: Failed to cache ${url}:`, err)
+          })
         })
-
-        return cachedResponse || fetchedResponse
-      })
+      )
     })
   )
+  self.skipWaiting()
 })
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-  const cacheWhitelist = [CACHE_NAME]
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
+          if (cacheName !== CACHE_NAME) {
+            console.log('SW: Deleting old cache', cacheName)
             return caches.delete(cacheName)
           }
-          return null
+          return Promise.resolve()
         })
       )
     })
+  )
+  return self.clients.claim()
+})
+
+// Fetch event - serve from cache, fallback to network
+self.addEventListener('fetch', (event) => {
+  // Only handle GET requests
+  if (event.request.method !== 'GET') return
+
+  const url = new URL(event.request.url)
+
+  // Only handle same-origin or allowed CDN requests
+  const isSameOrigin = url.origin === self.location.origin
+  const isAllowedCDN = [
+    'cdn.jsdelivr.net',
+    'cdnjs.cloudflare.com',
+    'unpkg.com',
+    'fonts.googleapis.com',
+    'fonts.gstatic.com'
+  ].some(domain => url.hostname.includes(domain))
+
+  if (!isSameOrigin && !isAllowedCDN) return
+
+  // Strategy: Stale-While-Revalidate for most, Network-First for navigation
+  event.respondWith(
+    (async () => {
+      const cache = await caches.open(CACHE_NAME)
+
+      // For navigation, try network first to ensure fresh content
+      if (event.request.mode === 'navigate' && isSameOrigin) {
+        try {
+          const networkResponse = await fetch(event.request)
+          if (networkResponse.ok) {
+            cache.put(event.request, networkResponse.clone())
+          }
+          return networkResponse
+        } catch (error) {
+          const cachedResponse = await cache.match(event.request)
+          if (cachedResponse) return cachedResponse
+          // If no cache, we let it fail or provide a generic offline page if we had one
+          throw error
+        }
+      }
+
+      // For everything else: Stale-While-Revalidate
+      const cachedResponse = await cache.match(event.request)
+      const fetchPromise = fetch(event.request).then(async (networkResponse) => {
+        if (networkResponse.ok) {
+          cache.put(event.request, networkResponse.clone())
+        }
+        return networkResponse
+      }).catch(() => {
+        return cachedResponse || new Response('Network error occurred', {
+          status: 408,
+          headers: { 'Content-Type': 'text/plain' }
+        })
+      })
+
+      return cachedResponse || fetchPromise
+    })()
   )
 })

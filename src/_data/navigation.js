@@ -3,7 +3,7 @@ module.exports = [
     key: "What's On",
     children: [
       { label: 'Entertainment', url: '/entertainment.html', icon: 'fas fa-music' },
-      { label: 'Food & Drink', url: '/pages/food.html', icon: 'fas fa-utensils' },
+      { label: 'Food & Drink', url: '/entertainment.html?category=food', icon: 'fas fa-utensils' },
       { label: 'Stalls', url: '/pages/stalls.html', icon: 'fas fa-store' },
       { label: 'Beer Tent', url: '/pages/beer-tent.html', icon: 'fas fa-beer' },
       { divider: true },
@@ -13,7 +13,8 @@ module.exports = [
   {
     key: 'Plan Your Visit',
     children: [
-      { label: 'Getting Here', url: '/pages/getting-here.html', icon: 'fas fa-map-marked-alt' },
+      { label: 'Getting Here', url: '/map.html?mode=transport', icon: 'fas fa-map-marked-alt' },
+      { label: 'Event Map', url: '/map.html?mode=event', icon: 'fas fa-map' },
       { label: 'Facilities', url: '/#amenities', icon: 'fas fa-restroom' }
     ]
   },
