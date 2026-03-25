@@ -362,11 +362,13 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
 }
 
 .dark-mode .mobile-nav-item {
-    color: var(--text-primary);
+    color: var(--brand-v2-purple);
+    font-weight: 700;
 }
 
 .dark-mode .mobile-nav-item.active {
-    color: var(--brand-saffron);
+    color: var(--brand-v2-purple);
+    font-weight: 700;
 }
 
 .dark-mode #gallery-nav {
@@ -1076,24 +1078,22 @@ html {
 }
 
 .mobile-nav-item {
-    color: var(--brand-marian-blue);
-    opacity: 0.6;
+    color: var(--brand-v2-purple);
     font-size: 0.7rem;
-    font-weight: 600;
+    font-weight: 700;
     transition: all 0.2s ease-in-out;
 }
 
 .mobile-nav-item i {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
 }
 
 .mobile-nav-item.active {
-    color: var(--brand-thulian-pink);
-    opacity: 1;
+    color: var(--brand-v2-purple);
 }
 
 .mobile-nav-item.active i {
-    color: var(--brand-thulian-pink);
+    color: var(--brand-v2-purple);
 }
 
 

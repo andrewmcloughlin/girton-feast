@@ -49,11 +49,8 @@
             <!-- Controls: Countdown and Theme Toggle -->
             <div class="d-flex align-items-center ms-auto" x-data>
                 <span id="countdown-timer" x-data="countdown" x-text="timeLeft"
-                    class="navbar-text text-dark d-none d-md-inline" style="font-size: 0.9rem;"></span>
-                <button id="theme-toggle" class="theme-toggle-btn ms-3 text-dark border-0 bg-transparent" title="Toggle dark mode"
-                    @click="$store.app.toggleTheme()">
-                    <i class="fas" :class="$store.app.theme === 'dark' ? 'fa-sun' : 'fa-moon'"></i>
-                </button>
+                    class="navbar-text text-dark d-none d-md-inline" style="font-size: 0.9rem;">
+                </span>
             </div>
         </div>
     </div>

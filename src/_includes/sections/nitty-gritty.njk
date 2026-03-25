@@ -37,13 +37,13 @@
                                 <ul class="list-unstyled nitty-gritty-list">
                                     {% for event in day.events %}
                                         <li class="mb-3">
-                                            <div class="row align-items-baseline">
-                                                <div class="col-8 col-md-9 d-flex align-items-baseline">
-                                                    <span class="fw-bold me-3" style="color: var(--brand-marian-blue); min-width: 120px; flex-shrink: 0;">{{ event.time }}</span>
-                                                    <span>{{ event.artist_event }}</span>
+                                            <div class="row align-items-baseline g-1">
+                                                <div class="col-12 col-sm-9 d-flex align-items-baseline">
+                                                    <span class="fw-bold me-2 me-md-3" style="color: var(--brand-marian-blue); min-width: 90px; flex-shrink: 0;">{{ event.time }}</span>
+                                                    <span class="flex-grow-1">{{ event.artist_event }}</span>
                                                 </div>
-                                                <div class="col-4 col-md-3 text-end small opacity-75">
-                                                    {{ event.location }}
+                                                <div class="col-12 col-sm-3 text-start text-sm-end small opacity-75 mt-1 mt-sm-0 ps-5 ps-sm-0">
+                                                    <span class="d-sm-none"><i class="fas fa-map-marker-alt me-1"></i></span>{{ event.location }}
                                                 </div>
                                             </div>
                                         </li>
