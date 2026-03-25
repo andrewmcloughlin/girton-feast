@@ -31,7 +31,7 @@ Global Styles & Variables
     --badge-text: #fff;
 
     /* Bootstrap Theme Overrides - Hex */
-    --bs-primary: var(--brand-marian-blue);
+    --bs-primary: var(--brand-v2-purple);
     --bs-secondary: var(--brand-glaucous);
     --bs-success: #4caf50;
     --bs-info: var(--brand-light-blue);
@@ -295,7 +295,7 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     z-index: 1000;
     border: none;
     outline: none;
-    background-color: var(--brand-giants-orange);
+    background-color: var(--brand-v2-purple);
     color: white;
     cursor: pointer;
     width: 50px;
@@ -309,7 +309,8 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
 }
 
 #scrollToTopBtn:hover {
-    background-color: var(--brand-thulian-pink);
+    background-color: var(--brand-pastel-green);
+    color: var(--brand-v2-purple);
 }
 
 /* Theme Toggle Button */
@@ -837,19 +838,6 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
    Gallery Specific Styles
    ======================================== */
 
-/* Keyframes for the fade-in-up animation */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 /* Keyframes for the placeholder shimmer animation */
 @keyframes shimmer {
     0% {
@@ -859,73 +847,6 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     100% {
         background-position: 468px 0;
     }
-}
-
-
-/* Thumbnail Container */
-.gallery-img-container {
-    /* Apply the animation */
-    opacity: 0;
-    /* Start hidden */
-    animation: fadeInUp 0.5s ease-out forwards;
-    animation-fill-mode: forwards;
-    /* Add the shimmer effect as a background */
-    background-color: #e0e0e0;
-    background-image: linear-gradient(to right, #e0e0e0 0%, #f0f0f0 20%, #e0e0e0 40%, #e0e0e0 100%);
-    background-repeat: no-repeat;
-    background-size: 800px 104px;
-    animation-name: fadeInUp, shimmer;
-    animation-duration: 0.5s, 1.5s;
-    animation-timing-function: ease-out, linear;
-    animation-iteration-count: 1, infinite;
-}
-
-/* Thumbnail Image */
-.gallery-img {
-    /* Fade the image in when it loads */
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.gallery-img.loaded {
-    opacity: 1;
-}
-
-/* Styles for the new Gallery Scrollspy Nav */
-#gallery-nav {
-    top: 100px;
-    /* Offset from the sticky top navbar */
-    background-color: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-#gallery-nav .nav-link {
-    color: var(--brand-thulian-pink);
-    font-weight: 500;
-}
-
-#gallery-nav .nav-link.active,
-#gallery-nav .nav-link:hover {
-    color: #fff;
-    background-color: var(--brand-thulian-pink);
-}
-
-/* Style for the gallery download button */
-.download-btn {
-    background-color: var(--brand-glaucous);
-    color: #fff;
-    border: 1px solid var(--brand-glaucous);
-    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
-    border-radius: 0.375rem;
-    /* Standard Bootstrap border-radius */
-    padding: 0.375rem 0.75rem;
-    font-weight: 600;
-}
-
-.download-btn:hover {
-    background-color: var(--brand-marian-blue);
-    border-color: var(--brand-marian-blue);
-    color: #fff;
 }
 
 /* Hover scale effect for cards */
@@ -3050,4 +2971,186 @@ html {
     .contact-card-wrapper {
         max-width: 100%;
     }
+}
+
+/*
+========================================
+Photo Gallery V2 Refinement
+========================================
+*/
+
+.font-glass-antiqua { font-family: 'Glass Antiqua', cursive !important; }
+.font-dynapuff { font-family: DynaPuff, cursive !important; }
+.font-comfortaa { font-family: Comfortaa, cursive !important; }
+.font-poppins { font-family: Comfortaa, sans-serif !important; }
+
+.text-brand-purple { color: var(--brand-v2-purple) !important; }
+.btn-brand-purple {
+    background-color: var(--brand-v2-purple) !important;
+    color: white !important;
+}
+
+.border-thick { border: 3px solid #000 !important; }
+.border-thick-white { border: 4px solid #fff !important; }
+
+#gallery-nav .nav-link {
+    color: #666;
+    background: #f8f9fa;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#gallery-nav .nav-link:hover {
+    background: #eee;
+    transform: translateY(-2px);
+}
+
+#gallery-nav .nav-link.active {
+    background-color: var(--brand-v2-purple) !important;
+    color: white !important;
+    border-color: #000 !important;
+    box-shadow: none !important;
+    transform: translate(2px, 2px);
+}
+
+.gallery-img-container {
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background: #eee;
+}
+
+.gallery-img-container:hover {
+    transform: scale(1.05) rotate(2deg) !important;
+    z-index: 5;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.year-gallery-group {
+    border-bottom: 2px dashed rgba(0, 0, 0, 0.05);
+    padding-bottom: 2rem;
+}
+
+.year-gallery-group:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu .dropdown-item:active {
+    background-color: var(--brand-v2-purple) !important;
+}
+
+@media (max-width: 767px) {
+    .get-involved-title {
+        font-size: 2.8rem;
+    }
+}
+
+/*
+========================================
+Polaroid Scrapbook Styling
+========================================
+*/
+
+.polaroid-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.polaroid-item {
+    background: white;
+    padding: 12px 12px 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid #eee;
+    text-decoration: none !important;
+    display: block;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.polaroid-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    background: #f8f8f8;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.polaroid-item img.loaded {
+    opacity: 1;
+}
+
+.polaroid-item:hover {
+    transform: scale(1.08) rotate(0) !important;
+    z-index: 10;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Sticker Button CSS (Pure CSS version) */
+.sticker-button {
+    font-family: DynaPuff, cursive;
+    background-color: var(--brand-v2-green);
+    border: 3px solid #000;
+    padding: 0.6rem 1.2rem;
+    border-radius: 50px;
+    color: #000;
+    box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.sticker-button:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 1);
+    background-color: var(--brand-v2-pink);
+    color: #000;
+}
+
+.sticker-button:active {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 1);
+}
+
+.sticker-button-pink {
+    background-color: var(--brand-v2-pink);
+}
+
+.sticker-button-pink:hover {
+    background-color: var(--brand-v2-green);
+}
+
+/* Sticky Nav Fixes */
+.gallery-nav-container {
+    padding-top: 1rem;
+}
+
+#gallery-nav {
+    border: 3px solid #000;
+    box-shadow: 6px 6px 0 0 rgba(0, 0, 0, 1);
+}
+
+
+.fadeIn {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.fadeInUp {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }

@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 title: Photo Gallery - Girton Feast
-bodyClass: bg-brand-light-yellow
+bodyClass: bg-white
 permalink: /pages/gallery.html
 eleventyNavigation:
   key: Photo Gallery
@@ -14,40 +14,55 @@ eleventyNavigation:
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 {% endblock %}
 
-<main class="container my-5">
-    <div class="text-center pt-5 mb-5">
-        <h1 class="display-4" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">Relive the memories</h1>
-        <p class="lead text-muted">A look back at previous years of the Girton Feast.</p>
-    </div>
-
-    <div class="row">
-        <!-- Scrollspy Navigation Column -->
-        <div class="col-lg-3 d-none d-lg-block">
-            <nav id="gallery-nav" class="sticky-top p-3 rounded bg-brand-marian-blue">
-                <ul id="gallery-nav-ul" class="nav nav-pills flex-column">
-                    <!-- Year links will be dynamically inserted here -->
-                </ul>
-            </nav>
+<div class="bg-white min-vh-100 py-5">
+    <div class="container pt-5">
+        <div class="text-center mb-5 animate-on-scroll">
+            <h1 class="get-involved-title mt-4">Relive the memories</h1>
+            <p class="lead text-muted font-comfortaa">A look back at previous years of the Girton Feast.</p>
         </div>
 
-        <!-- Gallery Content Column -->
-        <div id="gallery-container-wrapper" class="col-lg-9">
-            <!-- Mobile Dropdown Navigation -->
-            <div class="d-lg-none mb-4 sticky-top" style="top: 80px; z-index: 100;">
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="galleryDropdown"
-                        data-bs-toggle="dropdown" aria-expanded="false">
-                        Select a Year
-                    </button>
-                    <ul id="gallery-dropdown-ul" class="dropdown-menu w-100" aria-labelledby="galleryDropdown">
-                        <!-- Mobile year links will be inserted here -->
-                    </ul>
+        <div class="row position-relative">
+            <!-- Sticky Navigation Column -->
+            <div class="col-lg-3 mb-4">
+                <div class="gallery-nav-container sticky-top" style="top: 100px; z-index: 1020;">
+                    <h4 class="font-dynapuff mb-3 text-brand-purple">Select Year</h4>
+
+                    <!-- Desktop Nav -->
+                    <nav id="gallery-nav" class="p-3 rounded-4 bg-white d-none d-lg-block">
+                        <ul id="gallery-nav-ul" class="nav nav-pills flex-column gap-2">
+                            <!-- Year links will be dynamically inserted here -->
+                        </ul>
+                    </nav>
+
+                    <!-- Mobile Dropdown -->
+                    <div class="d-lg-none">
+                        <div class="dropdown">
+                            <button class="sticker-button sticker-button-pink w-100 dropdown-toggle" type="button" id="galleryDropdown"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Select a Year
+                            </button>
+                            <ul id="gallery-dropdown-ul" class="dropdown-menu w-100 border-thick shadow" aria-labelledby="galleryDropdown">
+                                <!-- Mobile year links will be inserted here -->
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id="gallery-container"></div>
+
+            <!-- Gallery Content Column -->
+            <div id="gallery-container-wrapper" class="col-lg-9">
+                <div id="gallery-container">
+                    <!-- Loading State -->
+                    <div class="text-center py-5">
+                        <div class="spinner-border text-brand-purple" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</main>
+</div>
 
 {% block extra_scripts %}
 <!-- JSZip library for creating zip files -->
@@ -68,68 +83,83 @@ eleventyNavigation:
     ];
     // --- END: Gallery Configuration ---
 
-    // Function to build the gallery from the configuration
-    function buildGallery() {
-        const galleryContainer = document.getElementById('gallery-container');
-        const galleryNavUl = document.getElementById('gallery-nav-ul');
-        const galleryDropdownUl = document.getElementById('gallery-dropdown-ul');
-        if (!galleryContainer || !galleryNavUl || !galleryDropdownUl) return;
+    let currentYear = photoConfig[0].year;
 
-        // Sort years in descending order
-        photoConfig.sort((a, b) => b.year - a.year);
+    function buildNavigation() {
+        const desktopNav = document.getElementById('gallery-nav-ul');
+        const mobileNav = document.getElementById('gallery-dropdown-ul');
+        const mobileBtn = document.getElementById('galleryDropdown');
 
-        let allYearsHtml = '';
-        let navLinksHtml = '';
-        let dropdownLinksHtml = '';
+        let desktopHtml = '';
+        let mobileHtml = '';
 
-        photoConfig.forEach(config => {
-            const yearId = `year-${config.year}`;
-
-            navLinksHtml += `
+        photoConfig.sort((a,b) => b.year - a.year).forEach(config => {
+            const activeClass = config.year === currentYear ? 'active' : '';
+            desktopHtml += `
                 <li class="nav-item">
-                    <a class="nav-link" href="#${yearId}">${config.year}</a>
+                    <a class="nav-link font-dynapuff text-center py-2 px-3 border-thick rounded-pill mb-2 ${activeClass}"
+                       href="javascript:void(0)" onclick="switchYear(${config.year})">${config.year}</a>
                 </li>
             `;
-
-            dropdownLinksHtml += `
-                <li><a class="dropdown-item" href="#${yearId}">${config.year}</a></li>
+            mobileHtml += `
+                <li><a class="dropdown-item font-dynapuff py-2 ${activeClass}" href="javascript:void(0)" onclick="switchYear(${config.year})">${config.year}</a></li>
             `;
-
-            allYearsHtml += `
-                <div id="${yearId}" class="year-gallery-group mb-5">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h2 class="display-5" style="font-family: 'Sigmar One', cursive; color: var(--brand-marian-blue);">${config.year}</h2>
-                        <button class="btn download-btn" onclick="downloadYearAsZip(${config.year}, this)">
-                            <i class="fas fa-download"></i><span class="d-none d-sm-inline ms-2">Download All</span>
-                        </button>
-                    </div>
-                    <div class="row g-4">
-            `;
-
-            for (let i = 1; i <= config.imageCount; i++) {
-                const prefix = window.siteConfig?.pathPrefix || '/';
-                const imagePath = `${prefix}images/previous/${config.year}/${i}.jpg`;
-                const delay = (i - 1) * 50;
-                allYearsHtml += `
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                        <a href="${imagePath}"
-                           data-fancybox="gallery-${config.year}"
-                           data-caption="Girton Feast ${config.year} - Photo ${i}"
-                           class="gallery-img-container ratio ratio-4x3 d-block rounded shadow-sm overflow-hidden hover-scale fadeInUp"
-                           style="animation-delay: ${delay}ms;">
-                            <img src="${imagePath}" class="object-fit-cover w-100 h-100 gallery-img" alt="Girton Feast ${config.year} - Photo ${i}" loading="lazy" onload="this.classList.add('loaded')">
-                        </a>
-                    </div>
-                `;
-            }
-
-            allYearsHtml += `</div></div>`;
         });
 
-        galleryContainer.innerHTML = allYearsHtml;
-        galleryNavUl.innerHTML = navLinksHtml;
-        galleryDropdownUl.innerHTML = dropdownLinksHtml;
+        desktopNav.innerHTML = desktopHtml;
+        mobileNav.innerHTML = mobileHtml;
+        mobileBtn.textContent = `Year: ${currentYear}`;
+    }
 
+    function switchYear(year) {
+        if (year === currentYear) return;
+        currentYear = year;
+        buildNavigation();
+        renderGallery();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderGallery() {
+        const container = document.getElementById('gallery-container');
+        const config = photoConfig.find(c => c.year === currentYear);
+        if (!config) return;
+
+        let html = `
+            <div class="fadeIn">
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-3">
+                    <h2 class="display-4 font-glass-antiqua text-brand-purple mb-0">${config.year} Collection</h2>
+                    <button class="sticker-button sticker-button-pink" onclick="downloadYearAsZip(${config.year}, this)">
+                        <i class="fas fa-download me-2"></i>Download All
+                    </button>
+                </div>
+                <div class="polaroid-gallery">
+        `;
+
+        const prefix = window.siteConfig?.pathPrefix || '/';
+        const cleanPrefix = prefix.endsWith('/') ? prefix : prefix + '/';
+
+        for (let i = 1; i <= config.imageCount; i++) {
+            const imagePath = `${cleanPrefix}images/previous/${config.year}/${i}.jpg`;
+
+            // Random rotation between -3 and 3 degrees
+            const rotation = (Math.random() * 6 - 3).toFixed(2);
+            const delay = (i % 20) * 40; // Stagger first 20 images
+
+            html += `
+                <a href="${imagePath}"
+                   data-fancybox="gallery-${config.year}"
+                   data-caption="Girton Feast ${config.year} - Photo ${i}"
+                   class="polaroid-item fadeInUp"
+                   style="transform: rotate(${rotation}deg); animation-delay: ${delay}ms;">
+                    <img src="${imagePath}" alt="Photo ${i}" loading="lazy" onload="this.classList.add('loaded')">
+                </a>
+            `;
+        }
+
+        html += `</div></div>`;
+        container.innerHTML = html;
+
+        // Re-bind Fancybox
         Fancybox.bind("[data-fancybox]", {});
     }
 
@@ -176,7 +206,8 @@ eleventyNavigation:
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        buildGallery();
+        buildNavigation();
+        renderGallery();
     });
 </script>
 {% endblock %}
