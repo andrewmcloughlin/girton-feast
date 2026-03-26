@@ -7,7 +7,8 @@
         "url": "#",
         "tags": [
             "drinks"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Wrapunzel's",
@@ -16,14 +17,16 @@
         "tags": [
             "vegetarian",
             "mains"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Tutle Dove Cafe",
         "url": "https://www.turtledovecambridge.com/",
         "tags": [
             "sweet treats"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Pizza Passione",
@@ -31,7 +34,8 @@
         "url": "https://pizzapassione.co.uk/",
         "tags": [
             "mains"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Smokehouse Burgers",
@@ -39,7 +43,8 @@
         "url": "#",
         "tags": [
             "mains"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Churros Bar",
@@ -47,7 +52,8 @@
         "url": "#",
         "tags": [
             "sweet treats"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "The Purple Pepper",
@@ -55,7 +61,8 @@
         "url": "https://www.thepurplepepper.online/",
         "tags": [
             "mains"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Toni's Ices",
@@ -63,7 +70,8 @@
         "url": "https://www.tonis-ices.co.uk/",
         "tags": [
             "sweet treats"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     },
     {
         "name": "Beer Tent",
@@ -71,6 +79,7 @@
         "url": "entertainment.html?category=beers",
         "tags": [
             "drinks"
-        ]
+        ],
+        "days": ["Friday", "Saturday"]
     }
 ]

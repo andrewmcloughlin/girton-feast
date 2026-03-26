@@ -1433,9 +1433,15 @@ html {
     font-family: Comfortaa, sans-serif;
     font-weight: 300;
     background-color: white;
-    padding: 2rem 0;
+    padding: 4rem 0 2rem;
     display: block;
     overflow-x: hidden;
+}
+
+@media (max-width: 991px) {
+    .hero-v2 {
+        padding-top: 6rem;
+    }
 }
 
 .hero-v2-title {
@@ -1446,6 +1452,7 @@ html {
     color: #000;
     position: relative;
     display: inline-block;
+    text-align: left;
 }
 
 .hero-v2-year {
@@ -1458,6 +1465,11 @@ html {
     vertical-align: middle;
     color: var(--brand-v2-purple);
     line-height: 1;
+}
+
+.hero-v2-content-col {
+    position: relative;
+    z-index: 5;
 }
 
 .hero-v2-detail {
@@ -1507,6 +1519,7 @@ html {
 }
 
 .hero-v2-visual:hover .btn-explore-feast,
+.hero-v2-visual.is-expanded .btn-explore-feast,
 .hero-v2-visual:has(.btn-explore-feast:focus-visible) .btn-explore-feast {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1.1);
@@ -1546,10 +1559,9 @@ html {
     max-height: 450px;
     /* Cap vertical height */
     display: block;
-    transform: scale(1.1);
-    /* Slightly enlarge the blobs within the space */
     transform-origin: center center;
-    transition: filter 0.5s ease;
+    transition: transform 0.2s ease-out, filter 0.5s ease;
+    will-change: transform;
     pointer-events: none;
     /* Ensure only filled paths trigger hover */
 }
@@ -1616,14 +1628,20 @@ html {
     will-change: transform;
 }
 
+/* Only expand blobs on desktop hover OR if the is-expanded class is applied (for mobile scroll) */
 .hero-v2-visual:hover .blob-bg-pink,
+.hero-v2-visual.is-expanded .blob-bg-pink,
 .hero-v2-visual:hover .blob-mask-pink,
+.hero-v2-visual.is-expanded .blob-mask-pink,
 .hero-v2-visual:hover .blob-bg-green,
-.hero-v2-visual:hover .blob-mask-green {
+.hero-v2-visual.is-expanded .blob-bg-green,
+.hero-v2-visual:hover .blob-mask-green,
+.hero-v2-visual.is-expanded .blob-mask-green {
     transform: scale(1.8);
 }
 
-.hero-v2-visual:hover .blob-svg {
+.hero-v2-visual:hover .blob-svg,
+.hero-v2-visual.is-expanded .blob-svg {
     filter: drop-shadow(0 15px 50px rgba(0, 0, 0, 0.2));
 }
 
@@ -1638,7 +1656,8 @@ html {
     will-change: transform;
 }
 
-.hero-v2-visual:hover .map-image-redesign {
+.hero-v2-visual:hover .map-image-redesign,
+.hero-v2-visual.is-expanded .map-image-redesign {
     transform: scale(0.9) translateX(-10%);
 }
 

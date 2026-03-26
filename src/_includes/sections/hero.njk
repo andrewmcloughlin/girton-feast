@@ -2,7 +2,8 @@
     <div class="container pt-5 pb-2">
         <div class="row align-items-start">
             <!-- Left Column: Content -->
-            <div class="col-lg-5 mb-5 mb-lg-0">
+            <!-- Left Column: Content -->
+            <div class="col-lg-5 mb-5 mb-lg-0 text-center text-lg-start hero-v2-content-col">
                 <div class="hero-v2-header">
                     <h1 class="hero-v2-title">
                         Girton<br>Feast<span class="hero-v2-year ps-1 pb-2">{% year %}</span>
@@ -15,25 +16,31 @@
                     <p>Girton Recreation Ground</p>
                 </div>
 
-                <div class="hero-v2-buttons mt-4 d-flex flex-wrap gap-5 align-items-start">
+                <div class="hero-v2-buttons mt-4 d-flex flex-wrap gap-5 justify-content-center justify-content-lg-start">
                     {% from "components/sticker-button.njk" import stickerButton %}
 
                     <div class="d-flex flex-column">
                         {{ stickerButton("Get Concert tickets →", "#concert-details") }}
                     </div>
 
-                    <div class="d-flex flex-column align-items-end">
+                    <div class="d-flex flex-column align-items-center align-items-lg-end">
                         {{ stickerButton("See fête activities →", "entertainment.html", "sticker-outline sticker-alt") }}
-                        <p class="text-muted small mt-2 mb-0 text-end">* free entry</p>
+                        <p class="text-muted small mt-2 mb-0 text-center text-lg-end">* free entry</p>
                     </div>
                 </div>
             </div>
 
             <!-- Right Column: Visuals -->
             <div class="col-lg-7">
-                <div class="hero-v2-visual">
+                <div class="hero-v2-visual"
+                     x-data="{ expanded: false }"
+                     @scroll.window="expanded = window.scrollY > 80"
+                     :class="{ 'is-expanded': expanded }">
                     {{ stickerButton("Explore the Feast", "/map.html", "btn-explore-feast sticker-outline sticker-alt") }}
-                    <svg viewBox="100 50 730 520" xmlns="http://www.w3.org/2000/svg" class="blob-svg" style="overflow: visible;">
+                    <svg viewBox="100 50 730 520"
+                         xmlns="http://www.w3.org/2000/svg"
+                         class="blob-svg"
+                         style="overflow: visible;">
                         <defs>
                             <!-- Pink Oval Base -->
                             <path id="morph-pink" d="M450,530C280,530,100,480,100,300C100,120,280,70,450,70C620,70,800,120,800,300C800,480,620,530,450,530Z" />

@@ -44,6 +44,25 @@ eleventyNavigation:
             </button>
         </div>
 
+        <!-- Day Filters -->
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+            <button class="badge-filter px-4"
+                    :class="selectedDay === 'all' ? 'active shadow-sm' : 'bg-light text-muted border'"
+                    @click="selectedDay = 'all'">
+                All Days
+            </button>
+            <button class="badge-filter px-4"
+                    :class="selectedDay === 'Friday' ? 'active shadow-sm' : 'bg-light text-muted border'"
+                    @click="selectedDay = 'Friday'">
+                Friday
+            </button>
+            <button class="badge-filter px-4"
+                    :class="selectedDay === 'Saturday' ? 'active shadow-sm' : 'bg-light text-muted border'"
+                    @click="selectedDay = 'Saturday'">
+                Saturday
+            </button>
+        </div>
+
         <!-- Badge Shaped Filters (Sub-categories/Tags) -->
         <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
             <button class="badge-filter"
