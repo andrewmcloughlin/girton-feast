@@ -134,10 +134,12 @@ document.addEventListener('alpine:init', () => {
 
         // Handle Beer Tent specific fields
         if (this.activeCategory === 'beers') {
-          normalized.image = item.logo
-          normalized.url = item.website || item.url
-          // Map beer styles to tags
-          normalized.tags = Array.from(new Set((item.beers || []).map(b => b.style)))
+          // Don't use brewery logo as main card image — the inline brewery
+          // attribution in the template handles that at a smaller size
+          normalized.image = item.image || null
+          normalized.url = item.brewery?.website || item.url
+          // tags are already an array in the new schema
+          normalized.tags = item.tags || []
         }
 
         // Determine if it's a logo/van (for display purposes)

@@ -1,122 +1,147 @@
 [
     {
-        "id": "blue-barrel-cider",
-        "name": "Blue Barrel Cider",
-        "logo": "images/breweries/logo_blue_barrel_cider.png",
-        "coords": [
-            52.2644,
-            0.0655
-        ],
-        "website": "https://www.bluebarrelcider.com/",
-        "description": "Award Winning Pure Juice Cider & Perry",
-        "beers": [
-            {
-                "name": "Trees Are Good",
-                "abv": 5.5,
-                "style": "Cider"
-            }
-        ]
+        "name": "Trees Are Good",
+        "abv": 5.5,
+        "tags": ["cider"],
+        "brewery": {
+            "name": "Blue Barrel Cider",
+            "logo": "images/breweries/logo_blue_barrel_cider.png",
+            "website": "https://www.bluebarrelcider.com/"
+        },
+        "description": "Award Winning Pure Juice Cider & Perry"
     },
     {
-        "id": "milton-brewery",
-        "name": "Milton Brewery",
-        "logo": "images/breweries/logo_milton_brewery.png",
-        "coords": [
-            52.2662,
-            0.1873
-        ],
-        "website": "https://www.miltonbrewery.co.uk/",
-        "description": "The Milton brewery is a traditional English Ale brewery, albeit lurking in the cunning disguise of a 1980s industrial unit.",
-        "beers": [
-            {
-                "name": "Pegasus",
-                "abv": 4.1,
-                "style": "Pale Ale"
-            },
-            {
-                "name": "Justinian",
-                "abv": 3.9,
-                "style": "Golden Ale"
-            },
-            {
-                "name": "Sparta",
-                "abv": 4.3,
-                "style": "Bitter"
-            }
-        ]
+        "name": "Pegasus",
+        "abv": 4.1,
+        "tags": ["pale ale", "real ale"],
+        "brewery": {
+            "name": "Milton Brewery",
+            "logo": "images/breweries/logo_milton_brewery.png",
+            "website": "https://www.miltonbrewery.co.uk/"
+        }
     },
     {
-        "id": "lord-conrads-brewery",
-        "name": "Lord Conrad's Brewery",
-        "logo": "images/breweries/logo_lord_conrads_brewery.png",
-        "coords": [
-            52.2444,
-            0.0034
-        ],
-        "website": "https://lordconradsbrewery.co.uk/",
-        "description": "",
-        "beers": [
-            {
-                "name": "A-Bomb",
-                "abv": 4.0,
-                "style": "Session Golden Ale",
-                "vegan": false,
-                "gluten_free": false,
-                "camra_link": "https://camra.org.uk/beers/lord-conrads-a-bomb-session-golden-ale-26032"
-            }
-        ]
+        "name": "Justinian",
+        "abv": 3.9,
+        "tags": ["golden ale", "real ale"],
+        "brewery": {
+            "name": "Milton Brewery",
+            "logo": "images/breweries/logo_milton_brewery.png",
+            "website": "https://www.miltonbrewery.co.uk/"
+        }
     },
     {
-        "id": "papworth-brewery",
-        "name": "Papworth Brewery",
-        "logo": "images/breweries/logo_papworth_brewery.png",
-        "coords": [
-            52.3619,
-            0.0487
-        ],
-        "website": "https://papworthbrewery.com/",
-        "description": "It's All About The Beer,",
-        "beers": [
-            {
-                "name": "Old Riverport Stout",
-                "abv": 4.5,
-                "style": "Stout",
-                "vegan": false,
-                "gluten_free": false
-            },
-            {
-                "name": "Red Kite",
-                "abv": 4.5,
-                "style": "Bitter",
-                "vegan": false,
-                "gluten_free": false
-            },
-            {
-                "name": "The Whitfield Citrabolt",
-                "abv": 3.8,
-                "style": "Pale Golden Ale",
-                "vegan": false,
-                "gluten_free": false
-            },
-            {
-                "name": "Hop Priest",
-                "abv": 4.4,
-                "style": "Pale Golden Ale",
-                "vegan": false,
-                "gluten_free": false
-            }
-        ]
+        "name": "Sparta",
+        "abv": 4.3,
+        "tags": ["bitter", "real ale"],
+        "brewery": {
+            "name": "Milton Brewery",
+            "logo": "images/breweries/logo_milton_brewery.png",
+            "website": "https://www.miltonbrewery.co.uk/"
+        }
     },
     {
-        "id": "moonshine-brewery",
-        "name": "Moonshine Brewery",
-        "logo": "images/breweries/logo_moonshine_brewery.png",
-        "coords": [
-            52.1788,
-            0.1983
-        ],
-        "website": "https://moonshinebrewery.co.uk/",
-        "description": "Our beers are characterised by their clean, fresh taste which is thanks in no small part to the natural spring water that is used to make them.",
-        "beers": []
+        "name": "A-Bomb",
+        "abv": 4.0,
+        "tags": ["golden ale", "real ale"],
+        "brewery": {
+            "name": "Lord Conrad's Brewery",
+            "logo": "images/breweries/logo_lord_conrads_brewery.png",
+            "website": "https://lordconradsbrewery.co.uk/"
+        }
+    },
+    {
+        "name": "Old Riverport Stout",
+        "abv": 4.5,
+        "tags": ["stout", "real ale"],
+        "brewery": {
+            "name": "Papworth Brewery",
+            "logo": "images/breweries/logo_papworth_brewery.png",
+            "website": "https://papworthbrewery.com/"
+        }
+    },
+    {
+        "name": "Red Kite",
+        "abv": 4.5,
+        "tags": ["bitter", "real ale"],
+        "brewery": {
+            "name": "Papworth Brewery",
+            "logo": "images/breweries/logo_papworth_brewery.png",
+            "website": "https://papworthbrewery.com/"
+        }
+    },
+    {
+        "name": "The Whitfield Citrabolt",
+        "abv": 3.8,
+        "tags": ["pale ale", "real ale"],
+        "brewery": {
+            "name": "Papworth Brewery",
+            "logo": "images/breweries/logo_papworth_brewery.png",
+            "website": "https://papworthbrewery.com/"
+        }
+    },
+    {
+        "name": "Hop Priest",
+        "abv": 4.4,
+        "tags": ["pale ale", "real ale"],
+        "brewery": {
+            "name": "Papworth Brewery",
+            "logo": "images/breweries/logo_papworth_brewery.png",
+            "website": "https://papworthbrewery.com/"
+        }
+    },
+    {
+        "name": "Guinness (Cans)",
+        "abv": 4.2,
+        "tags": ["stout", "canned"],
+        "description": "The iconic Irish dry stout"
+    },
+    {
+        "name": "Guinness 0.0 (Cans)",
+        "abv": 0.0,
+        "tags": ["stout", "alcohol free", "canned"],
+        "description": "All the taste, none of the alcohol"
+    },
+    {
+        "name": "Prosecco",
+        "tags": ["sparkling", "wine"],
+        "description": "Italian sparkling wine"
+    },
+    {
+        "name": "Nosecco",
+        "abv": 0.0,
+        "tags": ["sparkling", "alcohol free"],
+        "description": "Alcohol free sparkling wine"
+    },
+    {
+        "name": "Soft Drinks",
+        "tags": ["soft drink"],
+        "description": "A selection of soft drinks"
+    },
+    {
+        "name": "Variety of Canned & Bottled Lagers",
+        "tags": ["lager", "canned"],
+        "description": "A selection of popular lagers"
+    },
+    {
+        "name": "Alcohol Free Lagers",
+        "abv": 0.0,
+        "tags": ["lager", "alcohol free"],
+        "description": "Alcohol free lager options"
+    },
+    {
+        "name": "Red Wine",
+        "tags": ["wine"],
+        "description": "Selection of red wines"
+    },
+    {
+        "name": "Rosé Wine",
+        "tags": ["wine"],
+        "description": "Selection of rosé wines"
+    },
+    {
+        "name": "White Wine",
+        "tags": ["wine"],
+        "description": "Selection of white wines"
     }
 ]

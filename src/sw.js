@@ -11,14 +11,12 @@ const PRE_CACHE_RESOURCES = [
   './vendors.json',
   './entertainment.json',
   './sponsors.json',
-  './beer-tent.json',
   // Pages
   './pages/contact.html',
   './entertainment.html',
   './pages/gallery.html',
   './map.html',
   './pages/stalls.html',
-  './pages/beer-tent.html',
   // Info Pages
   './info/stall-holders.html',
   './info/caterers-info.html',

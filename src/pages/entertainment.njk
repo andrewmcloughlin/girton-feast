@@ -89,19 +89,20 @@ eleventyNavigation:
                             <p class="mb-3" x-text="item.description"></p>
                         </template>
 
-                        <!-- Beer List (Category Specific) -->
-                        <template x-if="activeCategory === 'beers' && item.beers && item.beers.length > 0">
-                            <div class="mt-2 mb-3">
-                                <h6 class="fw-bold small text-uppercase opacity-75 mb-2">Available Beers:</h6>
-                                <ul class="list-unstyled small mb-0">
-                                    <template x-for="beer in item.beers" :key="beer.name">
-                                        <li class="mb-1 d-flex justify-content-between">
-                                            <span x-text="beer.name"></span>
-                                            <span class="text-muted" x-text="beer.abv + '%'"></span>
-                                        </li>
-                                    </template>
-                                </ul>
+                        <!-- Brewery & ABV (Beer Tent items) -->
+                        <template x-if="activeCategory === 'beers' && item.brewery">
+                            <div class="mt-2 mb-3 d-flex align-items-center gap-2">
+                                <template x-if="item.brewery.logo">
+                                    <img :src="(window.siteConfig?.pathPrefix || '/') + item.brewery.logo"
+                                         :alt="item.brewery.name"
+                                         style="width:30px; height:30px; object-fit:contain;"
+                                         class="rounded-circle border bg-white p-1">
+                                </template>
+                                <span class="small fw-bold" x-text="item.brewery.name"></span>
                             </div>
+                        </template>
+                        <template x-if="activeCategory === 'beers' && item.abv !== undefined && item.abv !== null">
+                            <span class="badge rounded-pill bg-dark text-white mb-2" x-text="item.abv.toFixed(1) + '% ABV'"></span>
                         </template>
 
                         <div class="d-flex flex-wrap gap-2 mt-auto">

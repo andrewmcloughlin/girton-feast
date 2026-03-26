@@ -5,7 +5,7 @@ module.exports = [
       { label: 'Entertainment', url: '/entertainment.html', icon: 'fas fa-music' },
       { label: 'Food & Drink', url: '/entertainment.html?category=food', icon: 'fas fa-utensils' },
       { label: 'Stalls', url: '/entertainment.html?category=stalls', icon: 'fas fa-store' },
-      { label: 'Beer Tent', url: '/pages/beer-tent.html', icon: 'fas fa-beer' },
+      { label: 'Beer Tent', url: '/entertainment.html?category=beers', icon: 'fas fa-beer' },
       { divider: true },
       { label: 'Photo Gallery', url: '/pages/gallery.html', icon: 'fas fa-images' }
     ]

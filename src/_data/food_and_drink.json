@@ -67,7 +67,7 @@
     {
         "name": "Beer Tent",
         "image": "images/food/beer-tent.png",
-        "url": "beer-tent.html",
+        "url": "entertainment.html?category=beers",
         "tags": [
             "drinks"
         ]
