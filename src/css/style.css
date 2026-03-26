@@ -2415,9 +2415,12 @@ html {
 
 .activity-card h3 {
     font-family: DynaPuff, cursive;
-    font-size: 2rem;
+    font-size: clamp(1.25rem, 4vw, 1.85rem);
+    line-height: 1.25;
     font-weight: 600;
     color: #333;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .activity-card p {
@@ -2445,7 +2448,7 @@ html {
 }
 
 .activity-card .card-body {
-    padding: 2rem;
+    padding: 1.25rem 1.5rem;
 }
 
 .activity-card .card-img-left {

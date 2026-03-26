@@ -103,7 +103,24 @@
         "image": "",
         "url": "https://www.karenskitchenhaverhill.co.uk/",
         "tags": [
-            "sweet things"
+            "sweet things",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Fourtieth Rule",
+        "image": "images/fourtieth-rule.webp",
+        "url": "https://www.fortiethrule.com/",
+        "description": "",
+        "tags": [
+            "crafts",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
         ]
     },
     {
@@ -112,7 +129,11 @@
         "url": "https://murielartist.co.uk/",
         "description": "A stall showcasing the vibrant abstract art of Muriel Dahan.",
         "tags": [
-            "art"
+            "art",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
         ]
     },
     {
@@ -121,7 +142,8 @@
         "url": "http://sherbertfrog.carrd.co",
         "description": "A collection of our beautifully handmade crochet items.",
         "tags": [
-            "crafts"
+            "crafts",
+            "commercial"
         ],
         "days": [
             "Saturday"
@@ -133,7 +155,21 @@
         "url": "https://www.sewyee.etsy.com",
         "description": "Handmade Textile Products",
         "tags": [
-            "crafts"
+            "crafts",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Lampada Studio",
+        "image": "",
+        "url": "https://www.instagram.com/lampadastudio/",
+        "description": "Lamps and cushions",
+        "tags": [
+            "homeware",
+            "commercial"
         ],
         "days": [
             "Saturday"
