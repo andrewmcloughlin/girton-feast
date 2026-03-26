@@ -17,6 +17,7 @@
             <!-- Main Content Card -->
             <div class="nitty-gritty-card shadow-lg p-5">
                 <div class="accordion accordion-flush nitty-gritty-accordion" id="nittyGrittyAccordion">
+                    <h1 class="h5 fw-bold mb-2" style="color: #666;">Agenda</h1>
                     {% for day in schedule.schedule %}
                     <div class="accordion-item mb-4 border-0">
                         <h2 class="accordion-header" id="heading{{ loop.index }}">
@@ -59,11 +60,11 @@
                     <div class="row">
                         <div class="col-12 mb-4">
                             <h4 class="h5 fw-bold mb-2" style="color: #666;">Facilities</h4>
-                            <p class="text-secondary mb-0">Accessible toilets, baby changing, First Aid, Information, Accessible Parking, Lost & Found</p>
+                            <p class="text-dark mb-0">Accessible toilets, baby changing, First Aid, Information, Accessible Parking, Lost & Found</p>
                         </div>
                         <div class="col-12">
                             <h4 class="h5 fw-bold mb-2" style="color: #666;">Rules</h4>
-                            <p class="text-secondary mb-0">
+                            <p class="text-dark mb-0">
                                 {% for rule in schedule.rules %}
                                     {{ rule }}{% if not loop.last %} • {% endif %}
                                 {% endfor %}
