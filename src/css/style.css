@@ -1078,7 +1078,7 @@ html {
 }
 
 .mobile-nav-item {
-    color: var(--brand-v2-purple);
+    color: #0d0d0d;
     font-size: 0.7rem;
     font-weight: 700;
     transition: all 0.2s ease-in-out;
@@ -1445,14 +1445,14 @@ html {
 }
 
 .hero-v2-title {
-    font-family: 'Glass Antiqua', cursive;
+    font-family: 'Spicy Rice', cursive;
     font-size: clamp(4rem, 15vw, 10rem);
     line-height: 0.85;
     margin-bottom: 0.5rem;
     color: #000;
     position: relative;
     display: inline-block;
-    text-align: left;
+    text-align: center;
 }
 
 .hero-v2-year {
@@ -1505,160 +1505,97 @@ html {
     border: 2px solid var(--brand-v2-purple);
 }
 
-/* Explore the Feast Button (Sticker Variant) */
-.btn-explore-feast {
-    position: absolute;
-    top: 50%;
-    left: 45%;
-    transform: translate(-50%, -50%) scale(0.6);
-    opacity: 0;
-    z-index: 10;
-    pointer-events: auto;
-    transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-    width: 280px;
+/* Isometric Map Sticker Section */
+.hero-visual-section {
+    background-color: white;
+    padding-bottom: 4rem;
 }
 
-.hero-v2-visual:hover .btn-explore-feast,
-.hero-v2-visual.is-expanded .btn-explore-feast,
-.hero-v2-visual:has(.btn-explore-feast:focus-visible) .btn-explore-feast {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1.1);
+.map-section,
+.nitty-gritty-section,
+.food-and-drink-section,
+.whats-on-section,
+.headliner-section {
+    background-color: white;
 }
 
-.btn-explore-feast:focus-visible {
-    outline: 3px solid var(--brand-v2-purple);
-    outline-offset: 15px;
-}
-
-/* Morphing Blobs SVG Container */
-.hero-v2-visual {
-    position: relative;
-    width: 140%;
-    /* Even larger bleed */
-    max-width: 1000px;
-    margin-left: -10%;
-    z-index: 1;
-    isolation: isolate;
-    pointer-events: none;
-    /* Hitbox refinement */
-}
-
-@media (min-width: 992px) {
-    .hero-v2-visual {
-        margin-right: -30vw;
-        /* Bleed further off the right edge */
-        margin-top: -3rem;
-        /* Pull it up closer to header level */
-        max-width: none;
-    }
-}
-
-.blob-svg {
+.map-sticker-container {
+    display: inline-block;
     width: 100%;
-    height: auto;
-    max-height: 450px;
-    /* Cap vertical height */
-    display: block;
-    transform-origin: center center;
-    transition: transform 0.2s ease-out, filter 0.5s ease;
-    will-change: transform;
-    pointer-events: none;
-    /* Ensure only filled paths trigger hover */
-}
-
-/* Animations for morphing paths */
-/* Morphing Animations: Applied to base paths in <defs> */
-#morph-pink {
-    animation: blobMorph1 12s ease-in-out infinite alternate;
-}
-
-#morph-green {
-    animation: blobMorph2 10s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes blobMorph1 {
-
-    0%,
-    100% {
-        d: path("M450,530C280,530,100,480,100,300C100,120,280,70,450,70C620,70,800,120,800,300C800,480,620,530,450,530Z");
-    }
-
-    50% {
-        d: path("M450,510C300,510,140,450,140,300C140,150,300,90,450,90C600,90,760,150,760,300C760,450,600,510,450,510Z");
-    }
-}
-
-/* Horizontal Oval Green Blob (Slightly Offset for ~90% Overlap) */
-@keyframes blobMorph2 {
-
-    0%,
-    100% {
-        d: path("M460,540C290,540,110,490,110,310C110,130,290,80,460,80C630,80,810,130,810,310C810,490,630,540,460,540Z");
-    }
-
-    50% {
-        d: path("M460,520C310,520,150,460,150,310C150,160,310,100,460,100C610,100,770,160,770,310C770,460,610,520,460,520Z");
-    }
-}
-
-/* Appearance */
-.blob-bg-pink,
-.blob-mask-pink {
-    fill: var(--brand-v2-pink);
-    opacity: 0.45;
-    mix-blend-mode: multiply;
-    transform-origin: 450px 300px;
-    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: auto;
-    /* Active hitbox element */
-    cursor: pointer;
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+    transition: transform 0.1s linear; /* Fast response for scroll binding */
     will-change: transform;
 }
 
-.blob-bg-green,
-.blob-mask-green {
-    fill: var(--brand-v2-green);
-    opacity: 0.45;
-    mix-blend-mode: multiply;
-    transform-origin: 460px 310px;
-    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-    pointer-events: auto;
-    /* Active hitbox element */
-    cursor: pointer;
-    will-change: transform;
+.map-sticker {
+    background: white;
+    padding: 0;
+    border: 3px solid #0d0d0d;
+    border-radius: 2.5rem;
+    box-shadow: 15px 15px 0 0 rgba(0,0,0,1);
+    transform: rotate(-1deg);
+    position: relative;
+    z-index: 5;
+    overflow: hidden;
 }
 
-/* Only expand blobs on desktop hover OR if the is-expanded class is applied (for mobile scroll) */
-.hero-v2-visual:hover .blob-bg-pink,
-.hero-v2-visual.is-expanded .blob-bg-pink,
-.hero-v2-visual:hover .blob-mask-pink,
-.hero-v2-visual.is-expanded .blob-mask-pink,
-.hero-v2-visual:hover .blob-bg-green,
-.hero-v2-visual.is-expanded .blob-bg-green,
-.hero-v2-visual:hover .blob-mask-green,
-.hero-v2-visual.is-expanded .blob-mask-green {
-    transform: scale(1.8);
+.map-sticker-inner {
+    border-radius: 2.3rem; /* match parent border-radius to avoid white corners */
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background-color: #f8f9fa;
 }
 
-.hero-v2-visual:hover .blob-svg,
-.hero-v2-visual.is-expanded .blob-svg {
-    filter: drop-shadow(0 15px 50px rgba(0, 0, 0, 0.2));
-}
-
-/* Image Styling */
-.map-image-redesign {
+.map-sticker-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 1 !important;
-    transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
-    transform-origin: center center;
-    will-change: transform;
+    transition: transform 0.6s ease;
 }
 
-.hero-v2-visual:hover .map-image-redesign,
-.hero-v2-visual.is-expanded .map-image-redesign {
-    transform: scale(0.9) translateX(-10%);
+/* Zoom in when scrolled into view */
+.map-sticker-img.is-visible {
+    transform: scale(1.04);
+}
+
+/* Further zoom on hover */
+.map-sticker:hover .map-sticker-img {
+    transform: scale(1.1);
+}
+
+.map-sticker-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none; /* Let clicks pass through if needed, but the button has pointer-events: auto */
+}
+
+.map-sticker-overlay .switcher-btn {
+    pointer-events: auto;
+    font-size: 1.5rem;
+    padding: 1.2rem 2.5rem;
+}
+
+@media (max-width: 768px) {
+    .map-sticker {
+        padding: 0;
+        box-shadow: 8px 8px 0 0 rgba(0,0,0,1);
+    }
+
+    .map-sticker-inner {
+        aspect-ratio: 4 / 3;
+    }
 }
 
 /* Headliner Section */
@@ -1707,6 +1644,7 @@ html {
     font-size: 5rem;
     line-height: 1.1;
     margin-bottom: 1.5rem;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .headliner-details {
@@ -1746,12 +1684,13 @@ html {
 }
 
 .headliner-blob-svg {
-    width: 130%;
-    /* Increase size to overflow and look more organic */
+    width: 115%;
+    /* Reduced scale to prevent text overlap on smaller screens */
     height: auto;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 60%;
+    /* Shifted right to clear the text area */
     transform: translate(-50%, -50%);
     z-index: 1;
 }
@@ -1778,7 +1717,8 @@ html {
     height: auto;
     top: 45%;
     /* Slightly higher to give room for legs/shadow */
-    left: 50%;
+    left: 57%;
+    /* Shifted slightly right to follow the blob */
     transform: translate(-50%, -50%);
     z-index: 3;
     pointer-events: none;
@@ -2130,23 +2070,16 @@ html {
 .nitty-gritty-bg-yellow,
 .nitty-gritty-bg-green {
     position: absolute;
-    top: 0;
+    top: -5%;
     left: -5%;
     width: 110%;
-    height: 100%;
+    height: 110%;
 }
 
 .nitty-gritty-bg-pink {
     background-color: var(--brand-v2-pink);
     transform: rotate(-1.5deg);
     z-index: 1;
-}
-
-.nitty-gritty-bg-yellow {
-    background-color: var(--brand-light-yellow);
-    /* Mockup yellow/green */
-    transform: rotate(2deg);
-    z-index: 2;
 }
 
 .nitty-gritty-bg-green {
@@ -2168,6 +2101,7 @@ html {
     max-width: 900px;
     margin: 0 auto;
     z-index: 4;
+    min-height: 300px; /* ensures absolute bg cards have height to fill */
 }
 
 .nitty-gritty-card {
@@ -2190,12 +2124,6 @@ html {
     background-color: var(--brand-v2-pink);
     transform: rotate(-2.5deg);
     z-index: 3;
-}
-
-.nitty-gritty-card-bg-yellow {
-    background-color: var(--brand-light-yellow);
-    transform: rotate(1.5deg);
-    z-index: 4;
 }
 
 .nitty-gritty-list li {
@@ -2579,6 +2507,8 @@ html {
 }
 
 .switcher-btn {
+    display: inline-block;
+    text-decoration: none;
     font-family: DynaPuff, cursive;
     background-color: #f8f9fa;
     border: 3px solid #000;

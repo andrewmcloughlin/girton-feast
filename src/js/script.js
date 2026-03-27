@@ -4,7 +4,15 @@
 
 // Initialize everything when the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-  // Mobile nav and other initializations can go here
+  // Scroll-zoom trigger for the map card image
+  const mapImg = document.querySelector('#map-sticker-card .map-sticker-img')
+  if (mapImg) {
+    const observer = new IntersectionObserver(
+      ([entry]) => mapImg.classList.toggle('is-visible', entry.isIntersecting),
+      { threshold: 0.2 }
+    )
+    observer.observe(document.getElementById('map-sticker-card'))
+  }
 })
 
 // --- Alpine.js Global Store ---

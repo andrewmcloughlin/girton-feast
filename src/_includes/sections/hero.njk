@@ -3,9 +3,9 @@
         <div class="row align-items-start">
             <!-- Left Column: Content -->
             <!-- Left Column: Content -->
-            <div class="col-lg-5 mb-5 mb-lg-0 text-center text-lg-start hero-v2-content-col">
+            <div class="col-12 mb-5 text-center hero-v2-content-col">
                 <div class="hero-v2-header">
-                    <h1 class="hero-v2-title">
+                    <h1 class="hero-v2-title mb-4">
                         Girton<br>Feast<span class="hero-v2-year ps-1 pb-2">{% year %}</span>
                     </h1>
                 </div>
@@ -16,62 +16,24 @@
                     <p>Girton Recreation Ground</p>
                 </div>
 
-                <div class="hero-v2-buttons mt-4 d-flex flex-wrap gap-5 justify-content-center justify-content-lg-start">
+                <div class="hero-v2-buttons mt-4 d-flex flex-wrap gap-5 justify-content-center">
                     {% from "components/sticker-button.njk" import stickerButton %}
 
                     <div class="d-flex flex-column">
-                        {{ stickerButton("Get Concert tickets →", "#concert-details") }}
+                        <a class="switcher-btn switcher-btn-mint rotate-neg-2" href="https://www.ticketsource.com/girtonfeast" target="_blank">
+                            <i class="fas fa-ticket-alt me-2"></i>Get Concert tickets →
+                        </a>
                     </div>
 
-                    <div class="d-flex flex-column align-items-center align-items-lg-end">
-                        {{ stickerButton("See fête activities →", "entertainment.html", "sticker-outline sticker-alt") }}
-                        <p class="text-muted small mt-2 mb-0 text-center text-lg-end">* free entry</p>
+                    <div class="d-flex flex-column align-items-center">
+                        <a class="switcher-btn switcher-btn-white rotate-pos-2" href="#activities">
+                            See fête activities →
+                        </a>
+                        <p class="text-muted small mt-2 mb-0 text-center">* free entry</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Right Column: Visuals -->
-            <div class="col-lg-7">
-                <div class="hero-v2-visual"
-                     x-data="{ expanded: false }"
-                     @scroll.window="expanded = window.scrollY > 80"
-                     :class="{ 'is-expanded': expanded }">
-                    {{ stickerButton("Explore the Feast", "/map.html", "btn-explore-feast sticker-outline sticker-alt") }}
-                    <svg viewBox="100 50 730 520"
-                         xmlns="http://www.w3.org/2000/svg"
-                         class="blob-svg"
-                         style="overflow: visible;">
-                        <defs>
-                            <!-- Pink Oval Base -->
-                            <path id="morph-pink" d="M450,530C280,530,100,480,100,300C100,120,280,70,450,70C620,70,800,120,800,300C800,480,620,530,450,530Z" />
-                            <!-- Green Oval Base (Slight Offset for ~90% Overlap) -->
-                            <path id="morph-green" d="M460,540C290,540,110,490,110,310C110,130,290,80,460,80C630,80,810,130,810,310C810,490,630,540,460,540Z" />
-
-                            <clipPath id="clip-pink">
-                                <use href="#morph-pink" class="blob-mask-pink" />
-                            </clipPath>
-                            <clipPath id="clip-green">
-                                <use href="#morph-green" class="blob-mask-green" />
-                            </clipPath>
-                        </defs>
-
-                        <!-- Background Blobs (Synced) -->
-                        <use href="#morph-pink" class="blob-bg-pink" />
-                        <use href="#morph-green" class="blob-bg-green" />
-
-                        <!-- Masked Image: Intersection of A and B via nested clipping -->
-                        <g clip-path="url(#clip-pink)">
-                            <g clip-path="url(#clip-green)">
-                                <foreignObject x="-600" y="-600" width="2000" height="1800">
-                                    <img src="{{ "/images/map-lg.svg" | url }}"
-                                         alt="Girton Feast Map"
-                                         class="map-image-redesign" />
-                                </foreignObject>
-                            </g>
-                        </g>
-                    </svg>
-                </div>
-            </div>
         </div>
     </div>
 </section>

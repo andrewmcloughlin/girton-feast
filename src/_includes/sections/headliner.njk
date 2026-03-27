@@ -1,7 +1,7 @@
 {% from "components/sticker-button.njk" import stickerButton %}
 {% set event = event_info[0] %}
 
-<section class="headliner-section">
+<section id="headliner" class="headliner-section">
     <!-- Rotated Background Layers -->
     <div class="headliner-bg-green"></div>
     <div class="headliner-bg-pink"></div>
@@ -18,7 +18,9 @@
                     <p class="mb-0">Doors {{ event.doors_open }} | Show starts {{ event.show_start }}</p>
                     <p class="mb-0">{{ event.location }}</p>
                 </div>
-                {{ stickerButton("claim your ticket now!", "#tickets", "btn-headliner-tickets sticker-outline sticker-alt") }}
+                <a class="switcher-btn switcher-btn-pink rotate-neg-2" href="https://www.ticketsource.com/girtonfeast" target="_blank">
+                    <i class="fas fa-ticket-alt me-2"></i>Claim your tickets →
+                </a>
             </div>
 
             <!-- Right Side: Visuals -->
