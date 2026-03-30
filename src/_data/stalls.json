@@ -100,7 +100,8 @@
     },
     {
         "name": "Karen's Kitchen",
-        "image": "",
+        "image": "images/karens_kitchen.jpg",
+        "description": "Homemade Jams, Preserves, Pickles, Chutneys & Condiments.",
         "url": "https://www.karenskitchenhaverhill.co.uk/",
         "tags": [
             "sweet things",
@@ -114,9 +115,9 @@
         "name": "Fourtieth Rule",
         "image": "images/fourtieth-rule.webp",
         "url": "https://www.fortiethrule.com/",
-        "description": "",
+        "description": "English wines",
         "tags": [
-            "crafts",
+            "wine",
             "commercial"
         ],
         "days": [
@@ -164,7 +165,7 @@
     },
     {
         "name": "Lampada Studio",
-        "image": "",
+        "image": "images/lampada_studio.png",
         "url": "https://www.instagram.com/lampadastudio/",
         "description": "Lamps and cushions",
         "tags": [
@@ -230,7 +231,7 @@
     },
     {
         "name": "Nora's Aromas",
-        "image": "",
+        "image": "images/nora_aromas.avif",
         "url": "https://c9a768-3.myshopify.com/",
         "description": "",
         "tags": [
@@ -249,6 +250,60 @@
         "tags": [
             "community",
             "games"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Antz",
+        "image": "",
+        "url": "",
+        "description": "Kids toys, noveltys, dress up, lucky dip",
+        "tags": [
+            "commercial",
+            "toys"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Kimie Arty",
+        "image": "images/stalls/kimie_rt.png",
+        "url": "https://www.instagram.com/kimie.arty/",
+        "description": "Hand painted cards and crafts",
+        "tags": [
+            "commercial",
+            "crafts",
+            "art"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Cerana Ceramics",
+        "image": "images/stalls/cerana_ceramics.png",
+        "url": "https://www.instagram.com/ceranna_ceramics/",
+        "description": "Hand-thrown stoneware made in Girton",
+        "tags": [
+            "commercial",
+            "crafts",
+            "homeware",
+            "art"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "The Vanjarred Refillery",
+        "image": "images/stalls/vanjarred.jfif",
+        "url": "https://cambridge-biomedical.com/event/vanjarred-refillery/",
+        "description": "Zero waste shop which brings affordable food, household, and personal care refills directly to you.",
+        "tags": [
+            "commercial"
         ],
         "days": [
             "Saturday"
