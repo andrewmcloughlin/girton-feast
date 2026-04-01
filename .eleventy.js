@@ -8,6 +8,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/js");
   eleventyConfig.addPassthroughCopy("src/images");
+  eleventyConfig.addPassthroughCopy("src/sw.js");
   eleventyConfig.addPassthroughCopy("src/_data/*.json");
 
   // Helper for image optimization
@@ -40,6 +41,25 @@ module.exports = function(eleventyConfig) {
 
   // Shortcodes
   eleventyConfig.addAsyncShortcode("image", imageShortcode);
+
+  eleventyConfig.addAsyncShortcode("imageUrl", async function(src, width = 1200, format = "webp") {
+    if (!src) return "";
+    const fullSrc = src.startsWith("/") ? path.join(__dirname, "src", src) : src;
+
+    // For SVGs, just return the URL
+    if (src.endsWith(".svg")) {
+      return eleventyConfig.getFilter("url")(src);
+    }
+
+    let metadata = await Image(fullSrc, {
+      widths: [width],
+      formats: [format],
+      outputDir: "./_site/img/",
+      urlPath: "/girton-feast/img/",
+    });
+
+    return metadata[format][0].url;
+  });
 
   eleventyConfig.addAsyncShortcode("bentoItem", async function(url, title, image, badge, isWide = false, isTall = false, extraClasses = "", extraStyles = "") {
     const urlFilter = eleventyConfig.getFilter("url");
@@ -88,6 +108,8 @@ module.exports = function(eleventyConfig) {
         </div>
     </div>`;
   });
+
+  eleventyConfig.addShortcode("year", () => `'${new Date().getFullYear().toString().slice(-2)}`);
 
   eleventyConfig.addShortcode("facilityItem", function(icon, label) {
     return `<div class="col-6 col-md-4">

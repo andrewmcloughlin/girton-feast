@@ -1,106 +1,124 @@
-<footer class="bg-brand-marian-blue text-white pt-5 pb-3 position-relative overflow-hidden d-none d-md-block">
-    <!-- Silly Goose Background Image -->
-    <img src="{{ "/images/silly_goose.svg" | url }}" alt="" class="footer-goose-bg position-absolute bottom-0 end-0 opacity-10 pointer-events-none" style="width: 300px; transform: rotate(-15deg) translate(20px, 20px); z-index: 0;">
+{% from "components/sticker-button.njk" import stickerButton %}
 
-    <div class="container position-relative z-1">
-        <div class="row g-4">
-            <!-- About Section -->
-            <div class="col-lg-3 col-md-6">
-                <h5 class="fw-bold mb-3 text-brand-saffron">Girton Feast 2026</h5>
-                <p class="small mb-3">A weekend of live music, food, fun, and festivities for the whole community.
-                </p>
-                <div class="mb-3">
-                    <i class="fas fa-calendar-alt me-2 text-brand-saffron"></i>
-                    <span class="small">Fri 10 - Sat 11 July 2026</span>
-                </div>
-                <div class="mb-3">
-                    <i class="fas fa-map-marker-alt me-2 text-brand-saffron"></i>
-                    <span class="small">Girton Recreation Ground</span>
-                </div>
-            </div>
+<footer class="footer-v2 position-relative overflow-hidden d-none d-md-block">
+    <!-- Rotated Background Layers -->
+    <div class="footer-bg-pink"></div>
+    <div class="footer-bg-yellow"></div>
+    <div class="footer-bg-green"></div>
 
-            <!-- Quick Links -->
-            <div class="col-lg-2 col-md-6">
-                <h6 class="fw-bold mb-3 text-brand-saffron">Quick Links</h6>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="{{ "/pages/entertainment.html" | url }}"
-                            class="text-white-50 text-decoration-none small hover-brand-saffron transition-200">Entertainment</a></li>
-                    <li class="mb-2"><a href="{{ "/pages/food.html" | url }}"
-                            class="text-white-50 text-decoration-none small hover-brand-saffron transition-200">Food & Drink</a></li>
-                    <li class="mb-2"><a href="{{ "/pages/gallery.html" | url }}"
-                            class="text-white-50 text-decoration-none small hover-brand-saffron transition-200">Gallery</a></li>
-                    <li class="mb-2"><a href="{{ "/pages/getting-here.html" | url }}"
-                            class="text-white-50 text-decoration-none small hover-brand-saffron transition-200">Getting Here</a></li>
-                </ul>
-            </div>
+    <div class="container position-relative" style="z-index: 10;">
 
-            <!-- For Vendors -->
-            <div class="col-lg-2 col-md-6">
-                <h6 class="fw-bold mb-3 text-brand-saffron">For Vendors</h6>
-                <ul class="list-unstyled">
-                    <li class="mb-2"><a href="{{ "/info/stall-holders.html" | url }}"
-                            class="text-white-50 text-decoration-none small hover-brand-saffron transition-200">Stall Holders</a></li>
-                    <li class="mb-2"><a href="{{ "/info/caterers-info.html" | url }}"
-                            class="text-white-50 text-decoration-none small hover-brand-saffron transition-200">Food Vendors</a></li>
-                    <li class="mb-2"><a href="{{ "/info/ride-vendors-info.html" | url }}"
-                            class="text-white-50 text-decoration-none small hover-brand-saffron transition-200">Rides & Games</a></li>
-                </ul>
-            </div>
-
-            <!-- Contact & Social -->
-            <div class="col-lg-2 col-md-6">
-                <h6 class="fw-bold mb-3 text-brand-saffron">Get In Touch</h6>
-                <p class="small mb-2">Questions or want to help?</p>
-                <a href="{{ "/pages/contact.html" | url }}" class="btn btn-sm btn-outline-light mb-3 hover-scale">
-                    <i class="fas fa-envelope me-1"></i> Contact Us
-                </a>
-
-                <div class="d-flex gap-2 mb-3">
-                    <a href="https://www.facebook.com/GirtonFeastWeek"
-                        class="btn btn-outline-light btn-sm rounded-circle d-flex align-items-center justify-content-center hover-scale"
-                        style="width: 36px; height: 36px; padding: 0;"
-                        role="button" aria-label="Facebook" target="_blank">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="https://youtu.be/0FqhvdgCn3E?si=2SnO4hMgtZKrgjjJ"
-                        class="btn btn-outline-light btn-sm rounded-circle d-flex align-items-center justify-content-center hover-scale"
-                        style="width: 36px; height: 36px; padding: 0;"
-                        role="button" aria-label="Youtube" target="_blank">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="https://nextdoor.co.uk/search/?view=detail&init_source=search&query=%23girtonfeast&ccid=93bf984a-9a4c-401f-a5f8-c9bdcf0ba673&navigationScreen=POST&ssid=9fddbc32-dc0e-4d66-b684-c5e393c3f17a"
-                        class="btn btn-outline-light btn-sm rounded-circle d-flex align-items-center justify-content-center hover-scale"
-                        style="width: 36px; height: 36px; padding: 0;"
-                        role="button" aria-label="Nextdoor" target="_blank">
-                        <img src="{{ "/images/nextdoor-icon.svg" | url }}" alt="Nextdoor" style="width: 1em; height: 1em;">
-                    </a>
-                </div>
-                <p class="small mb-0 text-brand-thulian-pink" style="font-family: 'Sigmar One', cursive;">
-                    #GirtonFeast</p>
-            </div>
-
-            <!-- Organized By -->
-            <div class="col-lg-3 col-md-12 text-center text-lg-start">
-                <h6 class="fw-bold mb-3 text-brand-saffron">Organized By</h6>
-                <img src="{{ "/images/gvc_logo.png" | url }}" alt="Girton Village Celebrations" class="img-fluid mb-2 bg-white p-2 rounded-2"
-                    style="max-height: 80px;">
-                <p class="small text-white-50 mb-0">Girton Village Celebrations</p>
-            </div>
+        <!-- Footer Heading -->
+        <div class="text-center mb-5">
+            <h2 class="footer-v2-title">See You There!</h2>
+            <p class="footer-v2-subtitle">Fri 10 – Sat 11 July 2026 · Girton Recreation Ground</p>
         </div>
 
-        <hr class="border-white-50 my-4">
+        <!-- Card Wrapper -->
+        <div class="footer-v2-card-wrapper">
+            <!-- Decorative rotated cards behind -->
+            <div class="footer-v2-card-bg footer-v2-card-bg-pink"></div>
+            <div class="footer-v2-card-bg footer-v2-card-bg-yellow"></div>
 
-        <!-- Bottom Bar -->
-        <div class="row align-items-center">
-            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                <p class="small mb-0">© <span x-data x-text="new Date().getFullYear()">2026</span> Girton Village Celebrations. All rights
-                    reserved.</p>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-                <a href="{{ "/#sponsors" | url }}"
-                    class="text-white-50 text-decoration-none small hover-brand-saffron transition-200 me-3">Sponsors</a>
-                <a href="{{ "/#get-involved" | url }}" class="text-white-50 text-decoration-none small hover-brand-saffron transition-200">Get
-                    Involved</a>
+            <!-- Main Content Card -->
+            <div class="footer-v2-card shadow-lg p-5">
+                <!-- Silly Goose Background -->
+                <img src="{{ "/images/silly_goose.svg" | url }}" alt="" class="footer-goose-bg position-absolute bottom-0 end-0 opacity-10 pointer-events-none" style="width: 240px; transform: rotate(-15deg) translate(20px, 20px); z-index: 0;">
+
+                <div class="row g-5 position-relative" style="z-index: 1;">
+                    <!-- About Section -->
+                    <div class="col-lg-4 col-md-6">
+                        <h5 class="footer-v2-col-heading">Girton Feast {% year %}</h5>
+                        <p class="footer-v2-body mb-4">A weekend of live music, food, fun, and festivities for the whole village community.</p>
+
+                        <div class="d-flex align-items-center mb-2 footer-v2-body">
+                            <i class="fas fa-calendar-alt me-2" style="color: var(--brand-v2-purple);"></i>
+                            <span>Fri 10 – Sat 11 July 2026</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-4 footer-v2-body">
+                            <i class="fas fa-map-marker-alt me-2" style="color: var(--brand-v2-purple);"></i>
+                            <span>Girton Recreation Ground</span>
+                        </div>
+
+                        <div class="mt-3">
+                            <a class="switcher-btn switcher-btn-pink rotate-neg-2" href="https://www.ticketsource.com/girtonfeast" target="_blank">
+                                <i class="fas fa-ticket-alt me-2"></i>Get tickets →
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="col-lg-2 col-md-6">
+                        <h6 class="footer-v2-col-heading">Explore</h6>
+                        <ul class="list-unstyled footer-v2-links">
+                            <li><a href="{{ "/entertainment.html" | url }}">Entertainment</a></li>
+                            <li><a href="{{ "/entertainment.html?category=food" | url }}">Food &amp; Drink</a></li>
+                            <li><a href="{{ "/pages/gallery.html" | url }}">Gallery</a></li>
+                            <li><a href="{{ "/map.html?mode=transport" | url }}">Getting Here</a></li>
+                            <li><a href="{{ "/map.html?mode=event" | url }}">Event Map</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- For Vendors -->
+                    <div class="col-lg-2 col-md-6">
+                        <h6 class="footer-v2-col-heading">For Vendors</h6>
+                        <ul class="list-unstyled footer-v2-links">
+                            <li><a href="{{ "/info/stall-holders.html" | url }}">Stall Holders</a></li>
+                            <li><a href="{{ "/info/caterers-info.html" | url }}">Food Vendors</a></li>
+                            <li><a href="{{ "/info/ride-vendors-info.html" | url }}">Rides &amp; Games</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Contact & Social -->
+                    <div class="col-lg-4 col-md-6">
+                        <h6 class="footer-v2-col-heading">Get In Touch</h6>
+                        <p class="footer-v2-body mb-3">Questions or want to help out?</p>
+
+                        <a class="switcher-btn switcher-btn-mint rotate-pos-2 mb-4" href="{{ "/pages/contact.html" | url }}">
+                            <i class="fas fa-envelope me-2"></i>Contact Us
+                        </a>
+
+                        <div class="d-flex gap-2 mb-4 mt-3">
+                            <a href="https://www.facebook.com/GirtonFeastWeek"
+                                class="footer-v2-social-icon"
+                                aria-label="Facebook" target="_blank">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="https://youtu.be/0FqhvdgCn3E?si=2SnO4hMgtZKrgjjJ"
+                                class="footer-v2-social-icon"
+                                aria-label="Youtube" target="_blank">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="https://nextdoor.co.uk/search/?view=detail&init_source=search&query=%23girtonfeast&ccid=93bf984a-9a4c-401f-a5f8-c9bdcf0ba673&navigationScreen=POST&ssid=9fddbc32-dc0e-4d66-b684-c5e393c3f17a"
+                                class="footer-v2-social-icon"
+                                aria-label="Nextdoor" target="_blank">
+                                <img src="{{ "/images/nextdoor-icon.svg" | url }}" alt="Nextdoor" style="width: 1em; height: 1em; filter: brightness(0) invert(1);">
+                            </a>
+                        </div>
+
+                        <p class="footer-v2-hashtag">#GirtonFeast</p>
+
+                        <!-- Organized by -->
+                        <div class="mt-4 pt-4 border-top border-black border-opacity-10">
+                            <p class="footer-v2-body small mb-2" style="opacity: 0.6;">Organised by</p>
+                            <img src="{{ "/images/gvc_logo.png" | url }}" alt="Girton Village Celebrations"
+                                class="img-fluid bg-white p-2 rounded-2"
+                                style="max-height: 60px;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Bar -->
+                <hr class="my-4" style="border-color: rgba(0,0,0,0.1);">
+                <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                    <p class="footer-v2-body small mb-0" style="opacity: 0.55;">
+                        © <span x-data x-text="new Date().getFullYear()">2026</span> Girton Village Celebrations. All rights reserved.
+                    </p>
+                    <div class="d-flex gap-3">
+                        <a href="{{ "/#sponsors" | url }}" class="footer-v2-bottom-link">Sponsors</a>
+                        <a href="{{ "/#get-involved" | url }}" class="footer-v2-bottom-link">Get Involved</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

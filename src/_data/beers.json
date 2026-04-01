@@ -1,0 +1,222 @@
+[
+    {
+        "name": "Cuckoo Returns",
+        "abv": 6.5,
+        "tags": ["cider","medium sweet","still","gluten free","vegan"],
+        "brewery": {
+            "name": "Blue Barrel Cider",
+            "logo": "images/breweries/logo_blue_barrel_cider.png",
+            "website": "https://bluebarrelcider.com/project/testy-mc-testy-face/"
+        },
+        "description": "Eastern Style Cider using dessert fruit from our own & other nearby wildlife friendly orchards.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Discovery",
+        "abv": 6.0,
+        "tags": ["cider","medium dry"],
+        "brewery": {
+            "name": "Blue Barrel Cider",
+            "logo": "images/breweries/logo_blue_barrel_cider.png",
+            "website": "https://www.bluebarrelcider.com/"
+        },
+        "description": "Single variety refreshing cider with notes of strawberry.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Smokin' Barrels",
+        "abv": 6.5,
+        "tags": ["cider","medium dry","still","gluten free","vegan"],
+        "brewery": {
+            "name": "Blue Barrel Cider",
+            "logo": "images/breweries/logo_blue_barrel_cider.png",
+            "website": "https://bluebarrelcider.com/project/smokin-barrels/"
+        },
+        "description": "Made with a blend of bittersweet cider apples & foraged desserts.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Pegasus",
+        "abv": 4.1,
+        "tags": ["pale ale", "real ale"],
+        "brewery": {
+            "name": "Milton Brewery",
+            "logo": "images/breweries/logo_milton_brewery.png",
+            "website": "https://www.miltonbrewery.co.uk/beers/pegasus/"
+        },
+        "description": "Complex copper-coloured beer. The initial hoppiness is balanced with a long fruity, malty finish. Very moreish.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Justinian",
+        "abv": 3.9,
+        "tags": ["golden ale", "real ale"],
+        "brewery": {
+            "name": "Milton Brewery",
+            "logo": "images/breweries/logo_milton_brewery.png",
+            "website": "https://www.miltonbrewery.co.uk/beers/justinian/"
+        },
+        "description": "Crisp pale bronze-coloured bitter. Attractive bitter orange flavours persist into a satisfying lasting finish.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Orion",
+        "abv": 3.4,
+        "tags": ["bitter", "real ale"],
+        "brewery": {
+            "name": "Milton Brewery",
+            "logo": "images/breweries/logo_milton_brewery.png",
+            "website": "https://www.miltonbrewery.co.uk/beers/orion/"
+        },
+        "description": "Crisp session bitter. Created in September 2023 using finest Maris Otter pale malt, Galena and Citra hops.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Nero",
+        "abv": 5.0,
+        "tags": ["bitter", "real ale", "vegan"],
+        "brewery": {
+            "name": "Milton Brewery",
+            "logo": "images/breweries/logo_milton_brewery.png",
+            "website": "https://www.miltonbrewery.co.uk/beers/nero/"
+        },
+        "description": "A satisfying, full-flavoured black brew with a good balance of malt, roast and fruit. Bittersweet flavours carry through to a dry finish.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Big Bad Wolf",
+        "abv": 4.0,
+        "tags": ["golden ale", "pale ale"],
+        "brewery": {
+            "name": "Lord Conrad's Brewery",
+            "logo": "images/breweries/logo_lord_conrads_brewery.png",
+            "website": "https://camra.org.uk/beers/lord-conrads-big-bad-wolf-session-pale-ale-18476"
+        },
+        "description": "Pale golden ale with piney notes and a citrusy aroma.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Easy",
+        "abv": 3.4,
+        "tags": ["amber"],
+        "brewery": {
+            "name": "Lord Conrad's Brewery",
+            "logo": "images/breweries/logo_lord_conrads_brewery.png",
+            "website": "https://lordconradsbrewery.co.uk/"
+        },
+        "description": "Easy drinking traditional amber.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Slap N' Tickle",
+        "abv": 4.3,
+        "tags": ["blonde", "hops", "bitter"],
+        "brewery": {
+            "name": "Lord Conrad's Brewery",
+            "logo": "images/breweries/logo_lord_conrads_brewery.png",
+            "website": "https://lordconradsbrewery.co.uk/"
+        },
+        "description": "A summer blonde with a big slap of bitterness and just a tickle of hops.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Cambridge Best Bitter",
+        "abv": 4.1,
+        "tags": ["bitter"],
+        "brewery": {
+            "name": "Moonshine Brewery",
+            "logo": "images/breweries/logo_moonshine_brewery.png",
+            "website": "https://moonshinebrewery.co.uk/"
+        },
+        "description": "Copper coloured, English best bitter; the malt and hop aromas carry through to the taste and the finish is rounded with a growing hop bitterness.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Heavenly Matter",
+        "abv": 3.8,
+        "tags": ["blonde", "golden ale"],
+        "brewery": {
+            "name": "Moonshine Brewery",
+            "logo": "images/breweries/logo_moonshine_brewery.png",
+            "website": "https://moonshinebrewery.co.uk/"
+        },
+        "description": "A crisp, clean, straw coloured light bodied beer. Citra hops are prominent throughout, with a huge hoppy citrus, tropical fruit aroma and taste which leads to a generous bitterness in the finish.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Frank (Zappa)",
+        "abv": 4.0,
+        "tags": ["golden ale", "blonde"],
+        "brewery": {
+            "name": "Moonshine Brewery",
+            "logo": "images/breweries/logo_moonshine_brewery.png",
+            "website": "https://moonshinebrewery.co.uk/"
+        },
+        "description": "",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Guinness (Cans)",
+        "abv": 4.2,
+        "tags": ["stout", "canned"],
+        "description": "The iconic Irish dry stout",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Guinness 0.0 (Cans)",
+        "abv": 0.0,
+        "tags": ["stout", "alcohol free", "canned"],
+        "description": "All the taste, none of the alcohol",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Prosecco",
+        "tags": ["sparkling", "wine"],
+        "description": "Italian sparkling wine",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Nosecco",
+        "abv": 0.0,
+        "tags": ["sparkling", "alcohol free"],
+        "description": "Alcohol free sparkling wine",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Soft Drinks",
+        "tags": ["alcohol free"],
+        "description": "A selection of soft drinks",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Variety of Canned & Bottled Lagers",
+        "tags": ["lager", "canned"],
+        "description": "A selection of popular lagers",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Alcohol Free Lagers",
+        "abv": 0.0,
+        "tags": ["lager", "alcohol free"],
+        "description": "Alcohol free lager options",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Red Wine",
+        "tags": ["wine"],
+        "description": "Selection of red wines",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Rosé Wine",
+        "tags": ["wine"],
+        "description": "Selection of rosé wines",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "White Wine",
+        "tags": ["wine"],
+        "description": "Selection of white wines",
+        "days": ["Friday", "Saturday"]
+    }
+]

@@ -1,0 +1,17 @@
+{% if eleventyNavigation and page.url != "/" and page.url != "/girton-feast/" and page.url != "/index.html" %}
+<nav aria-label="breadcrumb" class="breadcrumb-container container py-3 mt-4">
+    <ol class="breadcrumb mb-0">
+        {% set navPages = collections.all | eleventyNavigationBreadcrumb(eleventyNavigation.key, { includeSelf: false }) %}
+        {% for entry in navPages %}
+        <li class="breadcrumb-item">
+            <a href="{{ entry.url | url }}" class="text-decoration-none text-muted transition-200 hover-text-primary">
+                {{ entry.title }}
+            </a>
+        </li>
+        {% endfor %}
+        <li class="breadcrumb-item active text-primary fw-bold" aria-current="page">
+            {{ eleventyNavigation.key }}
+        </li>
+    </ol>
+</nav>
+{% endif %}

@@ -34,8 +34,20 @@
         "days": ["Saturday"]
     },
     {
+        "name": "The Cambridge Chamber Collective",
+        "image": "images/cambridge-chamber-collective.webp",
+        "url": "https://paulamuldoon.com/cambridge-chamber-collective/",
+        "description": "Composed of some of Cambridge’s finest chamber musicians",
+        "tags": [
+            "music",
+            "free"
+        ],
+        "days": ["Saturday"]
+    },
+    {
         "name": "Helter Skelter",
         "image": "images/helter-skelter.webp",
+        "isLogo": false,
         "url": "",
         "description": "",
         "tags": [
@@ -46,7 +58,6 @@
     },
     {
         "name": "Bouncy Castle",
-        "image": "images/bouncy-castle.png",
         "url": "",
         "description": "Jump and play in our inflatable assault course",
         "tags": [
@@ -58,6 +69,7 @@
     {
         "name": "Land Train",
         "image": "images/land-train.png",
+        "isLogo": false,
         "url": "",
         "description": "Take a fun ride around the rec",
         "tags": [
@@ -69,6 +81,7 @@
     {
         "name": "Crazy Golf",
         "image": "images/golf.png",
+        "isLogo": false,
         "url": "",
         "description": "",
         "tags": [
@@ -176,7 +189,6 @@
     },
     {
         "name": "Hogwarts Express Train Ride",
-        "image": "images/hogwarts.png",
         "url": "",
         "description": "",
         "tags": [
@@ -187,7 +199,6 @@
     },
     {
         "name": "Teacups",
-        "image": "images/teacups.png",
         "url": "",
         "description": "",
         "tags": [
@@ -198,7 +209,6 @@
     },
     {
         "name": "Soft Play",
-        "image": "images/softplay.png",
         "url": "",
         "description": "",
         "tags": [
@@ -206,25 +216,5 @@
             "kids"
         ],
         "days": ["Friday", "Saturday"]
-    },
-    {
-        "name": "Food Vans",
-        "image": "images/food/burger.png",
-        "url": "food.html",
-        "description": "",
-        "tags": [
-            "food-and-drink"
-        ],
-        "days": ["Saturday","Friday"]
-    },
-    {
-        "name": "Beer Tent",
-        "image": "images/food/beer.png",
-        "url": "beer-tent.html",
-        "description": "",
-        "tags": [
-            "food-and-drink"
-        ],
-        "days": ["Saturday","Friday"]
     }
 ]

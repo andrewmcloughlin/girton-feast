@@ -9,12 +9,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Preload the LCP image -->
-    <link rel="preload" fetchpriority="high" as="image" href="{{ "/images/hero.png" | url }}" type="image/png">
+    <link rel="preload" fetchpriority="high" as="image" href="{% imageUrl "/images/hero.png" %}" type="image/webp">
+    <link rel="preload" href="{{ '/images/map-lg.svg' | url }}" as="image" type="image/svg+xml">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poller+One&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&family=Poller+One&family=Spicy+Rice&family=Glass+Antiqua&family=Annie+Use+Your+Telescope&family=Comfortaa:wght@300..700&family=DynaPuff:wght@400..700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -56,10 +57,25 @@
     {% include "components/navbar.njk" %}
 
     <main>
+        {% include "components/breadcrumbs.njk" %}
         {{ content | safe }}
     </main>
 
+    {% if not hideFooter %}
     {% include "components/footer.njk" %}
+    {% endif %}
+
+    <!-- Scroll to top button -->
+    <button x-data x-show="$store.app.scrolled"
+            @click="$store.app.scrollToTop()"
+            id="scrollToTopBtn"
+            title="Go to top"
+            x-cloak
+            style="display: none;"
+            :style="$store.app.scrolled ? 'display: flex' : 'display: none'">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     {% include "components/mobile-nav.njk" %}
 
     <!-- Bootstrap JS Bundle from CDN -->
@@ -67,5 +83,26 @@
     <script src="{{ "/js/script.js" | url }}"></script>
 
     {% block extra_scripts %}{% endblock %}
+    <!-- Scroll Animation Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.animate-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>

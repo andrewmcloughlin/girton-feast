@@ -1,0 +1,24 @@
+{% macro activityCard(item, index) %}
+{% set pastelColors = ['pink', 'green', 'purple', 'mint'] %}
+{% set rotations = ['rotate-1', 'rotate-2', 'rotate-neg-1', 'rotate-pos-1', 'rotate-3', 'rotate-4'] %}
+{% set colorClass = 'activity-card-' + pastelColors[index % 4] %}
+{% set rotationClass = rotations[index % 6] %}
+
+<div class="activity-card {{ colorClass }} {{ rotationClass }} d-flex shadow-sm mb-4">
+    {% if item.image %}
+    <img src="{{ (window.siteConfig.pathPrefix or '/') + item.image | url }}" alt="{{ item.name }}" class="card-img-left d-none d-sm-block">
+    {% endif %}
+    <div class="card-body d-flex flex-column justify-content-center">
+        <h3 class="mb-2">{{ item.name }}</h3>
+        {% if item.description %}
+        <p class="mb-3">{{ item.description }}</p>
+        {% endif %}
+
+        <div class="d-flex flex-wrap gap-2">
+            {% for tag in item.tags %}
+            <span class="activity-tag">#{{ tag }}</span>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endmacro %}

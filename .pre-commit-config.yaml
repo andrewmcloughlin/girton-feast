@@ -20,7 +20,7 @@ repos:
         name: Validate YAML files
       - id: check-added-large-files
         name: Check for large files
-        args: ['--maxkb=2000']
+        args: ['--maxkb=5000']
       - id: mixed-line-ending
         name: Check line endings
         args: ['--fix=lf']

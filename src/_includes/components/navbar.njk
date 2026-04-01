@@ -1,7 +1,7 @@
 <!-- navbar.njk: Dynamic menu driven by src/_data/navigation.js -->
-<nav id="main-navbar" class="navbar navbar-expand-md navbar-dark bg-brand-marian-blue py-3 sticky-top">
-    <div class="container-fluid">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+<nav id="main-navbar" class="navbar navbar-expand-md py-3">
+    <div class="container-fluid px-4">
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -20,20 +20,20 @@
                         data-bs-toggle="dropdown" aria-expanded="false">
                         {{ group.key }}
                     </a>
-                    <ul class="dropdown-menu bg-brand-marian-blue border-0 shadow">
+                    <ul class="dropdown-menu border-0 shadow-lg">
                         {%- for item in group.children %}
                             {%- if item.divider %}
-                            <li><hr class="dropdown-divider border-white-50"></li>
+                            <li><hr class="dropdown-divider"></li>
                             {%- elif item.header %}
                             <li>
-                                <h6 class="dropdown-header text-white-50">
+                                <h6 class="dropdown-header">
                                     {%- if item.icon %}<i class="{{ item.icon }} me-2"></i>{% endif %}
                                     {{ item.header }}
                                 </h6>
                             </li>
                             {%- else %}
                             <li>
-                                <a class="dropdown-item text-white {% if item.url and (item.url | url) == page.url %}active{% endif %}"
+                                <a class="dropdown-item {% if item.url and (item.url | url) == page.url %}active{% endif %}"
                                     href="{{ item.url | url }}">
                                     {%- if item.icon %}<i class="{{ item.icon }} me-2"></i>{% endif %}
                                     {{ item.label }}
@@ -49,11 +49,8 @@
             <!-- Controls: Countdown and Theme Toggle -->
             <div class="d-flex align-items-center ms-auto" x-data>
                 <span id="countdown-timer" x-data="countdown" x-text="timeLeft"
-                    class="navbar-text text-white d-none d-md-inline" style="font-size: 0.9rem;"></span>
-                <button id="theme-toggle" class="theme-toggle-btn ms-3" title="Toggle dark mode"
-                    @click="$store.app.toggleTheme()">
-                    <i class="fas" :class="$store.app.theme === 'dark' ? 'fa-sun' : 'fa-moon'"></i>
-                </button>
+                    class="navbar-text text-dark d-none d-md-inline" style="font-size: 0.9rem;">
+                </span>
             </div>
         </div>
     </div>

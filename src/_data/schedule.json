@@ -1,0 +1,103 @@
+{
+    "schedule": [
+        {
+            "date": "Friday 11 July",
+            "events": [
+                {
+                    "time": "19:00 – 19:45",
+                    "artist_event": "Rule the World Set 1",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "19:45 – 20:20",
+                    "artist_event": "Interval",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "20:25 – 21:15",
+                    "artist_event": "Rule the World Set 2",
+                    "location": "Main marquee"
+                }
+            ]
+        },
+        {
+            "date": "Saturday 12 July",
+            "events": [
+                {
+                    "time": "11:00 – 11:45",
+                    "artist_event": "Glebe School Choir",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "11:55 – 12:30",
+                    "artist_event": "Pom-Pom the Magic Fox (1)",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "12:00 onwards",
+                    "artist_event": "Table Tennis tournament",
+                    "location": "Outside the main marquee"
+                },
+                {
+                    "time": "12:35 – 13:00",
+                    "artist_event": "Maypole dancing",
+                    "location": "Outside the main marquee"
+                },
+                {
+                    "time": "13:10 – 13:35",
+                    "artist_event": "Rock Choir (1)",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "13:40 – 14:15",
+                    "artist_event": "Pom-Pom the Magic Fox (2)",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "14:25 – 14:50",
+                    "artist_event": "Rock Choir (2)",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "14:30",
+                    "artist_event": "Fun Run starts",
+                    "location": "Outside the main marquee"
+                },
+                {
+                    "time": "14:50 – 15:05",
+                    "artist_event": "Bounce demonstration",
+                    "location": "Outside the main marquee"
+                },
+                {
+                    "time": "15:10 – 15:55",
+                    "artist_event": "Disco Rave (DJ Grove-Rider)",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "16:10 – 17:30",
+                    "artist_event": "Disco Reconstructed",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "17:45 – close",
+                    "artist_event": "The Munroes",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "19:00",
+                    "artist_event": "Trading stops",
+                    "location": "Main marquee"
+                },
+                {
+                    "time": "19:30",
+                    "artist_event": "Cambridge Chamber Collective",
+                    "location": "St Andrew’s Church"
+                }
+            ]
+        }
+    ],
+    "rules": [
+        "Guide dogs welcome",
+        "No smoking"
+    ]
+}

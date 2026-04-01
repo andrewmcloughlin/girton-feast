@@ -1,15 +1,155 @@
 ---
 layout: layouts/base.njk
 title: Entertainment - Girton Feast
-permalink: /pages/entertainment.html
-bodyClass: bg-brand-glaucous
+permalink: /entertainment.html
+bodyClass: bg-white
 eleventyNavigation:
   key: Entertainment
-  parent: What's On
+  parent: Home
   order: 1
   icon: fas fa-music
 ---
 
-<main id="gallery-placeholder" class="container-xxl my-5" x-data="galleryBrowser('entertainment', {{ entertainment | dump }})">
-    {% include "components/gallery-content.njk" %}
+{% from "components/activity-card.njk" import activityCard %}
+
+{% set activityData = {
+    entertainment: entertainment,
+    food: food_and_drink,
+    beers: beers,
+    stalls: stalls
+} %}
+
+<script>
+    window.activityData = {{ activityData | dump | safe }};
+</script>
+
+<main class="container py-5 mt-5" x-data="galleryBrowser('entertainment', window.activityData)">
+    <!-- Centered Title -->
+    <div class="text-center mb-5 mt-4">
+        <h1 class="activities-title">All the Fun of the Fete</h1>
+
+        <!-- Top Level Category Switcher -->
+        <div class="d-flex flex-wrap justify-content-center gap-4 mt-4 category-switcher">
+            <button class="switcher-btn switcher-btn-pink rotate-neg-2" :class="activeCategory === 'entertainment' ? 'active' : ''" @click="setCategory('entertainment')">
+                <i class="fas fa-magic me-2"></i>What's On
+            </button>
+            <button class="switcher-btn switcher-btn-green rotate-pos-2" :class="activeCategory === 'food' ? 'active' : ''" @click="setCategory('food')">
+                <i class="fas fa-utensils me-2"></i>Food & Drink
+            </button>
+            <button class="switcher-btn switcher-btn-mint rotate-neg-1" :class="activeCategory === 'beers' ? 'active' : ''" @click="setCategory('beers')">
+                <i class="fas fa-beer me-2"></i>Beer Tent
+            </button>
+            <button class="switcher-btn switcher-btn-purple rotate-pos-1" :class="activeCategory === 'stalls' ? 'active' : ''" @click="setCategory('stalls')">
+                <i class="fas fa-store me-2"></i>Stalls
+            </button>
+        </div>
+
+        <!-- Day Filters -->
+        <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+            <button class="badge-filter px-4"
+                    :class="selectedDay === 'all' ? 'active shadow-sm' : 'bg-light text-muted border'"
+                    @click="selectedDay = 'all'">
+                All Days
+            </button>
+            <button class="badge-filter px-4"
+                    :class="selectedDay === 'Friday' ? 'active shadow-sm' : 'bg-light text-muted border'"
+                    @click="selectedDay = 'Friday'">
+                Friday
+            </button>
+            <button class="badge-filter px-4"
+                    :class="selectedDay === 'Saturday' ? 'active shadow-sm' : 'bg-light text-muted border'"
+                    @click="selectedDay = 'Saturday'">
+                Saturday
+            </button>
+        </div>
+
+        <!-- Badge Shaped Filters (Sub-categories/Tags) -->
+        <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+            <button class="badge-filter"
+                    :class="selectedTag === 'all' ? 'active shadow-sm' : 'bg-brand-light-blue text-primary'"
+                    @click="selectedTag = 'all'">
+                All
+            </button>
+            <template x-for="(tag, index) in uniqueTags" :key="tag">
+                <button class="badge-filter text-capitalize"
+                        :class="[
+                            selectedTag === tag ? 'active shadow-sm' : '',
+                            index % 4 === 0 ? 'badge-pink' : '',
+                            index % 4 === 1 ? 'badge-purple' : '',
+                            index % 4 === 2 ? 'badge-green' : '',
+                            index % 4 === 3 ? 'badge-mint' : ''
+                        ]"
+                        @click="selectedTag = (selectedTag === tag ? 'all' : tag)">
+                    <span x-text="tag.replace(/-/g, ' ')"></span>
+                    <span x-show="selectedTag === tag" class="ms-1">✕</span>
+                </button>
+            </template>
+        </div>
+    </div>
+
+    <!-- Grid of Cards -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 px-md-2">
+        <template x-for="(item, index) in filteredItems" :key="item.name">
+            <div class="col">
+                <div class="activity-card d-flex shadow-sm mb-4 h-100"
+                     :class="[
+                        'activity-card-' + (['pink', 'green', 'purple', 'mint'][index % 4]),
+                        ['rotate-1', 'rotate-2', 'rotate-neg-1', 'rotate-pos-1', 'rotate-3', 'rotate-4'][index % 6]
+                     ]">
+                    <template x-if="item.image">
+                        <img :src="(window.siteConfig?.pathPrefix || '/') + item.image"
+                             :alt="item.name"
+                             class="card-img-left d-none d-sm-block"
+                             :class="item.isLogo ? 'card-img-contain' : 'card-img-cover'">
+                    </template>
+                    <div class="card-body d-flex flex-column justify-content-center p-4 p-md-5">
+                        <h3 class="mb-2" x-text="item.name"></h3>
+                        <template x-if="item.description">
+                            <p class="mb-3" x-text="item.description"></p>
+                        </template>
+
+                        <!-- Brewery & ABV (Beer Tent items) -->
+                        <template x-if="activeCategory === 'beers' && item.brewery">
+                            <div class="mt-2 mb-3 d-flex align-items-center gap-2">
+                                <template x-if="item.brewery.logo">
+                                    <img :src="(window.siteConfig?.pathPrefix || '/') + item.brewery.logo"
+                                         :alt="item.brewery.name"
+                                         style="width:30px; height:30px; object-fit:contain;"
+                                         class="rounded-circle border bg-white p-1">
+                                </template>
+                                <span class="small fw-bold" x-text="item.brewery.name"></span>
+                            </div>
+                        </template>
+                        <template x-if="activeCategory === 'beers' && item.abv !== undefined && item.abv !== null">
+                            <span class="badge rounded-pill bg-dark text-white mb-2" x-text="item.abv.toFixed(1) + '% ABV'"></span>
+                        </template>
+
+                        <div class="d-flex flex-wrap gap-2 mt-auto">
+                            <template x-for="tag in item.tags">
+                                <span class="activity-tag" @click="selectedTag = tag">#<span x-text="tag"></span></span>
+                            </template>
+                        </div>
+
+                        <!-- External Link -->
+                        <template x-if="item.url">
+                            <a :href="item.url" target="_blank" rel="noopener noreferrer"
+                               class="btn btn-sm btn-outline-dark mt-3 d-inline-flex align-items-center justify-content-center gap-2"
+                               style="border-radius: 50px; font-family: 'Comfortaa', cursive; border-width: 2px;">
+                                Visit Website <i class="fas fa-external-link-alt small"></i>
+                            </a>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </template>
+    </div>
+
+    <!-- No Results State -->
+    <template x-if="filteredItems.length === 0">
+        <div class="text-center py-5">
+            <i class="fas fa-search fa-3x mb-3 text-muted opacity-50"></i>
+            <h4 class="fw-bold text-muted">No results found</h4>
+            <p class="text-muted">Try adjusting your filters.</p>
+        </div>
+    </template>
 </main>

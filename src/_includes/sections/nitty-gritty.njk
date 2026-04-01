@@ -1,0 +1,78 @@
+<section class="nitty-gritty-section">
+    <!-- Rotated Background Layers -->
+    <div class="nitty-gritty-bg-pink"></div>
+    <div class="nitty-gritty-bg-yellow"></div>
+    <div class="nitty-gritty-bg-green"></div>
+
+    <div class="container" style="position: relative; z-index: 10;">
+        <div class="text-center mb-5">
+            <h2 class="nitty-gritty-title">The Nitty-Gritty</h2>
+        </div>
+
+        <div class="nitty-gritty-card-wrapper">
+            <!-- Decorative Rotated Cards Behind -->
+            <div class="nitty-gritty-card-bg nitty-gritty-card-bg-pink"></div>
+            <div class="nitty-gritty-card-bg nitty-gritty-card-bg-yellow"></div>
+
+            <!-- Main Content Card -->
+            <div class="nitty-gritty-card shadow-lg p-5">
+                <div class="accordion accordion-flush nitty-gritty-accordion" id="nittyGrittyAccordion">
+                    <h1 class="h5 fw-bold mb-2" style="color: #666;">Agenda</h1>
+                    {% for day in schedule.schedule %}
+                    <div class="accordion-item mb-4 border-0">
+                        <h2 class="accordion-header" id="heading{{ loop.index }}">
+                            <button class="accordion-button {% if not loop.first %}collapsed{% endif %} px-0 bg-transparent h3 fw-bold mb-0"
+                                    type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse{{ loop.index }}"
+                                    aria-expanded="{{ 'true' if loop.first else 'false' }}"
+                                    aria-controls="collapse{{ loop.index }}"
+                                    style="color: var(--brand-marian-blue); box-shadow: none;">
+                                {{ day.date }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ loop.index }}"
+                             class="accordion-collapse collapse {{ 'show' if loop.first }}"
+                             aria-labelledby="heading{{ loop.index }}"
+                             data-bs-parent="#nittyGrittyAccordion">
+                            <div class="accordion-body px-0 pt-4">
+                                <ul class="list-unstyled nitty-gritty-list">
+                                    {% for event in day.events %}
+                                        <li class="mb-3">
+                                            <div class="row align-items-baseline g-1">
+                                                <div class="col-12 col-sm-9 d-flex align-items-baseline">
+                                                    <span class="fw-bold me-2 me-md-3" style="color: var(--brand-marian-blue); min-width: 90px; flex-shrink: 0;">{{ event.time }}</span>
+                                                    <span class="flex-grow-1">{{ event.artist_event }}</span>
+                                                </div>
+                                                <div class="col-12 col-sm-3 text-start text-sm-end small opacity-75 mt-1 mt-sm-0 ps-5 ps-sm-0">
+                                                    <span class="d-sm-none"><i class="fas fa-map-marker-alt me-1"></i></span>{{ event.location }}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mt-5 pt-4 border-top">
+                    <div class="row">
+                        <div class="col-12 mb-4">
+                            <h4 class="h5 fw-bold mb-2" style="color: #666;">Facilities</h4>
+                            <p class="text-dark mb-0">Accessible toilets, baby changing, First Aid, Information, Accessible Parking, Lost & Found</p>
+                        </div>
+                        <div class="col-12">
+                            <h4 class="h5 fw-bold mb-2" style="color: #666;">Rules</h4>
+                            <p class="text-dark mb-0">
+                                {% for rule in schedule.rules %}
+                                    {{ rule }}{% if not loop.last %} • {% endif %}
+                                {% endfor %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
