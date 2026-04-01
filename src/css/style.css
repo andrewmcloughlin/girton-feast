@@ -1429,81 +1429,7 @@ html {
 /* ========================================
    Hero V2 (Redesign)
    ======================================== */
-.hero-v2 {
-    font-family: Comfortaa, sans-serif;
-    font-weight: 300;
-    background-color: white;
-    padding: 4rem 0 2rem;
-    display: block;
-    overflow-x: hidden;
-}
 
-@media (max-width: 991px) {
-    .hero-v2 {
-        padding-top: 6rem;
-    }
-}
-
-.hero-v2-title {
-    font-family: 'Spicy Rice', cursive;
-    font-size: clamp(4rem, 15vw, 10rem);
-    line-height: 0.85;
-    margin-bottom: 0.5rem;
-    color: #000;
-    position: relative;
-    display: inline-block;
-    text-align: center;
-}
-
-.hero-v2-year {
-    display: inline-block;
-    font-family: DynaPuff, sans-serif;
-    writing-mode: vertical-rl;
-    text-orientation: mixed;
-    font-weight: 100;
-    font-size: clamp(2rem, 6vw, 4rem);
-    vertical-align: middle;
-    color: var(--brand-v2-purple);
-    line-height: 1;
-}
-
-.hero-v2-content-col {
-    position: relative;
-    z-index: 5;
-}
-
-.hero-v2-detail {
-    font-size: 1.25rem;
-    color: #666;
-    margin-bottom: 2rem;
-}
-
-.hero-v2-buttons .btn {
-    font-family: DynaPuff, cursive;
-    font-weight: 400;
-    border-radius: 50px;
-    padding: 0.75rem 1.5rem;
-    margin-right: 1rem;
-    margin-bottom: 1rem;
-    transition: transform 0.2s ease;
-}
-
-.hero-v2-buttons .btn:hover {
-    transform: translateY(-2px);
-}
-
-.btn-v2-primary {
-    background-color: var(--brand-v2-purple);
-    color: white;
-    border: none;
-    box-shadow: 0 4px 15px rgba(157, 54, 231, 0.3);
-}
-
-.btn-v2-outline {
-    background-color: white;
-    color: var(--brand-v2-purple);
-    border: 2px solid var(--brand-v2-purple);
-}
 
 /* Isometric Map Sticker Section */
 .hero-visual-section {
@@ -3351,4 +3277,75 @@ Polaroid Scrapbook Styling
     font-size: 0.8rem;
     padding: 6px 16px;
     border-radius: 30px;
+}
+
+/* ========================================
+   Hero Section V2
+   ======================================== */
+.hero-v2 {
+    /* Layer 1: The solid white bottom to avoid gaps */
+    background-color: #fff;
+    /* Layer 2: The SVG wave and the top gradient */
+    background-image:
+        url('../images/hero-background.svg'),
+        linear-gradient(180deg, #e2f9e5 0%, #fff 100%);
+    background-position: bottom center, top center;
+    background-repeat: no-repeat;
+    background-size: 100% auto, cover;
+    min-height: 600px;
+}
+
+.hero-v2-title {
+    font-family: 'Glass Antiqua', cursive;
+    font-size: 10rem;
+    line-height: 0.9;
+    color: #1a1a1a;
+}
+
+.hero-v2-year {
+    font-family: 'Annie Use Your Telescope', cursive;
+    font-size: 0.5em;
+    vertical-align: baseline;
+    color: var(--brand-v2-purple);
+}
+
+.letter-spacing-1 {
+    letter-spacing: 0.05em;
+}
+
+.hero-map-container {
+    perspective: 1000px;
+}
+
+.hero-v2-map-image {
+    transition: transform 0.3s ease;
+    /* Optional: filter to make it pop against the light green */
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
+}
+
+.hero-v2-map-image:hover {
+    transform: translateY(-5px);
+}
+
+.map-badge {
+    z-index: 10;
+    pointer-events: none;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -10px); }
+}
+
+/* Adjustments for mobile stacks */
+@media (max-width: 991.98px) {
+    .hero-v2 {
+        /* On mobile, let the SVG scale wider so the wave isn't too squashed */
+        background-size: 200% auto, cover;
+        padding-top: 2rem;
+    }
+    .hero-v2-content-col {
+        padding-top: 2rem;
+    }
 }

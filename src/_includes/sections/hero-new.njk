@@ -1,0 +1,58 @@
+<section id="hero-section" class="hero-v2 container-fluid overflow-hidden position-relative py-5">
+    <!-- Background Layer -->
+    <div class="hero-v2-bg-overlay position-absolute top-0 start-0 w-100 h-100"></div>
+
+    <div class="container py-lg-5 position-relative" style="z-index: 2;">
+        <div class="row align-items-center">
+
+            <!-- Left Column: Content & CTAs -->
+            <div class="col-12 col-lg-5 mb-5 mb-lg-0 text-center text-lg-start hero-v2-content-col">
+                <div class="hero-v2-header">
+                    <h1 class="hero-v2-title mb-4 display-3 fw-bold">
+                        Girton<br>Feast<span class="hero-v2-year ps-1">{% year %}</span>
+                    </h1>
+                </div>
+
+                <div class="hero-v2-detail mb-4 lead">
+                    <p class="mb-1 fw-medium text-uppercase small letter-spacing-1">Fri 10<sup>th</sup> July — Evening concert</p>
+                    <p class="mb-1 fw-medium text-uppercase small letter-spacing-1">Sat 11<sup>th</sup> July — Village Fête</p>
+                    <p class="text-muted">Girton Recreation Ground</p>
+                </div>
+
+                <div class="hero-v2-buttons d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start align-items-center">
+                    <div class="cta-wrapper">
+                        <a class="switcher-btn switcher-btn-purple rotate-neg-2 shadow-sm d-inline-block" href="https://www.ticketsource.com/girtonfeast" target="_blank">
+                            <i class="fas fa-ticket-alt me-2"></i>Get Concert tickets →
+                        </a>
+                    </div>
+
+                    <div class="cta-wrapper position-relative">
+                        <a class="switcher-btn switcher-btn-mint rotate-pos-2 shadow-sm d-inline-block" href="#activities">
+                            See fête activities →
+                        </a>
+                        <span class="d-block text-muted small mt-2 text-center">* free entry</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Interactive Map -->
+            <div class="col-12 col-lg-7 position-relative">
+                <div class="hero-map-container">
+                    <a href="{{ '/map.html' | url }}" class="d-block text-decoration-none">
+                        <!-- The Interactive Signpost -->
+                        <div class="map-badge position-absolute top-0 start-50 translate-middle-x mt-n3">
+                            <span class="badge rounded-pill bg-white text-dark shadow-sm px-3 py-2 border">
+                                <i class="fas fa-mouse-pointer me-1 text-primary"></i> Click to explore the grounds
+                            </span>
+                        </div>
+
+                        <img src="{{ "/images/map/isometric-hero-small.svg" | url }}"
+                             class="img-fluid w-100 hero-v2-map-image shadow-hover transition-all"
+                             alt="An interactive isometric map of Girton Feast">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
