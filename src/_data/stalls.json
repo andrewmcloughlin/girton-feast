@@ -41,6 +41,7 @@
         "url": "https://girtongardensociety.co.uk/",
         "description": "A local society, affiliated to the Royal Horticultural Society, for people interested in all aspects of gardening.",
         "tags": [
+            "community",
             "gardening"
         ],
         "days": [
@@ -53,6 +54,7 @@
         "url": "https://girtonallotments.org.uk/",
         "description": "A local society, for people interested in growing their own food.",
         "tags": [
+            "community",
             "gardening"
         ],
         "days": [
@@ -89,19 +91,50 @@
         "url": "https://www.girtonmusicaltheatre.org.uk/",
         "description": "",
         "tags": [
-            "community"
+            "community",
+            "art"
         ],
         "days": [
             "Saturday"
         ]
     },
-        {
+    {
+        "name": "Karen's Kitchen",
+        "image": "images/karens_kitchen.jpg",
+        "description": "Homemade Jams, Preserves, Pickles, Chutneys & Condiments.",
+        "url": "https://www.karenskitchenhaverhill.co.uk/",
+        "tags": [
+            "sweet things",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Fourtieth Rule",
+        "image": "images/fourtieth-rule.webp",
+        "url": "https://www.fortiethrule.com/",
+        "description": "English wines",
+        "tags": [
+            "wine",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
         "name": "Muriel Artist",
         "image": "images/stalls/muriel-art.png",
         "url": "https://murielartist.co.uk/",
         "description": "A stall showcasing the vibrant abstract art of Muriel Dahan.",
         "tags": [
-            "art"
+            "art",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
         ]
     },
     {
@@ -110,7 +143,34 @@
         "url": "http://sherbertfrog.carrd.co",
         "description": "A collection of our beautifully handmade crochet items.",
         "tags": [
-            "crafts"
+            "crafts",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Sewyee",
+        "image": "",
+        "url": "https://www.sewyee.etsy.com",
+        "description": "Handmade Textile Products",
+        "tags": [
+            "crafts",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Lampada Studio",
+        "image": "images/lampada_studio.png",
+        "url": "https://www.instagram.com/lampadastudio/",
+        "description": "Lamps and cushions",
+        "tags": [
+            "homeware",
+            "commercial"
         ],
         "days": [
             "Saturday"
@@ -122,7 +182,7 @@
         "url": "https://www.uw.co.uk/",
         "description": "",
         "tags": [
-            ""
+            "commercial"
         ],
         "days": [
             "Saturday"
@@ -135,7 +195,7 @@
         "description": "Fundraising for the World Scout Jamboree.",
         "tags": [
             "charity",
-            "sweets",
+            "sweet things",
             "crafts"
         ],
         "days": [
@@ -148,7 +208,8 @@
         "url": "https://www.facebook.com/estelle.s.sweet.treats.n.hire?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
         "description": "A cart of sweet treats",
         "tags": [
-            "sweets"
+            "commercial",
+            "sweet things"
         ],
         "days": [
             "Saturday"
@@ -160,8 +221,22 @@
         "url": "https://www.instagram.com/thingssosweetuk/",
         "description": "",
         "tags": [
-            "sweets",
+            "commercial",
+            "sweet things",
             "toys"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Nora's Aromas",
+        "image": "images/nora_aromas.avif",
+        "url": "https://c9a768-3.myshopify.com/",
+        "description": "",
+        "tags": [
+            "commercial",
+            "aromatherapy"
         ],
         "days": [
             "Saturday"
@@ -173,7 +248,113 @@
         "url": "#",
         "description": "Girton Cottontails Nursery and Girton Bowls Club are running child and adult tombolas.",
         "tags": [
+            "community",
             "games"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Antz",
+        "image": "",
+        "url": "",
+        "description": "Kids toys, noveltys, dress up, lucky dip",
+        "tags": [
+            "commercial",
+            "toys"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Kimie Arty",
+        "image": "images/stalls/kimie_rt.png",
+        "url": "https://www.instagram.com/kimie.arty/",
+        "description": "Hand painted cards and crafts",
+        "tags": [
+            "commercial",
+            "crafts",
+            "art"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Cerana Ceramics",
+        "image": "images/stalls/cerana_ceramics.png",
+        "url": "https://www.instagram.com/ceranna_ceramics/",
+        "description": "Hand-thrown stoneware made in Girton",
+        "tags": [
+            "commercial",
+            "crafts",
+            "homeware",
+            "art"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "The Vanjarred Refillery",
+        "image": "images/stalls/vanjarred.jfif",
+        "url": "https://cambridge-biomedical.com/event/vanjarred-refillery/",
+        "description": "Zero waste shop which brings affordable food, household, and personal care refills directly to you.",
+        "tags": [
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Simon's Toys",
+        "image": "",
+        "url": "",
+        "description": "",
+        "tags": [
+            "commercial",
+            "toys"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Amazing Reptiles",
+        "image": "",
+        "url": "",
+        "description": "",
+        "tags": [
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Mill Blossom Flowers",
+        "image": "",
+        "url": "",
+        "description": "",
+        "tags": [
+            "commercial",
+            "flowers"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Elsa's Ices",
+        "image": "",
+        "url": "",
+        "description": "",
+        "tags": [
+            "commercial",
+            "sweet things"
         ],
         "days": [
             "Saturday"

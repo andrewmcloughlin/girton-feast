@@ -1,0 +1,85 @@
+[
+    {
+        "name": "Pimms Tent",
+        "subtitle": "By Girton Musical Theatre",
+        "image": "images/food/pimms.png",
+        "isLogo": false,
+        "url": "#",
+        "tags": [
+            "drinks"
+        ],
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Wrapunzel's",
+        "subtitle": "Yorkshire Pudding Wraps",
+        "url": "https://www.facebook.com/p/Wrapunzel-100092729754323/",
+        "tags": [
+            "vegetarian",
+            "mains"
+        ],
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Tutle Dove Cafe",
+        "url": "https://www.turtledovecambridge.com/",
+        "tags": [
+            "sweet treats"
+        ],
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Pizza Passione",
+        "image": "images/food/pizza-passione-van.png",
+        "url": "https://pizzapassione.co.uk/",
+        "tags": [
+            "mains"
+        ],
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Smokehouse Burgers",
+        "image": "images/food/smokehouse-burger-tent.png",
+        "url": "#",
+        "tags": [
+            "mains"
+        ],
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Churros Bar",
+        "image": "images/food/churros-van.png",
+        "url": "#",
+        "tags": [
+            "sweet treats"
+        ],
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "The Purple Pepper",
+        "image": "images/food/the-purple-pepper-van.png",
+        "url": "https://www.thepurplepepper.online/",
+        "tags": [
+            "mains"
+        ],
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Toni's Ices",
+        "image": "images/food/tonis-ices-van.png",
+        "url": "https://www.tonis-ices.co.uk/",
+        "tags": [
+            "sweet treats"
+        ],
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Beer Tent",
+        "image": "images/food/beer-tent.png",
+        "url": "entertainment.html?category=beers",
+        "tags": [
+            "drinks"
+        ],
+        "days": ["Friday", "Saturday"]
+    }
+]
