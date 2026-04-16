@@ -127,7 +127,7 @@ eleventyNavigation:
                 });
 
                 const bounds = L.latLngBounds([[0, 0], [mapHeight, mapWidth]]);
-                L.imageOverlay('{{ "/images/map/isometric-map.svg" | url }}', bounds).addTo(this.eventMap);
+                L.imageOverlay('{{ "/images/map/isometric-map-labelled.svg" | url }}', bounds).addTo(this.eventMap);
                 this.eventMap.setView([mapHeight / 2, mapWidth / 2], 1);
                 this.eventMap.setMaxBounds(bounds.pad(0.1));
 

@@ -6,25 +6,31 @@ Global Styles & Variables
 /* Define a consistent color palette using CSS variables for easier theming */
 :root {
     --brand-saffron: #e9c253;
-    --brand-marian-blue: #9D36E7;
+    --brand-marian-blue: #3D3B8E;
     --brand-glaucous: #6883ba;
-    --brand-thulian-pink: #e072a4;
-    --brand-giants-orange: #9D36E7;
-    --brand-light-blue: #d4ffb6;
-    --brand-light-pink: #ffb6f2;
-    --brand-light-yellow: #e3b6ff;
+    --brand-thulian-pink: #E072A4;
+    --brand-giants-orange: #FF521B;
+    --brand-light-pink: #E072A4;
+    --brand-light-yellow: #e9c253;
 
     /* Redesign Colors */
-    --brand-v2-green: #98ffc0;
-    --brand-v2-pink: #ff9bed;
-    --brand-v2-purple: #9D36E7;
+    --brand-v2-green: #e9c253;
+    --brand-v2-pink: #E072A4;
+    --brand-v2-purple: #3D3B8E;
 
     /* Brand Pastel Colors for Cards */
-    --brand-pastel-pink: #ffb6f2;
-    --brand-pastel-green: #d4ffb6;
-    --brand-pastel-purple: #e3b6ff;
-    --brand-pastel-mint: #b6ffe4;
-    /* Complementary purple for buttons/accents */
+    --brand-pastel-pink: #ffbfdc;
+    --brand-pastel-green: #d1ffd7;
+    --brand-pastel-purple: #c5d9ff;
+    --brand-pastel-mint: #fff3d2;
+
+    /* origian colour scheme */
+    --brand-yellow: #e9c253;
+    --brand-dark-blue: #3D3B8E;
+    --brand-light-blue: #6883BA;
+    --brand-pink: #E072A4;
+    --brand-red: #FF521B;
+
 
     /* Default Badge Style */
     --badge-bg: var(--brand-glaucous);
@@ -1548,7 +1554,7 @@ html {
 }
 
 .headliner-bg-purple {
-    background-color: #7801AF;
+    background-color: #3D3B8E;
     transform: rotate(2.24deg);
     z-index: 0;
 }
@@ -1676,7 +1682,7 @@ html {
 
 .whats-on-link {
     font-family: Comfortaa, cursive;
-    color: var(--brand-v2-purple, #7801AF);
+    color: var(--brand-v2-purple, #3D3B8E);
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: 500;
@@ -2009,7 +2015,7 @@ html {
 }
 
 .nitty-gritty-bg-green {
-    background-color: var(--brand-v2-green);
+    background-color: var(--brand-yellow);
     transform: rotate(-0.5deg);
     z-index: 3;
 }
@@ -2302,7 +2308,7 @@ html {
     color: #444;
 }
 
-.activity-card-pink { background-color: var(--brand-pastel-pink); }
+.activity-card-pink { background-color: var(--brand-yellow); }
 .activity-card-green { background-color: var(--brand-pastel-green); }
 .activity-card-purple { background-color: var(--brand-pastel-purple); }
 .activity-card-mint { background-color: var(--brand-pastel-mint); }
@@ -2467,6 +2473,7 @@ html {
 .switcher-btn-green:not(.active) { background-color: var(--brand-pastel-green); }
 .switcher-btn-mint:not(.active) { background-color: var(--brand-pastel-mint); }
 .switcher-btn-purple:not(.active) { background-color: var(--brand-pastel-purple); }
+.switcher-btn-yellow:not(.active) { background-color: var(--brand-yellow); }
 
 /* Toast Notification Styles */
 .toast {
