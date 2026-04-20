@@ -40,7 +40,6 @@ document.addEventListener('alpine:init', () => {
   }))
 
   Alpine.store('app', {
-    theme: localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'),
     gooseEnabled: localStorage.getItem('gooseCursorEnabled') === 'true',
     konamiIndex: 0,
     konamiCode: ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'],
@@ -68,22 +67,10 @@ document.addEventListener('alpine:init', () => {
         console.error('Failed to load event info:', e)
       }
 
-      // Watch for system theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        if (!localStorage.getItem('theme')) {
-          this.theme = e.matches ? 'dark' : 'light'
-        }
-      })
-
       // Watch for scroll
       window.addEventListener('scroll', () => {
         this.scrolled = window.scrollY > 200
       })
-    },
-
-    toggleTheme () {
-      this.theme = this.theme === 'dark' ? 'light' : 'dark'
-      localStorage.setItem('theme', this.theme)
     },
 
     handleKonami (key) {
@@ -121,7 +108,6 @@ document.addEventListener('alpine:init', () => {
   // Reactive effects for body classes
   Alpine.effect(() => {
     const app = Alpine.store('app')
-    document.body.classList.toggle('dark-mode', app.theme === 'dark')
     document.body.classList.toggle('goose-cursor-enabled', app.gooseEnabled)
   })
 

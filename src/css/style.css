@@ -75,23 +75,7 @@ Global Styles & Variables
     --input-text: #353535;
 }
 
-/* Dark Mode Overrides */
-.dark-mode {
-    --bg-primary: #121212;
-    --bg-secondary: #1e1e1e;
-    --text-primary: #e0e0e0;
-    --text-secondary: #b0b0b0;
-    --card-bg: #242424;
-    --border-color: rgba(255, 255, 255, 0.1);
-    --input-bg: #333;
-    --input-text: #f8f9fa;
 
-    /* Adjust accent backgrounds for dark mode */
-    --brand-light-blue: #1e2a44;
-    --brand-light-pink: #441e30;
-    --brand-light-yellow: #44401e;
-    --brand-marian-blue: #8988dd;
-}
 
 body {
     font-family: Poppins, sans-serif;
@@ -155,54 +139,7 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     cursor: url("../images/cursor-active.svg") 0 0, pointer !important;
 }
 
-.dark-mode ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-}
 
-/* Override Bootstrap bg-light if it's explicitly used on body or other containers */
-.dark-mode .bg-light,
-.dark-mode.bg-light,
-.dark-mode .bg-brand-glaucous,
-.dark-mode.bg-brand-glaucous {
-    background-color: var(--bg-primary) !important;
-}
-
-.dark-mode .bg-white {
-    background-color: var(--bg-secondary) !important;
-}
-
-.dark-mode .text-muted {
-    color: var(--text-secondary) !important;
-}
-
-.dark-mode .card,
-.dark-mode .filter-sidebar {
-    background-color: var(--card-bg) !important;
-    color: var(--text-primary);
-    border-color: var(--border-color);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
-}
-
-.dark-mode .filter-item {
-    background-color: rgba(255, 255, 255, 0.05) !important;
-}
-
-.dark-mode .filter-item:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.dark-mode .filter-item.active {
-    background-color: var(--brand-marian-blue) !important;
-}
-
-.dark-mode .offcanvas {
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-}
-
-.dark-mode .offcanvas-header {
-    border-bottom-color: var(--border-color) !important;
-}
 
 
 /* Mascot styles removed in favor of SVG logo */
@@ -321,84 +258,9 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     color: #000;
 }
 
-/* Theme Toggle Button */
-.theme-toggle-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: none;
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-left: 1rem;
-}
 
-.theme-toggle-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
-}
 
-.theme-toggle-btn i {
-    font-size: 1.1rem;
-}
 
-.dark-mode .theme-toggle-btn {
-    color: var(--brand-saffron);
-    background: rgba(255, 255, 255, 0.05);
-}
-
-/* Dark Mode Overrides for Navigation */
-.dark-mode #main-navbar.bg-brand-marian-blue {
-    background-color: #0d0d0d !important;
-}
-
-.dark-mode .dropdown-menu {
-    background-color: #1a1a1a !important;
-    border: 1px solid var(--border-color);
-}
-
-.dark-mode .mobile-bottom-nav {
-    background-color: #1e1e1e;
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
-}
-
-.dark-mode .mobile-nav-item {
-    color: var(--brand-v2-purple);
-    font-weight: 700;
-}
-
-.dark-mode .mobile-nav-item.active {
-    color: var(--brand-v2-purple);
-    font-weight: 700;
-}
-
-.dark-mode #gallery-nav {
-    background-color: #1e1e1e !important;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
-
-.dark-mode .segmented-toggle {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-/* Form elements in dark mode */
-.dark-mode .form-control,
-.dark-mode .form-select {
-    background-color: var(--input-bg);
-    border-color: var(--border-color);
-    color: var(--input-text);
-}
-
-.dark-mode .form-control:focus {
-    background-color: var(--input-bg);
-    color: var(--input-text);
-    border-color: var(--brand-glaucous);
-}
 
 
 /* Custom class for a new green background */
@@ -582,30 +444,7 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
 
 
 
-/* Dark Mode Overrides for Brand Backgrounds */
-.dark-mode .bg-brand-marian-blue {
-    background-color: #0d0d0d !important;
-}
 
-.dark-mode .bg-brand-glaucous {
-    background-color: #1a2a44 !important;
-}
-
-.dark-mode .bg-brand-thulian-pink {
-    background-color: #3d1a2a !important;
-}
-
-.dark-mode .bg-brand-saffron {
-    background-color: #44401e !important;
-    color: #e9c253 !important;
-}
-
-/* Ensure text in brand backgrounds remains readable in dark mode */
-.dark-mode .bg-brand-glaucous,
-.dark-mode .bg-brand-thulian-pink,
-.dark-mode .bg-brand-marian-blue {
-    color: var(--text-primary) !important;
-}
 
 /* Hide underline on collapsed navbar (narrow screens) */
 @media (max-width: 767px) {
@@ -772,10 +611,7 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     align-items: center;
 }
 
-.dark-mode .day-tag {
-    background: rgba(0, 0, 0, 0.85);
-    color: white;
-}
+
 
 .bento-item::before {
     content: '';
@@ -1003,15 +839,7 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     white-space: nowrap;
 }
 
-.dark-mode .sponsor-name-container {
-    background: rgba(255, 255, 255, 0.85);
-    /* Keep backgrounds light for contrast with dark brand blue */
-}
 
-.dark-mode .sponsor-logo-container {
-    background: rgba(255, 255, 255, 0.85);
-    /* Keep logo backgrounds mostly light for visibility */
-}
 
 /* ========================================
    Floating Scrollspy Sidebar
@@ -1030,9 +858,7 @@ body.goose-cursor-enabled [style*="cursor: pointer"] {
     background-color: rgba(var(--bs-light-rgb), 0.5);
 }
 
-.dark-mode .hover-bg-light:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
+
 
 /* Hide on screens smaller than 1800px (User preference) */
 @media (max-width: 1800px) {
@@ -1182,9 +1008,7 @@ html {
     box-shadow: 0 4px 12px rgba(61, 59, 142, 0.2);
 }
 
-.dark-mode .segmented-control .btn-outline-primary {
-    color: var(--text-primary);
-}
+
 
 /* Ultra-Wide Screen Optimization */
 @media (min-width: 1600px) {
@@ -1199,10 +1023,7 @@ html {
     }
 }
 
-.dark-mode .segmented-control .btn-check:checked+.btn-outline-primary {
-    background-color: var(--brand-marian-blue);
-    color: white;
-}
+
 
 /* ========================================
    Netflix-Style Horizontal Scroll
@@ -1283,9 +1104,7 @@ html {
     color: var(--brand-giants-orange);
 }
 
-.dark-mode .site-rules-container {
-    background-color: var(--card-bg);
-}
+
 
 /* Pulse animation for the ticket scarcity badge */
 @keyframes pulse {
