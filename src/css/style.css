@@ -6,25 +6,31 @@ Global Styles & Variables
 /* Define a consistent color palette using CSS variables for easier theming */
 :root {
     --brand-saffron: #e9c253;
-    --brand-marian-blue: #9D36E7;
+    --brand-marian-blue: #3D3B8E;
     --brand-glaucous: #6883ba;
-    --brand-thulian-pink: #e072a4;
-    --brand-giants-orange: #9D36E7;
-    --brand-light-blue: #d4ffb6;
-    --brand-light-pink: #ffb6f2;
-    --brand-light-yellow: #e3b6ff;
+    --brand-thulian-pink: #E072A4;
+    --brand-giants-orange: #FF521B;
+    --brand-light-pink: #E072A4;
+    --brand-light-yellow: #e9c253;
 
     /* Redesign Colors */
-    --brand-v2-green: #98ffc0;
-    --brand-v2-pink: #ff9bed;
-    --brand-v2-purple: #9D36E7;
+    --brand-v2-green: #e9c253;
+    --brand-v2-pink: #E072A4;
+    --brand-v2-purple: #3D3B8E;
 
     /* Brand Pastel Colors for Cards */
-    --brand-pastel-pink: #ffb6f2;
-    --brand-pastel-green: #d4ffb6;
-    --brand-pastel-purple: #e3b6ff;
-    --brand-pastel-mint: #b6ffe4;
-    /* Complementary purple for buttons/accents */
+    --brand-pastel-pink: #ffbfdc;
+    --brand-pastel-green: #82d8db;
+    --brand-pastel-purple: #c5d9ff;
+    --brand-pastel-mint: #fff3d2;
+
+    /* origian colour scheme */
+    --brand-yellow: #e9c253;
+    --brand-dark-blue: #3D3B8E;
+    --brand-light-blue: #6883BA;
+    --brand-pink: #E072A4;
+    --brand-red: #FF521B;
+
 
     /* Default Badge Style */
     --badge-bg: var(--brand-glaucous);
@@ -1440,9 +1446,85 @@ html {
 .map-section,
 .nitty-gritty-section,
 .food-and-drink-section,
-.whats-on-section,
-.headliner-section {
+.whats-on-section {
     background-color: white;
+}
+
+.hero-map-container {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.hero-map-image-wrap {
+    width: 100%;
+    height: auto;
+}
+
+.hero-map-image-wrap img,
+.hero-map-image-wrap picture {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.hero-map-image-wrap.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hero-map-image-wrap.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-map-badge {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    opacity: 0.8;
+    color: black !important;
+    font-family: Comfortaa, cursive;
+    font-weight: 700;
+    padding: 0.6rem 1.4rem;
+    font-size: 0.95rem;
+    border: 0 solid #000;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 100;
+    white-space: nowrap;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1) !important;
+}
+
+.hero-map-badge.animate-on-scroll {
+    opacity: 0;
+    transform: translate(-50%, -30%) scale(0.8);
+    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.5s;
+}
+
+.hero-map-badge.animate-on-scroll.is-visible {
+    opacity: 0.8;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.hero-map-badge:hover {
+    transform: translate(-50%, -55%) scale(1.05);
+    background-color: var(--brand-v2-purple);
+    color: white !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+@media (max-width: 767px) {
+    .hero-map-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.8rem;
+        border-width: 1.5px;
+    }
 }
 
 .map-sticker-container {
@@ -1533,8 +1615,10 @@ html {
     display: flex;
     align-items: center;
     padding: 10rem 0;
-    margin: 4rem 0;
-    /* Add space for the overhang */
+    margin: 0;
+    margin-bottom: 4rem;
+    background-color: var(--brand-glaucous);
+    /* Match the hero blue to fill rotation gaps */
 }
 
 .headliner-bg-purple,
@@ -1548,19 +1632,19 @@ html {
 }
 
 .headliner-bg-purple {
-    background-color: #7801AF;
+    background-color: var(--brand-v2-purple);
     transform: rotate(2.24deg);
     z-index: 0;
 }
 
 .headliner-bg-pink {
-    background-color: #FFBEF7;
+    background-color: var(--brand-pastel-pink);
     z-index: -1;
     /* No rotation as requested */
 }
 
 .headliner-bg-green {
-    background-color: #C8FFE0;
+    background-color: var(--brand-pastel-green);
     transform: rotate(-2.57deg);
     z-index: -2;
 }
@@ -1622,12 +1706,12 @@ html {
 }
 
 .headliner-pink {
-    fill: #FFBEF7;
+    fill: var(--brand-pastel-pink);
     opacity: 1;
 }
 
 .headliner-green {
-    fill: #C8FFE0;
+    fill: var(--brand-pastel-green);
     opacity: 1;
 }
 
@@ -1649,6 +1733,17 @@ html {
     z-index: 3;
     pointer-events: none;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+    transition: opacity 1s ease-out, transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.headliner-drummer.animate-on-scroll {
+    opacity: 0;
+    transform: translate(-50%, -30%) scale(0.8) rotate(-5deg);
+}
+
+.headliner-drummer.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
 }
 
 @media (max-width: 991px) {
@@ -1658,7 +1753,7 @@ html {
 
     .headliner-visual-container {
         height: 400px;
-        margin-top: 3rem;
+        margin-top: 8rem;
     }
 }
 
@@ -1676,7 +1771,7 @@ html {
 
 .whats-on-link {
     font-family: Comfortaa, cursive;
-    color: var(--brand-v2-purple, #7801AF);
+    color: var(--brand-v2-purple, #3D3B8E);
     text-decoration: none;
     font-size: 1.1rem;
     font-weight: 500;
@@ -1837,6 +1932,9 @@ html {
     font-family: Comfortaa, cursive;
     font-size: 1.2rem;
     opacity: 0.8;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Marquee Animation */
@@ -2009,7 +2107,7 @@ html {
 }
 
 .nitty-gritty-bg-green {
-    background-color: var(--brand-v2-green);
+    background-color: var(--brand-yellow);
     transform: rotate(-0.5deg);
     z-index: 3;
 }
@@ -2090,6 +2188,9 @@ html {
     font-size: 1.2rem;
     opacity: 0.8;
     margin-bottom: 1rem;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Sponsor Logo Wrappers */
@@ -2116,13 +2217,13 @@ html {
 }
 
 .sponsor-logo-wrapper::before {
-    background-color: #FFBEF7;
+    background-color: var(--brand-pastel-purple);
     /* pink */
     transform: rotate(-6deg);
 }
 
 .sponsor-logo-wrapper::after {
-    background-color: #C8FFE0;
+    background-color: var(--brand-yellow);
     /* green */
     transform: rotate(-2deg);
 }
@@ -2302,7 +2403,7 @@ html {
     color: #444;
 }
 
-.activity-card-pink { background-color: var(--brand-pastel-pink); }
+.activity-card-pink { background-color: var(--brand-yellow); }
 .activity-card-green { background-color: var(--brand-pastel-green); }
 .activity-card-purple { background-color: var(--brand-pastel-purple); }
 .activity-card-mint { background-color: var(--brand-pastel-mint); }
@@ -2314,6 +2415,23 @@ html {
 .rotate-4 { transform: rotate(0.8deg); }
 .rotate-neg-1 { transform: rotate(-1.5deg); }
 .rotate-pos-1 { transform: rotate(1.2deg); }
+
+.headliner-content .switcher-btn {
+    animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: rotate(-2deg) scale(1);
+    }
+    50% {
+        transform: rotate(-2deg) scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    }
+    100% {
+        transform: rotate(-2deg) scale(1);
+    }
+}
 
 .activity-card:hover {
     transform: scale(1.02) rotate(0deg) !important;
@@ -2467,6 +2585,7 @@ html {
 .switcher-btn-green:not(.active) { background-color: var(--brand-pastel-green); }
 .switcher-btn-mint:not(.active) { background-color: var(--brand-pastel-mint); }
 .switcher-btn-purple:not(.active) { background-color: var(--brand-pastel-purple); }
+.switcher-btn-yellow:not(.active) { background-color: var(--brand-yellow); }
 
 /* Toast Notification Styles */
 .toast {
@@ -2552,6 +2671,9 @@ html {
     opacity: 0.7;
     position: relative;
     z-index: 4;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Card wrapper with decorative shadow cards behind */
@@ -2751,6 +2873,9 @@ html {
     font-size: 1.1rem;
     color: var(--brand-marian-blue);
     opacity: 0.7;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Card wrapper with decorative layers behind */
@@ -3311,10 +3436,6 @@ Polaroid Scrapbook Styling
 
 .letter-spacing-1 {
     letter-spacing: 0.05em;
-}
-
-.hero-map-container {
-    perspective: 1000px;
 }
 
 .hero-v2-map-image {

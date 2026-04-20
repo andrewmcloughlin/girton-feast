@@ -32,10 +32,10 @@
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ "/images/favicons/apple-touch-icon.png" | url }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ "/images/favicons/favicon-32x32.png" | url }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ "/images/favicons/favicon-16x16.png" | url }}">
-    <link rel="shortcut icon" href="{{ "/images/favicons/favicon.ico" | url }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ '/images/favicons/apple-touch-icon.png' | url }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ '/images/favicons/favicon-32x32.png' | url }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ '/images/favicons/favicon-16x16.png' | url }}">
+    <link rel="shortcut icon" href="{{ '/images/favicons/favicon.ico' | url }}">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2D103WGWN"></script>
@@ -57,7 +57,9 @@
     {% include "components/navbar.njk" %}
 
     <main>
+        {% if not hideBreadcrumbs %}
         {% include "components/breadcrumbs.njk" %}
+        {% endif %}
         {{ content | safe }}
     </main>
 
@@ -80,7 +82,7 @@
 
     <!-- Bootstrap JS Bundle from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="{{ "/js/script.js" | url }}"></script>
+    <script src="{{ '/js/script.js' | url }}"></script>
 
     {% block extra_scripts %}{% endblock %}
     <!-- Scroll Animation Script -->

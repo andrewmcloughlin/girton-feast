@@ -99,7 +99,7 @@ eleventyNavigation:
                     <template x-if="item.image">
                         <img :src="(window.siteConfig?.pathPrefix || '/') + item.image"
                              :alt="item.name"
-                             class="card-img-left d-none d-sm-block"
+                             class="card-img-left d-none d-lg-block"
                              :class="item.isLogo ? 'card-img-contain' : 'card-img-cover'">
                     </template>
                     <div class="card-body d-flex flex-column justify-content-center p-4 p-md-5">

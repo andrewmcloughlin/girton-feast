@@ -58,7 +58,7 @@ permalink: /info/vendors.html
                         <div class="col-md-6">
                             <h5 class="fw-bold mb-2">Location</h5>
                             <address class="mb-0" style="line-height: 1.6;">Girton Recreation Ground<br>Girton, Cambridge CB3 0FH</address>
-                            <a href="{{ "/map.html" | url }}" class="btn btn-sm btn-outline-dark mt-2" style="border-radius: 50px;">View Map →</a>
+                            <a href="{{ '/map.html' | url }}" class="btn btn-sm btn-outline-dark mt-2" style="border-radius: 50px;">View Map →</a>
                         </div>
                         <div class="col-md-6">
                             <h5 class="fw-bold mb-2">Date & Time</h5>
@@ -91,7 +91,7 @@ permalink: /info/vendors.html
                     </div>
                 </template>
 
-                 <!-- [STALLS ONLY] Costs & Payment -->
+                 <!-- [STALLS ONLY] Costs -->
                 <template x-if="activeCategory === 'stalls'">
                     <div class="info-sticker-card rotate-neg-1" x-transition>
                         <div class="d-flex align-items-center gap-3 mb-4">
@@ -118,13 +118,6 @@ permalink: /info/vendors.html
                             <p class="mb-0 text-muted">Please supply your own tables and gazebo. Tables are available for hire at <strong>£5 each</strong> if booked in advance.</p>
                         </div>
 
-                        <h4 class="fw-bold mb-3">How to Pay</h4>
-                        <div class="card border-0 bg-white shadow-sm p-3 rounded-4">
-                            <p class="mb-1"><strong>Bank Transfer:</strong> Girton Village Celebrations</p>
-                            <p class="mb-1">Sort code: <code>30-80-45</code> | Acc: <code>29094760</code></p>
-                            <hr class="my-3">
-                            <p class="small text-muted mb-0">Cheques payable to: <em>Girton Village Celebrations</em>. Send to Carol Noble, 19 Weavers Field, Girton.</p>
-                        </div>
                     </div>
                 </template>
 
@@ -168,8 +161,8 @@ permalink: /info/vendors.html
                     <template x-if="activeCategory === 'stalls'">
                         <div class="d-grid gap-3" x-transition>
                             <template x-if="!booked.stalls">
-                                <a href="https://forms.gle/f5uMHX5UwsAjjEn29" class="btn btn-light btn-lg fw-bold p-3 rounded-4 shadow" target="_blank">
-                                    Book Online
+                                <a href="mailto:carol@girtonfeast.org.uk" class="btn btn-light btn-lg fw-bold p-3 rounded-4 shadow">
+                                    Email to Book
                                 </a>
                             </template>
                             <template x-if="booked.stalls">
@@ -177,7 +170,7 @@ permalink: /info/vendors.html
                                     <p class="mb-0 fw-bold text-dark text-center">All stall pitches for the 2026 Feast are now fully booked.</p>
                                 </div>
                             </template>
-                            <a href="{{ "/entertainment.html?category=stalls" | url }}" class="btn btn-outline-light rounded-pill border-2 mt-2">
+                            <a href="{{ '/entertainment.html?category=stalls' | url }}" class="btn btn-outline-light rounded-pill border-2 mt-2">
                                 See confirmed stalls
                             </a>
                         </div>
@@ -192,8 +185,8 @@ permalink: /info/vendors.html
                                 </div>
                             </template>
                             <template x-if="!booked.food">
-                                <a href="#" class="btn btn-light btn-lg fw-bold p-3 rounded-4 shadow d-block text-center" target="_blank">
-                                    Book Online
+                                <a href="mailto:carol@girtonfeast.org.uk" class="btn btn-light btn-lg fw-bold p-3 rounded-4 shadow d-block text-center">
+                                    Email to Book
                                 </a>
                             </template>
                         </div>
@@ -203,8 +196,8 @@ permalink: /info/vendors.html
                     <template x-if="activeCategory === 'rides'">
                         <div class="d-grid gap-3" x-transition>
                             <template x-if="!booked.rides">
-                                <a href="https://forms.gle/WRyH8jcSbkLXwYg49" target="_blank" class="btn btn-light btn-lg fw-bold p-3 rounded-4 shadow">
-                                    Book Online
+                                <a href="mailto:carol@girtonfeast.org.uk" class="btn btn-light btn-lg fw-bold p-3 rounded-4 shadow">
+                                    Email to Book
                                 </a>
                             </template>
                             <template x-if="booked.rides">

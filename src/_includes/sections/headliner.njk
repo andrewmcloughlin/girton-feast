@@ -11,14 +11,17 @@
         <div class="row align-items-center">
             <!-- Left Side: Content -->
             <div class="col-lg-6 headliner-content mb-5" style="z-index: 2;">
-                <h2 class="headliner-title">Rule the World!</h2>
+                <h2 class="headliner-title">Take That - Rule the World!</h2>
                 <div class="headliner-details mb-4">
-                    <p class="headliner-microcopy mb-2">{{ event.calendar.details }}</p>
+                    <a href="https://ruletheworldofficial.com/" target="_blank" class="headliner-microcopy mb-2">{{ event.calendar.details }} →</a>
                     <p class="mb-0">{{ event.date_long }}</p>
                     <p class="mb-0">Doors {{ event.doors_open }} | Show starts {{ event.show_start }}</p>
                     <p class="mb-0">{{ event.location }}</p>
+                    <a class="text-decoration-underline text-white" >
+
                 </div>
-                <a class="switcher-btn switcher-btn-pink rotate-neg-2" href="https://www.ticketsource.com/girtonfeast" target="_blank">
+                <!-- Subtle link to their site -->
+                <a class="switcher-btn switcher-btn-yellow rotate-neg-2" href="https://www.ticketsource.com/girtonfeast" target="_blank">
                     <i class="fas fa-ticket-alt me-2"></i>Claim your tickets →
                 </a>
             </div>
@@ -44,7 +47,7 @@
                             <use href="#headliner-blob-green" class="headliner-intersection" />
                         </g>
                     </svg>
-                    <img src="{{ "/images/jumping-drummer.png" | url }}" alt="Jumping Drummer" class="headliner-drummer">
+                    <img src="{{ '/images/jumping-drummer.png' | url }}" alt="Jumping Drummer" class="headliner-drummer animate-on-scroll">
                 </div>
             </div>
         </div>
