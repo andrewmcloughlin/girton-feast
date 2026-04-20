@@ -4,6 +4,7 @@ title: Interactive Map - Girton Feast
 bodyClass: map-fullscreen-page
 permalink: /map.html
 hideFooter: true
+hideBreadcrumbs: true
 eleventyNavigation:
   key: Interactive Map
   parent: Home
@@ -55,7 +56,7 @@ eleventyNavigation:
                 <span class="transport-card-icon">🚌</span>
                 <h5>By Bus</h5>
                 <p>Citi 6 stops right outside. Easy access from Cambridge or Oakington.</p>
-                <a href="https://www.stagecoachbus.com/routes/east/6/cambridge-oakington/XEAO006.O" target="_blank" class="btn btn-sm btn-outline-warning rounded-pill font-dynapuff">Timetable</a>
+                <a href="https://www.stagecoachbus.com/routes/east/6/cambridge-oakington/XEAO006.O" target="_blank" class="btn btn-sm btn-outline-secondary rounded-pill font-dynapuff">Timetable</a>
             </div>
         </div>
 
@@ -65,7 +66,7 @@ eleventyNavigation:
             <div class="transport-card">
                 <span class="transport-card-icon">🚲</span>
                 <h5>By Bike</h5>
-                <p>Scenic & healthy! Plenty of cycle parking available at the main entrance.</p>
+                <p>Plenty of cycle parking available at the main entrance.</p>
             </div>
         </div>
 
@@ -76,7 +77,7 @@ eleventyNavigation:
                 <span class="transport-card-icon">🚕</span>
                 <h5>By Taxi</h5>
                 <p>Book a ride with our sponsors, <strong>Veezu</strong>, for a reliable trip home.</p>
-                <a href="https://www.veezu.co.uk/" target="_blank" class="text-brand-purple fw-bold text-decoration-none">Book with Veezu →</a>
+                <a href="https://www.veezu.co.uk/" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill font-dynapuff">Book with Veezu →</a>
             </div>
         </div>
     </div>
@@ -132,11 +133,12 @@ eleventyNavigation:
                 this.eventMap.setMaxBounds(bounds.pad(0.1));
 
                 // Add event markers
-                const points = [
-                    { name: "Main Stage", coords: [1500, 400], info: "Live music and performances all weekend!" },
-                    { name: "Food Court", coords: [1000, 1200], info: "A variety of food stalls and drinks." },
-                    { name: "Play Ground", coords: [500, 800], info: "Games and activities for children." }
-                ];
+                const points = []
+                // const points = [
+                //    { name: "Main Stage", coords: [1500, 400], info: "Live music and performances all weekend!" },
+                //    { name: "Food Court", coords: [1000, 1200], info: "A variety of food stalls and drinks." },
+                //    { name: "Play Ground", coords: [500, 800], info: "Games and activities for children." }
+                // ];
 
                 points.forEach(point => {
                     L.marker(point.coords).addTo(this.eventMap)

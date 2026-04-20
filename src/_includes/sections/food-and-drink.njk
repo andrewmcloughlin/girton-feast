@@ -1,11 +1,11 @@
 {% from "components/vendor-card.njk" import vendorCard %}
 
-{% set colors = ["#EABEFF", "#E3FFC0", "#C8FFE0", "#FFBEF7"] %}
+{% set colors = ["var(--brand-yellow)", "var(--brand-pastel-green)", "var(--brand-pastel-purple)", "var(--brand-pastel-mint)"] %}
 {% set rotations = ["rotate-left-sm", "rotate-right-xs", "rotate-left-xs", "rotate-right-sm"] %}
 
 <section class="food-drink-section py-5 my-5 overflow-hidden">
     <div class="container text-center mb-5">
-        <h2 class="food-drink-title">Feast your soul</h2>
+        <img src="{{ ('/images/titles/food-and-drink-text.svg') | url }}" alt="Food and Drink" class="img-fluid mb-4" style="max-width: 400px; width: 100%;">
         <p class="food-drink-subtitle">Food from around the world paired with beers from local breweries.</p>
         <a href="{{ "/entertainment.html?category=food" | url }}" class="whats-on-link">See all →</a>
     </div>

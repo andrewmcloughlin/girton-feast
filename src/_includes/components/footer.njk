@@ -19,11 +19,16 @@
             <!-- Decorative rotated cards behind -->
             <div class="footer-v2-card-bg footer-v2-card-bg-pink"></div>
             <div class="footer-v2-card-bg footer-v2-card-bg-yellow"></div>
+            <img
+                src="{{ "/images/silly_goose.svg" | url }}"
+                alt="A silly gooose"
+                class="footer-goose-bg position-absolute bottom-0 end-0 pointer-events-none"
+                style="width: 240px; transform: rotate(0deg) translate(-70px, -530px); z-index: 0;"
+            >
 
             <!-- Main Content Card -->
             <div class="footer-v2-card shadow-lg p-5">
                 <!-- Silly Goose Background -->
-                <img src="{{ "/images/silly_goose.svg" | url }}" alt="" class="footer-goose-bg position-absolute bottom-0 end-0 opacity-10 pointer-events-none" style="width: 240px; transform: rotate(-15deg) translate(20px, 20px); z-index: 0;">
 
                 <div class="row g-5 position-relative" style="z-index: 1;">
                     <!-- About Section -->
@@ -51,11 +56,11 @@
                     <div class="col-lg-2 col-md-6">
                         <h6 class="footer-v2-col-heading">Explore</h6>
                         <ul class="list-unstyled footer-v2-links">
-                            <li><a href="{{ "/entertainment.html" | url }}">Entertainment</a></li>
-                            <li><a href="{{ "/entertainment.html?category=food" | url }}">Food &amp; Drink</a></li>
-                            <li><a href="{{ "/pages/gallery.html" | url }}">Gallery</a></li>
-                            <li><a href="{{ "/map.html?mode=transport" | url }}">Getting Here</a></li>
-                            <li><a href="{{ "/map.html?mode=event" | url }}">Event Map</a></li>
+                            <li><a href="{{ '/entertainment.html' | url }}">Entertainment</a></li>
+                            <li><a href="{{ '/entertainment.html?category=food' | url }}">Food &amp; Drink</a></li>
+                            <li><a href="{{ '/pages/gallery.html' | url }}">Gallery</a></li>
+                            <li><a href="{{ '/map.html?mode=transport' | url }}">Getting Here</a></li>
+                            <li><a href="{{ '/map.html?mode=event' | url }}">Event Map</a></li>
                         </ul>
                     </div>
 
@@ -63,9 +68,9 @@
                     <div class="col-lg-2 col-md-6">
                         <h6 class="footer-v2-col-heading">For Vendors</h6>
                         <ul class="list-unstyled footer-v2-links">
-                            <li><a href="{{ "/info/stall-holders.html" | url }}">Stall Holders</a></li>
-                            <li><a href="{{ "/info/caterers-info.html" | url }}">Food Vendors</a></li>
-                            <li><a href="{{ "/info/ride-vendors-info.html" | url }}">Rides &amp; Games</a></li>
+                            <li><a href="{{ '/info/stall-holders.html' | url }}">Stall Holders</a></li>
+                            <li><a href="{{ '/info/caterers-info.html' | url }}">Food Vendors</a></li>
+                            <li><a href="{{ '/info/ride-vendors-info.html' | url }}">Rides &amp; Games</a></li>
                         </ul>
                     </div>
 

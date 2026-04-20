@@ -34,17 +34,6 @@
         "days": ["Saturday"]
     },
     {
-        "name": "The Cambridge Chamber Collective",
-        "image": "images/cambridge-chamber-collective.webp",
-        "url": "https://paulamuldoon.com/cambridge-chamber-collective/",
-        "description": "Composed of some of Cambridge’s finest chamber musicians",
-        "tags": [
-            "music",
-            "free"
-        ],
-        "days": ["Saturday"]
-    },
-    {
         "name": "Helter Skelter",
         "image": "images/helter-skelter.webp",
         "isLogo": false,
@@ -65,18 +54,6 @@
             "rides"
         ],
         "days": ["Friday", "Saturday"]
-    },
-    {
-        "name": "Land Train",
-        "image": "images/land-train.png",
-        "isLogo": false,
-        "url": "",
-        "description": "Take a fun ride around the rec",
-        "tags": [
-            "kids",
-            "rides"
-        ],
-        "days": ["Saturday"]
     },
     {
         "name": "Crazy Golf",

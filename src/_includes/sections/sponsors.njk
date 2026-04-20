@@ -3,12 +3,12 @@
 <!-- Sponsors section -->
 <section id="sponsors" class="sponsors-section py-5 my-5 overflow-hidden">
     <div class="container text-center mb-5">
-        <h2 class="sponsors-title">Built on generosity</h2>
+    <img src="{{ ('/images/titles/sponsors-text.png') | url }}" alt="Sponsors" class="img-fluid mb-4" style="max-width: 900px; width: 100%;">
         <p class="sponsors-subtitle">
             Girton Feast is run entirely by volunteers and funded by brilliant local businesses.<br>
             We're endlessly grateful to everyone who makes it possible.
         </p>
-        <a href="{{ "/pages/contact.html" | url }}" class="whats-on-link">Become a sponsor →</a>
+        <a href="{{ '/pages/contact.html' | url }}" class="whats-on-link">Become a sponsor →</a>
     </div>
 
     <div class="marquee-wrapper">
@@ -18,12 +18,12 @@
                 <div class="sponsor-logo-wrapper {{ rotation }}">
                     {% if sponsor.url %}
                         <a href="{{ sponsor.url }}" target="_blank" rel="noopener noreferrer">
-                            <img src="{{ ("/images/sponsors/" + sponsor.image) | url }}"
+                            <img src="{{ ('/images/sponsors/' + sponsor.image) | url }}"
                                  alt="Logo of an official event sponsor."
                                  class="sponsor-logo-img">
                         </a>
                     {% else %}
-                        <img src="{{ ("/images/sponsors/" + sponsor.image) | url }}"
+                        <img src="{{ ('/images/sponsors/' + sponsor.image) | url }}"
                              alt="Logo of an official event sponsor."
                              class="sponsor-logo-img">
                     {% endif %}
@@ -35,12 +35,12 @@
                 <div class="sponsor-logo-wrapper {{ rotation }}">
                     {% if sponsor.url %}
                         <a href="{{ sponsor.url }}" target="_blank" rel="noopener noreferrer">
-                            <img src="{{ ("/images/sponsors/" + sponsor.image) | url }}"
+                            <img src="{{ ('/images/sponsors/' + sponsor.image) | url }}"
                                  alt="Logo of an official event sponsor."
                                  class="sponsor-logo-img">
                         </a>
                     {% else %}
-                        <img src="{{ ("/images/sponsors/" + sponsor.image) | url }}"
+                        <img src="{{ ('/images/sponsors/' + sponsor.image) | url }}"
                              alt="Logo of an official event sponsor."
                              class="sponsor-logo-img">
                     {% endif %}
