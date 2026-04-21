@@ -1,8 +1,10 @@
 [
     {
-        "name": "Girton Parish Council",
+        "comment": "Girton Parish Council",
+        "name": "",
         "image": "images/stalls/gpc.png",
         "url": "https://www.girton-cambs.org.uk/",
+        "template": "A",
         "description": "",
         "tags": [
             "community"
@@ -12,9 +14,11 @@
         ]
     },
     {
-        "name": "Cambridge City Council",
+        "comment": "Cambridge City Council",
+        "name": "",
         "image": "images/stalls/ccc.png",
         "url": "https://www.cambridge.gov.uk/",
+        "template": "A",
         "description": "",
         "tags": [
             "community"
@@ -24,9 +28,11 @@
         ]
     },
     {
-        "name": "South Cambridgeshire District Council",
+        "comment": "South Cambridgeshire District Council",
+        "name": "",
         "image": "images/stalls/scdc.png",
         "url": "https://www.scambs.gov.uk/",
+        "template": "A",
         "description": "",
         "tags": [
             "community"
@@ -39,6 +45,7 @@
         "name": "Girton Garden Society: Mini Show & Sale",
         "image": "images/stalls/girton-garden-society.png",
         "url": "https://girtongardensociety.co.uk/",
+        "template": "D",
         "description": "A local society, affiliated to the Royal Horticultural Society, for people interested in all aspects of gardening.",
         "tags": [
             "community",
@@ -52,6 +59,7 @@
         "name": "Girton Allotment Society",
         "image": "images/stalls/girton-allotment-society.png",
         "url": "https://girtonallotments.org.uk/",
+        "template": "D",
         "description": "A local society, for people interested in growing their own food.",
         "tags": [
             "community",
@@ -66,6 +74,7 @@
         "image": "images/stalls/town-plan.png",
         "url": "https://www.girton-cambs.org.uk/neighbourhood-plan/",
         "description": "Help us decide the future of Girton.",
+        "template": "D",
         "tags": [
             "community"
         ],
@@ -78,6 +87,7 @@
         "image": "images/stalls/wildlife.png",
         "url": "https://www.girton-cambs.org.uk/girton-parish-council-2/local-nature-recovery-plan/",
         "description": "The Girton Local Nature Recovery Plan is a 10-year plan for identifying  and improving priority sites, habitats, and species’ statuses  in our village.",
+        "template": "A",
         "tags": [
             "community"
         ],
@@ -90,6 +100,7 @@
         "image": "images/stalls/girton-musical-theatre.png",
         "url": "https://www.girtonmusicaltheatre.org.uk/",
         "description": "Girton Musical Theatre will be selling Pimms",
+        "template": "A",
         "tags": [
             "community",
             "art",
@@ -104,6 +115,7 @@
         "image": "images/karens_kitchen.jpg",
         "description": "Homemade Jams, Preserves, Pickles, Chutneys & Condiments.",
         "url": "https://www.karenskitchenhaverhill.co.uk/",
+        "template": "A",
         "tags": [
             "sweet things",
             "commercial"
@@ -117,6 +129,7 @@
         "image": "images/fourtieth-rule.webp",
         "url": "https://www.fortiethrule.com/",
         "description": "English wines",
+        "template": "A",
         "tags": [
             "wine",
             "commercial"
@@ -129,6 +142,7 @@
         "name": "Muriel Artist",
         "image": "images/stalls/muriel-art.png",
         "url": "https://murielartist.co.uk/",
+        "template": "A",
         "description": "A stall showcasing the vibrant abstract art of Muriel Dahan.",
         "tags": [
             "art",
@@ -143,6 +157,7 @@
         "image": "images/stalls/sherbert-frog.png",
         "url": "http://sherbertfrog.carrd.co",
         "description": "A collection of our beautifully handmade crochet items.",
+        "template": "D",
         "tags": [
             "crafts",
             "commercial"
@@ -155,6 +170,7 @@
         "name": "Sewyee",
         "image": "",
         "url": "https://www.sewyee.etsy.com",
+        "template": "C",
         "description": "Handmade Textile Products",
         "tags": [
             "crafts",
@@ -169,6 +185,7 @@
         "image": "images/lampada_studio.png",
         "url": "https://www.instagram.com/lampadastudio/",
         "description": "Lamps and cushions",
+        "template": "D",
         "tags": [
             "homeware",
             "commercial"
@@ -178,10 +195,12 @@
         ]
     },
     {
-        "name": "Utility Warehouse",
+        "comment": "Utility Warehouse",
+        "name": "",
         "image": "images/stalls/utility-warehouse.png",
         "url": "https://www.uw.co.uk/",
         "description": "20k Prize draw",
+        "template": "A",
         "tags": [
             "commercial"
         ],
@@ -194,6 +213,7 @@
         "image": "images/stalls/scouts.png",
         "url": "#",
         "description": "Fundraising for the World Scout Jamboree.",
+        "template": "D",
         "tags": [
             "charity",
             "sweet things",
@@ -204,10 +224,12 @@
         ]
     },
     {
-        "name": "Estelle's Sweet Treats",
+        "comment": "Estelle's Sweet Treats",
+        "name": "",
         "image": "images/stalls/estelles.png",
         "url": "https://www.facebook.com/estelle.s.sweet.treats.n.hire?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
         "description": "A cart of sweet treats",
+        "template": "A",
         "tags": [
             "commercial",
             "sweet things"
@@ -248,6 +270,7 @@
         "image": "images/stalls/tombola.png",
         "url": "#",
         "description": "Girton Cottontails Nursery and Girton Bowls Club are running child and adult tombolas.",
+        "template": "B",
         "tags": [
             "community",
             "games"
@@ -261,6 +284,7 @@
         "image": "",
         "url": "",
         "description": "Kids toys, noveltys, dress up, lucky dip",
+        "template": "C",
         "tags": [
             "commercial",
             "toys"
@@ -274,6 +298,7 @@
         "image": "images/stalls/kimie_rt.png",
         "url": "https://www.instagram.com/kimie.arty/",
         "description": "Hand painted cards and crafts",
+        "template": "D",
         "tags": [
             "commercial",
             "crafts",
@@ -288,6 +313,7 @@
         "image": "images/stalls/cerana_ceramics.png",
         "url": "https://www.instagram.com/ceranna_ceramics/",
         "description": "Hand-thrown stoneware made in Girton",
+        "template": "A",
         "tags": [
             "commercial",
             "crafts",
@@ -303,6 +329,7 @@
         "image": "images/stalls/vanjarred.jfif",
         "url": "https://cambridge-biomedical.com/event/vanjarred-refillery/",
         "description": "Zero waste shop which brings affordable food, household, and personal care refills directly to you.",
+        "template": "D",
         "tags": [
             "commercial"
         ],
@@ -315,6 +342,7 @@
         "image": "",
         "url": "",
         "description": "",
+        "template": "B",
         "tags": [
             "commercial",
             "toys"
@@ -328,6 +356,7 @@
         "image": "",
         "url": "",
         "description": "Soft toys and plants",
+        "template": "B",
         "tags": [
             "commercial",
             "toys",
@@ -342,6 +371,7 @@
         "image": "",
         "url": "",
         "description": "Vintage pots and vases",
+        "template": "B",
         "tags": [
             "commercial",
             "flowers"
@@ -355,6 +385,7 @@
         "image": "",
         "url": "",
         "description": "",
+        "template": "B",
         "tags": [
             "commercial",
             "sweet things"
@@ -368,6 +399,7 @@
         "image": "images/stalls/cottontails.png",
         "url": "https://www.cottontailspreschool.com/",
         "description": "Child & Adult Tombola",
+        "template": "C",
         "tags": [
             "community",
             "games"
@@ -381,6 +413,7 @@
         "image": "",
         "url": "",
         "description": "Handmade crafts",
+        "template": "C",
         "tags": [
             "commercial",
             "crafts"
@@ -394,6 +427,7 @@
         "image": "",
         "url": "",
         "description": "Home cooked pies & cakes",
+        "template": "C",
         "tags": [
             "commercial",
             "food"
@@ -407,6 +441,7 @@
         "image": "images/stalls/tadpat.png",
         "url": "https://www.instagram.com/tadpat_handmade/",
         "description": "Handmade Leather Handbags",
+        "template": "A",
         "tags": [
             "commercial",
             "crafts"
@@ -420,6 +455,7 @@
         "image": "",
         "url": "",
         "description": "Artisan Cheese",
+        "template": "C",
         "tags": [
             "commercial",
             "food"
@@ -433,6 +469,7 @@
         "image": "images/stalls/zozarts.jpg",
         "url": "https://www.facebook.com/zozartz/",
         "description": "Home sewn goods,homewares etc",
+        "template": "A",
         "tags": [
             "commercial",
             "crafts"
@@ -446,6 +483,7 @@
         "image": "images/stalls/sancha.png",
         "url": "https://sancha.co.uk/",
         "description": "Premium Japanese Cookies & Artisan Biscuits",
+        "template": "A",
         "tags": [
             "commercial",
             "food"
@@ -459,6 +497,7 @@
         "image": "images/stalls/tumi.png",
         "url": "https://www.facebook.com/TumisCreations/",
         "description": "African fabric & household gifts",
+        "template": "A",
         "tags": [
             "commercial",
             "crafts"
@@ -472,6 +511,7 @@
         "image": "images/stalls/ojos.png",
         "url": "https://www.theojosfoods.com/",
         "description": "Spanish Charcuterie, Olive Oil",
+        "template": "A",
         "tags": [
             "commercial",
             "food"
@@ -481,10 +521,12 @@
         ]
     },
     {
-        "name": "Girton Social Club",
+        "comment": "Girton Social Club",
+        "name": "",
         "image": "images/stalls/girton-social-club.png",
         "url": "https://girtonsocialclub.com/",
-        "description": "Information",
+        "description": "",
+        "template": "A",
         "tags": [
             "community"
         ],
@@ -497,6 +539,7 @@
         "image": "",
         "url": "https://foggpta.org.uk/",
         "description": "Raffle & Face Painting",
+        "template": "C",
         "tags": [
             "community",
             "games",

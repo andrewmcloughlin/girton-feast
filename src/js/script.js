@@ -122,38 +122,48 @@ document.addEventListener('alpine:init', () => {
     // Normalize and merge datasets
     get allItems () {
       const rawItems = this.datasets[this.activeCategory] || []
-      return rawItems.map(item => {
+      return rawItems.map((item, index) => {
         // Normalize different data shapes
         const normalized = { ...item }
 
+        // Determine Template (A, B, C, or D)
+        const templates = ['A', 'B', 'C', 'D']
+        normalized.template = (item.template || templates[index % 4]).toUpperCase()
+
+        // Map tags to FontAwesome icons for Template B
+        const iconMapping = {
+          music: 'fas fa-music',
+          shows: 'fas fa-magic',
+          kids: 'fas fa-child',
+          free: 'fas fa-gift',
+          rides: 'fas fa-car-side',
+          games: 'fas fa-gamepad',
+          sports: 'fas fa-volleyball-ball',
+          food: 'fas fa-utensils',
+          drink: 'fas fa-glass-cheers',
+          stalls: 'fas fa-store',
+          community: 'fas fa-users',
+          art: 'fas fa-palette',
+          crafts: 'fas fa-scissors'
+        }
+        normalized.icon = item.icon || (item.tags && item.tags[0] ? iconMapping[item.tags[0]] : null) || 'fas fa-star'
+
         // Handle Beer Tent specific fields
         if (this.activeCategory === 'beers') {
-          // Don't use brewery logo as main card image — the inline brewery
-          // attribution in the template handles that at a smaller size
-          normalized.image = item.image || null
           normalized.url = item.brewery?.website || item.url
-          // tags are already an array in the new schema
           normalized.tags = item.tags || []
         }
 
         // Determine if it's a logo/van (for display purposes)
-        // prioritize explicit setting in data if present
         if (item.imageType) {
           normalized.isLogo = item.imageType === 'logo'
         } else if (item.isLogo !== undefined) {
           normalized.isLogo = item.isLogo
         } else {
-          // fallback to smart defaults
           normalized.isLogo = (this.activeCategory === 'food' || this.activeCategory === 'beers') ||
                                 (item.tags && item.tags.includes('rides'))
         }
 
-        // Handle Food & Drink specific fields
-        if (this.activeCategory === 'food') {
-          normalized.description = item.subtitle
-        }
-
-        // Ensure description is a string
         normalized.description = normalized.description || ''
 
         return normalized

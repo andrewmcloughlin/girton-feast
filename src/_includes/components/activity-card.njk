@@ -4,21 +4,76 @@
 {% set colorClass = 'activity-card-' + pastelColors[index % 4] %}
 {% set rotationClass = rotations[index % 6] %}
 
-<div class="activity-card {{ colorClass }} {{ rotationClass }} d-flex shadow-sm mb-4">
-    {% if item.image %}
-    <img src="{{ (window.siteConfig.pathPrefix or '/') + item.image | url }}" alt="{{ item.name }}" class="card-img-left d-none d-sm-block">
-    {% endif %}
-    <div class="card-body d-flex flex-column justify-content-center">
-        <h3 class="mb-2">{{ item.name }}</h3>
-        {% if item.description %}
-        <p class="mb-3">{{ item.description }}</p>
-        {% endif %}
+{# Determine template based on item.template or fallback to rotation #}
+{% set preferredTemplate = (item.template or (['A', 'B', 'C'][index % 3])) | upper %}
+{% set templateClass = 'card-template-' + preferredTemplate | lower %}
 
-        <div class="d-flex flex-wrap gap-2">
-            {% for tag in item.tags %}
-            <span class="activity-tag">#{{ tag }}</span>
-            {% endfor %}
+{# Map tags to FontAwesome icons for Template B #}
+{% set iconMapping = {
+    'music': 'fas fa-music',
+    'shows': 'fas fa-magic',
+    'kids': 'fas fa-child',
+    'free': 'fas fa-gift',
+    'rides': 'fas fa-car-side',
+    'games': 'fas fa-gamepad',
+    'sports': 'fas fa-volleyball-ball',
+    'food': 'fas fa-utensils',
+    'drink': 'fas fa-glass-cheers',
+    'stalls': 'fas fa-store',
+    'community': 'fas fa-users',
+    'art': 'fas fa-palette',
+    'crafts': 'fas fa-scissors'
+} %}
+{% set icon = item.icon or iconMapping[item.tags[0]] or 'fas fa-star' %}
+
+<div class="activity-card {{ colorClass }} {{ rotationClass }} {{ templateClass }} d-flex shadow-sm mb-4">
+    <div class="w-100 d-flex h-100 {% if preferredTemplate == 'A' or preferredTemplate == 'D' %}flex-column{% else %}flex-row{% endif %}">
+        {% if preferredTemplate == 'A' or preferredTemplate == 'B' or preferredTemplate == 'D' %}
+        {% if item.image %}
+            <img src="{{ (window.siteConfig.pathPrefix or '/') + item.image | url }}" alt="{{ item.name }}" class="card-img-left {% if preferredTemplate == 'D' %}h-50 w-100{% endif %}">
+        {% endif %}
+        <div class="card-body d-flex flex-column h-100 justify-content-center">
+            <h3 class="mb-2">{{ item.name }}</h3>
+            {% if item.description %}
+            <p class="mb-3">{{ item.description }}</p>
+            {% endif %}
+            <div class="d-flex flex-wrap gap-2 mt-auto">
+                {% for tag in item.tags %}
+                <span class="activity-tag">#{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% if item.url %}
+            <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer"
+               class="btn btn-sm btn-outline-dark mt-3 d-inline-flex align-items-center justify-content-center gap-2"
+               style="border-radius: 50px; font-family: 'Comfortaa', cursive; border-width: 2px;">
+                Visit Website <i class="fas fa-external-link-alt small"></i>
+            </a>
+            {% endif %}
         </div>
+    {% else %}
+        {% if preferredTemplate != 'C' and item.image %}
+            <img src="{{ (window.siteConfig.pathPrefix or '/') + item.image | url }}" alt="{{ item.name }}" class="card-img-left d-none d-sm-block">
+        {% endif %}
+        <div class="card-body d-flex flex-column justify-content-center">
+            <h3 class="mb-2">{{ item.name }}</h3>
+            {% if item.description %}
+            <p class="mb-3">{{ item.description }}</p>
+            {% endif %}
+
+            <div class="d-flex flex-wrap gap-2 mt-auto">
+                {% for tag in item.tags %}
+                <span class="activity-tag">#{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% if item.url %}
+            <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer"
+               class="btn btn-sm btn-outline-dark mt-3 d-inline-flex align-items-center justify-content-center gap-2"
+               style="border-radius: 50px; font-family: 'Comfortaa', cursive; border-width: 2px;">
+                Visit Website <i class="fas fa-external-link-alt small"></i>
+            </a>
+            {% endif %}
+        </div>
+        {% endif %}
     </div>
 </div>
 {% endmacro %}

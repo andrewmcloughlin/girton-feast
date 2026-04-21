@@ -4,6 +4,7 @@
         "image": "images/main_event/1.jpg",
         "url": "https://ruletheworldofficial.com/",
         "description": "Take That tribute band",
+        "template": "A",
         "tags": [
             "music",
             "shows"
@@ -15,6 +16,7 @@
         "image": "images/pompom.png",
         "url": "https://pompomkidsparties.co.uk/",
         "description": "Pom Pom The Magic Fox will make your children disappear for 30min",
+        "template": "B",
         "tags": [
             "shows",
             "kids",
@@ -27,6 +29,7 @@
         "image": "images/vendors/munroes_singer.png",
         "url": "https://www.facebook.com/music.themunroes/",
         "description": "Five piece band playing a range of pop, rock and acoustic tracks from the 60's to today",
+        "template": "A",
         "tags": [
             "music",
             "free"
@@ -39,6 +42,7 @@
         "isLogo": false,
         "url": "",
         "description": "",
+        "template": "A",
         "tags": [
             "kids",
             "rides"
@@ -49,6 +53,7 @@
         "name": "Bouncy Castle",
         "url": "",
         "description": "Jump and play in our inflatable assault course",
+        "template": "C",
         "tags": [
             "kids",
             "rides"
@@ -61,6 +66,7 @@
         "isLogo": false,
         "url": "",
         "description": "",
+        "template": "A",
         "tags": [
             "games",
             "kids",
@@ -74,6 +80,7 @@
         "image": "images/table-tennis.png",
         "url": "",
         "description": "",
+        "template": "A",
         "tags": [
             "games",
             "free",
@@ -98,6 +105,7 @@
         "image": "images/fun-run.png",
         "url": "",
         "description": "",
+        "template": "D",
         "tags": [
             "games",
             "free",
@@ -113,6 +121,7 @@
     {
         "name": "Maypole Dancing",
         "image": "images/maypole.png",
+        "template": "A",
         "url": "",
         "description": "",
         "tags": [
@@ -124,6 +133,7 @@
     {
         "name": "Target Bowls & Tombola",
         "image": "images/bowls.png",
+        "template": "D",
         "url": "https://girtonbowlsclub.weebly.com/",
         "description": "Run by Girton Bowls Club",
         "tags": [
@@ -135,6 +145,7 @@
         "name": "Rock Choir",
         "image": "images/rock-choir.png",
         "url": "https://rockchoir.com/",
+        "template": "D",
         "description": "",
         "tags": [
             "music",
@@ -158,6 +169,7 @@
         "image": "images/aircraft.png",
         "url": "https://ivcmac.bmfa.uk/",
         "description": "By Histon & Impington Model Aircraft Club",
+        "template": "D",
         "tags": [
             "shows",
             "free"
@@ -168,6 +180,7 @@
         "name": "Hogwarts Express Train Ride",
         "url": "",
         "description": "",
+        "template": "C",
         "tags": [
             "rides",
             "kids"
@@ -178,6 +191,7 @@
         "name": "Teacups",
         "url": "",
         "description": "",
+        "template": "C",
         "tags": [
             "rides",
             "kids"
@@ -188,6 +202,7 @@
         "name": "Soft Play",
         "url": "",
         "description": "",
+        "template": "C",
         "tags": [
             "rides",
             "kids"

@@ -3,6 +3,7 @@
         "name": "Pimms Tent",
         "subtitle": "By Girton Musical Theatre",
         "image": "images/food/pimms-tent.png",
+        "template": "B",
         "isLogo": false,
         "url": "#",
         "tags": [
@@ -14,6 +15,7 @@
         "name": "Wrapunzel's",
         "subtitle": "Yorkshire Pudding Wraps",
         "url": "https://www.facebook.com/p/Wrapunzel-100092729754323/",
+        "template": "B",
         "tags": [
             "vegetarian",
             "mains"
@@ -23,6 +25,7 @@
     {
         "name": "Tutle Dove Cafe",
         "url": "https://www.turtledovecambridge.com/",
+        "template": "B",
         "tags": [
             "sweet treats"
         ],
@@ -31,6 +34,7 @@
     {
         "name": "Pizza Passione",
         "image": "images/food/pizza-passione-van.png",
+        "template": "B",
         "url": "https://pizzapassione.co.uk/",
         "tags": [
             "mains"
@@ -40,6 +44,7 @@
     {
         "name": "Smokehouse Burgers",
         "image": "images/food/smokehouse-burger-tent.png",
+        "template": "C",
         "url": "#",
         "tags": [
             "mains"
@@ -49,6 +54,7 @@
     {
         "name": "Churros Bar",
         "image": "images/food/churros-van.png",
+        "template": "B",
         "url": "#",
         "tags": [
             "sweet treats"
@@ -58,6 +64,7 @@
     {
         "name": "The Purple Pepper",
         "image": "images/food/the-purple-pepper-van.png",
+        "template": "B",
         "url": "https://www.thepurplepepper.online/",
         "tags": [
             "mains"
@@ -67,6 +74,7 @@
     {
         "name": "Toni's Ices",
         "image": "images/food/tonis-ices-van.png",
+        "template": "B",
         "url": "https://www.tonis-ices.co.uk/",
         "tags": [
             "sweet treats"
@@ -76,6 +84,7 @@
     {
         "name": "Beer Tent",
         "image": "images/food/beer-tent.png",
+        "template": "B",
         "url": "entertainment.html?category=beers",
         "tags": [
             "drinks"
