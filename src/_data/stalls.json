@@ -89,10 +89,11 @@
         "name": "Girton Musical Theatre",
         "image": "images/stalls/girton-musical-theatre.png",
         "url": "https://www.girtonmusicaltheatre.org.uk/",
-        "description": "",
+        "description": "Girton Musical Theatre will be selling Pimms",
         "tags": [
             "community",
-            "art"
+            "art",
+            "drink"
         ],
         "days": [
             "Saturday"
@@ -180,7 +181,7 @@
         "name": "Utility Warehouse",
         "image": "images/stalls/utility-warehouse.png",
         "url": "https://www.uw.co.uk/",
-        "description": "",
+        "description": "20k Prize draw",
         "tags": [
             "commercial"
         ],
@@ -326,9 +327,11 @@
         "name": "Amazing Reptiles",
         "image": "",
         "url": "",
-        "description": "",
+        "description": "Soft toys and plants",
         "tags": [
-            "commercial"
+            "commercial",
+            "toys",
+            "plants"
         ],
         "days": [
             "Saturday"
@@ -338,7 +341,7 @@
         "name": "Mill Blossom Flowers",
         "image": "",
         "url": "",
-        "description": "",
+        "description": "Vintage pots and vases",
         "tags": [
             "commercial",
             "flowers"
@@ -355,6 +358,149 @@
         "tags": [
             "commercial",
             "sweet things"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Cottontails Nursery",
+        "image": "images/stalls/cottontails.png",
+        "url": "https://www.cottontailspreschool.com/",
+        "description": "Child & Adult Tombola",
+        "tags": [
+            "community",
+            "games"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Pretty Things",
+        "image": "",
+        "url": "",
+        "description": "Handmade crafts",
+        "tags": [
+            "commercial",
+            "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "My Special Occasions",
+        "image": "",
+        "url": "",
+        "description": "Home cooked pies & cakes",
+        "tags": [
+            "commercial",
+            "food"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "TadPat",
+        "image": "images/stalls/tadpat.png",
+        "url": "https://www.instagram.com/tadpat_handmade/",
+        "description": "Handmade Leather Handbags",
+        "tags": [
+            "commercial",
+            "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Artisan Cheese & Cured Meats",
+        "image": "",
+        "url": "",
+        "description": "Artisan Cheese",
+        "tags": [
+            "commercial",
+            "food"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "ZozArts",
+        "image": "images/stalls/zozarts.jpg",
+        "url": "https://www.facebook.com/zozartz/",
+        "description": "Home sewn goods,homewares etc",
+        "tags": [
+            "commercial",
+            "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Sancha",
+        "image": "images/stalls/sancha.png",
+        "url": "https://sancha.co.uk/",
+        "description": "Premium Japanese Cookies & Artisan Biscuits",
+        "tags": [
+            "commercial",
+            "food"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Tumi's Creations",
+        "image": "images/stalls/tumi.png",
+        "url": "https://www.facebook.com/TumisCreations/",
+        "description": "African fabric & household gifts",
+        "tags": [
+            "commercial",
+            "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "The Ojos Foods",
+        "image": "images/stalls/ojos.png",
+        "url": "https://www.theojosfoods.com/",
+        "description": "Spanish Charcuterie, Olive Oil",
+        "tags": [
+            "commercial",
+            "food"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Girton Social Club",
+        "image": "images/stalls/girton-social-club.png",
+        "url": "https://girtonsocialclub.com/",
+        "description": "Information",
+        "tags": [
+            "community"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Friends of Girton Glebe",
+        "image": "",
+        "url": "https://foggpta.org.uk/",
+        "description": "Raffle & Face Painting",
+        "tags": [
+            "community",
+            "games",
+            "face painting"
         ],
         "days": [
             "Saturday"
