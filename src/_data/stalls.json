@@ -89,7 +89,8 @@
         "description": "The Girton Local Nature Recovery Plan is a 10-year plan for identifying  and improving priority sites, habitats, and species’ statuses  in our village.",
         "template": "A",
         "tags": [
-            "community"
+            "community",
+            "eco-friendly"
         ],
         "days": [
             "Saturday"
@@ -131,7 +132,7 @@
         "description": "English wines",
         "template": "A",
         "tags": [
-            "wine",
+            "drink",
             "commercial"
         ],
         "days": [
@@ -258,8 +259,7 @@
         "url": "https://c9a768-3.myshopify.com/",
         "description": "",
         "tags": [
-            "commercial",
-            "aromatherapy"
+            "commercial"
         ],
         "days": [
             "Saturday"
@@ -360,7 +360,7 @@
         "tags": [
             "commercial",
             "toys",
-            "plants"
+            "gardening"
         ],
         "days": [
             "Saturday"
@@ -543,7 +543,154 @@
         "tags": [
             "community",
             "games",
-            "face painting"
+            "family"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Cambridge Acorn Project",
+        "image": "images/stalls/cambridge-acorn-project.png",
+        "url": "https://www.cambridgeacornproject.org.uk/",
+        "description": "Raffle and kids arts & crafts",
+        "template": "D",
+        "tags": [
+            "charity",
+            "games",
+            "family",
+            "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "",
+        "image": "images/stalls/wi.png",
+        "url": "https://cambridge.thewi.org.uk/find-wi/early-birds",
+        "description": "",
+        "template": "A",
+        "tags": [
+            "community",
+            "games",
+            "crafts"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "House of Colour",
+        "image": "images/stalls/house-of-colour.png",
+        "url": "https://www.houseofcolour.co.uk/stylists/sarah-george-lee",
+        "description": "Colour Analysis & Faux Flower Arrangements",
+        "template": "D",
+        "tags": [
+            "commercial",
+            "fashion",
+            "flowers"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Green, Blue and You",
+        "image": "images/stalls/green-blue-and-you.png",
+        "url": "https://www.greenblueyou.co.uk/",
+        "description": "A range of carefully chosen, eco-friendly essentials, delivered to you nationwide and with local doorstep refills in north Cambridge and surrounding villages. Bathroom, household, cleaning, laundry, hair and body products.",
+        "template": "D",
+        "tags": [
+            "commercial",
+            "eco-friendly",
+            "household"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Rowan Humberstone",
+        "image": "images/stalls/rowan.png",
+        "url": "https://www.rowanhumberstone.org.uk/",
+        "description": "Products and Arts from adults with learning disabilities",
+        "template": "D",
+        "tags": [
+            "charity",
+            "crafts",
+            "art"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Handmade Galore",
+        "image": "",
+        "url": "https://www.handmadegalore.net/",
+        "description": "Hand painted glassware, candles, wax melts & jewellery",
+        "template": "C",
+        "tags": [
+            "commercial",
+            "crafts",
+            "homeware"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "",
+        "image": "images/stalls/camcycle.png",
+        "url": "https://www.camcycle.org.uk/",
+        "description": "",
+        "template": "A",
+        "tags": [
+            "community"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Handmade crafts by Olivia Welch",
+        "image": "",
+        "url": "",
+        "description": "Handmade crafts and books",
+        "template": "C",
+        "tags": [
+            "commercial",
+            "crafts",
+            "books"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Landscape Photography",
+        "image": "images/stalls/lisa-verrinder.png",
+        "url": "https://www.lisaverrinderphotography.com/",
+        "description": "Landscape Photography by Lisa Verrinder",
+        "template": "D",
+        "tags": [
+            "commercial",
+            "art"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Entangled Pigments",
+        "image": "images/stalls/entangled-pigments.png",
+        "url": "https://www.facebook.com/profile.php?id=61590271236570",
+        "description": "Handmade acrylic paintings",
+        "template": "A",
+        "tags": [
+            "commercial",
+            "art"
         ],
         "days": [
             "Saturday"
