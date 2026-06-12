@@ -149,12 +149,13 @@
             <!-- Standard Card Layout -->
             <template x-if="item.template !== 'SUPERCARD'">
                 <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative group transition-300 hover-lift"
-                     :class="item.featured ? 'featured-card' : ''">
+                     :class="{'featured-card': item.featured, 'light-mode-card': item.lightMode}">
                     <!-- Card Image -->
                     <img :src="(window.siteConfig?.pathPrefix || '/') + item.image" class="card-img object-fit-cover" :alt="item.name" style="height: 380px;">
 
-                    <!-- Dark Gradient Overlay -->
-                    <div class="card-img-overlay d-flex flex-column justify-content-end p-4 bg-gradient-dark-strong transition-300 group-hover-darken">
+                    <!-- Dark/Light Gradient Overlay -->
+                    <div class="card-img-overlay d-flex flex-column justify-content-end pb-3 pt-5 px-4 transition-300 group-hover-darken"
+                         :class="item.lightMode ? 'bg-gradient-light-strong' : 'bg-gradient-dark-strong'">
                         <template x-if="item.days">
                             <div class="position-absolute top-0 start-0 m-3 d-flex gap-1" style="z-index: 10;">
                                 <template x-for="day in item.days">

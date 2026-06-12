@@ -20,7 +20,7 @@
         "description": "A local society, affiliated to the Royal Horticultural Society, for people interested in all aspects of gardening.",
         "tags": [
             "community",
-            "gardening"
+            "plants"
         ],
         "days": [
             "Saturday"
@@ -34,7 +34,7 @@
         "description": "A local society, for people interested in growing their own food.",
         "tags": [
             "community",
-            "gardening"
+            "plants"
         ],
         "days": [
             "Saturday"
@@ -172,8 +172,9 @@
         "comment": "Estelle's Sweet Treats",
         "name": "",
         "image": "images/stalls/estelles.png",
+        "lightMode": true,
         "url": "https://www.facebook.com/estelle.s.sweet.treats.n.hire?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
-        "description": "A cart of sweet treats",
+        "description": "",
         "template": "A",
         "tags": [
             "commercial",
@@ -200,7 +201,7 @@
         {
         "name": "Handmade Crafts",
         "description": "From crochet soft toys to handmade textiles, there's something for everyone.",
-        "image": "images/stalls/craft.png",
+        "image": "",
         "template": "SUPERCARD",
         "subItems": [
             { "name": "SherbertFrog", "url": "http://sherbertfrog.carrd.co" },
@@ -281,7 +282,7 @@
         "template": "B",
         "tags": [
             "commercial",
-            "flowers"
+            "plants"
         ],
         "days": [
             "Saturday"
@@ -403,7 +404,6 @@
     {
         "name": "Toys",
         "description": "From crochet soft toys to handmade textiles, there's something for everyone.",
-        "image": "images/stalls/craft.png",
         "template": "SUPERCARD",
         "subItems": [
             { "name": "Antz", "url": "" },
@@ -451,6 +451,7 @@
         "comment": "Girton Social Club",
         "name": "",
         "image": "images/stalls/girton-social-club.png",
+        "lightMode": true,
         "url": "https://girtonsocialclub.com/",
         "description": "",
         "template": "A",
@@ -531,7 +532,7 @@
         "tags": [
             "commercial",
             "fashion",
-            "flowers"
+            "plants"
         ],
         "days": [
             "Saturday"
@@ -574,10 +575,12 @@
         "description": "",
         "template": "A",
         "tags": [
-            "community"
+            "community",
+            "charity"
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "lightMode": true
     }
 ]

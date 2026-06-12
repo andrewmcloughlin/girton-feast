@@ -51,17 +51,6 @@
         "days": ["Friday", "Saturday"]
     },
     {
-        "name": "Bouncy Castle",
-        "url": "",
-        "description": "Jump and play in our inflatable assault course",
-        "template": "C",
-        "tags": [
-            "kids",
-            "rides"
-        ],
-        "days": ["Friday", "Saturday"]
-    },
-    {
         "name": "Crazy Golf",
         "image": "images/golf.png",
         "isLogo": false,
@@ -92,6 +81,7 @@
     {
         "name": "'Have a Go' Tennis",
         "image": "images/tennis.png",
+        "template": "B",
         "url": "https://girtontennisclub.uk/",
         "description": "Run by Girton Tennis Club",
         "tags": [
@@ -102,6 +92,19 @@
         "days": ["Saturday"]
     },
     {
+        "name": "Maypole Dancing",
+        "image": "images/maypole.png",
+        "featured": true,
+        "template": "A",
+        "url": "",
+        "description": "",
+        "tags": [
+            "free",
+            "shows"
+        ],
+        "days": ["Saturday"]
+    },
+        {
         "name": "Fun Run",
         "image": "images/fun-run.png",
         "url": "",
@@ -118,18 +121,6 @@
             "image": "pizzica.png",
             "url": "https://www.lapizzicacambridge.com/"
         }
-    },
-    {
-        "name": "Maypole Dancing",
-        "image": "images/maypole.png",
-        "template": "A",
-        "url": "",
-        "description": "",
-        "tags": [
-            "free",
-            "shows"
-        ],
-        "days": ["Saturday"]
     },
     {
         "name": "Target Bowls & Tombola",
@@ -178,36 +169,17 @@
         "days": ["Saturday"]
     },
     {
-        "name": "Hogwarts Express Train Ride",
-        "url": "",
+        "name": "And lots, lots more!",
         "description": "",
-        "template": "C",
-        "tags": [
-            "rides",
-            "kids"
+        "image": "images/hogwarts.png",
+        "template": "SUPERCARD",
+        "subItems": [
+            { "name": "Teacups", "url": "" },
+            { "name": "Soft Play", "url": "" },
+            { "name": "Bouncy Castle Assault Course", "url": "" },
+            { "name": "Hogwarts Express Train Ride", "url": "" }
         ],
-        "days": ["Friday", "Saturday"]
-    },
-    {
-        "name": "Teacups",
-        "url": "",
-        "description": "",
-        "template": "C",
-        "tags": [
-            "rides",
-            "kids"
-        ],
-        "days": ["Friday", "Saturday"]
-    },
-    {
-        "name": "Soft Play",
-        "url": "",
-        "description": "",
-        "template": "C",
-        "tags": [
-            "rides",
-            "kids"
-        ],
-        "days": ["Friday", "Saturday"]
+        "tags": ["community"],
+        "days": ["Saturday"]
     }
 ]

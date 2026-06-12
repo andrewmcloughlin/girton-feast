@@ -46,9 +46,17 @@
         gtag('config', 'G-P2D103WGWN');
 
         window.siteConfig = {
-            pathPrefix: "{{ '/' | url }}",
+            pathPrefix: "{{ '/' | url }}".replace(/\/+$/, '') + '/',
             eventInfo: {{ event_info | dump | safe }}
         };
+
+        // Ensure pathPrefix works correctly in local dev
+        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+            if (!window.location.pathname.startsWith(window.siteConfig.pathPrefix)) {
+                console.warn('Path prefix mismatch detected. Adjusting siteConfig.pathPrefix for local development.');
+                window.siteConfig.pathPrefix = '/';
+            }
+        }
     </script>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#main-navbar" data-bs-smooth-scroll="true" tabindex="0"
