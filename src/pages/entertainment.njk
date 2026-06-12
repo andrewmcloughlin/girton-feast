@@ -88,15 +88,17 @@ eleventyNavigation:
     </div>
 
     <!-- Grid of Cards -->
-    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 px-md-2">
+    <div class="row row-cols-1 g-4 px-md-2">
         <template x-for="(item, index) in filteredItems" :key="item.name + '-' + index">
-            <div class="col">
+            <div :class="item.featured ? 'col-12 col-xl-12' : 'col-12 col-md-6 col-xl-4'"
+                 class="grid-item transition-all duration-500">
                 <div class="activity-card d-flex shadow-sm mb-4 h-100"
                      style="position: relative;"
                      :class="[
                         'activity-card-' + (['pink', 'green', 'purple', 'mint'][index % 4]),
                         ['rotate-1', 'rotate-2', 'rotate-neg-1', 'rotate-pos-1', 'rotate-3', 'rotate-4'][index % 6],
-                        'card-template-' + item.template.toLowerCase()
+                        'card-template-' + item.template.toLowerCase(),
+                        item.featured ? 'featured-card' : ''
                      ]">
 
                     <!-- Debug Switcher -->
@@ -105,60 +107,98 @@ eleventyNavigation:
                          @click.stop="item.template = item.template === 'A' ? 'B' : (item.template === 'B' ? 'C' : (item.template === 'C' ? 'D' : 'A'))">
                     </div>
 
-                    <div class="w-100 d-flex h-100" :class="item.template === 'A' || item.template === 'D' ? 'flex-column' : 'flex-row'">
-                        {# Template A, B, or D Image #}
-                        <template x-if="(item.template === 'A' || item.template === 'B' || item.template === 'D') && item.image">
-                            <img :src="(window.siteConfig?.pathPrefix || '/') + item.image"
-                                 :alt="item.name"
-                                 class="card-img-left"
-                                 :class="{
-                                    'card-img-contain': item.isLogo,
-                                    'card-img-cover': !item.isLogo,
-                                    'w-100': item.template === 'A' || item.template === 'D',
-                                    'h-50': item.template === 'D'
-                                 }">
-                        </template>
+                    <!-- Supercard Layout -->
+                    <template x-if="item.template === 'SUPERCARD'">
+                        <div class="supercard-card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative group transition-300 hover-lift w-100"
+                             :style="item.color ? `background-color: ${item.color}` : ''">
+                            <div class="row g-0 h-100 align-items-center">
+                                <div class="col-lg-7 p-4 p-md-5 d-flex flex-column justify-content-center">
+                                    <h2 class="display-4 fw-bold mb-3" x-text="item.name"></h2>
+                                    <p class="lead mb-4 opacity-75" x-text="item.description"></p>
 
-                        <div class="card-body d-flex flex-column justify-content-center p-4 p-md-5">
-                            <h3 class="mb-2" x-text="item.name"></h3>
-                            <template x-if="item.description">
-                                <p class="mb-3" x-text="item.description"></p>
-                            </template>
-
-                            <!-- Brewery & ABV (Beer Tent items) -->
-                            <template x-if="activeCategory === 'beers' && item.brewery">
-                                <div class="mt-2 mb-3 d-flex align-items-center gap-2" :class="item.template === 'B' ? 'justify-content-center' : ''">
-                                    <template x-if="item.brewery.logo">
-                                        <img :src="(window.siteConfig?.pathPrefix || '/') + item.brewery.logo"
-                                             :alt="item.brewery.name"
-                                             style="width:30px; height:30px; object-fit:contain;"
-                                             class="rounded-circle border bg-white p-1">
-                                    </template>
-                                    <span class="small fw-bold" x-text="item.brewery.name"></span>
+                                    <div class="sub-items-container">
+                                        <div class="row row-cols-1 row-cols-md-2 g-3">
+                                            <template x-for="sub in item.subItems" :key="sub.name">
+                                                <div class="col text-start">
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <i class="fas fa-check-circle text-brand-marian-blue opacity-50"></i>
+                                                        <template x-if="sub.url">
+                                                            <a :href="sub.url" target="_blank" class="text-decoration-none fw-bold text-dark hover-primary" x-text="sub.name"></a>
+                                                        </template>
+                                                        <template x-if="!sub.url">
+                                                            <span class="fw-bold text-dark" x-text="sub.name"></span>
+                                                        </template>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </div>
+                                    </div>
                                 </div>
-                            </template>
-                            <template x-if="activeCategory === 'beers' && item.abv !== undefined && item.abv !== null">
-                                <span class="badge rounded-pill bg-dark text-white mb-2 mx-auto" :class="item.template === 'B' ? 'd-block w-fit' : ''" x-text="item.abv.toFixed(1) + '% ABV'"></span>
-                            </template>
-
-                            <div class="d-flex flex-wrap gap-2 mt-auto" :class="item.template === 'B' ? 'justify-content-center' : ''">
-                                <template x-for="tag in item.tags">
-                                    <span class="activity-tag" @click="selectedTag = tag">#<span x-text="tag"></span></span>
+                                <template x-if="item.image">
+                                    <div class="col-lg-5 p-4 p-md-5 d-flex justify-content-center align-items-center">
+                                        <img :src="(window.siteConfig?.pathPrefix || '/') + item.image" :alt="item.name" class="supercard-img-square w-100 h-auto" style="max-width: 400px;">
+                                    </div>
                                 </template>
                             </div>
-
-                            <!-- External Link -->
-                            <template x-if="item.url">
-                                <a :href="item.url" target="_blank" rel="noopener noreferrer"
-                                   class="btn btn-sm btn-outline-dark mt-3 d-inline-flex align-items-center justify-content-center gap-2"
-                                   style="border-radius: 50px; font-family: 'Comfortaa', cursive; border-width: 2px;">
-                                    Visit Website <i class="fas fa-external-link-alt small"></i>
-                                </a>
-                            </template>
                         </div>
-                    </div>
+                    </template>
 
-                    </div>
+                    <!-- Standard Card Layout -->
+                    <template x-if="item.template !== 'SUPERCARD'">
+                        <div class="w-100 d-flex h-100" :class="item.template === 'A' || item.template === 'D' ? 'flex-column' : 'flex-row'">
+                            {# Template A, B, or D Image #}
+                            <template x-if="(item.template === 'A' || item.template === 'B' || item.template === 'D') && item.image">
+                                <img :src="(window.siteConfig?.pathPrefix || '/') + item.image"
+                                     :alt="item.name"
+                                     class="card-img-left"
+                                     :class="{
+                                        'card-img-contain': item.isLogo,
+                                        'card-img-cover': !item.isLogo,
+                                        'w-100': item.template === 'A' || item.template === 'D',
+                                        'h-50': item.template === 'D'
+                                     }">
+                            </template>
+
+                            <div class="card-body d-flex flex-column justify-content-center p-4 p-md-5">
+                                <h3 class="mb-2" x-text="item.name"></h3>
+                                <template x-if="item.description">
+                                    <p class="mb-3" x-text="item.description"></p>
+                                </template>
+
+                                <!-- Brewery & ABV (Beer Tent items) -->
+                                <template x-if="activeCategory === 'beers' && item.brewery">
+                                    <div class="mt-2 mb-3 d-flex align-items-center gap-2" :class="item.template === 'B' ? 'justify-content-center' : ''">
+                                        <template x-if="item.brewery.logo">
+                                            <img :src="(window.siteConfig?.pathPrefix || '/') + item.brewery.logo"
+                                                 :alt="item.brewery.name"
+                                                 style="width:30px; height:30px; object-fit:contain;"
+                                                 class="rounded-circle border bg-white p-1">
+                                        </template>
+                                        <span class="small fw-bold" x-text="item.brewery.name"></span>
+                                    </div>
+                                </template>
+                                <template x-if="activeCategory === 'beers' && item.abv !== undefined && item.abv !== null">
+                                    <span class="badge rounded-pill bg-dark text-white mb-2 mx-auto" :class="item.template === 'B' ? 'd-block w-fit' : ''" x-text="item.abv.toFixed(1) + '% ABV'"></span>
+                                </template>
+
+                                <div class="d-flex flex-wrap gap-2 mt-auto" :class="item.template === 'B' ? 'justify-content-center' : ''">
+                                    <template x-for="tag in item.tags">
+                                        <span class="activity-tag" @click="selectedTag = tag">#<span x-text="tag"></span></span>
+                                    </template>
+                                </div>
+
+                                <!-- External Link -->
+                                <template x-if="item.url">
+                                    <a :href="item.url" target="_blank" rel="noopener noreferrer"
+                                       class="btn btn-sm btn-outline-dark mt-3 d-inline-flex align-items-center justify-content-center gap-2"
+                                       style="border-radius: 50px; font-family: 'Comfortaa', cursive; border-width: 2px;">
+                                        Visit Website <i class="fas fa-external-link-alt small"></i>
+                                    </a>
+                                </template>
+                            </div>
+                        </div>
+                    </template>
+
                 </div>
             </div>
         </template>

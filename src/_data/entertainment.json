@@ -3,6 +3,7 @@
         "name": "Rule The World",
         "image": "images/main_event/1.jpg",
         "url": "https://ruletheworldofficial.com/",
+        "featured": true,
         "description": "Take That tribute band",
         "template": "A",
         "tags": [

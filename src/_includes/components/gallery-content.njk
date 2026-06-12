@@ -103,58 +103,99 @@
         </template>
 
         <!-- Items Grid -->
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+        <div class="row g-4" x-ref="gridContainer">
             <template x-for="item in filteredItems" :key="item.name">
-                <div class="col">
-                    <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative group transition-300 hover-lift">
-                        <!-- Card Image -->
-                        <img :src="(window.siteConfig?.pathPrefix || '/') + item.image" class="card-img object-fit-cover" :alt="item.name" style="height: 380px;">
+                <div :class="item.featured ? 'col-12 col-xl-12' : 'col-12 col-md-6 col-xl-4'"
+                     class="grid-item transition-all duration-500"
+                     x-transition:enter="transition ease-out duration-300"
+                     x-transition:enter-start="opacity-0 transform scale-95"
+                     x-transition:enter-end="opacity-100 transform scale-100">
+            <!-- Supercard Layout -->
+            <template x-if="item.template === 'SUPERCARD'">
+                <div class="supercard-card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative group transition-300 hover-lift"
+                     :style="item.color ? `background-color: ${item.color}` : ''">
+                    <div class="row g-0 h-100 align-items-center">
+                        <div class="col-lg-7 p-4 p-md-5 d-flex flex-column justify-content-center">
+                            <h2 class="display-4 fw-bold mb-3" x-text="item.name"></h2>
+                            <p class="lead mb-4 opacity-75" x-text="item.description"></p>
 
-                        <!-- Dark Gradient Overlay -->
-                        <div class="card-img-overlay d-flex flex-column justify-content-end p-4 bg-gradient-dark-strong transition-300 group-hover-darken">
-                            <template x-if="item.days">
-                                <div class="position-absolute top-0 start-0 m-3 d-flex gap-1" style="z-index: 10;">
-                                    <template x-for="day in item.days">
-                                        <span class="badge rounded-pill shadow-sm px-3 py-1 fw-bold" style="font-size: 0.7rem;" x-text="day"></span>
+                            <div class="sub-items-container">
+                                <div class="row row-cols-1 row-cols-md-2 g-3">
+                                    <template x-for="sub in item.subItems" :key="sub.name">
+                                        <div class="col">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class="fas fa-check-circle text-brand-marian-blue opacity-50"></i>
+                                                <template x-if="sub.url">
+                                                    <a :href="sub.url" target="_blank" class="text-decoration-none fw-bold text-dark hover-primary" x-text="sub.name"></a>
+                                                </template>
+                                                <template x-if="!sub.url">
+                                                    <span class="fw-bold text-dark" x-text="sub.name"></span>
+                                                </template>
+                                            </div>
+                                        </div>
                                     </template>
                                 </div>
-                            </template>
+                            </div>
+                        </div>
+                        <template x-if="item.image">
+                            <div class="col-lg-5 p-4 p-md-5 d-flex justify-content-center align-items-center">
+                                <img :src="(window.siteConfig?.pathPrefix || '/') + item.image" :alt="item.name" class="supercard-img-square w-100 h-auto" style="max-width: 400px;">
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </template>
 
-                            <!-- Sponsor Badge (Top Right) -->
-                            <template x-if="item.sponsor">
-                                <a :href="item.sponsor.url" target="_blank" class="sponsor-badge text-decoration-none">
-                                    <span class="sponsor-label">Sponsored by</span>
-                                    <div class="sponsor-name-container">
-                                        <span class="sponsor-name" x-text="item.sponsor.name"></span>
-                                    </div>
-                                </a>
-                            </template>
+            <!-- Standard Card Layout -->
+            <template x-if="item.template !== 'SUPERCARD'">
+                <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden position-relative group transition-300 hover-lift"
+                     :class="item.featured ? 'featured-card' : ''">
+                    <!-- Card Image -->
+                    <img :src="(window.siteConfig?.pathPrefix || '/') + item.image" class="card-img object-fit-cover" :alt="item.name" style="height: 380px;">
 
-                            <!-- Card Content (Bottom) -->
-                            <div class="content-wrapper">
-                                <h4 class="card-title text-white fw-bold text-shadow mb-1" x-text="item.name"></h4>
-                                <p class="card-text text-white-50 small mb-3 line-clamp-2 text-shadow-subtle" x-text="item.description"></p>
+                    <!-- Dark Gradient Overlay -->
+                    <div class="card-img-overlay d-flex flex-column justify-content-end p-4 bg-gradient-dark-strong transition-300 group-hover-darken">
+                        <template x-if="item.days">
+                            <div class="position-absolute top-0 start-0 m-3 d-flex gap-1" style="z-index: 10;">
+                                <template x-for="day in item.days">
+                                    <span class="badge rounded-pill shadow-sm px-3 py-1 fw-bold" style="font-size: 0.7rem;" x-text="day"></span>
+                                </template>
+                            </div>
+                        </template>
 
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <!-- Category Tags -->
-                                    <div class="d-flex flex-wrap gap-1">
-                                        <template x-for="tag in item.tags">
-                                            <span class="badge rounded-pill shadow-sm text-capitalize px-2 py-1"
-                                                  :class="getTagColorClass(tag)"
-                                                  style="font-size: 0.65rem;"
-                                                  x-text="tag.replace(/-/g, ' ')">
-                                            </span>
-                                        </template>
-                                    </div>
+                        <!-- Sponsor Badge (Top Right) -->
+                        <template x-if="item.sponsor">
+                            <a :href="item.sponsor.url" target="_blank" class="sponsor-badge text-decoration-none">
+                                <span class="sponsor-label">Sponsored by</span>
+                                <div class="sponsor-name-container">
+                                    <span class="sponsor-name" x-text="item.sponsor.name"></span>
+                                </div>
+                            </a>
+                        </template>
 
-                                    <!-- Visit Button -->
-                                    <template x-if="item.url && item.url !== '#'">
-                                        <a :href="item.url" class="btn btn-white btn-sm rounded-circle shadow-sm ms-2 p-2 d-flex align-items-center justify-content-center transition-300 hover-scale"
-                                           style="width: 32px; height: 32px;" target="_blank">
-                                            <i class="fas fa-external-link-alt" style="font-size: 0.75rem;"></i>
-                                        </a>
+                        <!-- Card Content (Bottom) -->
+                        <div class="content-wrapper">
+                            <h4 class="card-title text-white fw-bold text-shadow mb-1" x-text="item.name"></h4>
+                            <p class="card-text text-white-50 small mb-3 line-clamp-2 text-shadow-subtle" x-text="item.description"></p>
+
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- Category Tags -->
+                                <div class="d-flex flex-wrap gap-1">
+                                    <template x-for="tag in item.tags">
+                                        <span class="badge rounded-pill shadow-sm text-capitalize px-2 py-1"
+                                              :class="getTagColorClass(tag)"
+                                              style="font-size: 0.65rem;"
+                                              x-text="tag.replace(/-/g, ' ')">
+                                        </span>
                                     </template>
                                 </div>
+
+                                <!-- Action Link -->
+                                <template x-if="item.url && item.url !== '#'">
+                                    <a :href="item.url" target="_blank" class="btn btn-sm btn-light rounded-pill px-3 fw-bold transition-200">
+                                        Visit <i class="fas fa-arrow-right ms-1 small"></i>
+                                    </a>
+                                </template>
                             </div>
                         </div>
                     </div>

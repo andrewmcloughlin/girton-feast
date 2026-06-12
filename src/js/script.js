@@ -119,16 +119,43 @@ document.addEventListener('alpine:init', () => {
     selectedDay: 'all',
     searchQuery: '',
 
+    // Provide aliases for template compatibility
+    get items () { return this.allItems },
+    get currentKey () { return this.activeCategory },
+
+    // Configuration for the gallery UI
+    config: {
+      showDayFilter: initialCategory !== 'stalls',
+      titleImage: (initialCategory === 'stalls' ? (window.siteConfig?.pathPrefix || '/') + 'images/titles/stalls.png' : (window.siteConfig?.pathPrefix || '/') + 'images/titles/events.png'),
+      sidebarGoose: (window.siteConfig?.pathPrefix || '/') + 'images/silly_goose.svg',
+      noResultsText: 'No matching items found',
+      cta: {
+        show: initialCategory === 'entertainment',
+        title: 'Join the Fun!',
+        text: 'Want to host a stall or perform at the Feast? Get in touch!',
+        primaryBtn: {
+          text: 'Contact Us',
+          url: (window.siteConfig?.pathPrefix || '/') + 'pages/contact.html',
+          icon: 'fas fa-envelope'
+        }
+      }
+    },
+
     // Normalize and merge datasets
     get allItems () {
-      const rawItems = this.datasets[this.activeCategory] || []
+      const rawItems = (Array.isArray(this.datasets) ? this.datasets : this.datasets[this.activeCategory]) || []
       return rawItems.map((item, index) => {
         // Normalize different data shapes
         const normalized = { ...item }
 
-        // Determine Template (A, B, C, or D)
+        // Determine Template (A, B, C, D, or SUPERCARD)
         const templates = ['A', 'B', 'C', 'D']
         normalized.template = (item.template || templates[index % 4]).toUpperCase()
+
+        // Supercards are always featured and full-width
+        if (normalized.template === 'SUPERCARD') {
+          normalized.featured = true
+        }
 
         // Map tags to FontAwesome icons for Template B
         const iconMapping = {

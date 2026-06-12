@@ -1,45 +1,16 @@
 [
     {
-        "comment": "Girton Parish Council",
-        "name": "",
+        "name": "Local Council Hub",
+        "description": "Connect with your local government representatives from the Parish, City, and District councils. Find out about local initiatives and services.",
         "image": "images/stalls/gpc.png",
-        "url": "https://www.girton-cambs.org.uk/",
-        "template": "A",
-        "description": "",
-        "tags": [
-            "community"
+        "template": "SUPERCARD",
+        "subItems": [
+            { "name": "Girton Parish Council", "url": "https://www.girton-cambs.org.uk/" },
+            { "name": "Cambridge City Council", "url": "https://www.cambridge.gov.uk/" },
+            { "name": "South Cambridgeshire District Council", "url": "https://www.scambs.gov.uk/" }
         ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "comment": "Cambridge City Council",
-        "name": "",
-        "image": "images/stalls/ccc.png",
-        "url": "https://www.cambridge.gov.uk/",
-        "template": "A",
-        "description": "",
-        "tags": [
-            "community"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "comment": "South Cambridgeshire District Council",
-        "name": "",
-        "image": "images/stalls/scdc.png",
-        "url": "https://www.scambs.gov.uk/",
-        "template": "A",
-        "description": "",
-        "tags": [
-            "community"
-        ],
-        "days": [
-            "Saturday"
-        ]
+        "tags": ["community"],
+        "days": ["Saturday"]
     },
     {
         "name": "Girton Garden Society: Mini Show & Sale",
@@ -126,6 +97,21 @@
         ]
     },
     {
+        "name": "Muriel Artist",
+        "image": "images/stalls/muriel-art.png",
+        "url": "https://murielartist.co.uk/",
+        "template": "A",
+        "featured": true,
+        "description": "A stall showcasing the vibrant abstract art of Muriel Dahan.",
+        "tags": [
+            "art",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
         "name": "Fourtieth Rule",
         "image": "images/fourtieth-rule.webp",
         "url": "https://www.fortiethrule.com/",
@@ -139,49 +125,7 @@
             "Saturday"
         ]
     },
-    {
-        "name": "Muriel Artist",
-        "image": "images/stalls/muriel-art.png",
-        "url": "https://murielartist.co.uk/",
-        "template": "A",
-        "description": "A stall showcasing the vibrant abstract art of Muriel Dahan.",
-        "tags": [
-            "art",
-            "commercial"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "SherbertFrog: Handmade crochet soft toys",
-        "image": "images/stalls/sherbert-frog.png",
-        "url": "http://sherbertfrog.carrd.co",
-        "description": "A collection of our beautifully handmade crochet items.",
-        "template": "D",
-        "tags": [
-            "crafts",
-            "commercial"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Sewyee",
-        "image": "",
-        "url": "https://www.sewyee.etsy.com",
-        "template": "C",
-        "description": "Handmade Textile Products",
-        "tags": [
-            "crafts",
-            "commercial"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
+        {
         "name": "Lampada Studio",
         "image": "images/lampada_studio.png",
         "url": "https://www.instagram.com/lampadastudio/",
@@ -253,6 +197,27 @@
             "Saturday"
         ]
     },
+        {
+        "name": "Handmade Crafts",
+        "description": "From crochet soft toys to handmade textiles, there's something for everyone.",
+        "image": "images/stalls/craft.png",
+        "template": "SUPERCARD",
+        "subItems": [
+            { "name": "SherbertFrog", "url": "http://sherbertfrog.carrd.co" },
+            { "name": "Sewyee", "url": "https://www.sewyee.etsy.com" },
+            { "name": "Handmade Galore", "url": "https://www.handmadegalore.net/" },
+            { "name": "Kimmie Arty", "url": "https://www.instagram.com/kimie.arty/" },
+            { "name": "Pretty Things", "url": "" },
+            { "name": "Olivia Welch", "url": "" }
+        ],
+        "tags": [
+            "crafts",
+            "commercial"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
     {
         "name": "Nora's Aromas",
         "image": "images/nora_aromas.avif",
@@ -274,35 +239,6 @@
         "tags": [
             "community",
             "games"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Antz",
-        "image": "",
-        "url": "",
-        "description": "Kids toys, noveltys, dress up, lucky dip",
-        "template": "C",
-        "tags": [
-            "commercial",
-            "toys"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Kimie Arty",
-        "image": "images/stalls/kimie_rt.png",
-        "url": "https://www.instagram.com/kimie.arty/",
-        "description": "Hand painted cards and crafts",
-        "template": "D",
-        "tags": [
-            "commercial",
-            "crafts",
-            "art"
         ],
         "days": [
             "Saturday"
@@ -338,35 +274,6 @@
         ]
     },
     {
-        "name": "Simon's Toys",
-        "image": "",
-        "url": "",
-        "description": "",
-        "template": "B",
-        "tags": [
-            "commercial",
-            "toys"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Amazing Reptiles",
-        "image": "",
-        "url": "",
-        "description": "Soft toys and plants",
-        "template": "B",
-        "tags": [
-            "commercial",
-            "toys",
-            "gardening"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
         "name": "Mill Blossom Flowers",
         "image": "",
         "url": "",
@@ -395,6 +302,21 @@
         ]
     },
     {
+        "name": "Landscape Photography",
+        "image": "images/stalls/lisa-verrinder.png",
+        "url": "https://www.lisaverrinderphotography.com/",
+        "description": "Landscape Photography by Lisa Verrinder",
+        "template": "A",
+        "featured": true,
+        "tags": [
+            "commercial",
+            "art"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
         "name": "Cottontails Nursery",
         "image": "images/stalls/cottontails.png",
         "url": "https://www.cottontailspreschool.com/",
@@ -403,20 +325,6 @@
         "tags": [
             "community",
             "games"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Pretty Things",
-        "image": "",
-        "url": "",
-        "description": "Handmade crafts",
-        "template": "C",
-        "tags": [
-            "commercial",
-            "crafts"
         ],
         "days": [
             "Saturday"
@@ -487,6 +395,25 @@
         "tags": [
             "commercial",
             "food"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Toys",
+        "description": "From crochet soft toys to handmade textiles, there's something for everyone.",
+        "image": "images/stalls/craft.png",
+        "template": "SUPERCARD",
+        "subItems": [
+            { "name": "Antz", "url": "" },
+            { "name": "Amazing Reptiles", "url": "" },
+            { "name": "Simon's Toys", "url": "" }
+        ],
+        "tags": [
+            "toys",
+            "games",
+            "commercial"
         ],
         "days": [
             "Saturday"
@@ -581,6 +508,21 @@
         ]
     },
     {
+        "name": "Entangled Pigments",
+        "image": "images/stalls/entangled-pigments.png",
+        "url": "https://www.facebook.com/profile.php?id=61590271236570",
+        "description": "Handmade acrylic paintings",
+        "template": "A",
+        "featured": true,
+        "tags": [
+            "commercial",
+            "art"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
         "name": "House of Colour",
         "image": "images/stalls/house-of-colour.png",
         "url": "https://www.houseofcolour.co.uk/stylists/sarah-george-lee",
@@ -626,21 +568,6 @@
         ]
     },
     {
-        "name": "Handmade Galore",
-        "image": "",
-        "url": "https://www.handmadegalore.net/",
-        "description": "Hand painted glassware, candles, wax melts & jewellery",
-        "template": "C",
-        "tags": [
-            "commercial",
-            "crafts",
-            "homeware"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
         "name": "",
         "image": "images/stalls/camcycle.png",
         "url": "https://www.camcycle.org.uk/",
@@ -648,49 +575,6 @@
         "template": "A",
         "tags": [
             "community"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Handmade crafts by Olivia Welch",
-        "image": "",
-        "url": "",
-        "description": "Handmade crafts and books",
-        "template": "C",
-        "tags": [
-            "commercial",
-            "crafts",
-            "books"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Landscape Photography",
-        "image": "images/stalls/lisa-verrinder.png",
-        "url": "https://www.lisaverrinderphotography.com/",
-        "description": "Landscape Photography by Lisa Verrinder",
-        "template": "D",
-        "tags": [
-            "commercial",
-            "art"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Entangled Pigments",
-        "image": "images/stalls/entangled-pigments.png",
-        "url": "https://www.facebook.com/profile.php?id=61590271236570",
-        "description": "Handmade acrylic paintings",
-        "template": "A",
-        "tags": [
-            "commercial",
-            "art"
         ],
         "days": [
             "Saturday"
