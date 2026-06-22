@@ -628,5 +628,18 @@
         "days": [
             "Saturday"
         ]
+    },
+    {
+        "name": "Girton Dental Practice",
+        "image": "images/stalls/girton-dental.png",
+        "url": "https://girtondentalpractice.co.uk/",
+        "description": "",
+        "template": "A",
+        "tags": [
+            "community"
+        ],
+        "days": [
+            "Saturday"
+        ]
     }
 ]
