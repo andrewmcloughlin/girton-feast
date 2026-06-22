@@ -209,11 +209,15 @@
             { "name": "Handmade Galore", "url": "https://www.handmadegalore.net/" },
             { "name": "Kimmie Arty", "url": "https://www.instagram.com/kimie.arty/" },
             { "name": "Pretty Things", "url": "" },
-            { "name": "Olivia Welch", "url": "" }
+            { "name": "Olivia Welch", "url": "" },
+            { "name": "eJewee", "url": "" },
+            { "name": "Rela Designs", "url": "" },
+            { "name": "Oink Designs", "url": "" }
         ],
         "tags": [
             "crafts",
-            "commercial"
+            "commercial",
+            "jewellery"
         ],
         "days": [
             "Saturday"
@@ -582,5 +586,47 @@
             "Saturday"
         ],
         "lightMode": true
+    },
+    {
+        "name": "Saragusta Spirits",
+        "image": "images/stalls/saragusta.png",
+        "url": "https://www.saragusta.com/",
+        "description": "",
+        "template": "B",
+        "tags": [
+            "commercial",
+            "drink"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Girton Colts FC",
+        "image": "images/stalls/girton-colts.png",
+        "url": "https://www.girtoncolts.co.uk/",
+        "description": "",
+        "template": "A",
+        "tags": [
+            "community",
+            "games"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Granny Ma's Bubby Tea",
+        "image": "images/stalls/granny-ma.png",
+        "url": "https://grannymas.wixsite.com/grannymasbubbletea",
+        "description": "",
+        "template": "D",
+        "tags": [
+            "commercial",
+            "drink"
+        ],
+        "days": [
+            "Saturday"
+        ]
     }
 ]
