@@ -616,21 +616,7 @@
         ]
     },
     {
-        "name": "Granny Ma's Bubby Tea",
-        "image": "images/stalls/granny-ma.png",
-        "url": "https://grannymas.wixsite.com/grannymasbubbletea",
-        "description": "",
-        "template": "D",
-        "tags": [
-            "commercial",
-            "drink"
-        ],
-        "days": [
-            "Saturday"
-        ]
-    },
-    {
-        "name": "Girton Dental Practice",
+        "name": "Girton Dental",
         "image": "images/stalls/girton-dental.png",
         "url": "https://girtondentalpractice.co.uk/",
         "description": "",
