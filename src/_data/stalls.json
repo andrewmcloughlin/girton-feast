@@ -627,5 +627,19 @@
         "days": [
             "Saturday"
         ]
+    },
+    {
+        "name": "Care Network Cambridgeshire",
+        "image": "images/stalls/care-network.png",
+        "url": "https://care-network.org.uk",
+        "description": "",
+        "template": "A",
+        "tags": [
+            "community",
+            "charity"
+        ],
+        "days": [
+            "Saturday"
+        ]
     }
 ]
