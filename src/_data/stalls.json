@@ -649,9 +649,9 @@
         "url": "https://store.bricklink.com/Tasmina#/shop",
         "description": "",
         "template": "A",
-        "lightMode": true,
         "tags": [
-            "commercial"
+            "commercial",
+            "toys"
         ],
         "days": [
             "Saturday"
