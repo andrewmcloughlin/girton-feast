@@ -629,14 +629,29 @@
         ]
     },
     {
-        "name": "Care Network Cambridgeshire",
+        "name": "",
         "image": "images/stalls/care-network.png",
         "url": "https://care-network.org.uk",
         "description": "",
         "template": "A",
+        "lightMode": true,
         "tags": [
             "community",
             "charity"
+        ],
+        "days": [
+            "Saturday"
+        ]
+    },
+    {
+        "name": "Bricks & Minifigs Galore",
+        "image": "images/stalls/lego.png",
+        "url": "https://store.bricklink.com/Tasmina#/shop",
+        "description": "",
+        "template": "A",
+        "lightMode": true,
+        "tags": [
+            "commercial"
         ],
         "days": [
             "Saturday"
