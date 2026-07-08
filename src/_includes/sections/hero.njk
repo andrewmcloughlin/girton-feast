@@ -39,13 +39,19 @@
             </div>
         </div>
         <template x-if="$store.app.eventInfo">
-            <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2 d-block d-md-none">
-                <a class="switcher-btn switcher-btn-yellow rotate-neg-2" href="https://www.ticketsource.com/girtonfeast" target="_blank">
-                    <i class="fas fa-ticket-alt me-2"></i>Claim your tickets →
-                </a>
-                <a class="switcher-btn switcher-btn-yellow rotate-pos-2" href="{{ '/entertainment.html' | url }}">
-                    See Fete Activities →
-                </a>
+            <div class="d-flex flex-column align-items-center justify-content-center text-center gap-3 d-block d-md-none mb-3">
+                <div class="bg-brand-marian-blue text-white rounded-pill px-4 py-2 shadow-sm fs-6">
+                    <span x-text="$store.app.eventInfo.main_event.date_short"></span> &amp;
+                    <span x-text="$store.app.eventInfo.village_fete.date_short"></span>
+                </div>
+                <div class="d-flex flex-column flex-sm-row justify-content-center text-center gap-2">
+                    <a class="switcher-btn switcher-btn-yellow rotate-neg-2" href="https://www.ticketsource.com/girtonfeast" target="_blank">
+                        <i class="fas fa-ticket-alt me-2"></i>Claim your tickets →
+                    </a>
+                    <a class="switcher-btn switcher-btn-yellow rotate-pos-2" href="{{ '/entertainment.html' | url }}">
+                        See Fete Activities →
+                    </a>
+                </div>
             </div>
         </template>
     </div>
