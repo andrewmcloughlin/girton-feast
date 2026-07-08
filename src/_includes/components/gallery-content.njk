@@ -116,7 +116,7 @@
                      :style="item.color ? `background-color: ${item.color}` : ''">
                     <div class="row g-0 h-100 align-items-center">
                         <div class="col-lg-7 p-4 p-md-5 d-flex flex-column justify-content-center">
-                            <h2 class="display-4 fw-bold mb-3" x-text="item.name"></h2>
+                            <h2 class="display-4 fw-bold mb-3" x-text="item.name" x-show="item.name_displayed !== false"></h2>
                             <p class="lead mb-4 opacity-75" x-text="item.description"></p>
 
                             <div class="sub-items-container">
@@ -176,7 +176,7 @@
 
                         <!-- Card Content (Bottom) -->
                         <div class="content-wrapper">
-                            <h4 class="card-title text-white fw-bold text-shadow mb-1" x-text="item.name"></h4>
+                            <h4 class="card-title text-white fw-bold text-shadow mb-1" x-text="item.name" x-show="item.name_displayed !== false"></h4>
                             <p class="card-text text-white-50 small mb-3 line-clamp-2 text-shadow-subtle" x-text="item.description"></p>
 
                             <div class="d-flex justify-content-between align-items-center">

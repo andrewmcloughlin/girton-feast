@@ -33,7 +33,9 @@
             <img src="{{ (window.siteConfig.pathPrefix or '/') + item.image | url }}" alt="{{ item.name }}" class="card-img-left {% if preferredTemplate == 'D' %}h-50 w-100{% endif %}">
         {% endif %}
         <div class="card-body d-flex flex-column h-100 justify-content-center">
+            {% if item.name_displayed != false %}
             <h3 class="mb-2">{{ item.name }}</h3>
+            {% endif %}
             {% if item.description %}
             <p class="mb-3">{{ item.description }}</p>
             {% endif %}
@@ -55,7 +57,9 @@
             <img src="{{ (window.siteConfig.pathPrefix or '/') + item.image | url }}" alt="{{ item.name }}" class="card-img-left d-none d-sm-block">
         {% endif %}
         <div class="card-body d-flex flex-column justify-content-center">
+            {% if item.name_displayed != false %}
             <h3 class="mb-2">{{ item.name }}</h3>
+            {% endif %}
             {% if item.description %}
             <p class="mb-3">{{ item.description }}</p>
             {% endif %}

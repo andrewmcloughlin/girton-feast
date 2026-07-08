@@ -7,7 +7,9 @@
             </div>
         {% endif %}
         <div class="vendor-card-content">
+            {% if vendor.name_displayed !== false %}
             <h3 class="vendor-card-name">{{ vendor.name }}</h3>
+            {% endif %}
             {% if vendor.subtitle %}
                 <p class="vendor-card-subtitle mb-0">{{ vendor.subtitle }}</p>
             {% endif %}

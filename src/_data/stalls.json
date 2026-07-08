@@ -10,7 +10,8 @@
             { "name": "South Cambridgeshire District Council", "url": "https://www.scambs.gov.uk/" }
         ],
         "tags": ["community"],
-        "days": ["Saturday"]
+        "days": ["Saturday"],
+        "mapCoords": [1000, 610]
     },
     {
         "name": "Girton Garden Society: Mini Show & Sale",
@@ -24,7 +25,8 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "mapCoords": [970, 1550]
     },
     {
         "name": "Girton Allotment Society",
@@ -94,10 +96,12 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "H57",
+        "mapCoords": [1175, 700]
     },
     {
-        "name": "Muriel Artist",
+        "name": "Muriel's Art",
         "image": "images/stalls/muriel-art.png",
         "url": "https://murielartist.co.uk/",
         "template": "A",
@@ -109,7 +113,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "E50",
+        "mapCoords": [1190, 1255]
     },
     {
         "name": "Fourtieth Rule",
@@ -123,7 +129,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "A11",
+        "mapCoords": [800, 1000]
     },
         {
         "name": "Lampada Studio",
@@ -140,8 +148,8 @@
         ]
     },
     {
-        "comment": "Utility Warehouse",
-        "name": "",
+        "name": "Utility Warehouse",
+        "name_displayed": false,
         "image": "images/stalls/utility-warehouse.png",
         "url": "https://www.uw.co.uk/",
         "description": "20k Prize draw",
@@ -151,7 +159,8 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "mapCoords": [1290, 672]
     },
     {
         "name": "World Scout Jamboree Fundraiser",
@@ -166,11 +175,12 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "mapCoords": [1060, 1390]
     },
     {
-        "comment": "Estelle's Sweet Treats",
-        "name": "",
+        "name": "Estelle's Sweet Treats",
+        "name_displayed": false,
         "image": "images/stalls/estelles.png",
         "lightMode": true,
         "url": "https://www.facebook.com/estelle.s.sweet.treats.n.hire?utm_source=ig&utm_medium=social&utm_content=link_in_bio",
@@ -182,7 +192,8 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "mapCoords": [1290, 1300]
     },
     {
         "name": "Things So Sweet",
@@ -196,7 +207,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "E54",
+        "mapCoords": [1080, 1430]
     },
         {
         "name": "Handmade Crafts",
@@ -233,7 +246,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "B13",
+        "mapCoords": [1100, 700]
     },
     {
         "name": "Tombolas",
@@ -290,7 +305,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "H59",
+        "mapCoords": [1190, 735]
     },
     {
         "name": "Elsa's Ices",
@@ -304,7 +321,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "G65",
+        "mapCoords": [1180, 1450]
     },
     {
         "name": "Landscape Photography",
@@ -319,7 +338,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "H63",
+        "mapCoords": [1260, 835]
     },
     {
         "name": "Cottontails Nursery",
@@ -347,7 +368,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "F1",
+        "mapCoords": [875, 1050]
     },
     {
         "name": "TadPat",
@@ -435,7 +458,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "B19",
+        "mapCoords": [935, 985]
     },
     {
         "name": "The Ojos Foods",
@@ -449,11 +474,13 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "B17",
+        "mapCoords": [1000, 860]
     },
     {
-        "comment": "Girton Social Club",
-        "name": "",
+        "name": "Girton Social Club",
+        "name_displayed": false,
         "image": "images/stalls/girton-social-club.png",
         "lightMode": true,
         "url": "https://girtonsocialclub.com/",
@@ -464,7 +491,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "G61",
+        "mapCoords": [1180, 1450]
     },
     {
         "name": "Friends of Girton Glebe",
@@ -479,7 +508,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "E56",
+        "mapCoords": [990, 1580]
     },
     {
         "name": "Cambridge Acorn Project",
@@ -495,10 +526,13 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "D37",
+        "mapCoords": [1220, 1190]
     },
     {
-        "name": "",
+        "name": "Early Birds WI",
+        "name_displayed": false,
         "image": "images/stalls/wi.png",
         "url": "https://cambridge.thewi.org.uk/find-wi/early-birds",
         "description": "",
@@ -510,7 +544,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "C28",
+        "mapCoords": [1160, 1110]
     },
     {
         "name": "Entangled Pigments",
@@ -540,7 +576,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "J74",
+        "mapCoords": [1300, 720]
     },
     {
         "name": "Green, Blue and You",
@@ -555,7 +593,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "E45",
+        "mapCoords": [1380, 1005]
     },
     {
         "name": "Rowan Humberstone",
@@ -570,10 +610,13 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "D35",
+        "mapCoords": [1310, 1070]
     },
     {
-        "name": "",
+        "name": "CamCycle",
+        "name_displayed": false,
         "image": "images/stalls/camcycle.png",
         "url": "https://www.camcycle.org.uk/",
         "description": "",
@@ -585,7 +628,9 @@
         "days": [
             "Saturday"
         ],
-        "lightMode": true
+        "lightMode": true,
+        "stall": "A7",
+        "mapCoords": [870, 900]
     },
     {
         "name": "Saragusta Spirits",
@@ -599,7 +644,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "J76",
+        "mapCoords": [1400, 850]
     },
     {
         "name": "Girton Colts FC",
@@ -626,10 +673,13 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "J78",
+        "mapCoords": [1470, 920]
     },
     {
-        "name": "",
+        "name": "Care Network",
+        "name_displayed": false,
         "image": "images/stalls/care-network.png",
         "url": "https://care-network.org.uk",
         "description": "",
@@ -641,7 +691,9 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "J80",
+        "mapCoords": [1500, 980]
     },
     {
         "name": "Bricks & Minifigs Galore",
@@ -655,6 +707,8 @@
         ],
         "days": [
             "Saturday"
-        ]
+        ],
+        "stall": "D38",
+        "mapCoords": [1180, 1220]
     }
 ]
