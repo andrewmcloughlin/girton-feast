@@ -1,5 +1,77 @@
 [
     {
+        "name": "Stubble Burner",
+        "abv": 5.0,
+        "tags": ["wheat beer","blanche"],
+        "brewery": {
+            "name": "Lord Conrad's Brewery",
+            "logo": "images/breweries/logo_lord_conrads_brewery.png",
+            "website": "https://untappd.com/b/lord-conrad-s-brewery-stubble-burner/219095"
+        },
+        "description": "This Wheat beer embraces the end of the harvest, a strong strawy start breaks away for a dry earthy finish.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Kaiju",
+        "abv": 5.0,
+        "tags": ["golden", "pale ale","IPA"],
+        "brewery": {
+            "name": "Lord Conrad's Brewery",
+            "logo": "images/breweries/logo_lord_conrads_brewery.png",
+            "website": "https://untappd.com/b/lord-conrad-s-brewery-kaiju/4433782"
+        },
+        "description": "Golden pale IPA brewed with tropical fruit and American hop. Hints of passionfruit, coconut, tangerine citrus ",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Eddington",
+        "abv": 4.0,
+        "tags": ["pale ale"],
+        "brewery": {
+            "name": "Lord Conrad's Brewery",
+            "logo": "images/breweries/logo_lord_conrads_brewery.png",
+            "website": "https://untappd.com/b/lord-conrad-s-brewery-eddington/6258120"
+        },
+        "description": "Pale ale with a international hop mix ",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Cambridge Lager",
+        "abv": 4.0,
+        "tags": ["lager"],
+        "brewery": {
+            "name": "Lord Conrad's Brewery",
+            "logo": "images/breweries/logo_lord_conrads_brewery.png",
+            "website": "https://untappd.com/b/lord-conrad-s-brewery-cambridge-lager/4933057"
+        },
+        "description": "Traditional slow Lagering leaves this perfect for quaffing!",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Sundowner",
+        "abv": 3.6,
+        "tags": ["session bitter"],
+        "brewery": {
+            "name": "Moonshine Brewery",
+            "logo": "images/breweries/logo_moonshine_brewery.png",
+            "website": "https://camra.org.uk/beers/moonshine-sundowner-session-bitter-14563?container=6"
+        },
+        "description": "Light amber session beer. Balanced malt and rounded hop finish.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
+        "name": "Sherwood Blend",
+        "abv": 6.5,
+        "tags": ["cider","medium dry","still","gluten free","vegan"],
+        "brewery": {
+            "name": "Blue Barrel Cider",
+            "logo": "images/breweries/logo_blue_barrel_cider.png",
+            "website": "https://bluebarrelcider.com/project/sherwood-blend/"
+        },
+        "description": "Made with a blend of bittersweet cider apples and foraged desserts.",
+        "days": ["Friday", "Saturday"]
+    },
+    {
         "name": "Cuckoo Returns",
         "abv": 6.5,
         "tags": ["cider","medium sweet","still","gluten free","vegan"],
@@ -9,18 +81,6 @@
             "website": "https://bluebarrelcider.com/project/testy-mc-testy-face/"
         },
         "description": "Eastern Style Cider using dessert fruit from our own & other nearby wildlife friendly orchards.",
-        "days": ["Friday", "Saturday"]
-    },
-    {
-        "name": "Discovery",
-        "abv": 6.0,
-        "tags": ["cider","medium dry"],
-        "brewery": {
-            "name": "Blue Barrel Cider",
-            "logo": "images/breweries/logo_blue_barrel_cider.png",
-            "website": "https://www.bluebarrelcider.com/"
-        },
-        "description": "Single variety refreshing cider with notes of strawberry.",
         "days": ["Friday", "Saturday"]
     },
     {
@@ -84,42 +144,6 @@
         "days": ["Friday", "Saturday"]
     },
     {
-        "name": "Big Bad Wolf",
-        "abv": 4.0,
-        "tags": ["golden ale", "pale ale"],
-        "brewery": {
-            "name": "Lord Conrad's Brewery",
-            "logo": "images/breweries/logo_lord_conrads_brewery.png",
-            "website": "https://camra.org.uk/beers/lord-conrads-big-bad-wolf-session-pale-ale-18476"
-        },
-        "description": "Pale golden ale with piney notes and a citrusy aroma.",
-        "days": ["Friday", "Saturday"]
-    },
-    {
-        "name": "Easy",
-        "abv": 3.4,
-        "tags": ["amber"],
-        "brewery": {
-            "name": "Lord Conrad's Brewery",
-            "logo": "images/breweries/logo_lord_conrads_brewery.png",
-            "website": "https://lordconradsbrewery.co.uk/"
-        },
-        "description": "Easy drinking traditional amber.",
-        "days": ["Friday", "Saturday"]
-    },
-    {
-        "name": "Slap N' Tickle",
-        "abv": 4.3,
-        "tags": ["blonde", "hops", "bitter"],
-        "brewery": {
-            "name": "Lord Conrad's Brewery",
-            "logo": "images/breweries/logo_lord_conrads_brewery.png",
-            "website": "https://lordconradsbrewery.co.uk/"
-        },
-        "description": "A summer blonde with a big slap of bitterness and just a tickle of hops.",
-        "days": ["Friday", "Saturday"]
-    },
-    {
         "name": "Cambridge Best Bitter",
         "abv": 4.1,
         "tags": ["bitter"],
@@ -141,18 +165,6 @@
             "website": "https://moonshinebrewery.co.uk/"
         },
         "description": "A crisp, clean, straw coloured light bodied beer. Citra hops are prominent throughout, with a huge hoppy citrus, tropical fruit aroma and taste which leads to a generous bitterness in the finish.",
-        "days": ["Friday", "Saturday"]
-    },
-    {
-        "name": "Frank (Zappa)",
-        "abv": 4.0,
-        "tags": ["golden ale", "blonde"],
-        "brewery": {
-            "name": "Moonshine Brewery",
-            "logo": "images/breweries/logo_moonshine_brewery.png",
-            "website": "https://moonshinebrewery.co.uk/"
-        },
-        "description": "",
         "days": ["Friday", "Saturday"]
     },
     {
