@@ -72,15 +72,9 @@ eleventyNavigation:
 <script>
     // --- START: Gallery Configuration ---
     const photoConfig = [
-        { year: 2026, imageCount: 46 },
-        { year: 2025, imageCount: 52 },
-        { year: 2018, imageCount: 36 },
-        { year: 2017, imageCount: 40 },
-        { year: 2016, imageCount: 45 },
-        { year: 2015, imageCount: 15 },
-        { year: 2014, imageCount: 14 },
-        { year: 2013, imageCount: 41 },
-        { year: 2012, imageCount: 50 },
+        {% for item in gallery %}
+        { year: {{ item.year }}, images: {{ item.images | dump | safe }} },
+        {% endfor %}
     ];
     // --- END: Gallery Configuration ---
 
@@ -139,8 +133,9 @@ eleventyNavigation:
         const prefix = window.siteConfig?.pathPrefix || '/';
         const cleanPrefix = prefix.endsWith('/') ? prefix : prefix + '/';
 
-        for (let i = 1; i <= config.imageCount; i++) {
-            const imagePath = `${cleanPrefix}images/previous/${config.year}/${i}.jpg`;
+        config.images.forEach((imageFilename, index) => {
+            const i = index + 1;
+            const imagePath = `${cleanPrefix}images/previous/${config.year}/${imageFilename}`;
 
             // Random rotation between -3 and 3 degrees
             const rotation = (Math.random() * 6 - 3).toFixed(2);
@@ -155,7 +150,7 @@ eleventyNavigation:
                     <img src="${imagePath}" alt="Photo ${i}" loading="lazy" onload="this.classList.add('loaded')">
                 </a>
             `;
-        }
+        });
 
         html += `</div></div>`;
         container.innerHTML = html;
@@ -175,20 +170,20 @@ eleventyNavigation:
         const zip = new JSZip();
         const imagePromises = [];
 
-        for (let i = 1; i <= config.imageCount; i++) {
+        config.images.forEach((imageFilename) => {
             const prefix = window.siteConfig?.pathPrefix || '/';
-            const imageUrl = `${prefix}images/previous/${year}/${i}.jpg`;
+            const imageUrl = `${prefix}images/previous/${year}/${imageFilename}`;
             const promise = fetch(imageUrl)
                 .then(response => {
-                    if (!response.ok) throw new Error(`Image ${i}.jpg not found`);
+                    if (!response.ok) throw new Error(`Image ${imageFilename} not found`);
                     return response.blob();
                 })
                 .then(blob => {
-                    zip.file(`${i}.jpg`, blob);
+                    zip.file(imageFilename, blob);
                 })
                 .catch(error => console.error(`Failed to fetch ${imageUrl}:`, error));
             imagePromises.push(promise);
-        }
+        });
 
         await Promise.all(imagePromises);
 
