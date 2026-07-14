@@ -2,10 +2,10 @@
 
 # --- Configuration ---
 # The year folder you want to process
-YEAR=2024
+YEAR=2026
 # --- End Configuration ---
 
-DIR="images/previous/$YEAR"
+DIR="src/images/previous/$YEAR"
 
 if [ ! -d "$DIR" ]; then
   echo "Error: Directory '$DIR' not found."
