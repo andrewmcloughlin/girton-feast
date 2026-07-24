@@ -26,7 +26,7 @@ module.exports = function(eleventyConfig) {
       widths: [300, 600, 1200],
       formats: ["avif", "webp", "jpeg"],
       outputDir: "./_site/img/",
-      urlPath: "/girton-feast/img/",
+      urlPath: "/img/",
     });
 
     return Image.generateHTML(metadata, {
@@ -55,7 +55,7 @@ module.exports = function(eleventyConfig) {
       widths: [width],
       formats: [format],
       outputDir: "./_site/img/",
-      urlPath: "/girton-feast/img/",
+      urlPath: "/img/",
     });
 
     return metadata[format][0].url;
@@ -121,7 +121,7 @@ module.exports = function(eleventyConfig) {
   });
 
   return {
-    pathPrefix: "/girton-feast/",
+    pathPrefix: "/",
     dir: {
       input: "src",
       output: "_site",
