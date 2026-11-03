@@ -1,9 +1,9 @@
 // Service Worker for Girton Feast PWA
-const CACHE_NAME = 'girton-feast-v6'
+const CACHE_NAME = 'girton-feast-v8'
 const PRE_CACHE_RESOURCES = [
   './',
   './index.html',
-  './css/style.css?v=20261103',
+  './css/style.css?v=20261103-3',
   './js/script.js?v=20261103',
   './js/email-protection.js?v=20261103',
   './sw.js',

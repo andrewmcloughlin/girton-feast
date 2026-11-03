@@ -22,22 +22,22 @@ permalink: /info/vendors.html
 }">
     <!-- Header & Switcher -->
     <div class="text-center pt-5 mb-5 pb-4">
-        <h1 class="display-3 mb-4 font-glass-antigua text-dark">Vendor Info</h1>
+        <h1 class="display-3 mb-4">Vendor Info</h1>
 
-        <div class="d-inline-flex flex-wrap justify-content-center gap-2 p-2 bg-white rounded-pill shadow-sm border" style="border-width: 2px !important;">
+        <div class="d-inline-flex flex-wrap justify-content-center gap-2 p-2 bg-transparent rounded-pill border-0 shadow-none">
             <button @click="activeCategory = 'stalls'; window.history.replaceState({}, '', '?category=stalls')"
-                    :class="activeCategory === 'stalls' ? 'bg-sticker-green text-dark shadow' : 'bg-transparent text-dark'"
-                    class="btn rounded-pill border-0 px-4 py-2 fw-bold transition-300">
+                    :aria-pressed="activeCategory === 'stalls'"
+                    class="button btn vendor-category-button">
                 Stalls
             </button>
             <button @click="activeCategory = 'food'; window.history.replaceState({}, '', '?category=food')"
-                    :class="activeCategory === 'food' ? 'bg-sticker-pink text-dark shadow' : 'bg-transparent text-dark'"
-                    class="btn rounded-pill border-0 px-4 py-2 fw-bold transition-300">
+                    :aria-pressed="activeCategory === 'food'"
+                    class="button btn vendor-category-button">
                 Food & Drink
             </button>
             <button @click="activeCategory = 'rides'; window.history.replaceState({}, '', '?category=rides')"
-                    :class="activeCategory === 'rides' ? 'bg-sticker-mint text-dark shadow' : 'bg-transparent text-dark'"
-                    class="btn rounded-pill border-0 px-4 py-2 fw-bold transition-300">
+                    :aria-pressed="activeCategory === 'rides'"
+                    class="button btn vendor-category-button">
                 Rides & Games
             </button>
         </div>
@@ -49,16 +49,16 @@ permalink: /info/vendors.html
             <div class="d-flex flex-column gap-5">
 
                 <!-- [SHARED] Location & Time -->
-                <div class="info-sticker-card rotate-neg-1 border-brand-v2-purple">
+                <div class="card pink rotate-left-sm">
                     <div class="d-flex align-items-center gap-3 mb-4">
-                        <h2 class="info-sticker-title h2 mb-1">When & Where</h2>
+                        <h2 class="card-header mb-1">When & Where</h2>
                     </div>
 
                     <div class="row g-4">
                         <div class="col-md-6">
                             <h5 class="fw-bold mb-2">Location</h5>
                             <address class="mb-0" style="line-height: 1.6;">Girton Recreation Ground<br>Girton, Cambridge CB3 0FH</address>
-                            <a href="{{ '/map.html' | url }}" class="btn btn-sm btn-outline-dark mt-2" style="border-radius: 50px;">View Map →</a>
+                            <a href="{{ '/map.html' | url }}" class="button btn mt-2">View Map →</a>
                         </div>
                         <div class="col-md-6">
                             <h5 class="fw-bold mb-2">Date & Time</h5>
@@ -73,9 +73,9 @@ permalink: /info/vendors.html
 
                 <!-- [STALLS ONLY] Pitch Info -->
                 <template x-if="activeCategory === 'stalls'">
-                    <div class="info-sticker-card rotate-pos-1" x-transition>
+                    <div class="card blue rotate-right-sm" x-transition>
                         <div class="d-flex align-items-center gap-3 mb-4">
-                            <h2 class="info-sticker-title h2 mb-1">Your Pitch</h2>
+                            <h2 class="card-header mb-1">Your Pitch</h2>
                         </div>
 
                         <p class="lead">Pitches are <strong>3m x 3m</strong> with 3m spacing for safety and comfort.</p>
@@ -93,20 +93,20 @@ permalink: /info/vendors.html
 
                  <!-- [STALLS ONLY] Costs -->
                 <template x-if="activeCategory === 'stalls'">
-                    <div class="info-sticker-card rotate-neg-1" x-transition>
+                    <div class="card yellow rotate-left-sm" x-transition>
                         <div class="d-flex align-items-center gap-3 mb-4">
-                            <h2 class="info-sticker-title h2 mb-1">Costs</h2>
+                            <h2 class="card-header mb-1">Costs</h2>
                         </div>
 
                         <div class="row g-4 mb-4">
                             <div class="col-md-6">
-                                <div class="p-4 bg-sticker-purple text-white rounded-4 shadow-sm h-100">
+                                <div class="p-4 bg-primary text-white rounded-4 shadow-sm h-100">
                                     <div class="display-3 fw-bold mb-1">£5</div>
                                     <h5 class="mb-0">Charity & Non-profit</h5>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div class="p-4 bg-sticker-pink rounded-4 shadow-sm h-100">
+                                <div class="p-4 bg-secondary text-dark rounded-4 shadow-sm h-100">
                                     <div class="display-3 fw-bold mb-1">£20</div>
                                     <h5 class="mb-0">Commercial Business</h5>
                                 </div>
@@ -122,9 +122,9 @@ permalink: /info/vendors.html
                 </template>
 
                 <!-- [SHARED] Ground Rules -->
-                <div class="info-sticker-card rotate-pos-1">
+                <div class="card blue rotate-right-sm">
                     <div class="d-flex align-items-center gap-3 mb-4">
-                        <h2 class="info-sticker-title h2 mb-1">Ground Rules</h2>
+                        <h2 class="card-header mb-1">Ground Rules</h2>
                     </div>
 
                     <ul class="list-unstyled d-flex flex-column gap-3 fs-5">
@@ -153,9 +153,9 @@ permalink: /info/vendors.html
         <div class="col-lg-4">
             <div class="sticky-lg-top" style="top: 100px; z-index: 10;">
 
-                <div class="info-sticker-card bg-sticker-purple text-white border-dark">
+                <div class="card bg-primary text-white">
                     <!-- Dynamic Headers -->
-                    <h2 class="info-sticker-title text-white mb-4" x-text="booked[activeCategory] ? 'Pitches Booked' : 'Ready to Book?'"></h2>
+                    <h2 class="card-header text-white mb-4" x-text="booked[activeCategory] ? 'Pitches Booked' : 'Ready to Book?'"></h2>
 
                     <!-- [STALLS] CTA -->
                     <template x-if="activeCategory === 'stalls'">

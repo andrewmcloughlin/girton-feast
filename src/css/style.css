@@ -869,3 +869,7 @@ h1, h2 {
 #agenda .agenda-item.is-open .agenda-panel-inner--fete {
     padding-bottom: 0;
 }
+.vendor-category-button[aria-pressed="true"] {
+    background-color: var(--girton-green-dark);
+    color: #fff;
+}
