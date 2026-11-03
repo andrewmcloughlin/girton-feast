@@ -12,6 +12,8 @@
     <link rel="preload" fetchpriority="high" as="image" href="{% imageUrl "/images/hero.png" %}" type="image/webp">
     <link rel="preload" href="{{ '/images/map-lg.svg' | url }}" as="image" type="image/svg+xml">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,60 +61,18 @@
         }
     </script>
 </head>
-<body data-bs-spy="scroll" data-bs-target="#main-navbar" data-bs-smooth-scroll="true" tabindex="0"
-    class="px-0 mx-0 w-100 bg-light {{ bodyClass }}" x-data x-on:keydown.window="$store.app.handleKonami($event.key)">
-
-    {% include "components/navbar.njk" %}
+<body tabindex="0" class="bg-secondary">
 
     <main>
-        {% if not hideBreadcrumbs %}
-        {% include "components/breadcrumbs.njk" %}
-        {% endif %}
         {{ content | safe }}
     </main>
 
-    {% if not hideFooter %}
-    {% include "components/footer.njk" %}
-    {% endif %}
-
-    <!-- Scroll to top button -->
-    <button x-data x-show="$store.app.scrolled"
-            @click="$store.app.scrollToTop()"
-            id="scrollToTopBtn"
-            title="Go to top"
-            x-cloak
-            style="display: none;"
-            :style="$store.app.scrolled ? 'display: flex' : 'display: none'">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    {% include "components/mobile-nav.njk" %}
 
     <!-- Bootstrap JS Bundle from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
     <script src="{{ '/js/script.js' | url }}"></script>
 
-    {% block extra_scripts %}{% endblock %}
-    <!-- Scroll Animation Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                observer.observe(el);
-            });
-        });
-    </script>
 </body>
 </html>

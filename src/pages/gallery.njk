@@ -1,7 +1,6 @@
 ---
 layout: layouts/base.njk
 title: Photo Gallery - Girton Feast
-bodyClass: bg-white
 permalink: /pages/gallery.html
 eleventyNavigation:
   key: Photo Gallery
@@ -14,22 +13,21 @@ eleventyNavigation:
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 {% endblock %}
 
-<div class="bg-white min-vh-100 py-5">
-    <div class="container pt-5">
-        <div class="text-center mb-5 animate-on-scroll">
-            <h1 class="get-involved-title mt-4">Relive the memories</h1>
-            <p class="lead text-muted font-comfortaa">A look back at previous years of the Girton Feast.</p>
+<div class="gallery-page">
+    <div class="gallery-page-inner">
+        <div class="gallery-heading">
+            <h1 class="big-text">Relive the memories</h1>
         </div>
 
-        <div class="row position-relative">
+        <div class="gallery-layout">
             <!-- Sticky Navigation Column -->
-            <div class="col-lg-3 mb-4">
-                <div class="gallery-nav-container sticky-top" style="top: 100px; z-index: 1020;">
-                    <h4 class="font-dynapuff mb-3 text-brand-purple">Select Year</h4>
+            <div class="gallery-sidebar">
+                <div class="gallery-nav-container">
+                    <h2 class="gallery-label">Select Year</h2>
 
                     <!-- Desktop Nav -->
-                    <nav id="gallery-nav" class="p-3 rounded-4 bg-white d-none d-lg-block">
-                        <ul id="gallery-nav-ul" class="nav nav-pills flex-column gap-2">
+                    <nav id="gallery-nav" class="gallery-year-nav">
+                        <ul id="gallery-nav-ul" class="gallery-year-list">
                             <!-- Year links will be dynamically inserted here -->
                         </ul>
                     </nav>
@@ -37,7 +35,7 @@ eleventyNavigation:
                     <!-- Mobile Dropdown -->
                     <div class="d-lg-none">
                         <div class="dropdown">
-                            <button class="sticker-button sticker-button-pink w-100 dropdown-toggle" type="button" id="galleryDropdown"
+                            <button class="button btn w-100 dropdown-toggle" type="button" id="galleryDropdown"
                                 data-bs-toggle="dropdown" aria-expanded="false">
                                 Select a Year
                             </button>
@@ -50,14 +48,10 @@ eleventyNavigation:
             </div>
 
             <!-- Gallery Content Column -->
-            <div id="gallery-container-wrapper" class="col-lg-9">
+            <div id="gallery-container-wrapper" class="gallery-content">
                 <div id="gallery-container">
                     <!-- Loading State -->
-                    <div class="text-center py-5">
-                        <div class="spinner-border text-brand-purple" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                    </div>
+                    <p class="gallery-empty">Loading photos…</p>
                 </div>
             </div>
         </div>
@@ -73,12 +67,12 @@ eleventyNavigation:
     // --- START: Gallery Configuration ---
     const photoConfig = [
         {% for item in gallery %}
-        { year: {{ item.year }}, images: {{ item.images | dump | safe }} },
+        { year: {{ item.year }}, images: {{ item.images | dump | safe }}, videos: {{ item.videos | dump | safe }} },
         {% endfor %}
     ];
     // --- END: Gallery Configuration ---
 
-    let currentYear = photoConfig[0].year;
+    let currentYear = photoConfig[0]?.year ?? null;
 
     function buildNavigation() {
         const desktopNav = document.getElementById('gallery-nav-ul');
@@ -92,12 +86,12 @@ eleventyNavigation:
             const activeClass = config.year === currentYear ? 'active' : '';
             desktopHtml += `
                 <li class="nav-item">
-                    <a class="nav-link font-dynapuff text-center py-2 px-3 border-thick rounded-pill mb-2 ${activeClass}"
+                    <a class="nav-link ${activeClass}"
                        href="javascript:void(0)" onclick="switchYear(${config.year})">${config.year}</a>
                 </li>
             `;
             mobileHtml += `
-                <li><a class="dropdown-item font-dynapuff py-2 ${activeClass}" href="javascript:void(0)" onclick="switchYear(${config.year})">${config.year}</a></li>
+                <li><a class="dropdown-item ${activeClass}" href="javascript:void(0)" onclick="switchYear(${config.year})">${config.year}</a></li>
             `;
         });
 
@@ -117,17 +111,20 @@ eleventyNavigation:
     function renderGallery() {
         const container = document.getElementById('gallery-container');
         const config = photoConfig.find(c => c.year === currentYear);
-        if (!config) return;
+        if (!config) {
+            container.innerHTML = '<p class="gallery-empty">Photos will be added soon.</p>';
+            return;
+        }
 
         let html = `
             <div class="fadeIn">
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-5 gap-3">
-                    <h2 class="display-4 font-glass-antiqua text-brand-purple mb-0">${config.year} Collection</h2>
-                    <button class="sticker-button sticker-button-pink" onclick="downloadYearAsZip(${config.year}, this)">
-                        <i class="fas fa-download me-2"></i>Download All
+                    <h2 class="big-text gallery-year-heading">${config.year} Collection</h2>
+                    <button class="button btn gallery-download" onclick="downloadYearAsZip(${config.year}, this)">
+                        <i class="fas fa-download me-2"></i>Download Photos
                     </button>
                 </div>
-                <div class="polaroid-gallery">
+                <div class="gallery-grid">
         `;
 
         const prefix = window.siteConfig?.pathPrefix || '/';
@@ -145,13 +142,28 @@ eleventyNavigation:
                 <a href="${imagePath}"
                    data-fancybox="gallery-${config.year}"
                    data-caption="Girton Feast ${config.year} - Photo ${i}"
-                   class="polaroid-item fadeInUp"
+                   class="gallery-photo"
                    style="transform: rotate(${rotation}deg); animation-delay: ${delay}ms;">
                     <img src="${imagePath}" alt="Photo ${i}" loading="lazy" onload="this.classList.add('loaded')">
                 </a>
             `;
         });
 
+        config.videos.forEach((videoFilename, index) => {
+            const videoNumber = config.images.length + index + 1;
+            const videoPath = `${cleanPrefix}images/previous/${config.year}/${videoFilename}`;
+            const extension = videoFilename.split('.').pop().toLowerCase();
+            const mimeType = extension === 'mov' ? 'video/quicktime' : `video/${extension === 'ogv' ? 'ogg' : extension}`;
+
+            html += `
+                <figure class="gallery-photo gallery-video-card">
+                    <video controls preload="none" playsinline aria-label="Girton Feast ${config.year} video ${videoNumber}">
+                        <source src="${videoPath}" type="${mimeType}">
+                        Your browser cannot play this video. <a href="${videoPath}" download>Download ${videoFilename}</a>.
+                    </video>
+                </figure>
+            `;
+        });
         html += `</div></div>`;
         container.innerHTML = html;
 

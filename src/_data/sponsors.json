@@ -1,78 +1,18 @@
 [
     {
-        "image": "gray_toynbee.png",
-        "url": "https://www.grayandtoynbee.com/"
+        "image": "placeholder.png",
+        "url": ""
     },
     {
-        "image": "polarglaze.png",
-        "url": "https://www.polarglaze-ltd.co.uk/"
+        "image": "placeholder-2.png",
+        "url": ""
     },
     {
-        "image": "wheeliefreshbins.png",
-        "url": "https://www.wheeliefreshbins.com/"
+        "image": "placeholder-3.png",
+        "url": ""
     },
     {
-        "image": "lumb.png",
-        "url": "https://www.guttering-cambridge.co.uk/"
-    },
-    {
-        "image": "lm_groundwork.png",
-        "url": "https://www.facebook.com/leemurfet16?locale=en_GB"
-    },
-    {
-        "image": "csss.png",
-        "url": "http://www.cambridgeselfservicestorage.co.uk/"
-    },
-    {
-        "image": "mnm.png",
-        "url": "https://www.mandmheating.co.uk/"
-    },
-    {
-        "image": "pp.png",
-        "url": "https://primeplumbing-cambridge.co.uk/"
-    },
-    {
-        "image": "veezu.png",
-        "url": "https://www.veezu.co.uk/cambridge-ppccampaign"
-    },
-    {
-        "image": "ccc.png",
-        "url": "https://www.cookecurtis.co.uk/"
-    },
-    {
-        "image": "gpc.png",
-        "url": "https://www.girton-pc.gov.uk/"
-    },
-    {
-        "image": "gretton.png",
-        "url": "https://www.grettonschool.com/"
-    },
-    {
-        "image": "pizzica.png",
-        "url": "https://www.lapizzicacambridge.com/"
-    },
-    {
-        "image": "ogc.png",
-        "url": "https://www.oakingtongardencentre.co.uk/"
-    },
-    {
-        "image": "mmwealth.png",
-        "url": "https://www.mmwealth.co.uk/"
-    },
-    {
-        "image": "c-and-c-blinds.png",
-        "url": "https://www.facebook.com/profile.php?id=100064711204770"
-    },
-    {
-        "image": "arlington_manor.png",
-        "url": " https://www.hallmarkcarehomes.co.uk/care-homes/cambridgeshire/arlington-manor/"
-    },
-    {
-        "image": "girton_college.png",
-        "url": "https://www.girton.cam.ac.uk/"
-    },
-    {
-        "image": "abbeyfield.png",
-        "url": "https://www.abbeyfieldengland.com/"
+        "image": "placeholder-1.png",
+        "url": ""
     }
 ]

@@ -100,6 +100,8 @@ function resolvePath (htmlFilePath, linkPath) {
     let webRoot = projectRoot
     if (htmlFilePath.includes(path.join(projectRoot, '_site'))) {
       webRoot = path.join(projectRoot, '_site')
+    } else if (htmlFilePath.includes(path.join(projectRoot, 'src'))) {
+      webRoot = path.join(projectRoot, 'src')
     }
     return path.join(webRoot, cleanPath)
   }

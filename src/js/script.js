@@ -321,3 +321,77 @@ function showToast (message, color) {
     setTimeout(() => toast.remove(), 500)
   }, 3000)
 }
+
+// Initialize the sponsor logo marquee when Splide and its Auto Scroll extension are available.
+document.addEventListener('DOMContentLoaded', () => {
+  const root = document.querySelector('#sponsors-marquee')
+  if (!root || !window.Splide || !window.splide?.Extensions) return
+
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const marquee = new window.Splide(root, {
+    type: 'loop',
+    autoWidth: true,
+    drag: 'free',
+    focus: 'center',
+    gap: '1.5rem',
+    arrows: false,
+    pagination: false,
+    autoScroll: {
+      speed: 0.6,
+      pauseOnHover: true,
+      pauseOnFocus: true,
+      autoStart: !prefersReducedMotion
+    },
+    reducedMotion: {
+      speed: 0,
+      autoScroll: { speed: 0, autoStart: false }
+    }
+  })
+
+  marquee.mount(window.splide.Extensions)
+
+  const toggle = document.querySelector('#sponsor-marquee-toggle')
+  const autoScroll = marquee.Components.AutoScroll
+  if (!toggle || !autoScroll) return
+
+  const updateToggle = () => {
+    const isRunning = !autoScroll.isPaused()
+    toggle.setAttribute('aria-pressed', String(isRunning))
+    toggle.textContent = isRunning ? 'Pause scrolling' : 'Start scrolling'
+  }
+
+  toggle.hidden = false
+  updateToggle()
+  toggle.addEventListener('click', () => {
+    if (autoScroll.isPaused()) autoScroll.play()
+    else autoScroll.pause()
+    updateToggle()
+  })
+})
+// Initialize the agenda card accordion.
+document.addEventListener('DOMContentLoaded', () => {
+  const items = Array.from(document.querySelectorAll('#agenda .agenda-item'))
+  if (items.length === 0) return
+
+  items.forEach(item => {
+    const toggle = item.querySelector('.agenda-toggle')
+    const panelId = toggle?.getAttribute('aria-controls')
+    const panel = panelId ? document.getElementById(panelId) : null
+    if (!toggle || !panel) return
+
+    toggle.addEventListener('click', () => {
+      items.forEach(otherItem => {
+        const isOpen = otherItem === item
+        const otherToggle = otherItem.querySelector('.agenda-toggle')
+        const otherPanelId = otherToggle?.getAttribute('aria-controls')
+        const otherPanel = otherPanelId ? document.getElementById(otherPanelId) : null
+        if (!otherToggle || !otherPanel) return
+
+        otherItem.classList.toggle('is-open', isOpen)
+        otherToggle.setAttribute('aria-expanded', String(isOpen))
+        otherPanel.setAttribute('aria-hidden', String(!isOpen))
+        otherPanel.inert = !isOpen
+      })
+    })
+  })
+})

@@ -5,53 +5,90 @@ eleventyNavigation:
   key: Home
   order: 1
 ---
-
-<section id="thank-you-hero" class="container-fluid bg-brand-glaucous content-container pb-5 px-3">
-    <div class="text-center pt-5 mb-4 animate-on-scroll">
-        <h1 class="display-1 fw-bold mb-3">
-            <img src="{{ '/images/girton-feast-logo-text.svg' | url }}" alt="Girton Feast Logo" class="img-fluid hero-logo"
-                style="max-height: 250px;">
-        </h1>
-        <div class="card border-0 shadow-lg rounded-4 p-4 p-md-5 max-width-container mx-auto"
-             style="background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); max-width: 900px; border: 3px solid #000 !important; box-shadow: 8px 8px 0 0 rgba(0, 0, 0, 1) !important;">
-
-            <h2 class="display-4 fw-bold mb-4 font-dynapuff text-brand-purple">
-                Thank you for joining us!
-            </h2>
-
-            <p class="lead fs-3 font-comfortaa text-dark mb-4">
-                Girton Feast will return in 2027 on <span class="text-brand-giants-orange fw-bold">9th and 10th July</span>.
-            </p>
-
-            <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center gap-3 mb-5">
-                <a href="{{ '/pages/gallery.html' | url }}" class="sticker-button sticker-button-pink px-4 py-3 fs-5 font-dynapuff text-decoration-none">
-                    <i class="fas fa-images me-2"></i>Photo Gallery
-                </a>
-            </div>
-
-            <!-- YouTube Video Embed -->
-            <div class="ratio ratio-16x9 rounded-4 overflow-hidden border-thick shadow" style="border: 3px solid #000; box-shadow: 4px 4px 0 0 rgba(0, 0, 0, 1) !important;">
-                <iframe width="1840" height="1035" src="https://www.youtube.com/embed/M5oyebP1RhA" title="Girton Feast 2026, Cambridge" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+<section id="hero" class="pt-4 mt-4">
+    <div class="hero-brand">
+        <img class="hero-goose" src="/images/brand/goose.png" alt="" aria-hidden="true">
+        <img id="logo" src="/images/brand/logo.svg" alt="Girton Feast">
+    </div>
+    <div class="card yellow">
+        <div class="card-header">
+            <div id="where">Girton Rec</div>
+            <div id="when-1">Fri 9 - Sat 10</div>
+            <div id="when-2">July 2027</div>
+        </div>
+        <div class="action-bar">
+            <div class="button btn">Where to find us</div>
+            <div class="button btn">Explore event</div>
         </div>
     </div>
 </section>
 
-<!-- Hiding existing sections to preserve them in markup but hide from visitors -->
-<div class="d-none" aria-hidden="true" style="display: none !important;">
-    {% include "sections/scrollspy-sidebar.njk" %}
+<section id="agenda" aria-labelledby="agenda-title">
+    <h2 id="agenda-title" class="big-text text-center">2 Days of Fun</h2>
+    <div class="agenda-timeline">
+        <article class="agenda-item card pink is-open">
+            <span class="agenda-marker agenda-marker--pink" aria-hidden="true"></span>
+            <button id="agenda-friday-toggle" class="agenda-toggle" type="button" aria-expanded="true" aria-controls="agenda-friday-panel">
+                <span class="agenda-card-title">Friday Evening Concert</span>
+                <span class="agenda-toggle-icon" aria-hidden="true"></span>
+            </button>
+            <div id="agenda-friday-panel" class="agenda-panel" role="region" aria-labelledby="agenda-friday-toggle" aria-hidden="false">
+                <div class="agenda-panel-inner">
+                    <p>Details coming soon</p>
+                </div>
+            </div>
+        </article>
 
-    {% include "sections/hero.njk" %}
+        <article class="agenda-item card blue">
+            <span class="agenda-marker agenda-marker--blue" aria-hidden="true"></span>
+            <button id="agenda-saturday-toggle" class="agenda-toggle agenda-toggle--fete" type="button" aria-expanded="false" aria-controls="agenda-saturday-panel"><span class="agenda-card-title">Saturday Village Fete</span>
+                <span class="agenda-toggle-icon" aria-hidden="true"></span>
+            </button>
+            <img class="agenda-goose agenda-goose--collapsed" src="/images/brand/goose-with-sign.png" alt="" aria-hidden="true">
+            <div id="agenda-saturday-panel" class="agenda-panel" role="region" aria-labelledby="agenda-saturday-toggle" aria-hidden="true" inert>
+                <div class="agenda-panel-inner agenda-panel-inner--fete">
+                    <img class="agenda-goose-shape" src="/images/brand/goose-with-sign.png" alt="" aria-hidden="true">
+                    <p>Free entry. Girton Feast has been a local tradition for over 20 years, celbrating the best of Girton. It's run entirely by local volunteers and any profit raised is fed back into local celebrations. More details coming soon.</p>
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
 
-    {% include "sections/headliner.njk" %}
-    {% include "sections/whats-on.njk" %}
+<section class="blue-section text-center">
+    <h2 class="big-text text-center"><br>Bottoms up<br>at the beer tent</h2>
+    <img src="/images/brand/bottoms-up.png" alt="Girtie the goose">
+    <p>Enjoy our selection of local beers.<br>
+    Full list coming soon.
+    </p>
 
-    {% include "sections/food-and-drink.njk" %}
-    {% include "sections/nitty-gritty.njk" %}
+</section>
 
-    {% include "sections/get-involved.njk" %}
+<section id="get-involved">
+    <img src="/images/brand/gaggle.png" alt="A gaggle of geese">
+    <h2 class="big-text text-center">Join the<br>gaggle</h2>
+    <div class="card pink">
+        <div class="card-header">
+            Share your wares
+        <p>Last year Girton Feast raised over £___ for local charities and businesses. If you are local and have something great to share, we’d love to have you join us!</p>
+        <a href="{{ '/pages/contact.html' | url }}" class="button btn stretched-link">Contact us</a>
+        </div>
+    </div>
+    <div class="card blue">
+        <div class="card-header">
+            Lend a hand
+            <p>Girton Feast is by a non-profit Girton Village Celebrations and run entirely by local volunteers. If you could spare some time to put up bunting, we need all the help we can get!</p>
+        <a href="{{ '/pages/contact.html' | url }}" class="button btn stretched-link">Contact us</a>
+        </div>
+    </div>
+    <div class="card yellow">
+        <div class="card-header">
+            Sponsor The Feast
+            <p>Be our golden goose and help to feast alive.
+            </p>
+        <a href="{{ '/pages/contact.html' | url }}" class="button btn stretched-link">Contact us</a>
+        </div>
+    </div>
+</section>
 
-    {% include "sections/sponsors.njk" %}
-
-    {% include "sections/footer-extras.njk" %}
-</div>
+{% include "sections/sponsors.njk" %}
