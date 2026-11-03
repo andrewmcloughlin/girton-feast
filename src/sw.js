@@ -4,8 +4,8 @@ const PRE_CACHE_RESOURCES = [
   './',
   './index.html',
   './css/style.css?v=20261103',
-  './js/script.js',
-  './js/email-protection.js',
+  './js/script.js?v=20261103',
+  './js/email-protection.js?v=20261103',
   './sw.js',
   // JSON Data
   './vendors.json',
