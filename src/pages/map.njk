@@ -10,29 +10,12 @@ eleventyNavigation:
   parent: Home
 ---
 
-{% block extra_head %}
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<style>
-    /* Ensure navbar is not duplicated or overlaps */
-    .map-fullscreen-page main { padding: 0 !important; }
-    #map-event, #map-transport { width: 100%; height: 100%; background: #f0f4f8; }
-
-    .custom-map-marker {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 50%;
-        color: white;
-        font-size: 14px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-        border: 2px solid white;
-    }
-</style>
-{% endblock %}
-
 <div class="map-fullscreen-wrapper" x-data="mapController()">
     <!-- Mode Switcher Toggle -->
     <div class="map-mode-switcher">
+        <a class="map-home-btn" href="{{ '/' | url }}" aria-label="Return to the Girton Feast home page">
+            Home
+        </a>
         <button class="map-mode-btn" :class="{ 'active': mode === 'event' }" @click="setMode('event')">
             Event Map
         </button>
@@ -50,56 +33,60 @@ eleventyNavigation:
     <!-- Transport Overlays (Only visible in transport mode) -->
     <div class="transport-overlay" x-show="mode === 'transport'" x-transition:enter="fadeInUp">
         <!-- By Car -->
-        <div class="transport-card-wrapper">
-            <div class="transport-card-bg" style="background-color: var(--brand-pastel-pink);"></div>
+        <div class="transport-card-wrapper" :class="{ 'is-expanded': expandedTransportCard === 'car' }">
             <div class="transport-card">
-                <span class="transport-card-icon">🚗</span>
+                <button class="transport-card-toggle" type="button" @click="toggleTransportCard('car')" :aria-expanded="expandedTransportCard === 'car'" :aria-label="expandedTransportCard === 'car' ? 'Close car travel details' : 'Show car travel details'">
+                    <i class="fas" :class="expandedTransportCard === 'car' ? 'fa-times' : 'fa-car'" aria-hidden="true"></i><span class="visually-hidden">Car details</span>
+                </button>
                 <h5>By Car</h5>
                 <p>Limited parking at Rec car park (Accessible only). Other vehicles use the field behind the Rec.</p>
-                <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill font-dynapuff">Open Maps</a>
+                <a href="https://maps.app.goo.gl/SpqWztHDsx1rBLwk6" target="_blank" rel="noopener noreferrer" class="btn btn-sm rounded-pill">Open Maps</a>
             </div>
         </div>
 
         <!-- By Bus -->
-        <div class="transport-card-wrapper">
-            <div class="transport-card-bg" style="background-color: var(--brand-pastel-yellow);"></div>
+        <div class="transport-card-wrapper" :class="{ 'is-expanded': expandedTransportCard === 'bus' }">
             <div class="transport-card">
-                <span class="transport-card-icon">🚌</span>
+                <button class="transport-card-toggle" type="button" @click="toggleTransportCard('bus')" :aria-expanded="expandedTransportCard === 'bus'" :aria-label="expandedTransportCard === 'bus' ? 'Close bus travel details' : 'Show bus travel details'">
+                    <i class="fas" :class="expandedTransportCard === 'bus' ? 'fa-times' : 'fa-bus'" aria-hidden="true"></i><span class="visually-hidden">Bus details</span>
+                </button>
                 <h5>By Bus</h5>
                 <p>Citi 6 stops right outside. Easy access from Cambridge or Oakington.</p>
-                <a href="https://www.stagecoachbus.com/routes/east/6/cambridge-oakington/XEAO006.O" target="_blank" class="btn btn-sm btn-outline-secondary rounded-pill font-dynapuff">Timetable</a>
+                <a href="https://www.stagecoachbus.com/routes/east/6/cambridge-oakington/XEAO006.O" target="_blank" rel="noopener noreferrer" class="btn btn-sm rounded-pill">Timetable</a>
             </div>
         </div>
 
         <!-- By Bike -->
-        <div class="transport-card-wrapper">
-            <div class="transport-card-bg" style="background-color: var(--brand-pastel-green);"></div>
+        <div class="transport-card-wrapper" :class="{ 'is-expanded': expandedTransportCard === 'bike' }">
             <div class="transport-card">
-                <span class="transport-card-icon">🚲</span>
+                <button class="transport-card-toggle" type="button" @click="toggleTransportCard('bike')" :aria-expanded="expandedTransportCard === 'bike'" :aria-label="expandedTransportCard === 'bike' ? 'Close bike travel details' : 'Show bike travel details'">
+                    <i class="fas" :class="expandedTransportCard === 'bike' ? 'fa-times' : 'fa-bicycle'" aria-hidden="true"></i><span class="visually-hidden">Bike details</span>
+                </button>
                 <h5>By Bike</h5>
                 <p>Plenty of cycle parking available at the main entrance.</p>
             </div>
         </div>
 
         <!-- By Taxi -->
-        <div class="transport-card-wrapper">
-            <div class="transport-card-bg" style="background-color: var(--brand-pastel-purple);"></div>
+        <div class="transport-card-wrapper" :class="{ 'is-expanded': expandedTransportCard === 'taxi' }">
             <div class="transport-card">
-                <span class="transport-card-icon">🚕</span>
+                <button class="transport-card-toggle" type="button" @click="toggleTransportCard('taxi')" :aria-expanded="expandedTransportCard === 'taxi'" :aria-label="expandedTransportCard === 'taxi' ? 'Close taxi travel details' : 'Show taxi travel details'">
+                    <i class="fas" :class="expandedTransportCard === 'taxi' ? 'fa-times' : 'fa-taxi'" aria-hidden="true"></i><span class="visually-hidden">Taxi details</span>
+                </button>
                 <h5>By Taxi</h5>
                 <p>Book a ride with our sponsors, <strong>Veezu</strong>, for a reliable trip home.</p>
-                <a href="https://www.veezu.co.uk/" target="_blank" class="btn btn-sm btn-outline-primary rounded-pill font-dynapuff">Book with Veezu →</a>
+                <a href="https://www.veezu.co.uk/" target="_blank" rel="noopener noreferrer" class="btn btn-sm rounded-pill">Book with Veezu →</a>
             </div>
         </div>
     </div>
 </div>
 
-{% block extra_scripts %}
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
     function mapController() {
         return {
             mode: 'event', // Default mode
+            expandedTransportCard: null,
             eventMap: null,
             transportMap: null,
 
@@ -107,6 +94,12 @@ eleventyNavigation:
                 // Initialize both maps on load
                 this.initEventMap();
                 this.initTransportMap();
+
+                // Leaflet needs a visible, sized element before it can lay out tiles.
+                requestAnimationFrame(() => requestAnimationFrame(() => {
+                    this.eventMap?.invalidateSize();
+                    if (this.mode === 'transport') this.transportMap?.invalidateSize();
+                }));
 
                 // Handle initial mode from URL
                 const params = new URLSearchParams(window.location.search);
@@ -127,6 +120,10 @@ eleventyNavigation:
                         this.transportMap.invalidateSize();
                     }
                 }, 100);
+            },
+
+            toggleTransportCard(card) {
+                this.expandedTransportCard = this.expandedTransportCard === card ? null : card;
             },
 
             initEventMap() {
@@ -200,10 +197,9 @@ eleventyNavigation:
                 const mapCoords = [52.2405, 0.0855]; // Girton Recreation Ground
                 this.transportMap = L.map('map-transport').setView(mapCoords, 15);
 
-                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                    subdomains: 'abcd',
-                    maxZoom: 20
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19
                 }).addTo(this.transportMap);
 
                 L.marker(mapCoords).addTo(this.transportMap)
@@ -212,4 +208,3 @@ eleventyNavigation:
         }
     }
 </script>
-{% endblock %}

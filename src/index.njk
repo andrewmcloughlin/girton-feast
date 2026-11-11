@@ -17,8 +17,8 @@ eleventyNavigation:
             <div id="when-2">July 2027</div>
         </div>
         <div class="action-bar">
-            <div class="button btn">Where to find us</div>
-            <div class="button btn">Explore event</div>
+            <a class="button btn" href="{{ '/map.html' | url }}">Where to find us</a>
+            <div class="button btn" href="{{ '/map.html' | url }}">Explore event</div>
         </div>
     </div>
 </section>
@@ -92,3 +92,7 @@ eleventyNavigation:
 </section>
 
 {% include "sections/sponsors.njk" %}
+
+<footer class="home-footer">
+    <small>© Girton Village Celebrations · <a href="{{ '/pages/colophon.html' | url }}">Colophon</a></small>
+</footer>

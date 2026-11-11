@@ -169,7 +169,7 @@ section {
     text-align: center;
 }
 .big-text {
-    /* Never smaller than 1.5rem, scales with 2.5vw plus 1rem, never larger than 3rem */
+    /* Never smaller than 1.5rem, scales with container, never larger than 3rem */
     font-size: clamp(5rem, 6cqi, 10rem);
     padding-top: 2rem;
     margin-bottom: 0;
@@ -178,7 +178,7 @@ section {
 h1, h2 {
     font-family: "Lilita One", cursive;
     /* Never smaller than 1.5rem, scales with 2.5vw plus 1rem, never larger than 3rem */
-    font-size: clamp(1.5rem, 2.5vw + 1rem, 3rem);
+    font-size: clamp(1.5rem, 6cqi, 3rem);
     color: var(--text-primary);
     text-transform: uppercase;
     line-height: 80%;
@@ -214,10 +214,312 @@ h1, h2 {
     margin-top: 10rem;
 }
 
+/* Interactive map page */
+.map-fullscreen-wrapper {
+    position: relative;
+    isolation: isolate;
+    width: 100%;
+    height: 100vh;
+    min-height: 32rem;
+    overflow: hidden;
+    background: var(--blue);
+}
+
+.map-fullscreen-wrapper .map-instance {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--blue);
+}
+
+.map-fullscreen-wrapper .map-mode-switcher {
+    position: absolute;
+    z-index: 1000;
+    top: 1rem;
+    left: 50%;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.4rem;
+    transform: translateX(-50%);
+    border: 2px solid var(--text-primary);
+    border-radius: 999px;
+    background: var(--girton-green-light);
+    box-shadow: 0 4px 0 var(--text-primary);
+}
+
+.map-fullscreen-wrapper .map-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.1rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-primary);
+    font: inherit;
+    font-weight: 700;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.map-fullscreen-wrapper .map-home-btn:hover,
+.map-fullscreen-wrapper .map-home-btn:focus-visible {
+    background: var(--text-primary);
+    color: var(--girton-green-light);
+}
+
+.map-fullscreen-wrapper .map-mode-btn {
+    padding: 0.65rem 1.1rem;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-primary);
+    font: inherit;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.map-fullscreen-wrapper .map-mode-btn.active {
+    background: var(--text-primary);
+    color: var(--girton-green-light);
+}
+
+.map-fullscreen-wrapper .transport-overlay {
+    position: absolute;
+    z-index: 500;
+    right: 1rem;
+    bottom: 1rem;
+    left: 1rem;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.75rem;
+    pointer-events: none;
+}
+
+.transport-card-wrapper {
+    position: relative;
+    min-width: 0;
+}
+
+.transport-card {
+    position: relative;
+    height: 100%;
+    padding: 1rem;
+    border: 2px solid var(--text-primary);
+    border-radius: 1.25rem;
+    background: var(--blue);
+    color: var(--text-primary);
+    box-shadow: 0 4px 0 rgba(3, 89, 77, 0.18);
+    pointer-events: auto;
+    transition: border-radius 220ms ease, box-shadow 220ms ease;
+}
+
+.transport-card-toggle {
+    display: none;
+}
+
+.transport-card-wrapper:nth-child(1) .transport-card {
+    background: var(--pink);
+}
+
+.transport-card-wrapper:nth-child(2) .transport-card {
+    background: var(--yellow);
+}
+
+.transport-card-wrapper:nth-child(3) .transport-card {
+    background: var(--girton-green-light);
+}
+
+.transport-card-wrapper:nth-child(4) .transport-card {
+    background: var(--blue);
+}
+
+.transport-card h5 {
+    margin: 0.35rem 0;
+    font-family: "Lilita One", cursive;
+    text-transform: uppercase;
+}
+
+.transport-card p {
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+}
+
+.transport-card .btn {
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+}
+
+.transport-card .btn:hover {
+    background: var(--text-primary);
+    color: var(--blue);
+}
+
+.custom-map-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    border-radius: 50%;
+    color: white;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+@media (max-width: 700px) {
+    .map-fullscreen-wrapper {
+        min-height: 36rem;
+    }
+
+    .map-fullscreen-wrapper .transport-overlay {
+        right: 0;
+        bottom: calc(2rem + env(safe-area-inset-bottom));
+        left: 0;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 0.75rem;
+        max-height: none;
+        overflow: visible;
+    }
+
+    .transport-card-wrapper {
+        flex: 0 0 3.5rem;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .transport-card-wrapper.is-expanded {
+        position: absolute;
+        z-index: 2;
+        right: 1rem;
+        bottom: 4.25rem;
+        left: 1rem;
+        width: auto;
+        height: auto;
+        flex: none;
+    }
+
+    .transport-card {
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        overflow: hidden;
+        border-radius: 50%;
+    }
+
+    .transport-card h5,
+    .transport-card p,
+    .transport-card .btn {
+        display: none;
+    }
+
+    .transport-card-toggle {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        color: var(--text-primary);
+        font-size: 1.4rem;
+        cursor: pointer;
+    }
+
+    .transport-card-wrapper.is-expanded .transport-card {
+        height: auto;
+        min-height: 8rem;
+        padding: 1rem 3.5rem 1rem 1rem;
+        overflow: visible;
+        border-radius: 1.25rem;
+        box-shadow: 0 8px 24px rgba(3, 89, 77, 0.25);
+        animation: transport-card-expand 220ms ease-out;
+    }
+
+    .transport-card-wrapper.is-expanded .transport-card h5,
+    .transport-card-wrapper.is-expanded .transport-card p,
+    .transport-card-wrapper.is-expanded .transport-card .btn {
+        display: block;
+    }
+
+    .transport-card-wrapper.is-expanded .transport-card-toggle {
+        inset: 0.5rem 0.5rem auto auto;
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 2px solid var(--text-primary);
+        border-radius: 50%;
+        font-size: 1rem;
+    }
+}
+
+@keyframes transport-card-expand {
+    from {
+        opacity: 0.7;
+        transform: scale(0.92);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 380px) {
+    .map-fullscreen-wrapper .map-mode-switcher {
+        width: calc(100% - 1.5rem);
+    }
+
+    .map-fullscreen-wrapper .map-mode-btn,
+    .map-fullscreen-wrapper .map-home-btn {
+        flex: 1;
+        padding-inline: 0.5rem;
+        font-size: 0.9rem;
+        justify-content: center;
+    }
+}
+
 .blue-section .big-text {
     width: 90%;
     margin-inline: auto;
     font-size: clamp(2.25rem, 11cqi, 10rem);
+}
+
+.home-footer {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    color: var(--text-primary);
+}
+
+.home-footer a,
+.colophon-card a {
+    color: inherit;
+    font-weight: 700;
+}
+
+.colophon-page {
+    width: calc(100% - 2rem);
+    max-width: 800px;
+    padding-block: clamp(2rem, 8vw, 5rem);
+}
+
+.colophon-page > .big-text {
+    padding-top: 0;
+    margin-bottom: 2rem;
+    font-size: clamp(3rem, 9vw, 6rem);
+}
+
+.colophon-card {
+    max-width: 100%;
+}
+
+.colophon-card h2 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 @media (max-width: 600px) {
