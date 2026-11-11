@@ -170,7 +170,7 @@ section {
 }
 .big-text {
     /* Never smaller than 1.5rem, scales with 2.5vw plus 1rem, never larger than 3rem */
-    font-size: clamp(5rem, 8vw + 1rem, 10rem);
+    font-size: clamp(5rem, 6cqi, 10rem);
     padding-top: 2rem;
     margin-bottom: 0;
 }
@@ -206,11 +206,18 @@ h1, h2 {
 }
 
 .blue-section {
+    container-type: inline-size;
     width: 100%;
     aspect-ratio: 1;
     background-color: var(--blue);
     border-radius: 50%;
     margin-top: 10rem;
+}
+
+.blue-section .big-text {
+    width: 90%;
+    margin-inline: auto;
+    font-size: clamp(2.25rem, 11cqi, 10rem);
 }
 
 @media (max-width: 600px) {
@@ -225,6 +232,7 @@ h1, h2 {
     }
 
     .blue-section .big-text {
+        width: 100%;
         padding-top: 0;
         font-size: clamp(2.25rem, 9vw, 3rem);
         line-height: 0.9;
